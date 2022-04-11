@@ -8,17 +8,6 @@
     tools:context=".RegisterActivity">
 
     <TextView
-        android:id="@+id/textViewTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="@string/r_e_g_i_s_t_e_r"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/textViewLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -143,7 +132,8 @@
         android:padding="10dp"
         android:gravity="center"
         android:layout_height="wrap_content"
-        android:text="By creating an account you agree to our terms of service and confirm that you have red them"
+        android:background="@drawable/main_text_background"
+        android:text="By creating a StarDash account you agree to our terms of service and confirm that you have red them"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -160,6 +150,19 @@
         android:textColor="@color/white"
         android:background="@drawable/main_text_background_red"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="StarDash\nAccount"
+        android:textColor="@color/black"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
