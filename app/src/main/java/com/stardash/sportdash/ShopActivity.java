@@ -5,12 +5,16 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -37,6 +41,7 @@ public class ShopActivity extends AppCompatActivity {
             textViewItems2.setTextColor(Color.parseColor("#323232"));
             TextView textViewRefresh = findViewById(R.id.textViewRefresh);
             textViewRefresh.setTextColor(Color.parseColor("#323232"));
+            getShop();
         }
 
       /*  ImageView image = findViewById(R.id.imageViewBg);
@@ -64,5 +69,77 @@ public class ShopActivity extends AppCompatActivity {
             }
         }, 1000);
 */
+    }
+
+
+    int version = BuildConfig.VERSION_CODE;
+    private void getShop() {
+        try {
+            TextView textViewItem1 = findViewById(R.id.textViewItem1);
+            TextView textViewItem2 = findViewById(R.id.textViewItem2);
+            TextView textViewItem3 = findViewById(R.id.textViewItem3);
+            TextView textViewItemDesc1 = findViewById(R.id.textViewItemDesc1);
+            TextView textViewItemDesc2 = findViewById(R.id.textViewItemDesc2);
+            TextView textViewItemDesc3 = findViewById(R.id.textViewItemDesc3);
+            TextView textViewItemText1 = findViewById(R.id.textViewItemText1);
+            TextView textViewItemText2 = findViewById(R.id.textViewItemText2);
+            TextView textViewItemText3 = findViewById(R.id.textViewItemText3);
+
+            StarsocketConnector.sendMessage("shop "+String.valueOf(version));
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    String received = StarsocketConnector.getMessage();
+                    if (received.contains("outdated-app")){
+                        toast("update SportDash app to access shop");
+                    } else {
+                        String item1 = received.split("\n")[0];
+                        String item2 = received.split("\n")[1];
+                        String item3 = received.split("\n")[2];
+
+                        String itemStyle1 = item1.split("!-")[0];
+                        String itemName1 = item1.split("!-")[1];
+                        String itemCoins1 = item1.split("!-")[2];
+                        String itemId1 = item1.split("!-")[3];
+
+                        String itemStyle2 = item2.split("!-")[0];
+                        String itemName2 = item2.split("!-")[1];
+                        String itemCoins2 = item2.split("!-")[2];
+                        String itemId2 = item2.split("!-")[3];
+
+                        String itemStyle3 = item3.split("!-")[0];
+                        String itemName3 = item3.split("!-")[1];
+                        String itemCoins3 = item3.split("!-")[2];
+                        String itemId3 = item3.split("!-")[3];
+
+                    }
+                }
+            }, 500);
+
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
+
+    public void vibrate(){
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
+    }
+    public void toast(String message){
+        TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
+        textViewCustomToast.setVisibility(View.VISIBLE);
+        textViewCustomToast.setText(Account.errorStyle()+" "+message);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textViewCustomToast.setVisibility(View.GONE);
+            }
+        }, 3000);
     }
 }
