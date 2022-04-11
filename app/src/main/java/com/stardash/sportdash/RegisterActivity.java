@@ -152,4 +152,9 @@ public class RegisterActivity extends AppCompatActivity {
     public void onBackPressed() {
         toast("exit ?");
     }
+
+    public void openTermsOfService(View view) {
+        Intent i = new Intent(this, TermsOfServiceActivity.class);
+        startActivity(i);
+    }
 }

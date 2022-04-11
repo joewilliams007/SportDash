@@ -127,6 +127,8 @@
         android:padding="10dp"
         android:gravity="center"
         android:layout_height="wrap_content"
+        android:onClick="openTermsOfService"
+        android:background="@drawable/main_text_background"
         android:text="By creating an account you agree to our terms of service and confirm that you have red them"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"

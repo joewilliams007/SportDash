@@ -197,4 +197,9 @@ public class LoginActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
+    public void openTermsOfService(View view) {
+        Intent i = new Intent(this, TermsOfServiceActivity.class);
+        startActivity(i);
+    }
 }
