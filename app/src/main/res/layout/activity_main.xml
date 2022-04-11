@@ -1,0 +1,523 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    android:id="@+id/main"
+    tools:context=".MainActivity">
+
+    <ProgressBar
+        android:id="@+id/progressBarBack"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="0dp"
+        android:visibility="gone"
+        android:layout_height="4dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        android:indeterminateTintMode="src_atop"
+        android:max="100"
+        android:progress="60"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.038"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+
+
+    <TextView
+        android:id="@+id/textViewMe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:onClick="openMyPlans"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFriends"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarWeek"
+        app:layout_constraintVertical_bias="0.473" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardViewSmall"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/projectGreen"
+        app:cardCornerRadius="250dp"
+        android:onClick="openSettings"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
+        app:layout_constraintTop_toTopOf="@+id/textViewMe">
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            app:cardCornerRadius="250dp">
+
+            <ImageView
+                android:id="@+id/imageViewSmallIcon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/no_icon" />
+
+        </androidx.cardview.widget.CardView>
+
+    </androidx.cardview.widget.CardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:max="10000"
+        android:progress="0"
+        android:progressBackgroundTint="@color/projectBlack"
+        android:progressTint="@color/projectGreen"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTodayAmount"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTodayAmount"
+        app:layout_constraintStart_toEndOf="@+id/textViewToday"
+        app:layout_constraintTop_toTopOf="@+id/textViewTodayAmount" />
+
+    <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
+         android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/projectGreen"
+        android:text="@string/s_p_o_r_t_d_s_h"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
+        android:id="@+id/textViewTopClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:onClick="closeApp"
+        android:textColor="@color/projectRed"
+        android:text="@string/c_l_o_s_e_a_p_p"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewToday"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:rotation="-10"
+        android:text="@string/todaysprogress"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewWeek"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:rotation="-10"
+        android:text="@string/weeksprogress"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewToday" />
+
+    <ProgressBar
+        android:id="@+id/progressBarWeek"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:max="70000"
+        android:progress="0"
+        android:layout_margin="10dp"
+        android:progressBackgroundTint="@color/projectBlack"
+        android:progressTint="@color/projectGreen"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewWeekAmount"
+        app:layout_constraintEnd_toStartOf="@+id/textViewWeekAmount"
+        app:layout_constraintStart_toEndOf="@+id/textViewWeek"
+        app:layout_constraintTop_toTopOf="@+id/textViewWeekAmount" />
+
+    <TextView
+        android:id="@+id/textViewBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:text="s t a r t\nt r a c k i n g"
+        android:textColor="@color/projectGreen"
+        android:gravity="center"
+        android:padding="10dp"
+        android:onClick="addResult"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/main_text_background"
+        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton8"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton8"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textViewWeekAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="0/70.000"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTodayAmount" />
+
+
+    <TextView
+        android:id="@+id/textViewTodayAmount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="0/10.000"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <ImageView
+        android:id="@+id/floatingActionButton8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:rotation="-270"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        android:onClick="openFriends"
+        app:layout_constraintBottom_toTopOf="@+id/textViewBottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewDetail"
+        android:layout_width="0dip"
+        android:layout_height="40dp"
+        android:text="J O E J O E"
+        android:gravity="center"
+        android:textColor="@color/projectGrey"
+        android:background="@drawable/main_text_background_white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="@+id/imageView5"
+        app:layout_constraintStart_toStartOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/textViewShop"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/track_green_background"
+        android:gravity="bottom|right"
+        android:onClick="openShop"
+        android:padding="10dp"
+        android:text="SHOP\nnew items available!"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewLog"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewLog"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/track_green_background"
+        android:gravity="bottom|right"
+        android:padding="10dp"
+        android:text="LOG"
+        android:onClick="openLog"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSettings"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSettings"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="5dp"
+        android:background="@drawable/track_green_background"
+        android:gravity="bottom|right"
+        android:padding="10dp"
+        android:text="SETTINGS"
+        android:onClick="openSettings"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDetail"
+        app:layout_constraintEnd_toStartOf="@+id/textView10"
+        app:layout_constraintStart_toStartOf="parent" />
+
+
+    <TextView
+        android:id="@+id/textViewFriends"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:onClick="openFriendsList"
+        android:text="FRIENDS\nsearch your friends"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewAchievements"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textViewAchievements"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:text="ACHIEVEMENTS"
+        android:onClick="openAchievements"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewClub"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textViewClub"
+        android:layout_width="0dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:onClick="openClub"
+        android:text="CLUB\nfight other teams with your friends"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewDetail"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textView10" />
+
+    <TextView
+        android:id="@+id/textView10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/imageView5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy2"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnergy1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy3"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnergy2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy4"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnergy3"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy5"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="2dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnergy4"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/flash" />
+
+    <TextView
+        android:id="@+id/textViewId"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="#1"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewSmall"
+        app:layout_constraintTop_toTopOf="@+id/textViewMe" />
+
+    <TextView
+        android:id="@+id/textViewLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Level 10"
+        android:layout_marginRight="10dp"
+        android:gravity="right"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintEnd_toStartOf="@+id/cardViewSmall"
+        app:layout_constraintTop_toBottomOf="@+id/textViewId" />
+
+    <TextView
+        android:id="@+id/textViewPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="openMyPlans"
+        android:padding="10dp"
+        android:text="PLANS"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
+        app:layout_constraintStart_toStartOf="@+id/textViewMe" />
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewInbox"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:onClick="openInbox"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFriends"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFriends"
+        app:srcCompat="@drawable/inbox" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        android:onClick="openLeaderboard"
+        android:layout_margin="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAchievements"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAchievements"
+        app:srcCompat="@drawable/leader" />
+
+    <TextView
+        android:id="@+id/textViewInbox"
+        android:layout_width="wrap_content"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_text_background_red"
+        android:onClick="openInbox"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewInbox"
+        app:layout_constraintTop_toTopOf="@+id/imageViewInbox" />
+
+    <ImageView
+        android:id="@+id/imageViewRandom"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:elevation="4dp"
+        android:padding="10dp"
+        android:onClick="randomPlan"
+        android:src="@drawable/shuffle"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMe" />
+
+
+
+    <TextView
+        android:id="@+id/textViewPopUp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/main_text_background"
+        android:padding="10dp"
+        android:layout_margin="5dp"
+        android:text="new daily login!\nyou earned 10 coins"
+        android:textSize="15dp"
+        android:gravity="center"
+        android:elevation="20dp"
+        android:visibility="gone"
+        android:onClick="doNothing"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:paddingRight="10dp"
+        android:text="c l o s e"
+        android:elevation="20dp"
+        android:onClick="closePopUp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:textSize="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPopUp"
+        app:layout_constraintEnd_toEndOf="@+id/textViewPopUp"
+        app:layout_constraintStart_toStartOf="@+id/textViewPopUp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

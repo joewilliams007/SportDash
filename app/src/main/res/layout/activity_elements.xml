@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    android:id="@+id/main"
+    tools:context=".ElementsActivity">
+
+    <TextView
+        android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/e_l_e_m_e_n_t_s"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@color/projectGreen"
+        android:elevation="-5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSelect"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textViewSelect"
+        app:layout_constraintTop_toTopOf="@+id/textViewSelect" />
+
+    <TextView
+        android:id="@+id/textViewSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/s_u_b_m_i_t"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        android:onClick="submit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/pause"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:text="@string/p_a_u_s_e"
+        android:onClick="addPause"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelect" />
+
+
+
+    <TextView
+        android:id="@+id/textViewElementLastUsed"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:text="@string/last_used"
+        android:onClick="addLastUsed"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toEndOf="@+id/pause"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSelect" />
+
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameElementCustom"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:ems="10"
+        android:hint="element name*"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/projectGrey"
+        android:textColorHint="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCreate"
+        android:importantForAutofill="no" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameElementCustomDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/track_green_background"
+        android:ems="10"
+        android:hint="element description*"
+        android:layout_margin="10dp"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/projectGrey"
+        android:textColorHint="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameElementCustom" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameElementCustomLink"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:ems="10"
+        android:hint="@string/link_for_more_information_optional"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/projectGrey"
+        android:textColorHint="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameElementCustomDescription" />
+
+    <TextView
+        android:id="@+id/textViewCreate"
+        android:layout_width="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:text="@string/create"
+        android:textColor="@color/projectGreen"
+        android:rotation="-10"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewSelect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:rotation="-10"
+        android:text="@string/or_select"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIterationsOrSecondsBtn" />
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewElementLastUsed"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewOld"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="@string/or_get"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:background="@color/projectGreen"
+                android:elevation="-5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewOld"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewOld"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textViewSave"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="saveToSlot"
+                android:padding="10dp"
+                android:text="@string/save_to_slot"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSaving" />
+
+            <TextView
+                android:id="@+id/textViewElement1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot1"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintEnd_toStartOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSave" />
+
+            <TextView
+                android:id="@+id/textViewElement2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot2"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintEnd_toStartOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewElement1" />
+
+            <TextView
+                android:id="@+id/textViewElement3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot3"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintEnd_toStartOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewElement2" />
+
+            <TextView
+                android:id="@+id/textViewElement4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot4"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintStart_toEndOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSave" />
+
+            <TextView
+                android:id="@+id/textViewElement6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot6"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewElement5" />
+
+            <TextView
+                android:id="@+id/textViewElement5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/track_green_background"
+                android:onClick="slot5"
+                android:padding="10dp"
+                android:text="@string/slot"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintStart_toEndOf="@+id/textViewMid"
+                app:layout_constraintTop_toBottomOf="@+id/textViewElement4" />
+
+            <TextView
+                android:id="@+id/textViewMid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text=""
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSaving"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_red"
+                android:elevation="-2dp"
+                android:gravity="center"
+                android:text="@string/tap_on_any_slot_to_save_for_later"
+                android:textColor="@color/projectGrey"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOld" />
+
+            <ImageView
+                android:id="@+id/imageViewHelp"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:padding="15dp"
+                android:onClick="openHelp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSave"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewSave"
+                app:srcCompat="@android:drawable/ic_menu_help" />
+
+            <TextView
+                android:id="@+id/textViewHelpInfo"
+                android:layout_width="0dp"
+                android:onClick="hideHelp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:text="here you have six free Slots available.\nIf you want to use and element, you have created more then once, you can tap save-to-slot and then tap on any slot to save it for later usage"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewHelp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageViewHelp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textViewSeconds"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/seconds"
+        android:textColor="@color/projectGrey"
+        android:elevation="1dp"
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameSeconds"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonNameSeconds"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameSeconds" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameSeconds"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:ems="10"
+        android:inputType="number"
+        android:padding="10dp"
+        android:text="@string/_30"
+        android:textColor="@color/projectGrey"
+        android:textColorHint="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameElementCustomLink"
+        android:importantForAutofill="no" />
+
+    <TextView
+        android:id="@+id/textViewX"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/x"
+        android:onClick="SKIP"
+        android:textColor="@color/projectGrey"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewElementLastUsed"
+        app:layout_constraintStart_toEndOf="@+id/textViewElementLastUsed"
+        app:layout_constraintTop_toTopOf="@+id/textViewElementLastUsed" />
+
+    <TextView
+        android:id="@+id/textViewIterationsOrSecondsBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="changeFormat"
+        android:padding="10dp"
+        android:text="change"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSeconds"
+        app:layout_constraintStart_toStartOf="@+id/textViewSeconds"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSeconds" />
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

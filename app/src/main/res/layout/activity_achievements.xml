@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    android:id="@+id/main"
+    tools:context=".AchievementsActivity">
+
+    <TextView
+        android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="A C H I E V E M E N T S"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewAccountCreated"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="48dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="account created"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewAccountCreatedLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="level 1"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewAccountCreated"
+                app:layout_constraintStart_toStartOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toTopOf="@+id/textViewAccountCreated" />
+
+            <TextView
+                android:id="@+id/textViewAccountCreatedCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="[1 COIN]"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewAccountCreated"
+                app:layout_constraintEnd_toEndOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toTopOf="@+id/textViewAccountCreated" />
+
+            <ProgressBar
+                android:id="@+id/progressBarAccountCreated"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progressTint="@color/projectGreen"
+                android:progress="0"
+                android:layout_marginRight="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/textViewAccountCreatedAmount"
+                app:layout_constraintStart_toStartOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAccountCreated" />
+
+            <TextView
+                android:id="@+id/textViewAccountCreatedAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/1"
+                android:layout_marginRight="10dp"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/progressBarAccountCreated" />
+
+            <TextView
+                android:id="@+id/textViewLogins"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="logins on different days"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressBarAccountCreated" />
+
+            <TextView
+                android:id="@+id/textViewLoginsLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="level 1"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLogins"
+                app:layout_constraintStart_toStartOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toTopOf="@+id/textViewLogins" />
+
+            <TextView
+                android:id="@+id/textViewLoginsCoins"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="[1 COIN]"
+                android:textColor="@color/projectGrey"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLogins"
+                app:layout_constraintEnd_toEndOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toTopOf="@+id/textViewLogins" />
+
+            <ProgressBar
+                android:id="@+id/progressBarLogins"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="@color/projectGreen"
+                app:layout_constraintEnd_toStartOf="@+id/textViewLoginsAmount"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@+id/textViewAccountCreated"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLogins" />
+
+            <TextView
+                android:id="@+id/textViewLoginsAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="0/10"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLogins" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/projectGrey"
+    tools:context=".TrackActivity">
+
+    <TextView
+    android:id="@+id/textViewTop"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:text="@string/track"
+    android:textColor="@color/projectGreen"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewTopDiscard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="D I S C A R D"
+        android:onClick="discard"
+        android:visibility="gone"
+        android:textColor="@color/projectRed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewBottom"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/main_text_background_track"
+        android:padding="10dp"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+
+    <TextView
+        android:id="@+id/textViewSecure"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/cancel"
+        android:onClick="onClickStop"
+        android:padding="10dp"
+        android:textColor="@color/projectRed"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewSecure"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSecure"
+        app:layout_constraintTop_toTopOf="@+id/imageViewSecure" />
+
+    <TextView
+        android:id="@+id/textViewFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="@string/finish"
+        android:onClick="finish"
+        android:padding="10dp"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewSecure"
+        app:layout_constraintStart_toEndOf="@+id/imageViewSecure"
+        app:layout_constraintTop_toTopOf="@+id/imageViewSecure"
+        />
+
+    <TextView
+        android:id="@+id/textViewTip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/tip_track"
+        android:layout_margin="10dp"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewSecure"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSecure"
+        app:layout_constraintStart_toStartOf="@+id/textViewSecure" />
+
+    <TextView
+        android:id="@+id/textViewTrack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/_00_00"
+        android:textColor="@color/black"
+        android:textSize="50sp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewTip"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBottom" />
+
+    <TextView
+        android:id="@+id/textViewActivity"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:gravity="right"
+        android:text="@string/activity_running"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBottom"
+        tools:ignore="RtlHardcoded" />
+
+    <TextView
+        android:id="@+id/textViewStart"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/start"
+        android:onClick="onClickStart"
+        android:gravity="center"
+        android:padding="10dp"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTrack" />
+    <ImageView
+        android:id="@+id/imageViewSecure"
+        android:layout_width="40dp"
+        android:layout_height="50dp"
+        android:elevation="2dp"
+        android:onClick="allowPauseFinish"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSecure"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSecure"
+        app:layout_constraintStart_toStartOf="@+id/textViewSecure"
+        app:layout_constraintTop_toTopOf="@+id/textViewSecure"
+        app:srcCompat="@drawable/shield" />
+
+    <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:text="@string/activate_lock_n"
+        android:gravity="center"
+        android:visibility="invisible"
+        android:textColor="@color/black"
+        android:padding="10dp"
+        android:background="@drawable/track_red_background"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSecure"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewSecure"
+        app:layout_constraintHorizontal_bias="0.507"
+        app:layout_constraintStart_toStartOf="@+id/imageViewSecure" />
+
+    <ProgressBar
+        android:id="@+id/progressBarToday"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="2dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/projectGrey"
+        android:indeterminateTintMode="src_atop"
+        android:max="100"
+        android:progress="60"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTrack"
+        app:layout_constraintStart_toStartOf="@+id/textViewTrack"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTrack" />
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

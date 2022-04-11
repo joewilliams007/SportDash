@@ -1,0 +1,560 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    android:id="@+id/main"
+    tools:context=".CreateStructureActivity">
+
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="1dp"
+                android:layout_height="0dp"
+                android:background="@color/projectGreen"
+                android:elevation="-5dp"
+                app:layout_constraintBottom_toTopOf="@+id/textViewBottom"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+            <TextView
+                android:id="@+id/textViewTop"
+                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="S T A R T"
+                android:padding="10dp"
+                android:background="@drawable/main_text_background"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure1"
+                android:onClick="structure1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.473"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+
+
+            <TextView
+                android:id="@+id/textViewStructure2"
+                android:layout_width="0dp"
+                android:onClick="structure2"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure1" />
+
+            <TextView
+                android:id="@+id/textViewStructure3"
+                android:onClick="structure3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure2" />
+
+            <TextView
+                android:id="@+id/textViewStructure4"
+                android:onClick="structure4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure3" />
+
+            <TextView
+                android:id="@+id/textViewStructure5"
+                android:onClick="structure5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure4" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure6"
+                android:layout_width="0dp"
+                android:onClick="structure6"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure5" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure7"
+                android:layout_width="0dp"
+                android:onClick="structure7"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure6" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure8"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:onClick="structure8"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure7" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure9"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure9"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure8" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure10"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure10"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure9" />
+
+
+            <TextView
+                android:id="@+id/textViewStructureMore1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="E N D  O R  C O N T I N U E"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure10" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure11"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                android:onClick="structure11"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructureMore1" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure12"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="structure12"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure11" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure13"
+                android:layout_width="0dp"
+                android:onClick="structure13"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure12" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure14"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure14"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure13" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure15"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure15"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure14" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure16"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure16"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure15" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure17"
+                android:layout_width="0dp"
+                android:onClick="structure17"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure16" />
+
+            <TextView
+                android:id="@+id/textViewStructure18"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure18"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure17" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure19"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:onClick="structure19"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure18" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure20"
+                android:layout_width="0dp"
+                android:onClick="structure20"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure19" />
+
+            <TextView
+                android:id="@+id/textViewStructureMore2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="E N D  O R  C O N T I N U E"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure19" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure21"
+                android:layout_width="0dp"
+                android:onClick="structure21"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructureMore2" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure22"
+                android:layout_width="0dp"
+                android:onClick="structure22"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure21" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure23"
+                android:layout_width="0dp"
+                android:onClick="structure23"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure22" />
+
+
+            <TextView
+                android:id="@+id/textViewStructure24"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="structure24"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure23" />
+            <TextView
+                android:id="@+id/textViewStructure25"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="structure25"
+                android:text="@string/select"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure24" />
+
+
+
+            <TextView
+                android:id="@+id/textViewBottom"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="E N D"
+                android:elevation="-1dp"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStructure25"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewDiscard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DISCARD"
+                android:visibility="gone"
+                android:onClick="discard"
+                android:padding="10dp"
+                android:textColor="@color/projectRed"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/textViewTop"
+                app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+            <TextView
+                android:id="@+id/textViewFinish"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:visibility="gone"
+                android:text="FINISH"
+                android:onClick="finish"
+                android:textColor="@color/projectYellow"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/textViewContinue"
+                app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+            <TextView
+                android:id="@+id/textViewContinue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="CONTINUE LATER"
+                android:visibility="gone"
+                android:onClick="continueLater"
+                android:padding="10dp"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toEndOf="@+id/textViewDiscard"
+                app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+            <TextView
+                android:id="@+id/textViewSettingsSport"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="10dp"
+                android:text="OPTIONS"
+                android:onClick="showSportOptions"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintEnd_toEndOf="@+id/textViewTop"
+                app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+            <TextView
+                android:id="@+id/textViewInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/info"
+                android:onClick="openPlanStructureGuide"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/view"
+                app:layout_constraintStart_toStartOf="@+id/textViewTop"
+                app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

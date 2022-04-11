@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:background="@color/projectGrey"
+    android:id="@+id/planConstraintLayout"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/textView11"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:layout_marginStart="8dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEnergy"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_margin="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView11"
+        app:srcCompat="@drawable/flash" />
+
+    <TextView
+        android:id="@+id/textViewEnergy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="5dp"
+        android:text="2"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewEnergy"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnergy"
+        app:layout_constraintTop_toTopOf="@+id/imageViewEnergy" />
+
+    <TextView
+        android:id="@+id/textViewName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="SUMMER WORKOUT"
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDescription"
+        app:layout_constraintStart_toEndOf="@+id/textViewCategory"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textViewCategory"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="R U N N I N G"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toStartOf="@+id/textViewDescription"
+        app:layout_constraintTop_toTopOf="@+id/textView11" />
+
+    <TextView
+        android:id="@+id/textViewDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="This is an awesome Workout to do in summer. After this session you will feel much better right away."
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/imageViewMuscle"
+        app:layout_constraintEnd_toEndOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <ImageView
+        android:id="@+id/imageViewMuscle"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textView11"
+        app:layout_constraintStart_toStartOf="@+id/textView11"
+        app:srcCompat="@drawable/muscle1" />
+
+    <TextView
+        android:id="@+id/textViewMuscle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="muscle: back"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMuscle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+
+    <TextView
+        android:id="@+id/textViewDifficulty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="difficulty: normal"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMuscle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMuscle" />
+
+    <TextView
+        android:id="@+id/textViewDuration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="duration: 3x5min, 15min"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMuscle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDifficulty" />
+
+    <TextView
+        android:id="@+id/textViewHashtag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="made by user: #6312"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMuscle"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDuration" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

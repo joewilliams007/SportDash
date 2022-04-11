@@ -1,0 +1,654 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/main"
+    android:background="@color/projectGrey"
+    tools:context=".SettingsActivity">
+
+    <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
+        android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:textColor="@color/projectGreen"
+        android:text="@string/settings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewExitTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="exit"
+        android:layout_margin="10dp"
+        android:text="E X I T"
+        android:textColor="@color/projectRed"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop"
+        app:layout_constraintVertical_bias="0.0">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textViewselect"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="setPicture"
+                android:text="@string/select"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="@+id/cardViewSmall"
+                app:layout_constraintStart_toStartOf="@+id/cardViewSmall"
+                app:layout_constraintTop_toBottomOf="@+id/cardViewSmall" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardViewSmall"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_margin="10dp"
+                app:cardBackgroundColor="@color/projectGreen"
+                app:cardCornerRadius="250dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    app:cardCornerRadius="250dp">
+
+                    <ImageView
+                        android:id="@+id/imageViewSmallIcon"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/no_icon" />
+
+                </androidx.cardview.widget.CardView>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/textViewAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:textColor="@color/projectBlack"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewselect" />
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="@string/username"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonNameUsername"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:inputType="textPersonName"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/textViewCopySaveName"
+                app:layout_constraintStart_toEndOf="@+id/textViewName"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+
+            <TextView
+                android:id="@+id/textViewAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="@string/age"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameUsername" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonNameAge"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:inputType="number"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/textViewCopySaveAge"
+                app:layout_constraintStart_toEndOf="@+id/textViewAge"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameUsername" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonNameWeight"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:inputType="number"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/textViewKG"
+                app:layout_constraintStart_toEndOf="@+id/textViewWeight"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameAge" />
+
+            <TextView
+                android:id="@+id/textViewWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="weight"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameAge" />
+
+            <TextView
+                android:id="@+id/textViewIdText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="@string/dashid"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameWeight" />
+
+            <View
+                android:id="@+id/view"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTTSsetting"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewTTSsetting"
+                app:layout_constraintTop_toTopOf="@+id/textViewTTSsetting" />
+
+
+            <TextView
+                android:id="@+id/textViewTheme"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="theme"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewCopyId" />
+
+            <View
+                android:id="@+id/viewTheme"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewTheme"
+                app:layout_constraintTop_toTopOf="@+id/textViewTheme" />
+
+            <TextView
+                android:id="@+id/textViewThemeGrey"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="setThemeGrey"
+                android:padding="10dp"
+                android:text="COMET GREY"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTheme" />
+
+            <TextView
+                android:id="@+id/textViewThemeAmoled"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="setThemeAmoled"
+                android:padding="10dp"
+                android:text="AMOLED BLACK"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTheme" />
+
+
+            <TextView
+                android:id="@+id/textViewTTSsetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:text="text to speech"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewThemeGrey" />
+
+            <TextView
+                android:id="@+id/textViewSetDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="enable default links"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTS" />
+
+            <View
+                android:id="@+id/view1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewSetDefault"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewSetDefault"
+                app:layout_constraintTop_toTopOf="@+id/textViewSetDefault" />
+
+            <TextView
+                android:id="@+id/textViewPersonalAccount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="account"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewDefault" />
+
+            <TextView
+                android:id="@+id/textViewFeedback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="feedback"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLogout" />
+
+            <TextView
+                android:id="@+id/textViewUpdates"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="update"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFeedbackBtn" />
+
+
+            <View
+                android:id="@+id/view3"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPersonalAccount"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewPersonalAccount"
+                app:layout_constraintTop_toTopOf="@+id/textViewPersonalAccount" />
+
+            <TextView
+                android:id="@+id/textViewFeedbackBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
+                android:onClick="openFeedback"
+                android:padding="10dp"
+                android:text="send feedback"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
+
+            <TextView
+                android:id="@+id/textViewMyVersion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="0.1.0"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewUpdates" />
+
+            <TextView
+                android:id="@+id/textViewMyVersionCheckUpdate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="checkUpdate"
+                android:padding="10dp"
+                android:text="check for update"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewMyVersion"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewMyVersion" />
+
+            <TextView
+                android:id="@+id/textViewChangeLog"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="openUpdate"
+                android:padding="10dp"
+                android:text="c h a n g e l o g"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMyVersion" />
+
+
+            <View
+                android:id="@+id/view4"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewFeedback"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewFeedback"
+                app:layout_constraintTop_toTopOf="@+id/textViewFeedback" />
+
+            <TextView
+                android:id="@+id/textViewLogout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="logout"
+                android:padding="10dp"
+                android:text="L O G O U T"
+                android:textColor="@color/projectYellow"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPersonalAccount" />
+
+
+            <TextView
+                android:id="@+id/textViewPrivacySetting"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="elementName"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTSsetting" />
+
+            <TextView
+                android:id="@+id/textViewMyVersionText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="your version"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewUpdates" />
+
+
+            <TextView
+                android:id="@+id/textViewTTSsetting2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="elementDescription"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTSsettingEnable" />
+
+
+            <TextView
+                android:id="@+id/textViewTTSsettingEnable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="enableTTSName"
+                android:padding="10dp"
+                android:text="E N A B L E"
+                android:textColor="@color/projectYellow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPrivacySetting" />
+
+
+            <TextView
+                android:id="@+id/textViewTTSsettingDisable"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="disableTTSName"
+                android:padding="10dp"
+                android:text="D I S A B L E"
+                android:textColor="@color/projectRed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPrivacySetting" />
+
+            <TextView
+                android:id="@+id/textViewTTSsettingEnable1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="enableTTSDescription"
+                android:padding="10dp"
+                android:text="E N A B L E"
+                android:textColor="@color/projectYellow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTSsetting2" />
+
+
+            <TextView
+                android:id="@+id/textViewTTSsettingDisable1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="disableTTSDescription"
+                android:padding="10dp"
+                android:text="D I S A B L E"
+                android:textColor="@color/projectRed"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTSsetting2" />
+
+            <TextView
+                android:id="@+id/textViewId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="#7213"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toStartOf="@+id/textViewCopyId"
+                app:layout_constraintStart_toEndOf="@+id/textViewIdText"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameWeight" />
+
+            <TextView
+                android:id="@+id/textViewCopyId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="copyID"
+                android:padding="10dp"
+                android:text="@string/copy"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameWeight" />
+
+            <TextView
+                android:id="@+id/textViewCopySaveName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveUsername"
+                android:padding="10dp"
+                android:text="@string/save"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+
+            <TextView
+                android:id="@+id/textViewCopySaveAge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveAge"
+                android:padding="10dp"
+                android:text="@string/save"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameUsername" />
+
+            <TextView
+                android:id="@+id/textViewCopySaveWeight"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="saveWeight"
+                android:padding="10dp"
+                android:text="@string/save"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameAge" />
+
+            <TextView
+                android:id="@+id/textViewAbout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="openAbout"
+                android:padding="10dp"
+                android:text="Λ B O U T  S P O R T D Λ S H"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view5" />
+
+            <View
+                android:id="@+id/view5"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_margin="10dp"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+            <TextView
+                android:id="@+id/textViewKG"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="KG"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameWeight"
+                app:layout_constraintEnd_toStartOf="@+id/textViewCopySaveWeight" />
+
+            <TextView
+                android:id="@+id/textViewTTS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="openTTSsettings"
+                android:padding="10dp"
+                android:text="open Text-To-Speech settings"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTSsettingEnable1" />
+
+            <TextView
+                android:id="@+id/textViewDefault"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="openDefaultSetting"
+                android:padding="10dp"
+                android:text="open default link settings"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewSetDefault" />
+
+
+            <TextView
+                android:id="@+id/textViewLocalhost"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="developer options"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChangeLog" />
+
+            <View
+                android:id="@+id/view7"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLocalhost"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewLocalhost"
+                app:layout_constraintTop_toTopOf="@+id/textViewLocalhost" />
+
+            <View
+                android:id="@+id/view8"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewUpdates"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewUpdates"
+                app:layout_constraintTop_toTopOf="@+id/textViewUpdates" />
+
+            <CheckBox
+                android:id="@+id/checkBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:checked="true"
+                android:text="localhost"
+                android:textColor="@color/projectGreen"
+                android:textColorHint="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLocalhost" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
