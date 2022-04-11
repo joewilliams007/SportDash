@@ -14,12 +14,14 @@ import android.os.Looper;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class ShopActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_shop);
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
@@ -29,9 +31,15 @@ public class ShopActivity extends AppCompatActivity {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.BLACK);
             }
+            TextView textViewApp = findViewById(R.id.textViewApp);
+            textViewApp.setTextColor(Color.parseColor("#323232"));
+            TextView textViewItems2 = findViewById(R.id.textViewItems2);
+            textViewItems2.setTextColor(Color.parseColor("#323232"));
+            TextView textViewRefresh = findViewById(R.id.textViewRefresh);
+            textViewRefresh.setTextColor(Color.parseColor("#323232"));
         }
 
-        ImageView image = findViewById(R.id.imageViewBg);
+      /*  ImageView image = findViewById(R.id.imageViewBg);
         ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(image, "scaleX", 0.2f);
         ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(image, "scaleY", 0.2f);
         scaleDownX.setDuration(500);
@@ -55,6 +63,6 @@ public class ShopActivity extends AppCompatActivity {
                 moveUp.start();//Do something after 100ms
             }
         }, 1000);
-
+*/
     }
 }

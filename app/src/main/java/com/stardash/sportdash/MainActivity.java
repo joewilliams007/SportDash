@@ -313,9 +313,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openShop(View view) {
-        toast("shop will be opened soon");
-      //  Intent i = new Intent(this, ShopActivity.class);
-      //  startActivity(i);
+        // toast("shop will be opened soon");
+        Intent i = new Intent(this, ShopActivity.class);
+        startActivity(i);
         vibrate();
     }
 

@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         android:text="S P O R T D Λ S H"
         android:layout_margin="10dp"
+        android:visibility="invisible"
         android:gravity="center"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
@@ -36,19 +37,31 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewSportDash"
-                android:layout_width="0dp"
-                android:visibility="invisible"
+                android:id="@+id/textViewApp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_marginTop="28dp"
+                android:layout_marginStart="8dp"
+                android:text="SportDash"
+                android:textColor="@color/black"
+                android:textSize="50dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSportDash"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
                 android:padding="10dp"
                 android:textColor="@color/white"
+                android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
@@ -103,4 +116,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,30 +22,234 @@
 
 
 
-
-    <ImageView
-        android:id="@+id/imageView1"
-        android:layout_width="132dp"
-        android:layout_height="73dp"
-        android:layout_margin="10dp"
+    <ScrollView
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/box1" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
 
-    <ImageView
-        android:id="@+id/imageViewBg"
-        android:layout_width="5000dp"
-        android:layout_height="5000dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+            <TextView
+                android:id="@+id/textViewRefresh"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="r e f r e s h e s  i n  12 h"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        app:srcCompat="@drawable/logo" />
+
+            <TextView
+                android:id="@+id/textViewApp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="Styles"
+                android:textColor="@color/black"
+                android:textSize="60dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+            <TextView
+                android:id="@+id/textViewItem1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="-_-"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+
+            <TextView
+                android:id="@+id/textViewItemDesc1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="s t e v e"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toEndOf="@+id/textViewItem1"
+                app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+
+            <TextView
+                android:id="@+id/textViewItemText1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:text="20 c o i n s"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+
+            <TextView
+                android:id="@+id/textViewItem2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="&lt;_&lt;"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/textViewItem1"
+                app:layout_constraintStart_toStartOf="@+id/textViewItem1"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItem1" />
+
+            <TextView
+                android:id="@+id/textViewItemDesc2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="f r a n k"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toEndOf="@+id/textViewItem1"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItemDesc1" />
+
+            <TextView
+                android:id="@+id/textViewItemText2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:text="25 c o i n s"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItemText1" />
+
+            <TextView
+                android:id="@+id/textViewItem3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="~_~"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="@+id/textViewItem1"
+                app:layout_constraintStart_toStartOf="@+id/textViewItem1"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItem2" />
+
+            <TextView
+                android:id="@+id/textViewItemDesc13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="h u a n"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toEndOf="@+id/textViewItem1"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItemDesc2" />
+            <TextView
+                android:id="@+id/textViewItemText3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:text="30 c o i n s"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItemText2" />
+
+            <TextView
+                android:id="@+id/textViewItems2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="40dp"
+                android:text="Boxes"
+                android:textColor="@color/black"
+                android:textSize="60dp"
+                android:textStyle="bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItem3" />
+
+
+            <ImageView
+                android:id="@+id/imageViewBox1"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewItems2"
+                app:srcCompat="@drawable/box1" />
+
+            <TextView
+                android:id="@+id/textViewItemDescBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="l i g h t  b o x"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewBox1"
+                app:layout_constraintStart_toEndOf="@+id/imageViewBox1"
+                app:layout_constraintTop_toTopOf="@+id/imageViewBox1" />
+
+            <TextView
+                android:id="@+id/textViewItemTextBox1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:text="100 c o i n s"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewBox1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageViewBox1" />
+
+            <ImageView
+                android:id="@+id/imageViewBox2"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_margin="10dp"
+                android:layout_marginStart="8dp"
+                android:padding="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewBox1"
+                app:srcCompat="@drawable/box2" />
+
+            <TextView
+                android:id="@+id/textViewItemDescBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="g r e e n s t a r  b o x"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintBottom_toBottomOf="@+id/imageViewBox2"
+                app:layout_constraintStart_toEndOf="@+id/imageViewBox1"
+                app:layout_constraintTop_toTopOf="@+id/imageViewBox2" />
+
+            <TextView
+                android:id="@+id/textViewItemTextBox2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:padding="10dp"
+                android:text="200 c o i n s"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/imageViewBox2" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
