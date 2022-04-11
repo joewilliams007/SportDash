@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         setProfilePicture(); // set picture
-        Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...]
+        Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
         checkDeepLink(); // check if app was opened with a link
         checkServerStatus(); // is server online make github request
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
