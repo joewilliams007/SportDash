@@ -143,11 +143,24 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
                 android:rotation="-10"
                 android:text="plan id"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewStarsAmount" />
+
+            <TextView
+                android:id="@+id/textViewStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:rotation="-10"
+                android:text="stars"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewEnergy" />
+
 
             <TextView
                 android:id="@+id/textViewCreatorId"
@@ -182,11 +195,12 @@
                 android:background="@drawable/main_text_background"
                 android:gravity="center"
                 android:padding="10dp"
+                android:onClick="openAccount"
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textViewPlanIdText"
-                app:layout_constraintTop_toBottomOf="@+id/textViewEnergy" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewStarsAmount" />
 
             <TextView
                 android:id="@+id/textViewMadeByUser"
@@ -205,12 +219,12 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMadeByUserId" />
 
+
             <TextView
                 android:id="@+id/textViewMadeByUserId"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/main_text_background"
                 android:gravity="center"
                 android:onClick="openAccount"
@@ -220,6 +234,21 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textViewCreatorId"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlanId" />
+
+            <TextView
+                android:id="@+id/textViewStarsAmount"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/textViewStars"
+                app:layout_constraintTop_toBottomOf="@+id/textViewEnergy" />
+
 
             <TextView
                 android:id="@+id/textViewDuration"
@@ -393,6 +422,19 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textViewStart"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewStarPlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:text="STAR"
+        android:onClick="starPlan"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textViewStart"
+        app:layout_constraintEnd_toStartOf="@+id/textViewComments" />
     <TextView
         android:id="@+id/textViewRandom"
         android:layout_width="wrap_content"

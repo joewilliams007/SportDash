@@ -151,6 +151,8 @@ public class RunPlanActivity extends AppCompatActivity {
             textViewIterations.setText(iterations+"x");
             textViewPlanTotalDuration.setText(totalDuration+" min");
 
+            getStars();
+
         } catch (Exception e){
 
         }
@@ -298,5 +300,52 @@ public class RunPlanActivity extends AppCompatActivity {
         commentsPlanId = textViewPlanId.getText().toString();
         Intent i = new Intent(this, CommentsActivity.class);
         startActivity(i);
+    }
+
+    public void starPlan(View view) {
+            try {
+                vibrate();
+                TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+                StarsocketConnector.sendMessage("starPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#",""));
+                final Handler handler = new Handler(Looper.getMainLooper());
+               // TextView textViewItem1 = findViewById(R.id.textViewItem1);
+
+                handler.postDelayed(new Runnable() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void run() {
+                        String received = StarsocketConnector.getMessage();
+                        if (received.contains("star-removed")) {
+                            toast("star removed");
+                        } else if (received.contains("star-added")) {
+                            toast("star added");
+                        }
+                        getStars();
+                    }
+                }, 500);
+
+            } catch (Exception e){
+                toast("no network");
+            }
+    }
+    public void getStars() {
+        TextView textViewStarsAmount = findViewById(R.id.textViewStarsAmount);
+        try {
+            TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+            StarsocketConnector.sendMessage("getStars "+textViewPlanId.getText().toString().replace("#",""));
+            final Handler handler = new Handler(Looper.getMainLooper());
+
+            handler.postDelayed(new Runnable() {
+                @SuppressLint("SetTextI18n")
+                @Override
+                public void run() {
+                    String received = StarsocketConnector.getMessage();
+                    textViewStarsAmount.setText(received);
+                }
+            }, 500);
+
+        } catch (Exception e){
+            textViewStarsAmount.setText("not available");
+        }
     }
 }

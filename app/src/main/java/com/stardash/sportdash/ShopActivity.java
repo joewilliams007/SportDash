@@ -5,6 +5,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -41,9 +42,9 @@ public class ShopActivity extends AppCompatActivity {
             textViewItems2.setTextColor(Color.parseColor("#323232"));
             TextView textViewRefresh = findViewById(R.id.textViewRefresh);
             textViewRefresh.setTextColor(Color.parseColor("#323232"));
-            getShop();
-        }
 
+        }
+        getShop();
       /*  ImageView image = findViewById(R.id.imageViewBg);
         ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(image, "scaleX", 0.2f);
         ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(image, "scaleY", 0.2f);
@@ -75,6 +76,8 @@ public class ShopActivity extends AppCompatActivity {
     int version = BuildConfig.VERSION_CODE;
     private void getShop() {
         try {
+            StarsocketConnector.sendMessage("shop "+String.valueOf(version));
+            final Handler handler = new Handler(Looper.getMainLooper());
             TextView textViewItem1 = findViewById(R.id.textViewItem1);
             TextView textViewItem2 = findViewById(R.id.textViewItem2);
             TextView textViewItem3 = findViewById(R.id.textViewItem3);
@@ -84,19 +87,23 @@ public class ShopActivity extends AppCompatActivity {
             TextView textViewItemText1 = findViewById(R.id.textViewItemText1);
             TextView textViewItemText2 = findViewById(R.id.textViewItemText2);
             TextView textViewItemText3 = findViewById(R.id.textViewItemText3);
+            TextView textViewRefresh = findViewById(R.id.textViewRefresh);
 
-            StarsocketConnector.sendMessage("shop "+String.valueOf(version));
-            final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
                     String received = StarsocketConnector.getMessage();
                     if (received.contains("outdated-app")){
                         toast("update SportDash app to access shop");
                     } else {
-                        String item1 = received.split("\n")[0];
-                        String item2 = received.split("\n")[1];
-                        String item3 = received.split("\n")[2];
+                        String info = received.split("\n")[0];
+
+                        textViewRefresh.setText("r e f r e s h e s  i n  "+info);
+
+                        String item1 = received.split("\n")[1];
+                        String item2 = received.split("\n")[2];
+                        String item3 = received.split("\n")[3];
 
                         String itemStyle1 = item1.split("!-")[0];
                         String itemName1 = item1.split("!-")[1];
@@ -112,6 +119,18 @@ public class ShopActivity extends AppCompatActivity {
                         String itemName3 = item3.split("!-")[1];
                         String itemCoins3 = item3.split("!-")[2];
                         String itemId3 = item3.split("!-")[3];
+
+                        textViewItem1.setText(itemStyle1);
+                        textViewItemDesc1.setText(itemName1);
+                        textViewItemText1.setText(itemCoins1+" c o i n s");
+
+                        textViewItem2.setText(itemStyle2);
+                        textViewItemDesc2.setText(itemName2);
+                        textViewItemText2.setText(itemCoins2+" c o i n s");
+
+                        textViewItem3.setText(itemStyle3);
+                        textViewItemDesc3.setText(itemName3);
+                        textViewItemText3.setText(itemCoins3+" c o i n s");
 
                     }
                 }
