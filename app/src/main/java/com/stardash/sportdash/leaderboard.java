@@ -60,7 +60,7 @@ public class leaderboard extends AppCompatActivity {
                             toast("not enough users to determine all");
                     }
                 }
-            }, 1000);
+            }, 200);
         } catch (Exception e){
             toast("no network");
         }

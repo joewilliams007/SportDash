@@ -167,7 +167,7 @@
                 android:padding="10dp"
                 android:text="loading"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewVerified"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
@@ -393,6 +393,17 @@
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan5" />
+
+            <ImageView
+                android:id="@+id/imageViewVerified"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_margin="10dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@+id/textView17"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textView17"
+                app:srcCompat="@drawable/verified" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

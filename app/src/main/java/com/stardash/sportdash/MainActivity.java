@@ -88,12 +88,31 @@ public class MainActivity extends AppCompatActivity {
                 Window window = getWindow();
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.BLACK);
+
+                TextView textViewId = findViewById(R.id.textViewId);
+                TextView textViewLevel = findViewById(R.id.textViewLevel);
+                textViewId.setTextColor(Color.parseColor("#000000"));
+                textViewLevel.setTextColor(Color.parseColor("#000000"));
             }
         }
 
         getInbox();
         isNewLogin();
+        isShopNew();
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private void isShopNew() {
+        TextView textViewNew = findViewById(R.id.textViewNew);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        LocalDate localDate = LocalDate.now();
+
+        if (dtf.format(localDate).equals(Account.isShopNew())) {
+            textViewNew.setVisibility(View.GONE);
+        } else {
+            textViewNew.setVisibility(View.VISIBLE);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)

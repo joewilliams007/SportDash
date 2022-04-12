@@ -46,6 +46,18 @@ public class Account {
         editor.putString("rewardDay", day);
         editor.apply();
     }
+    // shop new? --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    static String isShopNew() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        String result = pref.getString("isShopNew", null);
+        return result;
+    }
+    static void setShopNew(String day) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("isShopNew", day);
+        editor.apply();
+    }
     // progresses --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     static String week() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
@@ -419,8 +431,6 @@ public class Account {
         editor.putString("selectedFriend", friend);
         editor.apply();
     }
-
-
 
     static void setFriend(int friendNumber, String friend) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("me", 0);

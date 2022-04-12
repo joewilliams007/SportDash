@@ -1,5 +1,6 @@
 package com.stardash.sportdash;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -7,8 +8,10 @@ import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -21,13 +24,22 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 public class ShopActivity extends AppCompatActivity {
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_shop);
+
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
+        LocalDate localDate = LocalDate.now();
+        Account.setShopNew((dtf.format(localDate)));
+
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -42,6 +54,7 @@ public class ShopActivity extends AppCompatActivity {
             textViewItems2.setTextColor(Color.parseColor("#323232"));
             TextView textViewRefresh = findViewById(R.id.textViewRefresh);
             textViewRefresh.setTextColor(Color.parseColor("#323232"));
+
 
         }
         getShop();
@@ -72,7 +85,7 @@ public class ShopActivity extends AppCompatActivity {
 */
     }
 
-
+    static String min = "loading";
     int version = BuildConfig.VERSION_CODE;
     private void getShop() {
         try {
@@ -87,8 +100,13 @@ public class ShopActivity extends AppCompatActivity {
             TextView textViewItemText1 = findViewById(R.id.textViewItemText1);
             TextView textViewItemText2 = findViewById(R.id.textViewItemText2);
             TextView textViewItemText3 = findViewById(R.id.textViewItemText3);
+            TextView textViewItemDescBox1 = findViewById(R.id.textViewItemDescBox1);
+            TextView textViewItemDescBox2 = findViewById(R.id.textViewItemDescBox2);
+            TextView textViewItemTextBox1 = findViewById(R.id.textViewItemTextBox1);
+            TextView textViewItemTextBox2 = findViewById(R.id.textViewItemTextBox2);
+            ImageView imageViewBox1 = findViewById(R.id.imageViewBox1);
+            ImageView imageViewBox2 = findViewById(R.id.imageViewBox2);
             TextView textViewRefresh = findViewById(R.id.textViewRefresh);
-
             handler.postDelayed(new Runnable() {
                 @SuppressLint("SetTextI18n")
                 @Override
@@ -97,13 +115,24 @@ public class ShopActivity extends AppCompatActivity {
                     if (received.contains("outdated-app")){
                         toast("update SportDash app to access shop");
                     } else {
-                        String info = received.split("\n")[0];
 
-                        textViewRefresh.setText("r e f r e s h e s  i n  "+info);
+                        try {
+                        String info = received.split("\n")[0];
+                        String hours = info.split("h")[0];
+
+
+                        int hoursMin = Integer.parseInt(info.split("h")[1].replace("!-",""))/60;
+                        int minMinusHours = Integer.parseInt(info.split("h")[1].replace("!-",""))-hoursMin*60+1;
+
+                        min = "refreshes  in  "+hours.split("\\.")[0]+" h"+" "+String.valueOf(minMinusHours)+" min";
+
+                        textViewRefresh.setText("r e f r e s h e s  i n  "+hours.split("\\.")[0]+" h"+" "+String.valueOf(minMinusHours)+" min");
 
                         String item1 = received.split("\n")[1];
                         String item2 = received.split("\n")[2];
                         String item3 = received.split("\n")[3];
+                        String item4 = received.split("\n")[4];
+                        String item5 = received.split("\n")[5];
 
                         String itemStyle1 = item1.split("!-")[0];
                         String itemName1 = item1.split("!-")[1];
@@ -120,6 +149,16 @@ public class ShopActivity extends AppCompatActivity {
                         String itemCoins3 = item3.split("!-")[2];
                         String itemId3 = item3.split("!-")[3];
 
+                        String itemImage4 = item4.split("!-")[0];
+                        String itemName4 = item4.split("!-")[1];
+                        String itemCoins4 = item4.split("!-")[2];
+                        String itemId4 = item4.split("!-")[3];
+
+                        String itemImage5 = item5.split("!-")[0];
+                        String itemName5 = item5.split("!-")[1];
+                        String itemCoins5 = item5.split("!-")[2];
+                        String itemId5 = item5.split("!-")[3];
+
                         textViewItem1.setText(itemStyle1);
                         textViewItemDesc1.setText(itemName1);
                         textViewItemText1.setText(itemCoins1+" c o i n s");
@@ -132,9 +171,29 @@ public class ShopActivity extends AppCompatActivity {
                         textViewItemDesc3.setText(itemName3);
                         textViewItemText3.setText(itemCoins3+" c o i n s");
 
+                        String uri = "@drawable/box"+itemImage4;  // where myresource (without the extension) is the file
+                        int imageResource = getResources().getIdentifier(uri, null, getPackageName());
+                        Drawable res = getResources().getDrawable(imageResource);
+                        imageViewBox1.setImageDrawable(res);
+
+                        String uri1 = "@drawable/box"+itemImage5;  // where myresource (without the extension) is the file
+                        int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
+                        Drawable res1 = getResources().getDrawable(imageResource1);
+                        imageViewBox2.setImageDrawable(res1);
+
+                        textViewItemDescBox1.setText(itemName4);
+                        textViewItemTextBox1.setText(itemCoins4+" c o i n s");
+
+                        textViewItemDescBox2.setText(itemName5);
+                        textViewItemTextBox2.setText(itemCoins5+" c o i n s");
+
+                        } catch (Exception e){
+                            toast("unknown error please update app or report error");
+                        }
+
                     }
                 }
-            }, 500);
+            }, 100);
 
         } catch (Exception e){
             toast("no network");
@@ -161,4 +220,16 @@ public class ShopActivity extends AppCompatActivity {
             }
         }, 3000);
     }
+
+    public void showMin(View view) {
+        vibrate();
+        toast(min);
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+
 }

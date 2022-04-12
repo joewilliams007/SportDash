@@ -253,8 +253,9 @@
         android:elevation="2dp"
         android:layout_margin="10dp"
         android:padding="2dp"
+        android:textStyle="italic"
         android:onClick="openShop"
-        android:text="  +  "
+        android:text="  NEW  "
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="@+id/textViewShop"
         app:layout_constraintTop_toTopOf="@+id/textViewShop" />
@@ -413,19 +414,22 @@
         android:layout_margin="10dp"
         android:text="#1"
         android:textColor="@color/projectGrey"
-        app:layout_constraintEnd_toStartOf="@+id/cardViewSmall"
-        app:layout_constraintTop_toTopOf="@+id/textViewMe" />
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="@+id/textViewMe"
+        app:layout_constraintTop_toBottomOf="@+id/progressBarWeek" />
 
     <TextView
         android:id="@+id/textViewLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:padding="10dp"
         android:text="Level 10"
-        android:layout_marginRight="10dp"
-        android:gravity="right"
+        android:layout_marginTop="10dp"
         android:textColor="@color/projectGrey"
-        app:layout_constraintEnd_toStartOf="@+id/cardViewSmall"
-        app:layout_constraintTop_toBottomOf="@+id/textViewId" />
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@+id/textViewId"
+        app:layout_constraintTop_toTopOf="@+id/textViewId" />
 
     <TextView
         android:id="@+id/textViewPlan"
@@ -433,7 +437,7 @@
         android:layout_height="wrap_content"
         android:onClick="openMyPlans"
         android:padding="10dp"
-        android:text="PLANS"
+        android:text="TRAINING PLANS"
         android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
         app:layout_constraintStart_toStartOf="@+id/textViewMe" />
@@ -533,5 +537,16 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewPopUp"
         app:layout_constraintEnd_toEndOf="@+id/textViewPopUp"
         app:layout_constraintStart_toStartOf="@+id/textViewPopUp" />
+
+    <ImageView
+        android:id="@+id/imageViewSetting"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_margin="5dp"
+        android:onClick="openSettings"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="@+id/textViewSettings"
+        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
+        app:srcCompat="@drawable/settings" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

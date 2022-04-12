@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
                 public void run() {
                     getUserProfile();
                 }
-            }, 500);
+            }, 100);
 
 
         } catch (Exception e) {
@@ -100,6 +100,11 @@ public class ProfileActivity extends AppCompatActivity {
 
             textViewUsername.setText(username);
             textViewUserID.setText("#" + id);
+
+            ImageView imageViewVerified = findViewById(R.id.imageViewVerified);
+            if (id.equals("1")){
+                imageViewVerified.setVisibility(View.VISIBLE);
+            }
             textViewLevel.setText(String.valueOf(level));
             textViewXp.setText(xp + " xp");
             ProgressBar progressBarToday = findViewById(R.id.progressBarToday);
