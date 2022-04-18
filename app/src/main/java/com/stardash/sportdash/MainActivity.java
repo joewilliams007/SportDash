@@ -39,7 +39,7 @@ import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.FriendsActivity;
 import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.online.chat.InboxActivity;
-import com.stardash.sportdash.me.leaderboard;
+import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.online.shop.ShopActivity;
 import com.stardash.sportdash.plans.run.PlanActivity;
 import com.stardash.sportdash.plans.run.ResultActivity;

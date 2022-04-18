@@ -28,7 +28,7 @@
             android:name=".settings.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".me.leaderboard"
+            android:name=".me.leaderboard.leaderboard"
             android:exported="false" />
         <activity
             android:name=".plans.comments.CommentsActivity"

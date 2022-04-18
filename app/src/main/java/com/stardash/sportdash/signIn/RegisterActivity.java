@@ -14,6 +14,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.settings.Account;
@@ -40,6 +41,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void next(View view) {
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         vibrate();
         sendRegistrationToServer();
     }
@@ -53,7 +55,9 @@ public class RegisterActivity extends AppCompatActivity {
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        if (username.length()<3) {
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+
+            if (username.length()<3) {
             toast("username must be at least 3 characters");
         } else if (password.length()<5){
             toast("password must be at least 5 characters long");
@@ -64,7 +68,8 @@ public class RegisterActivity extends AppCompatActivity {
         } else if (!email.contains(".")) {
             toast("invalid email");
         } else {
-            try {
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+                try {
                 TextView textViewNext = findViewById(R.id.textViewNext);
                 textViewNext.setVisibility(View.GONE);
                 final Handler handler = new Handler(Looper.getMainLooper());
@@ -74,6 +79,8 @@ public class RegisterActivity extends AppCompatActivity {
                         StarsocketConnector.sendMessage("register " + username + " " + password + " " + email);
                         getIdFromServer();
                         continueIt();
+                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+
                     }
                 }, 3000);
 

@@ -17,6 +17,7 @@ import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.settings.Account;
@@ -49,8 +50,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void next(View view) {
-        vibrate();
 
+        vibrate();
         EditText editTextId = findViewById(R.id.editTextTextPersonNameId);
         EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
         String id = editTextId.getText().toString().replace(" ","");
@@ -62,6 +63,7 @@ public class LoginActivity extends AppCompatActivity {
             toast("your password must been at least 5 characters long");
         } else {
             try {
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
                 TextView textViewNext = findViewById(R.id.textViewNext);
                 textViewNext.setVisibility(View.GONE);
                 StarsocketConnector.sendMessage("login " + id + " " + password);
@@ -78,6 +80,7 @@ public class LoginActivity extends AppCompatActivity {
                 toast("network error");
             }
         }
+
     }
 
     private void getLoginsFromServer() {
@@ -148,6 +151,7 @@ public class LoginActivity extends AppCompatActivity {
         }
         TextView textViewNext = findViewById(R.id.textViewNext);
         textViewNext.setVisibility(View.VISIBLE);
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
     }
 
     public void downloadPlans(String id) {
