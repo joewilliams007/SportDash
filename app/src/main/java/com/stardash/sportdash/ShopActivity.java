@@ -9,6 +9,7 @@ import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -24,8 +25,19 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Base64;
+import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.Bundle;
+import android.widget.TextView;
+import java.io.ByteArrayOutputStream;
 
 public class ShopActivity extends AppCompatActivity {
 
@@ -35,6 +47,8 @@ public class ShopActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_shop);
+
+
 
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("uuuu/MM/dd");
         LocalDate localDate = LocalDate.now();
@@ -58,6 +72,8 @@ public class ShopActivity extends AppCompatActivity {
 
         }
         getShop();
+
+
       /*  ImageView image = findViewById(R.id.imageViewBg);
         ObjectAnimator scaleDownX = ObjectAnimator.ofFloat(image, "scaleX", 0.2f);
         ObjectAnimator scaleDownY = ObjectAnimator.ofFloat(image, "scaleY", 0.2f);
@@ -221,6 +237,7 @@ public class ShopActivity extends AppCompatActivity {
         }, 3000);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void showMin(View view) {
         vibrate();
         toast(min);
@@ -231,5 +248,6 @@ public class ShopActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
+
 
 }

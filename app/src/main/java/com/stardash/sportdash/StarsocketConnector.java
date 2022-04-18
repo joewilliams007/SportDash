@@ -25,14 +25,14 @@ public class StarsocketConnector {
         socket.stopConnection();
     }
 
-    static void sendMessage(String message){
+    public static void sendMessage(String message){
         aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
         socket.sendMessage(message);
         socket.stopConnection();
     }
 
 
-    static String getMessage(){
+    public static String getMessage(){
         aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
         String message = socket.receiveMessage();
         socket.stopConnection();

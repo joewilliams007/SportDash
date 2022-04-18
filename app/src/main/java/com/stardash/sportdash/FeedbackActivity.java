@@ -1,31 +1,26 @@
 package com.stardash.sportdash;
 
-import static com.stardash.sportdash.RunPlanActivity.reportPlanId;
-import static com.stardash.sportdash.RunPlanActivity.reportingPlan;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.reportPlanId;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.reportingPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.wifi.WifiManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.format.Formatter;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
-import android.widget.Checkable;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.InetAddress;

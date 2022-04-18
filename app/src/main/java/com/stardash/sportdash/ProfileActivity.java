@@ -1,12 +1,12 @@
 package com.stardash.sportdash;
 
-import static com.stardash.sportdash.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import android.animation.ObjectAnimator;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -15,22 +15,28 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.stardash.sportdash.online.FriendsActivity;
+import com.stardash.sportdash.plans.run.RunPlanActivity;
 
 public class ProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_profile);
         invalidId = false;
+        ChatActivity.updateChat = false;
         try {
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
@@ -141,7 +147,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
 
     }
-     static Boolean invalidId;
+    public static Boolean invalidId;
     private void loadPlans(String id) {
         try {
             StarsocketConnector.sendMessage("downloadPlans " + id);
@@ -202,6 +208,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     }
     public void plan1(View view) {
+        vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan1);
         if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
             toast("empty plan");
@@ -210,6 +217,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
     public void plan2(View view) {
+        vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan2);
         if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
             toast("empty plan");
@@ -218,6 +226,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
     public void plan3(View view) {
+        vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan3);
         if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
             toast("empty plan");
@@ -226,6 +235,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
     public void plan4(View view) {
+        vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan4);
         if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
             toast("empty plan");
@@ -234,6 +244,7 @@ public class ProfileActivity extends AppCompatActivity {
         }
     }
     public void plan5(View view) {
+        vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan5);
         if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
             toast("empty plan");
@@ -270,6 +281,7 @@ public class ProfileActivity extends AppCompatActivity {
     }
 
     public void saveFriend(View view) {
+        vibrate();
         TextView textViewUsername = findViewById(R.id.textViewUsername);
         TextView textViewUserID = findViewById(R.id.textViewUserID);
         String text = textViewUserID.getText().toString()+" "+textViewUsername.getText().toString();
@@ -280,11 +292,24 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    static String chatId;
+    public static String chatId;
+    public static String chatUsername;
     public void openChat(View view) {
+        vibrate();
+        TextView textViewUsername = findViewById(R.id.textViewUsername);
         TextView textViewUserID = findViewById(R.id.textViewUserID);
+        chatUsername = textViewUsername.getText().toString();
         chatId = textViewUserID.getText().toString().replace("#","");
         Intent i = new Intent(this, ChatActivity.class);
         startActivity(i);
+    }
+
+    private void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
     }
 }

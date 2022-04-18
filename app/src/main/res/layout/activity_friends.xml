@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".FriendsActivity">
+    tools:context=".online.FriendsActivity">
 
     <TextView
         android:id="@+id/textViewTop"
@@ -21,196 +21,349 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewAdd"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="2dp"
-        android:onClick="openProfile"
-        android:padding="2dp"
-        android:text="E N T E R"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
-
-    <EditText
-        android:id="@+id/editTextTextPersonNameHashtag"
+    <ScrollView
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/track_green_background"
-        android:hint="USER ID"
-        android:inputType="number"
-        android:padding="10dp"
-        android:textColor="@color/projectGrey"
-        android:textColorHint="@color/projectGrey"
-        app:layout_constraintEnd_toStartOf="@+id/textViewAdd"
-        app:layout_constraintStart_toEndOf="@+id/textViewHashtag"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/textViewAdd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:onClick="openProfile"
+                android:padding="2dp"
+                android:text="E N T E R"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
+
+            <EditText
+                android:id="@+id/editTextTextPersonNameHashtag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/track_green_background"
+                android:hint="USER ID"
+                android:inputType="number"
+                android:padding="10dp"
+                android:textColor="@color/projectGrey"
+                android:textColorHint="@color/projectGrey"
+                app:layout_constraintEnd_toStartOf="@+id/textViewAdd"
+                app:layout_constraintStart_toEndOf="@+id/textViewHashtag"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewSend"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:onClick="sendFriendRequest"
+                android:padding="2dp"
+                android:text="R E Q U E S T"
+                android:textColor="@color/white"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textViewHashtag"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="16dp"
+                android:text="#"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
+
+
+
+            <TextView
+                android:id="@+id/textViewFriend"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend0"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLast" />
+
+            <TextView
+                android:id="@+id/textViewFriend1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChat4" />
+
+            <TextView
+                android:id="@+id/textViewFriend2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend2"
+                android:padding="10dp"
+
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend1" />
+
+            <TextView
+                android:id="@+id/textViewFriend3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend3"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend2" />
+
+            <TextView
+                android:id="@+id/textViewFriend4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend4"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend3" />
+
+            <TextView
+                android:id="@+id/textViewFriend5"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend5"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend4" />
+
+            <TextView
+                android:id="@+id/textViewFriendx"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:onClick="friend5"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend5" />
+
+            <TextView
+                android:id="@+id/textViewLast"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="last searched"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameHashtag" />
+
+            <TextView
+                android:id="@+id/textViewLastChat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:padding="10dp"
+                android:text="friends"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFriend" />
+
+            <TextView
+                android:id="@+id/textViewChat2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:onClick="friend7"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChat1" />
+
+            <TextView
+                android:id="@+id/textViewChat3"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend8"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChat2" />
+
+            <TextView
+                android:id="@+id/textViewChat4"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend9"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewChat3" />
+
+            <TextView
+                android:id="@+id/textViewChat1"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:gravity="center"
+                android:onClick="friend6"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLastChat" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
 
     <TextView
-        android:id="@+id/textViewSend"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="2dp"
-        android:padding="2dp"
-        android:text="R E Q U E S T"
-        android:visibility="gone"
-        android:onClick="sendFriendRequest"
-        android:textColor="@color/white"
+        android:id="@+id/textViewSelect"
+        android:layout_width="200dp"
+        android:layout_height="150dp"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:onClick="doNth"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewHashtag"
+        android:id="@+id/textViewProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginStart="16dp"
-        android:text="#"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
+        android:onClick="openProfileId"
+        android:padding="10dp"
+        android:text="P R O F I L E"
+        android:textColor="@color/projectGrey"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toTopOf="@+id/textViewChat"
+        app:layout_constraintStart_toStartOf="@+id/textViewSelect" />
+
+    <TextView
+        android:id="@+id/textViewChat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="C H A T"
+        android:onClick="openChat"
+        android:textColor="@color/projectGrey"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSelect"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSelect" />
+
+    <TextView
+        android:id="@+id/textViewClose"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="hideSelectStart"
+        android:padding="15dp"
+        android:text="X"
+        android:textColor="@color/projectRed"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSelect"
+        app:layout_constraintTop_toTopOf="@+id/textViewProfile" />
+
+    <TextView
+        android:id="@+id/textViewProfileId"
+        android:layout_width="0dp"
+        android:background="@drawable/main_text_background"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:layout_margin="5dp"
+        android:text="#1"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSelect"
+        app:layout_constraintStart_toStartOf="@+id/textViewSelect"
+        app:layout_constraintTop_toTopOf="@+id/textViewSelect" />
+
+    <TextView
+        android:id="@+id/textViewUrId"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/main_text_background_track"
+        android:gravity="center"
+        android:onClick="openMyProfile"
+        android:padding="15dp"
+        android:text="your ID is #"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
     <TextView
         android:id="@+id/textViewCustomToast"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CUSTOM TOAST"
-        android:padding="10dp"
-        android:elevation="10dp"
         android:layout_margin="10dp"
-        android:visibility="gone"
-        android:textColor="@color/white"
         android:background="@drawable/main_text_background_red"
+        android:elevation="10dp"
+        android:padding="10dp"
+        android:text="CUSTOM TOAST"
+        android:textColor="@color/white"
+        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewFriend"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="friend0"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLast" />
-    <TextView
-        android:id="@+id/textViewFriend1"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="friend1"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriends" />
-
-
-    <TextView
-        android:id="@+id/textViewFriend2"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:onClick="friend2"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriend1" />
-
-    <TextView
-        android:id="@+id/textViewFriend3"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="friend3"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriend2" />
-
-    <TextView
-        android:id="@+id/textViewFriend4"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="friend4"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriend3" />
-
-    <TextView
-        android:id="@+id/textViewFriend5"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="friend5"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriend4" />
-
-    <TextView
-        android:id="@+id/textViewLast"
-        android:padding="10dp"
-        android:layout_margin="10dp"
-        android:textColor="@color/white"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="last searched"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameHashtag" />
-
-    <TextView
-        android:id="@+id/textViewFriends"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="friends"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFriend" />
-
-    <TextView
-        android:id="@+id/textViewUrId"
-        android:layout_width="0dp"
-        android:padding="15dp"
-        android:onClick="openMyProfile"
-        android:layout_height="wrap_content"
-        android:textColor="@color/projectGrey"
-        android:gravity="center"
-        android:text="your ID is #"
-        android:background="@drawable/main_text_background_track"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

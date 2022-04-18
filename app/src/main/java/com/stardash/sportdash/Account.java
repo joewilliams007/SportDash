@@ -9,120 +9,118 @@ import java.util.Date;
 public class Account {
 
 
-
-
     // level --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int level() {
+    public static int level() {
         int level = xp()/10000+1;
         return level;
     }
     // coins --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int coins() {
+    public static int coins() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("coins", 0);
         return result;
     }
-    static void setCoins(int coins) {
+    public static void setCoins(int coins) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("coins", coins);
         editor.apply();
     }
-    static void getCoins(int coins) {
+    public static void getCoins(int coins) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("coins", coins()+coins);
         editor.apply();
     }
     // reward --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String rewardDay() {
+    public static String rewardDay() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("rewardDay", null);
         return result;
     }
-    static void setRewardDay(String day) {
+    public static void setRewardDay(String day) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("rewardDay", day);
         editor.apply();
     }
     // shop new? --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String isShopNew() {
+    public static String isShopNew() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("isShopNew", null);
         return result;
     }
-    static void setShopNew(String day) {
+    public static void setShopNew(String day) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("isShopNew", day);
         editor.apply();
     }
     // progresses --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String week() {
+    public static String week() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("week", null);
         return result;
     }
-    static String day() {
+    public static String day() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("day", null);
         return result;
     }
-    static int WeekProgress() {
+    public static int WeekProgress() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("week_progress", 0);
         return result;
     }
-    static int TodayProgress() {
+    public static int TodayProgress() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("today_progress", 0);
         return result;
     }
-    static void setTodayProgress(int progress) {
+    public static void setTodayProgress(int progress) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("today_progress", progress);
         editor.apply();
     }
-    static void getTodayProgress(int progress) {
+    public static void getTodayProgress(int progress) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("today_progress", TodayProgress()+progress);
         editor.apply();
     }
-    static void setDay(String day) {
+    public static void setDay(String day) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("day", day);
         editor.apply();
     }
-    static void setWeek(String week) {
+    public static void setWeek(String week) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("week", week);
         editor.apply();
     }
-    static void setWeekProgress(int progress) {
+    public static void setWeekProgress(int progress) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("week_progress", progress);
         editor.apply();
     }
-    static void getWeekProgress(int progress) {
+    public static void getWeekProgress(int progress) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("week_progress", WeekProgress()+progress);
         editor.apply();
     }
     // weight --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int weight() {
+    public static int weight() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("weight", 0);
         return result;
     }
 
-    static void setWeight(int weight) {
+    public static void setWeight(int weight) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("weight", weight);
@@ -130,30 +128,30 @@ public class Account {
     }
 
     // age --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int age() {
+    public static int age() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("age", 0);
         return result;
     }
-    static void setAge(int age) {
+    public static void setAge(int age) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("age", age);
         editor.apply();
     }
     // xp --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int xp() {
+    public static int xp() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("xp", 0);
         return result;
     }
-    static void setXp(int xp) {
+    public static void setXp(int xp) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("xp", xp);
         editor.apply();
     }
-    static void getXp(int xp) {
+    public static void getXp(int xp) {
         try {
             StarsocketConnector.sendMessage("setXp "+userid()+" "+String.valueOf(xp()+xp));
         } catch (Exception e){
@@ -191,66 +189,66 @@ public class Account {
         editor.apply();
     }
     // log --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String log() {
+    public static String log() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("username", null);
         return result;
     }
-    static void setLog(String log) {
+    public static void setLog(String log) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("log", log);
         editor.apply();
     }
-    static void addLog(String log) {
+    public static void addLog(String log) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("log", log()+"\n\n"+log);
         editor.apply();
     }
     // username --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String username() {
+    public static String username() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("username", null);
         return result;
     }
-    static void setUsername(String username) {
+    public static void setUsername(String username) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("username", username);
         editor.apply();
     }
     // id --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String userid() {
+    public static String userid() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("userid", null);
         return result;
     }
-    static void setId(String id) {
+    public static void setId(String id) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("userid", id);
         editor.apply();
     }
     // email --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String email() {
+    public static String email() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("email", null);
         return result;
     }
-    static void setEmail(String email) {
+    public static void setEmail(String email) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("email", email);
         editor.apply();
     }
     // password --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String password() {
+    public static String password() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         String result = pref.getString("password", null);
         return result;
     }
-    static void setPassword(String password) {
+    public static void setPassword(String password) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("password", password);
@@ -258,19 +256,19 @@ public class Account {
     }
 
     // is logged in status --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static void setLoggedIn(Boolean loggedIn) {
+    public static void setLoggedIn(Boolean loggedIn) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putBoolean("loggedIn", loggedIn);
         editor.apply();
     }
-    static boolean loggedIn() {
+    public static boolean loggedIn() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         Boolean result = pref.getBoolean("loggedIn", false);
         return result;
     }
     // error styles --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static void setErrorStyle(String errorStyle) {
+    public static void setErrorStyle(String errorStyle) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("errorStyle", errorStyle);
@@ -281,7 +279,7 @@ public class Account {
         String result = pref.getString("errorStyle", ">_<");
         return result;
     }
-    static void setMyErrorStyles(String styles) {
+    public static void setMyErrorStyles(String styles) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("myErrorStyles", styles);
@@ -293,37 +291,37 @@ public class Account {
         return result;
     }
     // energy --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static int energy() {
+    public static int energy() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         int result = pref.getInt("energy", 0);
         return result;
     }
-    static void setEnergy(int energy) {
+    public static void setEnergy(int energy) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("energy", energy);
         editor.apply();
     }
-    static void getEnergy(int energy) {
+    public static void getEnergy(int energy) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("energy", energy()+energy);
         editor.apply();
     }
     // create status --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static boolean isCreate() {
+    public static boolean isCreate() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("sport", 0); // 0 - for private mode
         boolean create = pref.getBoolean("create", true);
         return create;
     }
     // active iterations --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static void setActiveIterations(int i) {
+    public static void setActiveIterations(int i) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putInt("activeIterations", 0).commit();
     }
     // plans --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String plan(int i) {
+    public static String plan(int i) {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("sport", 0); // 0 - for private mode
         String plan = pref.getString(String.valueOf(i)+" plan", "empty");
         if (plan.length()<1) {
@@ -332,14 +330,14 @@ public class Account {
         return plan;
     }
 
-    static void setPlan(int planNumber, String plan) {
+    public static void setPlan(int planNumber, String plan) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(String.valueOf(planNumber)+" plan", plan);
         editor.apply();
     }
 
-    static String committedPlan() {
+    public static String committedPlan() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("sport", 0); // 0 - for private mode
         String plan = pref.getString("committed plan", "empty");
         if (plan.length()<1) {
@@ -348,7 +346,7 @@ public class Account {
         return plan;
     }
     // plan friend --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    static String planFriend(int i) {
+    public static String planFriend(int i) {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("sport", 0); // 0 - for private mode
         String plan = pref.getString(String.valueOf(i)+" planFriend", "empty");
         if (plan.length()<1) {
@@ -363,14 +361,14 @@ public class Account {
         editor.putBoolean("isAmoled", amoled);
         editor.apply();
     }
-    static Boolean isAmoled() {
+    public static Boolean isAmoled() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         Boolean amoled = pref.getBoolean("isAmoled", false);
         return amoled;
     }
     // localhost --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    static Boolean localhost() {
+    public static Boolean localhost() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("app", 0); // 0 - for private mode
         Boolean localhost = pref.getBoolean("isLocalhost", false);
         return localhost;
@@ -391,7 +389,7 @@ public class Account {
         editor.putBoolean("isMine", x);
         editor.apply();
     }
-    static Boolean isMine() {
+    public static Boolean isMine() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("app", 0); // 0 - for private mode
         Boolean x = pref.getBoolean("isMine", false);
         return x;
@@ -404,13 +402,13 @@ public class Account {
         editor.putBoolean("isAddingFriend", x);
         editor.apply();
     }
-    static Boolean isAddingFriend() {
+    public static Boolean isAddingFriend() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("app", 0); // 0 - for private mode
         Boolean x = pref.getBoolean("isAddingFriend", false);
         return x;
     }
 
-    static String friend(int i) {
+    public static String friend(int i) {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("me", 0); // 0 - for private mode
         String plan = pref.getString(String.valueOf(i)+" friend", "");
         if (plan.length()<1) {
@@ -418,7 +416,7 @@ public class Account {
         }
         return plan;
     }
-    static String selectedFriend() {
+    public static String selectedFriend() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("me", 0); // 0 - for private mode
         String plan = pref.getString("selectedFriend", "");
 
@@ -432,7 +430,7 @@ public class Account {
         editor.apply();
     }
 
-    static void setFriend(int friendNumber, String friend) {
+    public static void setFriend(int friendNumber, String friend) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("me", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString(String.valueOf(friendNumber)+" friend", friend);

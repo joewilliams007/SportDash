@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    tools:context=".plans.create.ImagesActivity">
+
+    <TextView
+        android:id="@+id/textViewSearchBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S E A R C H"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameSearch" />
+
+    <EditText
+        android:id="@+id/editTextTextPersonNameSearch"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:textColor="@color/projectGrey"
+        android:hint="search"
+        android:textColorHint="@color/projectGrey"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:background="@drawable/track_green_background"
+        app:layout_constraintEnd_toStartOf="@+id/textViewSearchBtn"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewMiddle"
+        android:layout_width="1dp"
+        android:layout_height="1dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <ImageView
+        android:id="@+id/imageViewElement1"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameSearch" />
+
+    <ImageView
+        android:id="@+id/imageViewFinalElement1.1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewElement1"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewMiddle"
+        app:layout_constraintStart_toStartOf="@+id/imageViewElement1"
+        app:layout_constraintTop_toTopOf="@+id/imageViewElement1"
+        app:srcCompat="@drawable/element_1_1" />
+
+    <ImageView
+        android:id="@+id/imageViewFinalElement1.2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/textViewElement1"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewElement1"
+        app:layout_constraintStart_toEndOf="@+id/imageViewMiddle"
+        app:layout_constraintTop_toTopOf="@+id/imageViewElement1"
+        app:srcCompat="@drawable/element_1_2" />
+
+    <TextView
+        android:id="@+id/textViewElement1"
+        android:background="@drawable/track_green_background"
+        android:padding="10dp"
+        android:textColor="@color/projectGrey"
+        android:layout_width="0dp"
+        android:layout_margin="10dp"
+        android:layout_height="wrap_content"
+        android:text="plank with leg lift"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewElement1"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewElement1"
+        app:layout_constraintStart_toStartOf="@+id/imageViewElement1" />
+</androidx.constraintlayout.widget.ConstraintLayout>

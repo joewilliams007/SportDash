@@ -16,6 +16,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".settings.ChatSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plans.create.ImagesActivity"
+            android:exported="false" />
+        <activity
             android:name=".TermsOfServiceActivity"
             android:exported="false" />
         <activity
@@ -25,7 +31,7 @@
             android:name=".leaderboard"
             android:exported="false" />
         <activity
-            android:name=".CommentsActivity"
+            android:name=".plans.comments.CommentsActivity"
             android:exported="false" />
         <activity
             android:name=".InboxActivity"
@@ -52,34 +58,34 @@
             android:name=".LobbyActivity"
             android:exported="false" />
         <activity
-            android:name=".FriendsActivity"
+            android:name=".online.FriendsActivity"
             android:exported="false" />
         <activity
             android:name=".RatePlanActivity"
             android:exported="false" />
         <activity
-            android:name=".FinishedWorkoutActivity"
+            android:name=".plans.run.FinishedWorkoutActivity"
             android:exported="false" />
         <activity
-            android:name=".ActivePlanActivity"
+            android:name=".plans.run.ActivePlanActivity"
             android:exported="false" />
         <activity
-            android:name=".RunPlanActivity"
+            android:name=".plans.run.RunPlanActivity"
             android:exported="false" />
         <activity
-            android:name=".GuideStructurePlanActivity"
+            android:name=".plans.create.GuideStructurePlanActivity"
             android:exported="false" />
         <activity
-            android:name=".ElementsActivity"
+            android:name=".plans.create.ElementsActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateStructureActivity"
+            android:name=".plans.create.CreateStructureActivity"
             android:exported="false" />
         <activity
-            android:name=".CreatePlanActivity"
+            android:name=".plans.create.CreatePlanActivity"
             android:exported="false" />
         <activity
-            android:name=".PlanActivity"
+            android:name=".plans.run.PlanActivity"
             android:exported="false" />
         <activity
             android:name=".AboutActivity"
@@ -91,10 +97,10 @@
             android:name=".AfterRegister"
             android:exported="false" />
         <activity
-            android:name=".RegisterActivity"
+            android:name=".signIn.RegisterActivity"
             android:exported="false" />
         <activity
-            android:name=".TrackActivity"
+            android:name=".plans.run.TrackActivity"
             android:exported="false" />
         <activity
             android:name=".RewardActivity"
@@ -106,10 +112,10 @@
             android:name=".ResultActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".signIn.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".SettingsActivity"
+            android:name=".settings.SettingsActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".GuideStructurePlanActivity">
+    tools:context=".plans.create.GuideStructurePlanActivity">
 
     <TextView
         android:id="@+id/textViewTop"

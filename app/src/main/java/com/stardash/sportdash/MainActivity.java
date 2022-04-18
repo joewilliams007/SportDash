@@ -1,26 +1,20 @@
 package com.stardash.sportdash;
 
 import static com.stardash.sportdash.ProfileActivity.invalidId;
-import static com.stardash.sportdash.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.cardview.widget.CardView;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.animation.AnimatorInflater;
-import android.animation.ArgbEvaluator;
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.graphics.drawable.TransitionDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -30,21 +24,23 @@ import android.os.StrictMode;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.stardash.sportdash.online.FriendsActivity;
+import com.stardash.sportdash.plans.run.PlanActivity;
+import com.stardash.sportdash.plans.run.RunPlanActivity;
+import com.stardash.sportdash.settings.SettingsActivity;
+import com.stardash.sportdash.signIn.LoginActivity;
+import com.stardash.sportdash.signIn.RegisterActivity;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,6 +53,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ChatActivity.updateChat = false;
+        try {
+            StarsocketConnector.sendMessage("boost");
+        } catch (Exception e){
+
+        }
         setProfilePicture(); // set picture
         Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
         checkDeepLink(); // check if app was opened with a link
@@ -74,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 StarsocketConnector.sendMessage("connecting "+" #"+Account.userid());
             } catch (Exception e){
-                toast(".. no connection, no problemection");
+                toast("no network");
             }
         } else {
             Intent i = new Intent(this, RegisterActivity.class);
@@ -381,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openAchievements(View view) {
+        vibrate();
         Intent i = new Intent(this, AchievementsActivity.class);
         startActivity(i);
     }

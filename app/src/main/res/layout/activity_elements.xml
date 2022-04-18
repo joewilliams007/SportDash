@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".ElementsActivity">
+    tools:context=".plans.create.ElementsActivity">
 
     <TextView
         android:id="@+id/textViewTop"
@@ -405,4 +405,20 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSelectAvailable"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:background="@drawable/main_text_background_track"
+        android:gravity="center"
+        android:textStyle="italic|bold"
+        android:padding="10dp"
+        android:onClick="openImages"
+        android:text="S E L E C T  F R O M  L I B R A R Y"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

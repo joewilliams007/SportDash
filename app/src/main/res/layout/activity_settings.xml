@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:background="@color/projectGrey"
-    tools:context=".SettingsActivity">
+    tools:context=".settings.SettingsActivity">
 
     <TextView
         android:elevation="2dp"
@@ -15,7 +15,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/projectLightBlue"
         android:text="@string/settings"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -42,7 +42,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop"
-        app:layout_constraintVertical_bias="0.0">
+        app:layout_constraintVertical_bias="1.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -217,6 +217,7 @@
                 android:padding="10dp"
                 android:text="COMET GREY"
                 android:textColor="@color/projectGreen"
+                android:textStyle="italic"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTheme" />
 
@@ -229,6 +230,7 @@
                 android:padding="10dp"
                 android:text="AMOLED BLACK"
                 android:textColor="@color/projectGreen"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewTheme" />
 
@@ -244,6 +246,32 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewThemeGrey" />
 
+
+            <TextView
+                android:id="@+id/textViewChatSettings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="chat settings"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewTTS" />
+
+
+            <View
+                android:id="@+id/viewChatStng1"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewChatSettings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toEndOf="@+id/textViewChatSettings"
+                app:layout_constraintTop_toTopOf="@+id/textViewChatSettings"
+                app:layout_constraintVertical_bias="0.472" />
+
             <TextView
                 android:id="@+id/textViewSetDefault"
                 android:layout_width="wrap_content"
@@ -252,7 +280,7 @@
                 android:text="enable default links"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTTS" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewChatStng" />
 
             <View
                 android:id="@+id/view1"
@@ -355,7 +383,7 @@
                 android:layout_margin="10dp"
                 android:onClick="openUpdate"
                 android:padding="10dp"
-                android:text="c h a n g e l o g"
+                android:text="C H A N G E L O G"
                 android:textColor="@color/projectLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -575,18 +603,32 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewTTSsettingEnable1" />
 
             <TextView
+                android:id="@+id/textViewChatStng"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:onClick="openChatSettings"
+                android:padding="10dp"
+                android:text="C H A T  S E T T I N G S"
+                android:textColor="@color/projectLightBlue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/viewChatStng1" />
+
+
+            <TextView
                 android:id="@+id/textViewDefault"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
                 android:onClick="openDefaultSetting"
                 android:padding="10dp"
                 android:text="open default link settings"
                 android:textColor="@color/projectLightBlue"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewSetDefault" />
-
 
             <TextView
                 android:id="@+id/textViewLocalhost"
