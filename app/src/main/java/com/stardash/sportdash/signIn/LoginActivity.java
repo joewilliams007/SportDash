@@ -2,14 +2,21 @@ package com.stardash.sportdash.signIn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.Image;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.StrictMode;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stardash.sportdash.settings.Account;
@@ -17,6 +24,8 @@ import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.TermsOfServiceActivity;
+
+import org.w3c.dom.Text;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -34,24 +43,36 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void openRegister(View view) {
+        vibrate();
         Intent i = new Intent(this, RegisterActivity.class);
         startActivity(i);
     }
 
     public void next(View view) {
+        vibrate();
+
         EditText editTextId = findViewById(R.id.editTextTextPersonNameId);
         EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
         String id = editTextId.getText().toString().replace(" ","");
         String password = editTextPassword.getText().toString().replace(" ","");
 
         if (id.length()<1) {
-            toast("invalid id");
+            toast("invalid user id");
         } else if (password.length()<5){
             toast("your password must been at least 5 characters long");
         } else {
             try {
+                TextView textViewNext = findViewById(R.id.textViewNext);
+                textViewNext.setVisibility(View.GONE);
                 StarsocketConnector.sendMessage("login " + id + " " + password);
-                getLoginsFromServer();
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getLoginsFromServer();
+                    }
+                }, 3000);
+
                 Account.setLoggedIn(true);
             } catch (Exception e){
                 toast("network error");
@@ -66,58 +87,37 @@ public class LoginActivity extends AppCompatActivity {
         String password = editTextPassword.getText().toString().replace(" ","");
 
         String received = StarsocketConnector.getMessage().split("\n",100)[0];
-       // String received_plans = StarsocketConnector.getMessage().split("PLANS",2)[1];
-        String received_id = received.split("%SPORTDASH%",13)[1];
-        String received_password = received.split("%SPORTDASH%",13)[2];
 
-        String received_username = received.split("%SPORTDASH%",13)[3];
+        if(received.equals("WRONG")) {
+            toast("wrong password or id");
+        } else {
 
-        String received_xp = received.split("%SPORTDASH%",13)[4];
-        if (received_xp.equals("null")) {
-            received_xp = "0";
-        }
-        String received_age = received.split("%SPORTDASH%",13)[5];
-        if (received_age.equals("null")) {
-            received_age = "0";
-        }
-        String received_weight = received.split("%SPORTDASH%",13)[6];
-        if (received_weight.equals("null")) {
-            received_weight = "0";
-        }
-        String received_coins = received.split("%SPORTDASH%",13)[7];
-        if (received_coins.equals("null")) {
-            received_coins = "0";
-        }
-        /* String received_email = received.split(" ",13)[7];
-        String received_energy = received.split(" ",19)[8];
-        if (received_energy.equals("null")) {
-            received_energy = "5";
-        }
-        String received_error_styles = received.split(" ",19)[9];
-        if (received_error_styles.equals("null")) {
-            received_error_styles = ">_<";
-        }
-        String received_log = received.split(" ",19)[10];
-        if (received_log.equals("null")) {
-            received_log = "";
-        }
-        String received_plan1 = received_plans.split(" ",13)[0];
-        String received_plan2 = received.split(" ",13)[1];
-        String received_plan3 = received.split(" ",19)[2];
-        String received_plan4 = received.split(" ",19)[3];
-        String received_plan5 = received.split(" ",19)[4];
+            String received_id = received.split("%SPORTDASH%", 13)[1];
+            String received_password = received.split("%SPORTDASH%", 13)[2];
 
-        // add achievements
-        */
+            String received_username = received.split("%SPORTDASH%", 13)[3];
 
-        if(received.contains("invalid ip")) {
-            getLoginsFromServer();
-            toast("got an invalid ip, retrying");
-        } else if (received.contains("err")) {
-            toast("invalid id or password");
-        } else if (received_password.equals(password) && received_id.equals(id)) {
+            String received_xp = received.split("%SPORTDASH%", 13)[4];
+            if (received_xp.equals("null")) {
+                received_xp = "0";
+            }
+            String received_age = received.split("%SPORTDASH%", 13)[5];
+            if (received_age.equals("null")) {
+                received_age = "0";
+            }
+            String received_weight = received.split("%SPORTDASH%", 13)[6];
+            if (received_weight.equals("null")) {
+                received_weight = "0";
+            }
+            String received_coins = received.split("%SPORTDASH%", 13)[7];
+            if (received_coins.equals("null")) {
+                received_coins = "0";
+            }
 
-            Account.setUsername(received_username);
+
+            if (received_password.equals(password) && received_id.equals(id)) {
+
+                Account.setUsername(received_username);
 
                 Account.setId(received_id);
                 Account.setXp(Integer.parseInt(received_xp));
@@ -125,41 +125,33 @@ public class LoginActivity extends AppCompatActivity {
                 Account.setWeight(Integer.parseInt(received_weight));
                 Account.setCoins(Integer.parseInt(received_coins));
 
-                /*
-                Account.setEmail(received_email);
-                // missing: logins and all achievements in general
-                Account.setEnergy(Integer.parseInt(received_energy));
-                Account.setPlan(1, received_plan1);
-                Account.setPlan(2, received_plan2);
-                Account.setPlan(3, received_plan3);
-                Account.setPlan(4, received_plan4);
-                Account.setPlan(5, received_plan5);
-                Account.setMyErrorStyles(received_error_styles);
+                Account.setTodayProgress(0);
+                Account.setWeekProgress(0);
 
-                 */
-            Account.setTodayProgress(0);
-            Account.setWeekProgress(0);
+                Date cDate = new Date();
+                String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
+                Account.setDay(fDate);
 
-            Date cDate = new Date();
-            String fDate = new SimpleDateFormat("yyyy-MM-dd").format(cDate);
-            Account.setDay(fDate);
+                Date d1 = new Date();
+                Calendar cl = Calendar.getInstance();
+                cl.setTime(d1);
+                Account.setWeek(String.valueOf(cl.WEEK_OF_YEAR));
 
-            Date d1 = new Date();
-            Calendar cl = Calendar.getInstance();
-            cl.setTime(d1);
-            Account.setWeek(String.valueOf(cl.WEEK_OF_YEAR));
-
-            downloadPlans(received_id);
-            Intent i = new Intent(this, MainActivity.class);
-            startActivity(i);
-        } else {
-            toast("unknown error");
-            getLoginsFromServer();
+                downloadPlans(received_id);
+                Intent i = new Intent(this, MainActivity.class);
+                startActivity(i);
+            } else {
+                toast("unknown error");
+                getLoginsFromServer();
+            }
+            // toast(received);
         }
-       // toast(received);
+        TextView textViewNext = findViewById(R.id.textViewNext);
+        textViewNext.setVisibility(View.VISIBLE);
     }
 
     public void downloadPlans(String id) {
+        vibrate();
         try {
             toast("downloading plans ...");
             StarsocketConnector.sendMessage("downloadPlans " + id);
@@ -193,19 +185,46 @@ public class LoginActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-              //  textViewCustomToast.setVisibility(View.GONE);
+                textViewCustomToast.setVisibility(View.GONE);
             }
         }, 3000);
     }
 
     public void skip(View view) {
+        vibrate();
         Account.setLoggedIn(true);
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
     public void openTermsOfService(View view) {
+        vibrate();
         Intent i = new Intent(this, TermsOfServiceActivity.class);
         startActivity(i);
+    }
+
+    public void showPassword(View view) {
+        vibrate();
+        EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
+        ImageView imageViewEye = findViewById(R.id.imageViewEye);
+        imageViewEye.setVisibility(View.GONE);
+        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imageViewEye.setVisibility(View.VISIBLE);
+            }
+        }, 3000);
+    }
+
+    private void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
     }
 }

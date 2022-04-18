@@ -2,12 +2,18 @@ package com.stardash.sportdash.signIn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
+import android.text.InputType;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stardash.sportdash.settings.Account;
@@ -28,11 +34,13 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void openLogin(View view) {
+        vibrate();
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
 
     public void next(View view) {
+        vibrate();
         sendRegistrationToServer();
     }
 
@@ -67,7 +75,7 @@ public class RegisterActivity extends AppCompatActivity {
                         getIdFromServer();
                         continueIt();
                     }
-                }, 1000);
+                }, 3000);
 
             } catch (Exception e){
                 toast("network error");
@@ -89,7 +97,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText editTextUsername = findViewById(R.id.editTextTextPersonNameUsername);
         String username = editTextUsername.getText().toString().replace(" ","");
 
-        String received = StarsocketConnector.getMessage().split("\n",2)[0];
+        String received = StarsocketConnector.getMessage();
         String received_username = received.split(" ",2)[0];
         String received_id = received.split(" ",2)[1];
 
@@ -105,6 +113,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     public void createPreferences(String id){
+
         EditText editTextUsername = findViewById(R.id.editTextTextPersonNameUsername);
         EditText editTextEmail = findViewById(R.id.editTextTextPersonNameEmail);
         EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
@@ -152,10 +161,37 @@ public class RegisterActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         toast("exit ?");
+        vibrate();
     }
 
     public void openTermsOfService(View view) {
+        vibrate();
         Intent i = new Intent(this, TermsOfServiceActivity.class);
         startActivity(i);
+    }
+
+    public void showPassword(View view) {
+        vibrate();
+        EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
+        ImageView imageViewEye = findViewById(R.id.imageViewEye);
+        imageViewEye.setVisibility(View.GONE);
+        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imageViewEye.setVisibility(View.VISIBLE);
+            }
+        }, 3000);
+    }
+
+    private void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
     }
 }

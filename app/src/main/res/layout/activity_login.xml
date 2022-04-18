@@ -163,4 +163,15 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewLogin"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewEye"
+        android:onClick="showPassword"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="15dp"
+        app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNamePassword"
+        app:layout_constraintEnd_toEndOf="@+id/editTextTextPersonNamePassword"
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNamePassword"
+        app:srcCompat="@drawable/eye" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -409,8 +409,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
