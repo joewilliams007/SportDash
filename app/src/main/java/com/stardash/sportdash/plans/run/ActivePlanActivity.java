@@ -20,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 

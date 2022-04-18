@@ -13,10 +13,9 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.plans.run.ActivePlanActivity;
 
 public class FinishedWorkoutActivity extends AppCompatActivity {
 

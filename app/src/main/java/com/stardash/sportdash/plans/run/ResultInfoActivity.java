@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.plans.run;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,6 +17,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.SeekBar;
 import android.widget.TextView;
+
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.R;
 
 public class ResultInfoActivity extends AppCompatActivity {
 

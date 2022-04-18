@@ -1,9 +1,10 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.online.chat;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -17,13 +18,21 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class UpdateActivity extends AppCompatActivity {
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.MainActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+
+public class InboxActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setContentView(R.layout.activity_update);
+        setContentView(R.layout.activity_inbox);
+
+        getInbox();
+
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -32,21 +41,27 @@ public class UpdateActivity extends AppCompatActivity {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.BLACK);
             }
+            TextView textView = findViewById(R.id.textViewCHatInbox);
+            textView.setTextColor(Color.parseColor("#FFFFFF"));
+            TextView textView1 = findViewById(R.id.inboxChat);
+            textView1.setTextColor(Color.parseColor("#FFFFFF"));
         }
-        getChangelog();
     }
-    String versionName = BuildConfig.VERSION_NAME;
-    private void getChangelog() {
+
+    private void getInbox() {
+        TextView textViewInbox = findViewById(R.id.inboxChat);
         try {
-            TextView textViewSportDash = findViewById(R.id.textViewSportDash);
-            StarsocketConnector.sendMessage("changelog");
+            StarsocketConnector.sendMessage("mychatinbox " + Account.userid());
+
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String received = StarsocketConnector.getMessage();
-                    textViewSportDash.setText("your version : "+versionName+"\n"+received);
-                    textViewSportDash.setVisibility(View.VISIBLE);
+                    String inbox = StarsocketConnector.getMessage();
+                    if (inbox.equals("invalid_ip")){
+                        getInbox();
+                    }
+                    textViewInbox.setText(inbox);
                 }
             }, 500);
 
@@ -54,14 +69,10 @@ public class UpdateActivity extends AppCompatActivity {
             toast("no network");
         }
     }
-
-    public void vibrate(){
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
+    @Override
+    public void onBackPressed() {
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
     }
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
@@ -74,5 +85,28 @@ public class UpdateActivity extends AppCompatActivity {
                 textViewCustomToast.setVisibility(View.GONE);
             }
         }, 3000);
+    }
+
+
+    public void clearInbox(View view) {
+        vibrate();
+        toast("deleting inbox . . .");
+        StarsocketConnector.sendMessage("clearinbox " + Account.userid());
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+               getInbox();
+            }
+        }, 2000);
+    }
+
+    private void vibrate() {
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
     }
 }

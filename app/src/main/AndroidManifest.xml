@@ -8,7 +8,7 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".settings.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/bosslogo"
         android:label="@string/app_name"
@@ -22,46 +22,40 @@
             android:name=".plans.create.ImagesActivity"
             android:exported="false" />
         <activity
-            android:name=".TermsOfServiceActivity"
+            android:name=".settings.TermsOfServiceActivity"
             android:exported="false" />
         <activity
-            android:name=".UpdateActivity"
+            android:name=".settings.UpdateActivity"
             android:exported="false" />
         <activity
-            android:name=".leaderboard"
+            android:name=".me.leaderboard"
             android:exported="false" />
         <activity
             android:name=".plans.comments.CommentsActivity"
             android:exported="false" />
         <activity
-            android:name=".InboxActivity"
+            android:name=".online.chat.InboxActivity"
             android:exported="false" />
         <activity
-            android:name=".ChatActivity"
+            android:name=".online.chat.ChatActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileActivity"
+            android:name=".online.ProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".FeedbackActivity"
+            android:name=".settings.FeedbackActivity"
             android:exported="false" />
         <activity
-            android:name=".DeveloperLogActivity"
+            android:name=".me.CalenderActivity"
             android:exported="false" />
         <activity
-            android:name=".CalenderActivity"
+            android:name=".me.AchievementsActivity"
             android:exported="false" />
         <activity
-            android:name=".AchievementsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".LobbyActivity"
+            android:name=".online.LobbyActivity"
             android:exported="false" />
         <activity
             android:name=".online.FriendsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".RatePlanActivity"
             android:exported="false" />
         <activity
             android:name=".plans.run.FinishedWorkoutActivity"
@@ -88,13 +82,13 @@
             android:name=".plans.run.PlanActivity"
             android:exported="false" />
         <activity
-            android:name=".AboutActivity"
+            android:name=".settings.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".ShopActivity"
+            android:name=".online.shop.ShopActivity"
             android:exported="false" />
         <activity
-            android:name=".AfterRegister"
+            android:name=".signIn.AfterRegister"
             android:exported="false" />
         <activity
             android:name=".signIn.RegisterActivity"
@@ -103,13 +97,13 @@
             android:name=".plans.run.TrackActivity"
             android:exported="false" />
         <activity
-            android:name=".RewardActivity"
+            android:name=".plans.run.RewardActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultInfoActivity"
+            android:name=".plans.run.ResultInfoActivity"
             android:exported="false" />
         <activity
-            android:name=".ResultActivity"
+            android:name=".plans.run.ResultActivity"
             android:exported="false" />
         <activity
             android:name=".signIn.LoginActivity"

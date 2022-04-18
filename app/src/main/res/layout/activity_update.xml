@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:background="@color/projectGrey"
-    tools:context=".UpdateActivity">
+    tools:context=".settings.UpdateActivity">
 
     <TextView
         android:id="@+id/textViewChangeLog"

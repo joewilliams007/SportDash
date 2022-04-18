@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.online.chat;
 
 public class ChatItem {
     private String mText1;

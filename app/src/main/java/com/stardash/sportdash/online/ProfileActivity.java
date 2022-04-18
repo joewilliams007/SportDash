@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.online;
 
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 
@@ -24,8 +24,12 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.FriendsActivity;
+import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
+import com.stardash.sportdash.settings.Account;
 
 public class ProfileActivity extends AppCompatActivity {
 

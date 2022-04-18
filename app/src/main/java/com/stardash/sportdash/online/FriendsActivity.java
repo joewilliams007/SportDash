@@ -2,9 +2,9 @@ package com.stardash.sportdash.online;
 
 
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
-import static com.stardash.sportdash.ProfileActivity.chatId;
-import static com.stardash.sportdash.ProfileActivity.chatUsername;
-import static com.stardash.sportdash.ProfileActivity.invalidId;
+import static com.stardash.sportdash.online.ProfileActivity.chatId;
+import static com.stardash.sportdash.online.ProfileActivity.chatUsername;
+import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,12 +26,11 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
-import com.stardash.sportdash.ChatActivity;
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.MainActivity;
-import com.stardash.sportdash.ProfileActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.StarsocketConnector;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 public class FriendsActivity extends AppCompatActivity {
 

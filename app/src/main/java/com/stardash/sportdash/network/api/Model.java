@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.network.api;
 
 public class Model {
     String version;

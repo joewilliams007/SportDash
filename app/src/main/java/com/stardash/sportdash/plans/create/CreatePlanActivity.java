@@ -23,10 +23,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.run.PlanActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.ResultActivity;
+import com.stardash.sportdash.plans.run.ResultActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

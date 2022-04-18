@@ -23,9 +23,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.StarsocketConnector;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 import java.util.ArrayList;
 

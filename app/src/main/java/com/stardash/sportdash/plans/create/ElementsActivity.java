@@ -20,7 +20,7 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;
 
 import java.util.Locale;

@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.me;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -10,12 +10,15 @@ import android.os.Bundle;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class LobbyActivity extends AppCompatActivity {
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.settings.Account;
+
+public class CalenderActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lobby);
+        setContentView(R.layout.activity_calender);
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));

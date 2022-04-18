@@ -1,8 +1,8 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.online.chat;
 
 import static android.graphics.BitmapFactory.*;
-import static com.stardash.sportdash.ProfileActivity.chatId;
-import static com.stardash.sportdash.ProfileActivity.chatUsername;
+import static com.stardash.sportdash.online.ProfileActivity.chatId;
+import static com.stardash.sportdash.online.ProfileActivity.chatUsername;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
-import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -34,16 +33,17 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
-import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.MainActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
 
 public class ChatActivity extends AppCompatActivity {
 

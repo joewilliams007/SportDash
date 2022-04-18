@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:background="@color/projectGrey"
-    tools:context=".RewardActivity">
+    tools:context=".plans.run.RewardActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

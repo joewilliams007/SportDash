@@ -23,13 +23,13 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.comments.CommentsActivity;
-import com.stardash.sportdash.FeedbackActivity;
-import com.stardash.sportdash.LobbyActivity;
-import com.stardash.sportdash.ProfileActivity;
+import com.stardash.sportdash.settings.FeedbackActivity;
+import com.stardash.sportdash.online.LobbyActivity;
+import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.StarsocketConnector;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 public class RunPlanActivity extends AppCompatActivity {
 

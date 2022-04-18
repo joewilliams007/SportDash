@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.me;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,6 +17,11 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
+
+import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
 
 public class leaderboard extends AppCompatActivity {
 

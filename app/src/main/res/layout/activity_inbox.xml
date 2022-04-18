@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:background="@color/projectGrey"
-    tools:context=".InboxActivity">
+    tools:context=".online.chat.InboxActivity">
 
     <TextView
         android:id="@+id/textViewCHatInbox"

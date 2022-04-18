@@ -39,18 +39,14 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.stardash.sportdash.AboutActivity;
-import com.stardash.sportdash.Account;
 import com.stardash.sportdash.BuildConfig;
-import com.stardash.sportdash.FeedbackActivity;
 import com.stardash.sportdash.MainActivity;
-import com.stardash.sportdash.Methods;
-import com.stardash.sportdash.Model;
+import com.stardash.sportdash.network.api.Methods;
+import com.stardash.sportdash.network.api.Model;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.signIn.RegisterActivity;
-import com.stardash.sportdash.RetrofitClient;
-import com.stardash.sportdash.StarsocketConnector;
-import com.stardash.sportdash.UpdateActivity;
+import com.stardash.sportdash.network.api.RetrofitClient;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -18,10 +18,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.StarsocketConnector;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.plans.create.CreateStructureActivity;
 
 public class PlanActivity extends AppCompatActivity {

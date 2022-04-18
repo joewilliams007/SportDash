@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".CalenderActivity">
+    tools:context=".me.CalenderActivity">
 
     <TextView
         android:id="@+id/textViewTop"

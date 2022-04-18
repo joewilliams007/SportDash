@@ -1,6 +1,4 @@
-package com.stardash.sportdash;
-
-import static com.stardash.sportdash.Account.username;
+package com.stardash.sportdash.signIn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,6 +16,11 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.MainActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
+
 public class AfterRegister extends AppCompatActivity {
 
     @Override
@@ -25,7 +28,7 @@ public class AfterRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_after_register);
         listenSeekbarEnergy();
-        toastRegistered("successfully registered "+Account.username());
+        toastRegistered("successfully registered "+ Account.username());
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override
@@ -55,7 +58,7 @@ public class AfterRegister extends AppCompatActivity {
             } catch (Exception e){
                 toast("network error");
             }
-            Intent i = new Intent(this,MainActivity.class);
+            Intent i = new Intent(this, MainActivity.class);
             startActivity(i);
         }
     }

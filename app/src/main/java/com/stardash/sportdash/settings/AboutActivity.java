@@ -1,10 +1,9 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
@@ -18,15 +17,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class InboxActivity extends AppCompatActivity {
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
+
+public class AboutActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setContentView(R.layout.activity_inbox);
-
-        getInbox();
+        setContentView(R.layout.activity_about);
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
@@ -36,27 +37,22 @@ public class InboxActivity extends AppCompatActivity {
                 window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
                 window.setStatusBarColor(Color.BLACK);
             }
-            TextView textView = findViewById(R.id.textViewCHatInbox);
-            textView.setTextColor(Color.parseColor("#FFFFFF"));
-            TextView textView1 = findViewById(R.id.inboxChat);
-            textView1.setTextColor(Color.parseColor("#FFFFFF"));
         }
+
+        getAbout();
     }
 
-    private void getInbox() {
-        TextView textViewInbox = findViewById(R.id.inboxChat);
+    private void getAbout() {
         try {
-            StarsocketConnector.sendMessage("mychatinbox " + Account.userid());
-
+            TextView textViewSportDash = findViewById(R.id.textViewSportDash);
+            StarsocketConnector.sendMessage("aboutSportDash");
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String inbox = StarsocketConnector.getMessage();
-                    if (inbox.equals("invalid_ip")){
-                        getInbox();
-                    }
-                    textViewInbox.setText(inbox);
+                    String received = StarsocketConnector.getMessage();
+                    textViewSportDash.setText(received);
+                    textViewSportDash.setVisibility(View.VISIBLE);
                 }
             }, 500);
 
@@ -64,11 +60,7 @@ public class InboxActivity extends AppCompatActivity {
             toast("no network");
         }
     }
-    @Override
-    public void onBackPressed() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }
+
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -82,18 +74,9 @@ public class InboxActivity extends AppCompatActivity {
         }, 3000);
     }
 
-
-    public void clearInbox(View view) {
+    public void soon(View view) {
         vibrate();
-        toast("deleting inbox . . .");
-        StarsocketConnector.sendMessage("clearinbox " + Account.userid());
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-               getInbox();
-            }
-        }, 2000);
+        toast("available soon!");
     }
 
     private void vibrate() {

@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.me;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -14,6 +14,10 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+
+import com.stardash.sportdash.MainActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.settings.Account;
 
 public class AchievementsActivity extends AppCompatActivity {
 

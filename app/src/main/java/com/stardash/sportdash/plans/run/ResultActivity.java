@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.plans.run;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -15,8 +15,9 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.R;
 import com.stardash.sportdash.plans.create.CreatePlanActivity;
-import com.stardash.sportdash.plans.run.TrackActivity;
 
 import java.util.Locale;
 

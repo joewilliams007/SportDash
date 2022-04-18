@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,13 +17,17 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class AboutActivity extends AppCompatActivity {
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
+
+public class TermsOfServiceActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setContentView(R.layout.activity_about);
+        setContentView(R.layout.activity_terms_of_service);
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
@@ -34,14 +38,13 @@ public class AboutActivity extends AppCompatActivity {
                 window.setStatusBarColor(Color.BLACK);
             }
         }
-
-        getAbout();
+        getChangelog();
     }
 
-    private void getAbout() {
+    private void getChangelog() {
         try {
             TextView textViewSportDash = findViewById(R.id.textViewSportDash);
-            StarsocketConnector.sendMessage("aboutSportDash");
+            StarsocketConnector.sendMessage("terms_of_service");
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
@@ -57,6 +60,14 @@ public class AboutActivity extends AppCompatActivity {
         }
     }
 
+    public void vibrate(){
+        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            v.vibrate(100);
+        }
+    }
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -68,19 +79,5 @@ public class AboutActivity extends AppCompatActivity {
                 textViewCustomToast.setVisibility(View.GONE);
             }
         }, 3000);
-    }
-
-    public void soon(View view) {
-        vibrate();
-        toast("available soon!");
-    }
-
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
     }
 }

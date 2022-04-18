@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import android.app.Application;
 import android.content.Context;

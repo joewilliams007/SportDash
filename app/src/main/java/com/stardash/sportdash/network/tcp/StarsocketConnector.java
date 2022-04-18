@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.network.tcp;
 
 public class StarsocketConnector {
 

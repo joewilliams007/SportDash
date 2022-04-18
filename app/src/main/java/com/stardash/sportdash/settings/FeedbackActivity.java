@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import static com.stardash.sportdash.plans.run.RunPlanActivity.reportPlanId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.reportingPlan;
@@ -20,6 +20,12 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.stardash.sportdash.BuildConfig;
+import com.stardash.sportdash.MainActivity;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
 
 import java.io.IOException;
 import java.io.RandomAccessFile;

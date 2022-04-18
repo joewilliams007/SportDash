@@ -1,6 +1,8 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import android.content.SharedPreferences;
+
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

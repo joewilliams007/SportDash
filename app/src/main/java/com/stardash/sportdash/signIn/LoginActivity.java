@@ -12,11 +12,11 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.stardash.sportdash.Account;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.StarsocketConnector;
-import com.stardash.sportdash.TermsOfServiceActivity;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.TermsOfServiceActivity;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;

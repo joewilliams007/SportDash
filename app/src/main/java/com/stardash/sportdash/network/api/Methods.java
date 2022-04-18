@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.network.api;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

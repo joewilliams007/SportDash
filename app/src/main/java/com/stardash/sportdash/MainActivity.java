@@ -1,6 +1,6 @@
 package com.stardash.sportdash;
 
-import static com.stardash.sportdash.ProfileActivity.invalidId;
+import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 
 import androidx.annotation.RequiresApi;
@@ -31,9 +31,21 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.me.AchievementsActivity;
+import com.stardash.sportdash.network.api.Methods;
+import com.stardash.sportdash.network.api.Model;
+import com.stardash.sportdash.network.api.RetrofitClient;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.FriendsActivity;
+import com.stardash.sportdash.online.chat.ChatActivity;
+import com.stardash.sportdash.online.chat.InboxActivity;
+import com.stardash.sportdash.me.leaderboard;
+import com.stardash.sportdash.online.shop.ShopActivity;
 import com.stardash.sportdash.plans.run.PlanActivity;
+import com.stardash.sportdash.plans.run.ResultActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
+import com.stardash.sportdash.settings.AboutActivity;
+import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.SettingsActivity;
 import com.stardash.sportdash.signIn.LoginActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
@@ -397,10 +409,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void openDev(View view) {
-        Intent i = new Intent(this, DeveloperLogActivity.class);
-        startActivity(i);
-    }
+
 
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);

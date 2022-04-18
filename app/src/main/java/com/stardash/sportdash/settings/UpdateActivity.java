@@ -1,4 +1,4 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.settings;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -17,14 +17,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-public class TermsOfServiceActivity extends AppCompatActivity {
+import com.stardash.sportdash.BuildConfig;
+import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.Account;
+
+public class UpdateActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-        setContentView(R.layout.activity_terms_of_service);
-
+        setContentView(R.layout.activity_update);
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -36,17 +40,17 @@ public class TermsOfServiceActivity extends AppCompatActivity {
         }
         getChangelog();
     }
-
+    String versionName = BuildConfig.VERSION_NAME;
     private void getChangelog() {
         try {
             TextView textViewSportDash = findViewById(R.id.textViewSportDash);
-            StarsocketConnector.sendMessage("terms_of_service");
+            StarsocketConnector.sendMessage("changelog");
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
                     String received = StarsocketConnector.getMessage();
-                    textViewSportDash.setText(received);
+                    textViewSportDash.setText("your version : "+versionName+"\n"+received);
                     textViewSportDash.setVisibility(View.VISIBLE);
                 }
             }, 500);

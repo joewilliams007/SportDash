@@ -1,4 +1,6 @@
-package com.stardash.sportdash;
+package com.stardash.sportdash.network.tcp;
+
+import com.stardash.sportdash.settings.Account;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
