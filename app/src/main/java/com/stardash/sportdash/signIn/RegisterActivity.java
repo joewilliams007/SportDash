@@ -1,5 +1,7 @@
 package com.stardash.sportdash.signIn;
 
+import static com.stardash.sportdash.settings.app.vibrate;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -70,13 +72,13 @@ public class RegisterActivity extends AppCompatActivity {
         } else {
                 ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
                 try {
-                TextView textViewNext = findViewById(R.id.textViewNext);
+                    StarsocketConnector.sendMessage("register " + username + " " + password + " " + email);
+                    TextView textViewNext = findViewById(R.id.textViewNext);
                 textViewNext.setVisibility(View.GONE);
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        StarsocketConnector.sendMessage("register " + username + " " + password + " " + email);
                         getIdFromServer();
                         continueIt();
                         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
@@ -193,12 +195,5 @@ public class RegisterActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
+
 }

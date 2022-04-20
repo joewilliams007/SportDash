@@ -19,7 +19,6 @@
         android:indeterminateTintMode="src_atop"
         android:max="100"
         android:progress="60"
-
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.038"
         app:layout_constraintStart_toStartOf="parent"
@@ -423,9 +422,9 @@
         android:id="@+id/textViewLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="Level 10"
-        android:layout_marginTop="10dp"
         android:textColor="@color/projectGrey"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textViewId"
@@ -548,5 +547,6 @@
         app:layout_constraintStart_toStartOf="@+id/textViewSettings"
         app:layout_constraintTop_toTopOf="@+id/textViewSettings"
         app:srcCompat="@drawable/settings" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

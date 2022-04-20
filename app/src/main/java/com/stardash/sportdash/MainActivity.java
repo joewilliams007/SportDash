@@ -1,7 +1,9 @@
 package com.stardash.sportdash;
 
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
+import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,6 +46,7 @@ import com.stardash.sportdash.online.shop.ShopActivity;
 import com.stardash.sportdash.plans.run.PlanActivity;
 import com.stardash.sportdash.plans.run.ResultActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
+import com.stardash.sportdash.plans.run.SearchPlanActivity;
 import com.stardash.sportdash.settings.AboutActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.SettingsActivity;
@@ -66,6 +69,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ChatActivity.updateChat = false;
+        isInChat = false;
+
         try {
             StarsocketConnector.sendMessage("boost");
         } catch (Exception e){
@@ -287,6 +292,8 @@ public class MainActivity extends AppCompatActivity {
         checkDeepLink();
     }
 
+
+
     private void checkDeepLink(){
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -298,6 +305,10 @@ public class MainActivity extends AppCompatActivity {
             if (data.toString().contains("user=")) {
                 Intent i = new Intent(this, FriendsActivity.class);
                 i.putExtra("friendHashtag", data.toString());
+                startActivity(i);
+            } else if (data.toString().contains("plan=")) {
+                Intent i = new Intent(this, SearchPlanActivity.class);
+                i.putExtra("planHashtag", data.toString());
                 startActivity(i);
             }
         }
@@ -396,18 +407,11 @@ public class MainActivity extends AppCompatActivity {
 
     public void openAchievements(View view) {
         vibrate();
-        Intent i = new Intent(this, AchievementsActivity.class);
-        startActivity(i);
+        toast("available soon");
+        //Intent i = new Intent(this, AchievementsActivity.class);
+        //startActivity(i);
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
 
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);

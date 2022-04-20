@@ -1,5 +1,7 @@
 package com.stardash.sportdash.me.leaderboard;
 
+import static com.stardash.sportdash.settings.app.vibrate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -29,9 +31,6 @@ import java.util.ArrayList;
 
 public class leaderboard extends AppCompatActivity {
 
-    private RecyclerView mRecyclerView;
-    private LeaderboardAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,6 +51,8 @@ public class leaderboard extends AppCompatActivity {
     }
 
     static ArrayList<LeaderboardItem> leaderboardList;
+
+
     private void getLeaderboard() {
         try {
             StarsocketConnector.sendMessage("leaderboard");
@@ -60,42 +61,12 @@ public class leaderboard extends AppCompatActivity {
                 @Override
                 public void run() {
                     String received = StarsocketConnector.getMessage().replaceAll("\"", "");
-                    TextView textViewFirstPlace = findViewById(R.id.textViewFirstPlace);
-                    TextView textViewSecondPlace = findViewById(R.id.textViewSecondPlace);
-                    TextView textViewThirdPlace = findViewById(R.id.textViewThirdPlace);
 
                     try {
-                        textViewFirstPlace.setText(received.split("\n")[0]);
-                        textViewSecondPlace.setText(received.split("\n")[1]);
-                        textViewThirdPlace.setText(received.split("\n")[2]);
+                        String rest = received;
 
-                        String rest = received.split("\n", 4)[3];
-                        String[] user = rest.split("\n");
-
-                        toast(user[0]);
-
-
-
-                        leaderboardList = new ArrayList<>();
-
-                        for (String element : user) {
-                            try {
-                                leaderboardList.add(new LeaderboardItem(element.split("@")[0], element.split("@")[2]+element.split("@")[3], element.split("@")[1]));
-                            } catch (Exception e) {
-
-                            }
-                        }
-
-
-                        // chatList.add(new ChatItem("JoeJoe", "Hi how are you?", "10.44 pm"));
-
-                        mRecyclerView = findViewById(R.id.leaderboard_recycler_view);
-                        mRecyclerView.setHasFixedSize(true);
-                        mLayoutManager = new LinearLayoutManager(leaderboard.this);
-                        mAdapter = new LeaderboardAdapter(leaderboardList);
-                        mRecyclerView.setLayoutManager(mLayoutManager);
-                        mRecyclerView.setAdapter(mAdapter);
-
+                        createBoardList(rest);
+                        buildRecyclerView();
 
                     } catch (Exception e){
                             toast("not enough users to determine all");
@@ -105,6 +76,34 @@ public class leaderboard extends AppCompatActivity {
         } catch (Exception e){
             toast("no network");
         }
+    }
+
+    private ArrayList<LeaderboardItem> mLeaderboardList;
+    private RecyclerView mRecyclerView;
+    private LeaderboardAdapter mAdapter;
+    private RecyclerView.LayoutManager mLayoutManager;
+
+    public void createBoardList(String rest){
+        String[] user = rest.split("\n");
+
+        mLeaderboardList = new ArrayList<>();
+
+        for (String element : user) {
+            try {
+                mLeaderboardList.add(new LeaderboardItem(element.split("@")[0]+" place", element.split("@")[2]+element.split("@")[3], element.split("@")[1]));
+            } catch (Exception e) {
+
+            }
+        }
+    }
+
+    public void buildRecyclerView(){
+        mRecyclerView = findViewById(R.id.leaderboard_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(leaderboard.this);
+        mAdapter = new LeaderboardAdapter(mLeaderboardList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
     }
 
     public void toast(String message){
@@ -120,51 +119,7 @@ public class leaderboard extends AppCompatActivity {
         }, 3000);
     }
 
-    public void open1(View view) {
-        vibrate();
-        TextView textViewFirstPlace = findViewById(R.id.textViewFirstPlace);
-        try {
-        String id = textViewFirstPlace.getText().toString().split("#")[1];
-            StarsocketConnector.sendMessage("getProfile " + id);
-            Intent i = new Intent(this, ProfileActivity.class);
-            startActivity(i);
-        } catch (Exception e) {
-            toast("no network");
-        }
 
-    }
-    public void open2(View view) {
-        vibrate();
-        TextView textViewSecondPlace = findViewById(R.id.textViewSecondPlace);
-        try {
-        String id = textViewSecondPlace.getText().toString().split("#")[1];
-            StarsocketConnector.sendMessage("getProfile " + id);
-            Intent i = new Intent(this, ProfileActivity.class);
-            startActivity(i);
-        } catch (Exception e) {
-            toast("no network");
-        }
-    }
-    public void open3(View view) {
-        vibrate();
-        TextView textViewThirdPlace = findViewById(R.id.textViewThirdPlace);
-        try {
-        String id = textViewThirdPlace.getText().toString().split("#")[1];
-            StarsocketConnector.sendMessage("getProfile " + id);
-            Intent i = new Intent(this, ProfileActivity.class);
-            startActivity(i);
-        } catch (Exception e) {
-            toast("no network");
-        }
 
-    }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
 }

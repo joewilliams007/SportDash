@@ -33,6 +33,7 @@
 
     <TextView
         android:id="@+id/textViewTopRight"
+        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
@@ -195,7 +196,7 @@
                 android:background="@drawable/main_text_background"
                 android:gravity="center"
                 android:padding="10dp"
-                android:onClick="openAccount"
+                android:onClick="copyPlanId"
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -435,6 +436,82 @@
         android:textColor="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/textViewStart"
         app:layout_constraintEnd_toStartOf="@+id/textViewComments" />
+
+    <TextView
+        android:id="@+id/textViewShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:onClick="sharePlan"
+        android:padding="10dp"
+        android:text="SHARE"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toTopOf="@+id/textViewStart"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewSharePage"
+        android:layout_width="0dp"
+        android:layout_height="120dp"
+        android:background="@drawable/main_text_background_track_white"
+        android:onClick="doNothing1"
+        android:padding="20dp"
+        android:elevation="4dp"
+        android:text="c a n c e l"
+        android:visibility="gone"
+        android:gravity="top|right"
+        android:textColor="@color/projectRed"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCopyIdShare"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        android:elevation="4dp"
+        android:onClick="copyTextPlanIdLink"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:text="C O P Y  L I N K"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/textViewRandom"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCopyIdShare1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        android:elevation="4dp"
+        android:onClick="copyPlanIdLink"
+        android:padding="10dp"
+        android:text="S H A R E  L I N K"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewCopyIdShare3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        android:elevation="4dp"
+        android:onClick="copyPlanId"
+        android:padding="10dp"
+        android:visibility="gone"
+        android:text="S H A R E  T O  C H A T"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
     <TextView
         android:id="@+id/textViewRandom"
         android:layout_width="wrap_content"
@@ -455,7 +532,7 @@
         android:layout_height="50dp"
         android:padding="10dp"
         android:id="@+id/imageViewRandom"
-        android:elevation="4dp"
+        android:elevation="3dp"
         android:src="@drawable/shuffle"
         app:layout_constraintBottom_toBottomOf="@+id/textViewRandom"
         app:layout_constraintEnd_toEndOf="@+id/textViewRandom"

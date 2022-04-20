@@ -1,6 +1,7 @@
 package com.stardash.sportdash.plans.run;
 
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -95,6 +96,7 @@ public class PlanActivity extends AppCompatActivity {
 
 
     private void runPlan(int plan) {
+        vibrate();
         isMyPlan = true;
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
@@ -272,11 +274,16 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void randomPlan(View view) {
-
+        vibrate();
         isRandom = true;
         isMyPlan = false;
         Intent i = new Intent(this, RunPlanActivity.class);
         startActivity(i);
+    }
 
+    public void searchPlan(View view) {
+        vibrate();
+        Intent i = new Intent(this, SearchPlanActivity.class);
+        startActivity(i);
     }
 }

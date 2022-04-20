@@ -1,5 +1,8 @@
 package com.stardash.sportdash.plans.comments;
 
+import static com.stardash.sportdash.settings.app.vibrate;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,8 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;
+import com.stardash.sportdash.settings.MyApplication;
 
 import java.util.ArrayList;
 
@@ -61,7 +67,25 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         holder.mTextView1.setText(currentItem.getText1());
         holder.mTextView2.setText(currentItem.getText2());
         holder.mTextView3.setText(currentItem.getText3());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = holder.mTextView1.getText().toString().split("#")[1];
+
+                try {
+                    vibrate();
+                    StarsocketConnector.sendMessage("getProfile " + id);
+                    Intent i = new Intent(MyApplication.getAppContext(), ProfileActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MyApplication.getAppContext().startActivity(i);
+                } catch (Exception e) {
+
+                }
+            }
+        });
     }
+
 
     @Override
     public int getItemCount() {

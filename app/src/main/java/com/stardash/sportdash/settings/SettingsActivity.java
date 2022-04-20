@@ -1,6 +1,7 @@
 package com.stardash.sportdash.settings;
 
 import static com.stardash.sportdash.plans.run.RunPlanActivity.reportingPlan;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,8 +27,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
 import android.provider.Settings;
@@ -44,6 +43,7 @@ import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.network.api.Methods;
 import com.stardash.sportdash.network.api.Model;
 import com.stardash.sportdash.R;
+import com.stardash.sportdash.settings.changelog.UpdateActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
 import com.stardash.sportdash.network.api.RetrofitClient;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
@@ -211,9 +211,6 @@ public class SettingsActivity extends AppCompatActivity {
 
         vibrate();
 
-
-
-
     }
 
     public void copyID(View view) {
@@ -221,7 +218,7 @@ public class SettingsActivity extends AppCompatActivity {
         TextView textViewId = findViewById(R.id.textViewId);
             ClipboardManager clipboard = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
             String id = textViewId.getText().toString();
-            String clip0 = "S P O R T D A S H\nAdd my account via the link https://www.sportdash.com/user="+id+" or enter my id in the app "+id;
+            String clip0 = "SportDash - User Account\nAdd my account via the link https://www.sportdash.com/user="+id+"\nor enter my id in the app "+id;
             ClipData clip = ClipData.newPlainText("SportDash-ID", clip0);
             clipboard.setPrimaryClip(clip);
             toast("copied!");
@@ -283,14 +280,7 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void vibrate(){
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
+
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);

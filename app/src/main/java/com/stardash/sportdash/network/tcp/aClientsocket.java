@@ -30,7 +30,7 @@ public class aClientsocket {
 
             String ip = "87.184.96.149";
             if (Account.localhost()) {
-                ip = "192.168.2.102";
+                ip = "192.168.2.115";
             }
             socket = new Socket(ip, serverPort);
 

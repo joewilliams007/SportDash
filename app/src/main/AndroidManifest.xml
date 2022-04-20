@@ -16,103 +16,144 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".plans.run.SearchPlanActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
+            android:name=".settings.ChatBackgroundActivity"
+            android:screenOrientation="portrait"
+            android:exported="false" />
+        <activity
             android:name=".settings.ChatSettingsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.create.ImagesActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".settings.TermsOfServiceActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
-            android:name=".settings.UpdateActivity"
+            android:name=".settings.changelog.UpdateActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".me.leaderboard.leaderboard"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.comments.CommentsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.chat.InboxActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.chat.ChatActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.ProfileActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".settings.FeedbackActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".me.CalenderActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".me.AchievementsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.LobbyActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.FriendsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.FinishedWorkoutActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.ActivePlanActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.RunPlanActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.create.GuideStructurePlanActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.create.ElementsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.create.CreateStructureActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.create.CreatePlanActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.PlanActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".settings.AboutActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".online.shop.ShopActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".signIn.AfterRegister"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".signIn.RegisterActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.TrackActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.RewardActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.ResultInfoActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".plans.run.ResultActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".signIn.LoginActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".settings.SettingsActivity"
+            android:screenOrientation="portrait"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:screenOrientation="portrait"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -120,14 +161,28 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <intent-filter>
+
+
+            <intent-filter android:label="userid" android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.OPENABLE"/>
+                <category android:name="android.intent.category.BROWSABLE" />
+                <!-- Accepts URIs that begin with "http://www.example.com/gizmos” -->
+                <data android:scheme="https"
+                    android:host="www.sportdash.com" />
+                <!-- note that the leading "/" is required for pathPrefix-->
+            </intent-filter>
+            <intent-filter android:label="userid">
+                <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-
-                <data
-                    android:host="www.sportdash.com"
-                    android:scheme="https" />
+                <!-- Accepts URIs that begin with "example://gizmos” -->
+                <data android:scheme="sportdash"
+                    android:host="userid" />
             </intent-filter>
+
+
         </activity>
     </application>
 

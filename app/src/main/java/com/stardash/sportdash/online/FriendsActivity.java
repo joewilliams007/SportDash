@@ -1,11 +1,13 @@
 package com.stardash.sportdash.online;
 
 
+import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.online.ProfileActivity.chatId;
 import static com.stardash.sportdash.online.ProfileActivity.chatUsername;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -31,6 +33,7 @@ import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.MyApplication;
 
 public class FriendsActivity extends AppCompatActivity {
 
@@ -52,8 +55,20 @@ public class FriendsActivity extends AppCompatActivity {
             String value = extras.getString("friendHashtag").toString();
             EditText editTextHashtag = findViewById(R.id.editTextTextPersonNameHashtag);
             String id = value.split("#",3)[1];
-            toast("follow #"+id+" as friend?");
             editTextHashtag.setText(id);
+            vibrate();
+            EditText editText = findViewById(R.id.editTextTextPersonNameHashtag);
+            if (editText.getText().toString().length()<1){
+                toast("enter id");
+            } else {
+                try {
+                    StarsocketConnector.sendMessage("getProfile " + editText.getText().toString());
+                    Intent i = new Intent(this, ProfileActivity.class);
+                    startActivity(i);
+                } catch (Exception e) {
+                    toast("no network");
+                }
+            }
             //The key argument here must match that used in the other activity
         }
         if (Account.isAmoled()) {
@@ -76,6 +91,11 @@ public class FriendsActivity extends AppCompatActivity {
         hideSelect();
 
         setFriendNames();
+    }
+
+    public void onResume() {
+        super.onResume();
+        isInChat = false;
     }
     @Override
     public void onBackPressed() {
@@ -146,13 +166,6 @@ public class FriendsActivity extends AppCompatActivity {
         }
 
     }
-
-    public void sendFriendRequest(View view) {
-    }
-
-    public void cancel(View view) {
-    }
-
 
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
@@ -276,14 +289,7 @@ public class FriendsActivity extends AppCompatActivity {
         }
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
+
 
 
     public void hideSelect() {

@@ -8,6 +8,7 @@
     android:id="@+id/main"
     tools:context=".me.AchievementsActivity">
 
+
     <TextView
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"

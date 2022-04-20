@@ -1,6 +1,7 @@
 package com.stardash.sportdash.plans.comments;
 
 import static com.stardash.sportdash.plans.run.RunPlanActivity.commentsPlanId;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -182,12 +183,4 @@ public class CommentsActivity extends AppCompatActivity {
         }
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
 }

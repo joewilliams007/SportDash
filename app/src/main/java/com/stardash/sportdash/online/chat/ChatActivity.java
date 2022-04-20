@@ -3,6 +3,7 @@ package com.stardash.sportdash.online.chat;
 import static android.graphics.BitmapFactory.*;
 import static com.stardash.sportdash.online.ProfileActivity.chatId;
 import static com.stardash.sportdash.online.ProfileActivity.chatUsername;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -29,7 +31,9 @@ import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -38,12 +42,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.MyApplication;
 
 import java.util.ArrayList;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {
 
@@ -57,16 +66,20 @@ public class ChatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         updateChat = false;
-
         updateChat = true;
+        isInChat = true;
+        isNew = true;
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_chat);
         TextView textViewTop = findViewById(R.id.textViewTop);
+
+        check();
+
         textViewTop.setText(chatUsername);
         showSet();
 
-        ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.GONE);
+
         Window window = getWindow();
         window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
         window.setStatusBarColor(Color.parseColor("#212121"));
@@ -83,7 +96,7 @@ public class ChatActivity extends AppCompatActivity {
             textViewSet.setBackgroundColor(Color.parseColor("#000000"));
         }
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        setRecyclerView();
+       // setRecyclerView();
         setBg();
 
         mRecyclerView = findViewById(R.id.chat_recycler_view);
@@ -92,11 +105,7 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-                if (dy > 0) {
-                    ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.GONE);
-                } else {
-                    ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.VISIBLE);
-                }
+
             }
 
             @Override
@@ -113,17 +122,26 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
     }
+    public static Boolean isNew;
+    public static Boolean isInChat;
+    public void check(){
+        ScheduledExecutorService scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
 
-    public void refresh(View view) {
-        ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.GONE);
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        vibrate();
-        setRecyclerView();
+        // This schedule a runnable task every 2 minutes
+        scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
+            public void run() {
+                setRecyclerView();
+                if (!isInChat){
+                    scheduleTaskExecutor.shutdown();
+                }
+            }
+        }, 0, 2, TimeUnit.SECONDS);
     }
 
 
     public static Boolean updateChat;
     static ArrayList<ChatItem> chatList;
+    static String olds;
     private void setRecyclerView() {
        try {
         StarsocketConnector.sendMessage("getChat "+Account.userid()+" "+chatId);
@@ -135,6 +153,13 @@ public class ChatActivity extends AppCompatActivity {
                     try {
 
                         String s[] = StarsocketConnector.getMessage().split("NEXTMESSAGEIS:;");
+
+
+                        if (s[s.length-1].equals(olds)&&!isNew) {
+
+                        } else {
+                            olds = s[s.length-1];
+                            isNew = false;
 
                             String ans = "";
                             for (int i = s.length - 1; i >= 0; i--) {
@@ -167,12 +192,12 @@ public class ChatActivity extends AppCompatActivity {
 
                             //  mRecyclerView.scrollToPosition(chatList.size() - 1);
 
-                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                        ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.VISIBLE);
+                            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+                         }
                         } catch(Exception e){
                             toast("no network");
-                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-                        }
+                            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+                    }
 
             }
         }, 2000);
@@ -193,10 +218,9 @@ public class ChatActivity extends AppCompatActivity {
             toast("message is too long");
         } else {
             ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-            ((TextView) findViewById(R.id.textViewOptionRefresh)).setVisibility(View.GONE);
                 StarsocketConnector.sendMessage("chat " + Account.userid() + " " + chatId + " MESSAGE&" + editTextMessage.getText().toString().replace("#","(hashtag)")+ " MESSAGE&" + Account.username());
                 editTextMessage.setText("");
-            setRecyclerView();
+          //  setRecyclerView();
         }
 
     }
@@ -253,14 +277,6 @@ public class ChatActivity extends AppCompatActivity {
         }
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
 
     public void scrollDown(View view) {
         vibrate();
@@ -328,11 +344,8 @@ public class ChatActivity extends AppCompatActivity {
             }
             else
             {
-
                 imageView.setVisibility(View.INVISIBLE);
-
             }
-
     }
 
     @Override
@@ -373,5 +386,18 @@ public class ChatActivity extends AppCompatActivity {
         vibrate();
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("picturePathBg", null).apply();
         setBg();
+    }
+
+
+    public void openProfile(View view) {
+        try {
+            vibrate();
+            StarsocketConnector.sendMessage("getProfile " + chatId);
+            Intent i = new Intent(MyApplication.getAppContext(), ProfileActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            MyApplication.getAppContext().startActivity(i);
+        } catch (Exception e) {
+
+        }
     }
 }

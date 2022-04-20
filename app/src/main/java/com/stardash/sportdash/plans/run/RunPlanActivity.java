@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.annotation.SuppressLint;
+import android.content.ClipData;
+import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -30,6 +32,7 @@ import com.stardash.sportdash.online.LobbyActivity;
 import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.settings.MyApplication;
 
 public class RunPlanActivity extends AppCompatActivity {
 
@@ -61,6 +64,8 @@ public class RunPlanActivity extends AppCompatActivity {
             }
         }
       ismyplan();
+
+
     }
 
     private void ismyplan() {
@@ -159,6 +164,8 @@ public class RunPlanActivity extends AppCompatActivity {
             textViewIterations.setText(iterations+"x");
             textViewPlanTotalDuration.setText(totalDuration+" min");
 
+            TextView textViewTopRight = findViewById(R.id.textViewTopRight); // textview to save plan
+            textViewTopRight.setVisibility(View.VISIBLE);
             getStars();
 
         } catch (Exception e){
@@ -355,5 +362,63 @@ public class RunPlanActivity extends AppCompatActivity {
         } catch (Exception e){
             textViewStarsAmount.setText("not available");
         }
+    }
+
+    public void copyPlanId(View view) {
+        vibrate();
+        TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+        String toCopy = textViewPlanId.getText().toString();
+        ClipboardManager clipboard = (ClipboardManager) MyApplication.getAppContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("SportDash-PLAN-ID", toCopy);
+        clipboard.setPrimaryClip(clip);
+        toast("copied plan id");
+    }
+
+    public void doNothing1(View view) {
+        vibrate();
+        TextView textView = findViewById(R.id.textViewSharePage);
+        textView.setVisibility(View.GONE);
+        TextView textView1 = findViewById(R.id.textViewCopyIdShare);
+        textView1.setVisibility(View.GONE);
+        TextView textView3 = findViewById(R.id.textViewCopyIdShare3);
+        textView3.setVisibility(View.GONE);
+        TextView textView4 = findViewById(R.id.textViewCopyIdShare1);
+        textView4.setVisibility(View.GONE);
+    }
+
+    public void sharePlan(View view) {
+        vibrate();
+        TextView textView = findViewById(R.id.textViewSharePage);
+        textView.setVisibility(View.VISIBLE);
+        TextView textView1 = findViewById(R.id.textViewCopyIdShare);
+        textView1.setVisibility(View.VISIBLE);
+        TextView textView3 = findViewById(R.id.textViewCopyIdShare3);
+        textView3.setVisibility(View.VISIBLE);
+        TextView textView4 = findViewById(R.id.textViewCopyIdShare1);
+        textView4.setVisibility(View.VISIBLE);
+    }
+
+    public void copyPlanIdLink(View view) {
+        vibrate();
+        TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+        String toCopy = textViewPlanId.getText().toString();
+        String clip0 = "SportDash - Training Plan\nAdd my account via the link https://www.sportdash.com/plan="+toCopy+"\nor enter the plan id "+toCopy;
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, clip0);
+        sendIntent.setType("text/plain");
+        startActivity(sendIntent);
+    }
+
+    public void copyTextPlanIdLink(View view) {
+        vibrate();
+        TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+        String toCopy = textViewPlanId.getText().toString();
+        String clip0 = "SportDash - Training Plan\nAdd my account via the link https://www.sportdash.com/plan="+toCopy+"\nor enter the plan id "+toCopy;
+
+        ClipboardManager clipboard = (ClipboardManager) MyApplication.getAppContext().getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("SportDash-PLAN-ID", clip0);
+        clipboard.setPrimaryClip(clip);
+        toast("copied plan id");
     }
 }

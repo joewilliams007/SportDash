@@ -1,6 +1,8 @@
 package com.stardash.sportdash.online;
 
+import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -153,28 +155,37 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public static Boolean invalidId;
     private void loadPlans(String id) {
+        StarsocketConnector.sendMessage("downloadPlans " + id);
         try {
-            StarsocketConnector.sendMessage("downloadPlans " + id);
-            String received_plans = StarsocketConnector.getMessage().toString();
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                String received_plans = StarsocketConnector.getMessage().toString();
 
-            SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-            SharedPreferences.Editor editor = settings.edit();
+                SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                        try {
+                            String plan1 = received_plans.split("##########", 9)[1];
+                            String plan2 = received_plans.split("##########", 9)[2];
+                            String plan3 = received_plans.split("##########", 9)[3];
+                            String plan4 = received_plans.split("##########", 9)[4];
+                            String plan5 = received_plans.split("##########", 9)[5];
 
-            String plan1 = received_plans.split("##########", 9)[1];
-            String plan2 = received_plans.split("##########", 9)[2];
-            String plan3 = received_plans.split("##########", 9)[3];
-            String plan4 = received_plans.split("##########", 9)[4];
-            String plan5 = received_plans.split("##########", 9)[5];
+                            editor.putString("1 planFriend", String.valueOf(plan1)).apply();
+                            editor.putString("2 planFriend", String.valueOf(plan2)).apply();
+                            editor.putString("3 planFriend", String.valueOf(plan3)).apply();
+                            editor.putString("4 planFriend", String.valueOf(plan4)).apply();
+                            editor.putString("5 planFriend", String.valueOf(plan5)).apply();
 
-            editor.putString("1 planFriend", String.valueOf(plan1)).apply();
-            editor.putString("2 planFriend", String.valueOf(plan2)).apply();
-            editor.putString("3 planFriend", String.valueOf(plan3)).apply();
-            editor.putString("4 planFriend", String.valueOf(plan4)).apply();
-            editor.putString("5 planFriend", String.valueOf(plan5)).apply();
-
-            setPlanNames();
+                            setPlanNames();
+                        } catch (Exception e){
+                            toast("error loading plans");
+                        }
+                }
+            }, 1000);
         } catch (Exception e){
-           // toast("no network");
+            toast("no network");
         }
     }
 
@@ -295,7 +306,10 @@ public class ProfileActivity extends AppCompatActivity {
         Intent i = new Intent(this, FriendsActivity.class);
         startActivity(i);
     }
-
+    public void onResume() {
+        super.onResume();
+        isInChat = false;
+    }
     public static String chatId;
     public static String chatUsername;
     public void openChat(View view) {
@@ -308,12 +322,4 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
 }

@@ -6,7 +6,27 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     tools:context=".plans.create.ImagesActivity">
+    <View
+        android:id="@+id/viewStripe1"
+        android:layout_width="5dp"
+        android:layout_height="0dp"
+        android:layout_marginLeft="50dp"
+        android:background="@color/projectGreen"
+        android:elevation="-3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/viewStripe2"
+        android:layout_width="5dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="0dp"
+        android:background="@color/projectGreen"
+        android:elevation="-3dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/viewStripe1"
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/textViewSearchBtn"
         android:layout_width="wrap_content"

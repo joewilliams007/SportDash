@@ -23,96 +23,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
 
-    <TextView
-        android:id="@+id/textViewFirst"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:rotation="-15"
-        android:text="1. place"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewFirstPlace"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:onClick="open1"
-        android:padding="10dp"
-        android:text="loading"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewFirst"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewSecond"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:rotation="-15"
-        android:text="2. place"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstPlace" />
-
-    <TextView
-        android:id="@+id/textViewSecondPlace"
-        android:layout_width="0dp"
-        android:onClick="open2"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:padding="10dp"
-        android:text="loading"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewSecond"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFirstPlace" />
-
-    <TextView
-        android:id="@+id/textViewThird"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:rotation="-15"
-        android:text="3. place"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSecondPlace" />
-
-    <TextView
-        android:id="@+id/textViewThirdPlace"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:padding="10dp"
-        android:text="loading"
-        android:onClick="open3"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/textViewSecond"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSecondPlace" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/leaderboard_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
         android:elevation="1dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewThirdPlace" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
 
 
@@ -130,4 +50,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
