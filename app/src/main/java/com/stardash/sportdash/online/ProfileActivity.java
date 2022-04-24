@@ -8,7 +8,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ObjectAnimator;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -17,8 +16,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -28,7 +25,7 @@ import android.widget.TextView;
 
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
-import com.stardash.sportdash.online.FriendsActivity;
+import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
 import com.stardash.sportdash.settings.Account;
@@ -311,12 +308,11 @@ public class ProfileActivity extends AppCompatActivity {
         isInChat = false;
     }
     public static String chatId;
-    public static String chatUsername;
+
     public void openChat(View view) {
         vibrate();
         TextView textViewUsername = findViewById(R.id.textViewUsername);
         TextView textViewUserID = findViewById(R.id.textViewUserID);
-        chatUsername = textViewUsername.getText().toString();
         chatId = textViewUserID.getText().toString().replace("#","");
         Intent i = new Intent(this, ChatActivity.class);
         startActivity(i);

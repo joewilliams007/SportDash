@@ -323,8 +323,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-
     </ScrollView>
 
     <TextView

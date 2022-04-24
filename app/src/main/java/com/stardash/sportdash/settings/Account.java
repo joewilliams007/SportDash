@@ -223,7 +223,7 @@ public class Account {
     // id --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static String userid() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
-        String result = pref.getString("userid", null);
+        String result = pref.getString("userid", "0");
         return result;
     }
     public static void setId(String id) {
@@ -247,7 +247,7 @@ public class Account {
     // password --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static String password() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
-        String result = pref.getString("password", null);
+        String result = pref.getString("password", "0");
         return result;
     }
     public static void setPassword(String password) {

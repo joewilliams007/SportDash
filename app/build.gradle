@@ -10,10 +10,15 @@ android {
         minSdk 24
         targetSdk 32
         versionCode 1
-        versionName "0.1.1"
+        versionName "0.1.2"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
+
+    task wrapper(type: Wrapper) {
+        gradleVersion = '6.7.1'
+    }
+
 
     buildTypes {
         release {

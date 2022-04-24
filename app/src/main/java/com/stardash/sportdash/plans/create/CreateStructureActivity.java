@@ -17,6 +17,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
@@ -290,5 +291,11 @@ public class CreateStructureActivity extends AppCompatActivity {
         } else {
             v.vibrate(100);
         }
+    }
+
+    public void openBeta(View view) {
+        vibrate();
+        Intent i = new Intent(this, CreateStructureNewActivity.class);
+        startActivity(i);
     }
 }

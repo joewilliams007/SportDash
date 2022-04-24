@@ -1,6 +1,9 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
@@ -25,6 +28,7 @@ import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
+import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.comments.CommentsActivity;
 import com.stardash.sportdash.settings.FeedbackActivity;
@@ -224,13 +228,17 @@ public class RunPlanActivity extends AppCompatActivity {
     public void openAccount(View view) {
         vibrate();
         TextView textViewMadeById = findViewById(R.id.textViewMadeByUserId);
-        try {
-            StarsocketConnector.sendMessage("getProfile " + textViewMadeById.getText().toString().replace("#", "").split(" ")[0]);
-            Intent i = new Intent(this, ProfileActivity.class);
-            startActivity(i);
-        } catch (Exception e) {
-            toast("no network");
-        }
+        String id = textViewMadeById.getText().toString().replace("#", "").split(" ")[0];
+            try {
+                vibrate();
+                tappedOnSearchItem = true;
+                tappedOnSearchItemId = id;
+                Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyApplication.getAppContext().startActivity(i);
+            } catch (Exception e) {
+
+            }
     }
 
     public void toast(String message){
@@ -354,8 +362,12 @@ public class RunPlanActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
-                    String received = StarsocketConnector.getMessage();
-                    textViewStarsAmount.setText(received);
+                    try {
+                        String received = StarsocketConnector.getMessage();
+                        textViewStarsAmount.setText(received);
+                    } catch (Exception e){
+
+                    }
                 }
             }, 500);
 
@@ -376,26 +388,23 @@ public class RunPlanActivity extends AppCompatActivity {
 
     public void doNothing1(View view) {
         vibrate();
-        TextView textView = findViewById(R.id.textViewSharePage);
-        textView.setVisibility(View.GONE);
-        TextView textView1 = findViewById(R.id.textViewCopyIdShare);
-        textView1.setVisibility(View.GONE);
-        TextView textView3 = findViewById(R.id.textViewCopyIdShare3);
-        textView3.setVisibility(View.GONE);
-        TextView textView4 = findViewById(R.id.textViewCopyIdShare1);
-        textView4.setVisibility(View.GONE);
+        ConstraintLayout searchLayout = findViewById(R.id.shareLayout);
+        searchLayout.animate().alpha(0).setDuration(1000);
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                searchLayout.setVisibility(View.GONE);
+            }
+        }, 1000);
     }
 
     public void sharePlan(View view) {
         vibrate();
-        TextView textView = findViewById(R.id.textViewSharePage);
-        textView.setVisibility(View.VISIBLE);
-        TextView textView1 = findViewById(R.id.textViewCopyIdShare);
-        textView1.setVisibility(View.VISIBLE);
-        TextView textView3 = findViewById(R.id.textViewCopyIdShare3);
-        textView3.setVisibility(View.VISIBLE);
-        TextView textView4 = findViewById(R.id.textViewCopyIdShare1);
-        textView4.setVisibility(View.VISIBLE);
+        ConstraintLayout searchLayout = findViewById(R.id.shareLayout);
+        searchLayout.setVisibility(View.VISIBLE);
+        searchLayout.animate().alpha(1).setDuration(1000);
+
     }
 
     public void copyPlanIdLink(View view) {

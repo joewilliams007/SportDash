@@ -1,5 +1,7 @@
 package com.stardash.sportdash.network.tcp;
 
+import com.stardash.sportdash.settings.Account;
+
 public class StarsocketConnector {
 
     static int nodeFileReceiveServerPort = 2222;
@@ -27,7 +29,7 @@ public class StarsocketConnector {
 
     public static void sendMessage(String message){
         aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
-        socket.sendMessage(message);
+        socket.sendMessage(Account.userid()+" "+Account.password()+" "+Account.username()+" §"+message);
         socket.stopConnection();
     }
 

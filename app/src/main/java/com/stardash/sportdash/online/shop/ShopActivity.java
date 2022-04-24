@@ -132,7 +132,7 @@ public class ShopActivity extends AppCompatActivity {
                         int hoursMin = Integer.parseInt(info.split("h")[1].replace("!-",""))/60;
                         int minMinusHours = Integer.parseInt(info.split("h")[1].replace("!-",""))-hoursMin*60+1;
 
-                        min = "refreshes  in  "+hours.split("\\.")[0]+" h"+" "+String.valueOf(minMinusHours)+" min";
+                        min = "refreshes in "+hours.split("\\.")[0]+" h"+" "+String.valueOf(minMinusHours)+" min";
 
                         textViewRefresh.setText("r e f r e s h e s  i n  "+hours.split("\\.")[0]+" h"+" "+String.valueOf(minMinusHours)+" min");
 
@@ -179,12 +179,13 @@ public class ShopActivity extends AppCompatActivity {
                         textViewItemDesc3.setText(itemName3);
                         textViewItemText3.setText(itemCoins3+" c o i n s");
 
-                        String uri = "@drawable/box"+itemImage4;  // where myresource (without the extension) is the file
+
+                        String uri = "@drawable/box"+itemImage4.replaceAll(" ","");  // where myresource (without the extension) is the file
                         int imageResource = getResources().getIdentifier(uri, null, getPackageName());
                         Drawable res = getResources().getDrawable(imageResource);
                         imageViewBox1.setImageDrawable(res);
 
-                        String uri1 = "@drawable/box"+itemImage5;  // where myresource (without the extension) is the file
+                        String uri1 = "@drawable/box"+itemImage5.replaceAll(" ","");  // where myresource (without the extension) is the file
                         int imageResource1 = getResources().getIdentifier(uri1, null, getPackageName());
                         Drawable res1 = getResources().getDrawable(imageResource1);
                         imageViewBox2.setImageDrawable(res1);

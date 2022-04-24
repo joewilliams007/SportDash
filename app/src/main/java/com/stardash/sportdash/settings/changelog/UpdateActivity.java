@@ -17,6 +17,7 @@ import android.os.Vibrator;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.BuildConfig;
@@ -36,6 +37,8 @@ public class UpdateActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_update);
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.textViewLoad)).setVisibility(View.GONE);
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -45,12 +48,12 @@ public class UpdateActivity extends AppCompatActivity {
                 window.setStatusBarColor(Color.BLACK);
             }
         }
-        getChangelog();
+        getChangelog("changelog");
     }
     String versionName = BuildConfig.VERSION_NAME;
-    private void getChangelog() {
+    private void getChangelog(String type) {
         try {
-            StarsocketConnector.sendMessage("changelog");
+            StarsocketConnector.sendMessage(type);
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
                 @Override
@@ -93,6 +96,9 @@ public class UpdateActivity extends AppCompatActivity {
         mAdapter = new UpdateAdapter(mUpdateList);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+        ((TextView) findViewById(R.id.textViewLoad)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.textViewFuture)).setVisibility(View.VISIBLE);
     }
 
     public void vibrate(){
@@ -114,5 +120,25 @@ public class UpdateActivity extends AppCompatActivity {
                 textViewCustomToast.setVisibility(View.GONE);
             }
         }, 3000);
+    }
+
+    public void myVersion(View view) {
+        vibrate();
+        toast("your version is "+versionName);
+    }
+
+    public void reload(View view) {
+        vibrate();
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.textViewLoad)).setVisibility(View.GONE);
+        getChangelog("changelog");
+
+    }
+
+    public void soon(View view) {
+        vibrate();
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+        ((TextView) findViewById(R.id.textViewFuture)).setVisibility(View.GONE);
+        getChangelog("futureLog");
     }
 }

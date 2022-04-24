@@ -6,28 +6,16 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".online.FriendsActivity">
-
-    <TextView
-        android:id="@+id/textViewTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:elevation="2dp"
-        android:padding="2dp"
-        android:text="F R I E N D S"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".online.friends.FriendsActivity">
 
     <ScrollView
+        android:id="@+id/scrollView6"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewMeUsername"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -35,307 +23,531 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textViewAdd"
+                android:id="@+id/textViewLevel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
+
+            <TextView
+                android:id="@+id/textViewLevelTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:elevation="2dp"
-                android:onClick="openProfile"
-                android:padding="2dp"
-                android:text="E N T E R"
+                android:padding="10dp"
+                android:text="level"
                 android:textColor="@color/projectGreen"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view1" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonNameHashtag"
+            <TextView
+                android:id="@+id/textViewUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="loading"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMe" />
+
+            <TextView
+                android:id="@+id/textViewFollow"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="follow"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOpenSearch" />
+
+            <TextView
+                android:id="@+id/textViewMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:onClick="openChat"
+                android:padding="10dp"
+                android:text="message"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/textViewFollow"
+                app:layout_constraintTop_toBottomOf="@+id/textViewOpenSearch" />
+
+            <TextView
+                android:id="@+id/textViewOpenSearch"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/track_green_background"
-                android:hint="USER ID"
-                android:inputType="number"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="showSearch"
                 android:padding="10dp"
-                android:textColor="@color/projectGrey"
-                android:textColorHint="@color/projectGrey"
-                app:layout_constraintEnd_toStartOf="@+id/textViewAdd"
-                app:layout_constraintStart_toEndOf="@+id/textViewHashtag"
+                android:text="search user"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+
+            <TextView
+                android:id="@+id/textViewProgressTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="progress"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLevelTxt" />
+
+            <TextView
+                android:id="@+id/textViewProgress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewLevel" />
+
+            <TextView
+                android:id="@+id/textViewProgressTdTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="today"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProgressTxt" />
+
+            <ProgressBar
+                android:id="@+id/progressBarToday"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="10000"
+                android:progress="0"
+                android:progressBackgroundTint="@color/projectBlack"
+                android:progressTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewProgressTdTxt"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProgressTd"
+                app:layout_constraintStart_toEndOf="@+id/textViewProgressTdTxt"
+                app:layout_constraintTop_toTopOf="@+id/textViewProgressTdTxt" />
+
+            <TextView
+                android:id="@+id/textViewProgressTd"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProgress" />
+
+            <TextView
+                android:id="@+id/textViewProgressWkTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="week"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProgressTdTxt" />
+
+            <ProgressBar
+                android:id="@+id/progressBarWeek"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:max="70000"
+                android:progress="0"
+                android:progressBackgroundTint="@color/projectBlack"
+                android:progressTint="@color/white"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewProgressWkTxt"
+                app:layout_constraintEnd_toStartOf="@+id/textViewProgressWk"
+                app:layout_constraintStart_toEndOf="@+id/textViewProgressWkTxt"
+                app:layout_constraintTop_toTopOf="@+id/textViewProgressWkTxt" />
+
+            <TextView
+                android:id="@+id/textViewProgressWk"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProgressTd" />
+
+            <View
+                android:id="@+id/view1"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/projectBlack"
+                android:elevation="-5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMessage" />
+
+            <View
+                android:id="@+id/view"
+                android:visibility="gone"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/projectBlack"
+                android:elevation="-5dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewProgressWk" />
+
+            <TextView
+                android:id="@+id/textViewPlan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="plan1"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan1Txt" />
+
+            <TextView
+                android:id="@+id/textViewPlan1Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="plan 1"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/view" />
+
+            <TextView
+                android:id="@+id/textViewPlan2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:onClick="plan1"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan2Txt" />
+
+            <TextView
+                android:id="@+id/textViewPlan2Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="plan 2"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan1" />
+
+            <TextView
+                android:id="@+id/textViewPlan3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:onClick="plan1"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan3Txt" />
+
+            <TextView
+                android:id="@+id/textViewPlan3Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="plan 3"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan2" />
+
+            <TextView
+                android:id="@+id/textViewPlan4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:onClick="plan1"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan4Txt" />
+
+            <TextView
+                android:id="@+id/textViewPlan4Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="plan 4"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan3" />
+
+            <TextView
+                android:id="@+id/textViewPlan5"
+                android:onClick="plan1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/loading"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan15Txt" />
+
+            <TextView
+                android:id="@+id/textViewPlan15Txt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="plan 5"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan4" />
+
+
+            <TextView
+                android:id="@+id/textViewMe"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:elevation="2dp"
+                android:text="#1"
+                android:textColor="@color/projectGreen"
+                android:textSize="100dp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-
             <TextView
-                android:id="@+id/textViewHashtag"
+                android:id="@+id/textViewStyle"
+                android:onClick="rotate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_marginStart="16dp"
-                android:text="#"
+                android:padding="10dp"
+                android:elevation="2dp"
+                android:text="-_-"
                 android:textColor="@color/projectGreen"
-                app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameHashtag"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameHashtag" />
-
-
-
-            <TextView
-                android:id="@+id/textViewFriend"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend0"
-                android:padding="10dp"
-                android:textColor="@color/white"
+                android:textSize="100dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/textViewOpenSearch"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewLast" />
+                app:layout_constraintTop_toTopOf="@+id/textViewUsername" />
 
             <TextView
-                android:id="@+id/textViewFriend1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend1"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChat4" />
-
-            <TextView
-                android:id="@+id/textViewFriend2"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend2"
-                android:padding="10dp"
-
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend1" />
-
-            <TextView
-                android:id="@+id/textViewFriend3"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend3"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend2" />
-
-            <TextView
-                android:id="@+id/textViewFriend4"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend4"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend3" />
-
-            <TextView
-                android:id="@+id/textViewFriend5"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend5"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend4" />
-
-            <TextView
-                android:id="@+id/textViewFriendx"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:onClick="friend5"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend5" />
-
-            <TextView
-                android:id="@+id/textViewLast"
+                android:id="@+id/textViewFollowing"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="last searched"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameHashtag" />
+                android:elevation="2dp"
+                android:padding="2dp"
+                android:text="f o l l o w i n g"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toEndOf="@+id/textViewMe"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textViewLastChat"
+                android:id="@+id/textViewFollowingNr"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:padding="10dp"
-                android:text="friends"
+                android:elevation="2dp"
+                android:padding="2dp"
+                android:text="20"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFriend" />
+                app:layout_constraintStart_toEndOf="@+id/textViewMe"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFollowing" />
 
             <TextView
-                android:id="@+id/textViewChat2"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:onClick="friend7"
+                android:id="@+id/textViewFollowers"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChat1" />
+                android:elevation="2dp"
+                android:padding="2dp"
+                android:text="f o l l o w e r s"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toEndOf="@+id/textViewMe"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFollowingNr" />
 
             <TextView
-                android:id="@+id/textViewChat3"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
+                android:id="@+id/textViewFollowersNr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend8"
-                android:padding="10dp"
+                android:elevation="2dp"
+                android:padding="2dp"
+                android:text="15"
                 android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChat2" />
+                app:layout_constraintStart_toEndOf="@+id/textViewMe"
+                app:layout_constraintTop_toBottomOf="@+id/textViewFollowers" />
 
-            <TextView
-                android:id="@+id/textViewChat4"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend9"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewChat3" />
 
-            <TextView
-                android:id="@+id/textViewChat1"
-                android:layout_width="0dp"
-                android:layout_height="50dp"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:gravity="center"
-                android:onClick="friend6"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewLastChat" />
-
-  </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-
-    <TextView
-        android:id="@+id/textViewSelect"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:background="@drawable/track_green_background"
-        android:padding="10dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="gone"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/main_text_background_track_no_border"
+        android:elevation="15dp"
         android:onClick="doNth"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <TextView
-        android:id="@+id/textViewProfile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:onClick="openProfileId"
-        android:padding="10dp"
-        android:text="P R O F I L E"
-        android:textColor="@color/projectGrey"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toTopOf="@+id/textViewChat"
-        app:layout_constraintStart_toStartOf="@+id/textViewSelect" />
+        <View
+            android:id="@+id/view6"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="@color/projectGrey"
+            android:elevation="-5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
 
-    <TextView
-        android:id="@+id/textViewChat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:text="C H A T"
-        android:onClick="openChat"
-        android:textColor="@color/projectGrey"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewSelect"
-        app:layout_constraintEnd_toEndOf="@+id/textViewSelect" />
+        <TextView
+            android:id="@+id/textViewSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="hideSearch"
+            android:padding="10dp"
+            android:text="C A N C E L"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewClose"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="hideSelectStart"
-        android:padding="15dp"
-        android:text="X"
-        android:textColor="@color/projectRed"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewSelect"
-        app:layout_constraintTop_toTopOf="@+id/textViewProfile" />
+        <TextView
+            android:id="@+id/textViewSubmitSearch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:elevation="2dp"
+            android:onClick="searchUsers"
+            android:padding="10dp"
+            android:text="S E A R C H"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
 
-    <TextView
-        android:id="@+id/textViewProfileId"
-        android:layout_width="0dp"
-        android:background="@drawable/main_text_background"
-        android:gravity="center"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:layout_margin="5dp"
-        android:text="#1"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewSelect"
-        app:layout_constraintStart_toStartOf="@+id/textViewSelect"
-        app:layout_constraintTop_toTopOf="@+id/textViewSelect" />
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:hint="search user"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            app:layout_constraintEnd_toStartOf="@+id/textViewSubmitSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view6" />
 
-    <TextView
-        android:id="@+id/textViewUrId"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/main_text_background_track"
-        android:gravity="center"
-        android:onClick="openMyProfile"
-        android:padding="15dp"
-        android:text="your ID is #"
-        android:textColor="@color/projectGrey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+              <TextView
+                android:id="@+id/textViewMeUsername"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                  android:layout_marginTop="10dp"
+                  android:layout_marginBottom="10dp"
+                android:background="@drawable/main_text_background"
+                android:elevation="10dp"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="L\nO\nA\nD\nI\nN\nG"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
     <TextView
@@ -344,7 +556,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/main_text_background_red"
-        android:elevation="10dp"
+        android:elevation="50dp"
         android:padding="10dp"
         android:text="CUSTOM TOAST"
         android:textColor="@color/white"
@@ -353,5 +565,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        android:indeterminateTintMode="src_atop"
+        android:max="100"
+        android:progress="60"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

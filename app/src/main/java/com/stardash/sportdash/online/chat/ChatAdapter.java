@@ -3,7 +3,6 @@ package com.stardash.sportdash.online.chat;
 import static com.stardash.sportdash.online.ProfileActivity.chatId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
@@ -19,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
-import com.stardash.sportdash.online.FriendsActivity;
 import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;

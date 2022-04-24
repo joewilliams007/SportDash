@@ -1,5 +1,7 @@
 package com.stardash.sportdash.plans.comments;
 
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.Intent;
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.settings.MyApplication;
@@ -75,8 +78,9 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
 
                 try {
                     vibrate();
-                    StarsocketConnector.sendMessage("getProfile " + id);
-                    Intent i = new Intent(MyApplication.getAppContext(), ProfileActivity.class);
+                    tappedOnSearchItem = true;
+                    tappedOnSearchItemId = id;
+                    Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     MyApplication.getAppContext().startActivity(i);
                 } catch (Exception e) {

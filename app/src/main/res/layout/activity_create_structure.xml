@@ -40,6 +40,8 @@
                 android:layout_margin="10dp"
                 android:text="S T A R T"
                 android:padding="10dp"
+                android:onClick="openBeta"
+                android:elevation="-1dp"
                 android:background="@drawable/main_text_background"
                 android:textColor="@color/projectGreen"
                 app:layout_constraintEnd_toEndOf="parent"

@@ -1,0 +1,295 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    tools:context=".plans.create.structure.CreateStructureNewActivity">
+
+    <TextView
+        android:id="@+id/textViewTop"
+        android:layout_width="0dp"
+        android:gravity="center"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:layout_margin="10dp"
+        android:text="S T A R T"
+        android:padding="10dp"
+        android:background="@drawable/main_text_background"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/structure_recycler_view"
+        android:layout_width="0dp"
+        android:scrollbars="vertical"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewSubmit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S U B M I T"
+        android:textStyle="italic"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTop"
+        app:layout_constraintTop_toTopOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewPlus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textStyle="italic"
+        android:layout_margin="10dp"
+        android:text="A D D  E L E M E N T"
+        android:padding="10dp"
+        android:onClick="addElement"
+        android:background="@drawable/main_text_background"
+        android:textColor="@color/projectLightBlue"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:animateLayoutChanges="true"
+        android:id="@+id/elementLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/main_text_background_track_no_border"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewElement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="@string/e_l_e_m_e_n_t_s"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewElementSubmit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:text="S U B M I T"
+            android:onClick="submitElement"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/editTextName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:ems="10"
+            android:hint="name*"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textStyle="italic"
+
+            app:layout_constraintEnd_toStartOf="@+id/upload"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+        <EditText
+            android:id="@+id/editTextDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:ems="10"
+            android:hint="description*"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+        <EditText
+            android:id="@+id/editTextTime"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:ems="10"
+            android:hint="duration*"
+            android:inputType="number"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toStartOf="@+id/textViewSeconds"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
+
+        <TextView
+            android:id="@+id/textViewSeconds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background_white"
+            android:padding="10dp"
+            android:text="seconds"
+            android:onClick="useSeconds"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+            app:layout_constraintEnd_toStartOf="@+id/textViewIterations"
+            app:layout_constraintTop_toTopOf="@+id/editTextTime" />
+
+        <TextView
+            android:id="@+id/textViewIterations"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:onClick="useIterations"
+            android:padding="10dp"
+            android:text="iterations"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextTime" />
+
+        <View
+            android:id="@+id/view11"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="@color/projectGrey"
+            android:elevation="-5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.761"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="@color/projectGrey"
+            android:elevation="-5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewElement" />
+
+        <TextView
+            android:id="@+id/textViewSearchTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:padding="10dp"
+            android:text="S E A R C H"
+            android:onClick="searchElements"
+            android:textColor="@color/projectGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:ems="10"
+            android:hint="search elements"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintEnd_toStartOf="@+id/textViewSearchTxt"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view11" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+
+        <View
+            android:id="@+id/view3"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_margin="10dp"
+            android:background="@color/projectGrey"
+            android:elevation="-5dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/search_recycler_view" />
+
+        <TextView
+            android:id="@+id/textViewCustomToast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CUSTOM TOAST"
+            android:padding="10dp"
+            android:elevation="10dp"
+            android:layout_margin="10dp"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:background="@drawable/main_text_background_red"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/upload"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:buttonTint="@color/projectGrey"
+            android:checked="true"
+            android:text="UPLOAD"
+            android:onClick="uploadElement"
+            android:textColor="@color/projectGrey"
+            android:textColorHint="@color/projectGrey"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextName"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextName" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/white"
+        android:indeterminateTintMode="src_atop"
+        android:max="100"
+        android:progress="60"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="0dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

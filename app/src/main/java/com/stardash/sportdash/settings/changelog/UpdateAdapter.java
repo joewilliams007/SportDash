@@ -1,5 +1,7 @@
 package com.stardash.sportdash.settings.changelog;
 
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.Intent;
@@ -17,6 +19,7 @@ import com.stardash.sportdash.BuildConfig;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.plans.comments.CommentsItem;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
@@ -76,6 +79,8 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.UpdateView
             holder.mTextView1.setTextColor(Color.parseColor("#0eff00"));
         } else if (currentItem.getText1().split(" ")[0].equals("NEWVER")) {
             holder.mTextView1.setTextColor(Color.parseColor("#14FFEC"));
+        } if (currentItem.getText1().split(" ")[0].equals("RELEASED")) {
+            holder.mTextView1.setTextColor(Color.parseColor("#E64868"));
         }
 
         if (currentItem.getText1().split(" ")[0].equals("NEWVER")) {
@@ -101,6 +106,13 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.UpdateView
             holder.mTextView2.setText(currentItem.getText2());
 
         }
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    vibrate();
+            }
+        });
 
     }
 

@@ -33,7 +33,6 @@
         android:layout_height="wrap_content"
         android:background="@color/projectBlack"
         android:gravity="center"
-        android:onClick="openProfile"
         android:padding="10dp"
         android:text="J O E J O E"
         android:textColor="@color/projectGreen"

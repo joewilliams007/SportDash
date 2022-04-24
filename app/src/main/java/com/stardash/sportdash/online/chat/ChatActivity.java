@@ -2,7 +2,7 @@ package com.stardash.sportdash.online.chat;
 
 import static android.graphics.BitmapFactory.*;
 import static com.stardash.sportdash.online.ProfileActivity.chatId;
-import static com.stardash.sportdash.online.ProfileActivity.chatUsername;
+import static com.stardash.sportdash.online.friends.FriendsActivity.chatUsername;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.NonNull;
@@ -91,7 +91,6 @@ public class ChatActivity extends AppCompatActivity {
             textView.setTextColor(Color.parseColor("#FFFFFF"));
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
             window.setStatusBarColor(Color.parseColor("#000000"));
-            textViewTop.setBackgroundColor(Color.parseColor("#000000"));
             TextView textViewSet = findViewById(R.id.textViewSet);
             textViewSet.setBackgroundColor(Color.parseColor("#000000"));
         }
