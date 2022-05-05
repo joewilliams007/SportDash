@@ -11,5 +11,5 @@
         android:pivotX="10%"
         android:pivotY="10%"
         android:fillAfter="false"
-        android:duration="10000" />
+        android:duration="1" />
 </set>

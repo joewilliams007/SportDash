@@ -254,7 +254,6 @@ public class CreateStructureActivity extends AppCompatActivity {
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
 
-
         for (int i = 0; i < 65; i++) {
             System.out.println("Yes");
 

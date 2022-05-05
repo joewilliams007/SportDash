@@ -5,17 +5,22 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -26,9 +31,12 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
+import com.stardash.sportdash.plans.run.inspect.InspectActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.comments.CommentsActivity;
 import com.stardash.sportdash.settings.FeedbackActivity;
@@ -68,7 +76,27 @@ public class RunPlanActivity extends AppCompatActivity {
             }
         }
       ismyplan();
+        listenRefresh();
 
+    }
+
+    private void listenRefresh() {
+        SwipeRefreshLayout mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
+        mySwipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        vibrate();
+                        try {
+                            isRandom = true;
+                            Intent i = new Intent(getApplicationContext(), RunPlanActivity.class);
+                            startActivity(i);
+                        } catch (Exception e) {
+                            toast("no network");
+                        }
+                    }
+                }
+        );
 
     }
 
@@ -99,19 +127,19 @@ public class RunPlanActivity extends AppCompatActivity {
     @SuppressLint("SetTextI18n")
     private void setPlan() {
         try {
-            String name = plan().split("\n",5)[2];
-            String category = plan().split("\n",5)[4];
-            String description = plan().split("\n",5)[3];
-            String firstRow = plan().split("\n",5)[1];
+            String name = thePlan().split("\n",5)[2];
+            String category = thePlan().split("\n",5)[4];
+            String description = thePlan().split("\n",5)[3];
+            String firstRow = thePlan().split("\n",5)[1];
             String difficultyInt = firstRow.split(" ",5)[1];
             String difficulty = "none";
             String energy = firstRow.split(" ",5)[2];
             String duration = "none";
             String totalDuration = "none";
             String iterations = firstRow.split(" ",5)[3];
-            String madeUser = plan().split("\n",9)[5];
-            String madeId = plan().split("\n",9)[6];
-            String planId = plan().split("\n",9)[7];
+            String madeUser = thePlan().split("\n",9)[5];
+            String madeId = thePlan().split("\n",9)[6];
+            String planId = thePlan().split("\n",9)[7];
             int iterationsInt = Integer.parseInt(firstRow.split(" ",5)[3]);
 
             try{
@@ -178,10 +206,10 @@ public class RunPlanActivity extends AppCompatActivity {
 
     }
     public static Boolean isRandom;
-    String plan() {
+    public static String thePlan() {
         String plan = "err";
 
-        SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("sport", 0); // 0 - for private mode
         int planInt = pref.getInt("selectedPlan", 0);
 
         if (isRandom) {
@@ -195,22 +223,35 @@ public class RunPlanActivity extends AppCompatActivity {
         return plan;
     }
     static String thePlan;
-    public void openLobby(View view) {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-        Intent i = new Intent(this, LobbyActivity.class);
-        startActivity(i);
-    }
 
-    /*@Override
+    @Override
     public void onBackPressed() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }*/
+        if (isRandom) {
+            Intent i = new Intent(this, MainActivity.class);
+            startActivity(i);
+        } else {
+            this.finish();
+            /* AlertDialog.Builder builder = new AlertDialog.Builder(RunPlanActivity.this);
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.mipmap.ic_launcher);
+            builder.setMessage("If You Enjoy The App Please Rate us?")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent play =
+                                    new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=kd.travellingtips"));
+                            startActivity(play);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show(); */
+        }
+    }
 
     public void deletePlan(View view) {
         vibrate();
@@ -262,7 +303,7 @@ public class RunPlanActivity extends AppCompatActivity {
         editor.putBoolean("online",false).apply();
 
         editor.putString("category", "none").commit();
-        editor.putString("committed plan",plan()).commit();
+        editor.putString("committed plan",thePlan()).commit();
 
         editor.putBoolean("create", true).commit();
 
@@ -295,14 +336,7 @@ public class RunPlanActivity extends AppCompatActivity {
         }
     }
 
-    private void vibrate() {
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
+
 
     public static String reportPlanId;
     public static Boolean reportingPlan;
@@ -429,5 +463,11 @@ public class RunPlanActivity extends AppCompatActivity {
         ClipData clip = ClipData.newPlainText("SportDash-PLAN-ID", clip0);
         clipboard.setPrimaryClip(clip);
         toast("copied plan id");
+    }
+
+    public void inspectPlan(View view) {
+        vibrate();
+        Intent i = new Intent(this, InspectActivity.class);
+        startActivity(i);
     }
 }

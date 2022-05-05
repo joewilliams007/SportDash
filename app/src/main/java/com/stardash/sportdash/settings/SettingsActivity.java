@@ -465,4 +465,31 @@ public class SettingsActivity extends AppCompatActivity {
         Intent i = new Intent(this, ChatSettingsActivity.class);
         startActivity(i);
     }
+
+    public void boost(View view) {
+        TextView textViewBoost = findViewById(R.id.textViewBoost);
+        textViewBoost.setVisibility(View.GONE);
+        vibrate();
+        try {
+            toast("boosting ..");
+            StarsocketConnector.sendMessage("boost");
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    toast("boosting ...");
+                   vibrate();
+                    handler.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            vibrate();
+                            toast("boosted connection");
+                        }
+                    }, 1000);
+                }
+            }, 1000);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
 }

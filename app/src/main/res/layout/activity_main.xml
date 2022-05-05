@@ -273,12 +273,12 @@
         android:text="LOG"
         android:onClick="openLog"
         android:textColor="@color/projectGrey"
-        app:layout_constraintBottom_toTopOf="@+id/textViewSettings"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFeed"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/textViewSettings"
+        android:id="@+id/textViewFeed"
         android:layout_width="0dp"
         android:layout_height="100dp"
         android:layout_marginLeft="10dp"
@@ -286,8 +286,8 @@
         android:background="@drawable/track_green_background"
         android:gravity="bottom|right"
         android:padding="10dp"
-        android:text="SETTINGS"
-        android:onClick="openSettings"
+        android:text="FEED"
+        android:onClick="openFeed"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/projectGrey"
@@ -362,7 +362,7 @@
         android:layout_width="15dp"
         android:layout_height="15dp"
         android:layout_margin="10dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSetting"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/flash" />
 
@@ -444,11 +444,11 @@
     <TextView
         android:id="@+id/textViewCustomToast"
         android:layout_width="wrap_content"
+        android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:text="CUSTOM TOAST"
         android:padding="10dp"
         android:elevation="10dp"
-        android:layout_margin="10dp"
         android:visibility="gone"
         android:textColor="@color/white"
         android:background="@drawable/main_text_background_red"
@@ -539,14 +539,14 @@
 
     <ImageView
         android:id="@+id/imageViewSetting"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:onClick="openSettings"
-        android:padding="10dp"
-        app:layout_constraintStart_toStartOf="@+id/textViewSettings"
-        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
-        app:srcCompat="@drawable/settings" />
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewEnergy1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageViewEnergy1"
+        app:srcCompat="@drawable/setting_green" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

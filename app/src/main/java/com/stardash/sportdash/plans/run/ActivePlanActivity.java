@@ -1,5 +1,7 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -360,14 +362,12 @@ public class ActivePlanActivity extends AppCompatActivity {
         });
     }
 
-
     private void planNames(int element) {
         String elementNames = plan().split("\n",20)[13];
         String selectedElement = elementNames.split("&",25)[element];
         TextView textViewElement = findViewById(R.id.textViewElement);
         textViewElement.setText(selectedElement);
     }
-
 
     private void planNamesNext(int element) {
         String elementNames = plan().split("\n",20)[13];
@@ -386,8 +386,6 @@ public class ActivePlanActivity extends AppCompatActivity {
     String advice(int element) {
         String elementNames = plan().split("\n",20)[15];
         String selectedElement = elementNames.split("&",25)[element];
-      //  TextView textViewElement = findViewById(R.id.textViewElement);
-      //  textViewElement.setText(selectedElement);
         return selectedElement;
     }
 
@@ -405,21 +403,8 @@ public class ActivePlanActivity extends AppCompatActivity {
         textViewElement.setText(selectedElement);
     }
 
-
-
     String plan() {
-        String plan = "err";
-
-        SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
-        int planInt = pref.getInt("selectedPlan", 0);
-
-        if (Account.isMine()) {
-            plan = pref.getString(String.valueOf(planInt) + " plan", null);
-        } else {
-            plan = pref.getString(planInt+" planFriend", "empty");
-        }
-
-        return plan;
+        return thePlan;
     }
 
     public void openAdvice(View view) {

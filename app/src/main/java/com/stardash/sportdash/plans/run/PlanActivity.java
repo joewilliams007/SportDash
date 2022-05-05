@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
@@ -90,7 +91,7 @@ public class PlanActivity extends AppCompatActivity {
 
 
     public void createPlan(View view) {
-        Intent i = new Intent(this, CreateStructureActivity.class);
+        Intent i = new Intent(this, CreateStructureNewActivity.class);
         startActivity(i);
     }
 

@@ -4,7 +4,9 @@ import static com.stardash.sportdash.plans.create.structure.CreateStructureNewAc
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_name;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_time;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_type;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.set_e;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.tappedItem;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.Intent;
@@ -89,43 +91,19 @@ public class ElementSearchAdapter extends RecyclerView.Adapter<ElementSearchAdap
                     e_time = currentItem.getText1().split(",")[1].split(" ")[1].replaceAll(" ","");
                     e_type = currentItem.getText1().split(",")[1];
                     set_e = true;
+
+
+                        vibrate();
+                        Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MyApplication.getAppContext().startActivity(i);
+
                 } catch (Exception e) {
 
                 }
             }
         });
 
-        holder.mTextView1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    vibrate();
-                    e_name = currentItem.getText1().split(",")[0];
-                    e_desc = currentItem.getText2();
-                    e_time = currentItem.getText1().split(",")[1].split(" ")[1].replaceAll(" ","");
-                    set_e = true;
-                    e_type = currentItem.getText1().split(",")[1];
-                } catch (Exception e) {
-
-                }
-            }
-        });
-
-        holder.mTextView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    vibrate();
-                    e_name = currentItem.getText1().split(",")[0];
-                    e_desc = currentItem.getText2();
-                    e_time = currentItem.getText1().split(",")[1].split(" ")[1].replaceAll(" ","");
-                    e_type = currentItem.getText1().split(",")[1];
-                    set_e = true;
-                } catch (Exception e) {
-
-                }
-            }
-        });
 
         holder.mTextView3.setOnClickListener(new View.OnClickListener() {
             @Override

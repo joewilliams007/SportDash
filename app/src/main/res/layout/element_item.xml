@@ -19,8 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Line 1"
-            android:textColor="@color/projectGreen"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:textColor="@color/white"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -30,10 +29,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Line 2"
-            android:textColor="@color/white"
+            android:textColor="@color/projectGreen"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLine1" />
+            app:layout_constraintStart_toEndOf="@+id/textViewLine1"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/textViewLine3"

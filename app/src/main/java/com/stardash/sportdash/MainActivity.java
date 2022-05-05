@@ -3,6 +3,7 @@ package com.stardash.sportdash;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.settings.app.vibrate;
 
@@ -38,6 +39,7 @@ import com.stardash.sportdash.network.api.Methods;
 import com.stardash.sportdash.network.api.Model;
 import com.stardash.sportdash.network.api.RetrofitClient;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.online.feed.FeedActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.online.chat.InboxActivity;
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
         ChatActivity.updateChat = false;
         isInChat = false;
         tappedOnSearchItem = false;
+        editItem = false;
 
         try {
             StarsocketConnector.sendMessage("boost");
@@ -414,18 +417,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    public void toast(String message){
-        TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
-        textViewCustomToast.setVisibility(View.VISIBLE);
-        textViewCustomToast.setText(Account.errorStyle()+" "+message);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                textViewCustomToast.setVisibility(View.GONE);
-            }
-        }, 3000);
-    }
 
 
     public void openClub(View view) {
@@ -465,6 +456,26 @@ public class MainActivity extends AppCompatActivity {
         vibrate();
     }
 
+    public void toast(String message){
+        TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
+        textViewCustomToast.setVisibility(View.VISIBLE);
+        textViewCustomToast.setText(Account.errorStyle()+" "+message);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textViewCustomToast.setVisibility(View.GONE);
+            }
+        }, 3000);
+    }
+
     public void doNothing(View view) {
+        //
+    }
+
+    public void openFeed(View view) {
+        Intent i = new Intent(this, FeedActivity.class);
+        startActivity(i);
+        vibrate();
     }
 }

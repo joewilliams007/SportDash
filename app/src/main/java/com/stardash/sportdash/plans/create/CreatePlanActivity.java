@@ -292,30 +292,50 @@ public class CreatePlanActivity extends AppCompatActivity {
         trainingPlanNames.append("unused"); // 12 unused. Maybe usage in future who will know
         trainingPlanNames.append("\n");
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String add = pref.getString(i+" name", "C H O O S E"); // 13
             trainingPlanNames.append("&"+add);
         }
         trainingPlanNames.append("\n");
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String add = pref.getString(i+" description", "C H O O S E"); // 14
             trainingPlanNames.append("&"+add);
         }
         trainingPlanNames.append("\n");
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String add = pref.getString(i+" advice", "C H O O S E"); // 15
             trainingPlanNames.append("&"+add);
         }
         trainingPlanNames.append("\n");
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String add = pref.getString(i+" seconds", "C H O O S E"); // 16
             trainingPlanNames.append("&"+add);
         }
         trainingPlanNames.append("\n");
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String add = pref.getString(i+" format", "C H O O S E"); // 17
             trainingPlanNames.append("&"+add);
         }
+
+        trainingPlanNames.append("##########"); // for database
+        trainingPlanNames.append(editTextName.getText().toString()
+                +"##########"
+                +editTextDescription.getText().toString()
+                +"##########"
+                +Account.username()
+                +"##########"
+                +Account.userid()
+                +"##########"
+                +String.valueOf(randomNumber)
+                +"##########"
+                +trainingPlanDuration()
+                +"##########"
+                +textViewCategory.getText().toString()
+                +"##########"
+                +difficulty()
+                +"##########"
+
+        ); // for database
 
         return trainingPlanNames;
     }
@@ -335,7 +355,7 @@ public class CreatePlanActivity extends AppCompatActivity {
 
         int duration = 0;
 
-        for (int i = 0; i < 26; i++) {
+        for (int i = 0; i < 100; i++) {
             String addString = pref.getString(i+" seconds", "C H O O S E");
             try{
                 int number = Integer.parseInt(addString);

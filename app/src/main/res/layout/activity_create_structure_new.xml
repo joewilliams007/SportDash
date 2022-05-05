@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
+    android:id="@+id/main"
     tools:context=".plans.create.structure.CreateStructureNewActivity">
+
 
     <TextView
         android:id="@+id/textViewTop"
@@ -13,6 +15,7 @@
         android:gravity="center"
         android:layout_height="wrap_content"
         android:textStyle="italic"
+        android:elevation="-2dp"
         android:layout_margin="10dp"
         android:text="S T A R T"
         android:padding="10dp"
@@ -23,6 +26,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
+        android:layout_marginTop="8dp"
         android:id="@+id/structure_recycler_view"
         android:layout_width="0dp"
         android:scrollbars="vertical"
@@ -39,6 +43,8 @@
         android:text="S U B M I T"
         android:textStyle="italic"
         android:padding="10dp"
+        android:elevation="-1dp"
+        android:onClick="finish"
         android:layout_margin="10dp"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
@@ -61,13 +67,16 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:animateLayoutChanges="true"
         android:id="@+id/elementLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
+        android:animateLayoutChanges="true"
         android:background="@drawable/main_text_background_track_no_border"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
@@ -85,9 +94,9 @@
             android:id="@+id/textViewElementSubmit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:onClick="submitElement"
             android:padding="10dp"
             android:text="S U B M I T"
-            android:onClick="submitElement"
             android:textColor="@color/projectGrey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -150,9 +159,9 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/main_text_background_white"
+            android:onClick="useSeconds"
             android:padding="10dp"
             android:text="seconds"
-            android:onClick="useSeconds"
             android:textColor="@color/projectGrey"
             app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
             app:layout_constraintEnd_toStartOf="@+id/textViewIterations"
@@ -199,9 +208,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
+            android:onClick="searchElements"
             android:padding="10dp"
             android:text="S E A R C H"
-            android:onClick="searchElements"
             android:textColor="@color/projectGrey"
             app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
             app:layout_constraintEnd_toEndOf="parent"
@@ -246,20 +255,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/search_recycler_view" />
 
-        <TextView
-            android:id="@+id/textViewCustomToast"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="CUSTOM TOAST"
-            android:padding="10dp"
-            android:elevation="10dp"
-            android:layout_margin="10dp"
-            android:visibility="gone"
-            android:textColor="@color/white"
-            android:background="@drawable/main_text_background_red"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/upload"
@@ -268,8 +263,8 @@
             android:layout_marginRight="10dp"
             android:buttonTint="@color/projectGrey"
             android:checked="true"
-            android:text="UPLOAD"
             android:onClick="uploadElement"
+            android:text="UPLOAD"
             android:textColor="@color/projectGrey"
             android:textColorHint="@color/projectGrey"
             app:layout_constraintBottom_toBottomOf="@+id/editTextName"
@@ -292,4 +287,34 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp" />
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:elevation="-1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="D I S C A R D"
+        android:textStyle="italic"
+        android:onClick="discard"
+        android:padding="10dp"
+        android:layout_margin="10dp"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
+        app:layout_constraintStart_toStartOf="@+id/textViewTop"
+        app:layout_constraintTop_toTopOf="@+id/textViewTop" />
 </androidx.constraintlayout.widget.ConstraintLayout>
