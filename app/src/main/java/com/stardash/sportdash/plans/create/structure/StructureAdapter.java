@@ -6,6 +6,7 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.tappedItem;
+import static com.stardash.sportdash.plans.run.inspect.InspectActivity.inspectingPlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.ClipData;
@@ -88,18 +89,22 @@ public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.Stru
             @Override
             public void onClick(View view) {
                 vibrate();
-                SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putInt("chooseId", Integer.parseInt(holder.mTextView1.getText().toString().replace(".",""))).apply();
-                tappedItem = true;
-                editItem = true;
-                try {
-                    vibrate();
-                    Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MyApplication.getAppContext().startActivity(i);
-                } catch (Exception e) {
+                if (inspectingPlan) {
 
+                } else {
+                    SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    editor.putInt("chooseId", Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""))).apply();
+                    tappedItem = true;
+                    editItem = true;
+                    try {
+                        vibrate();
+                        Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MyApplication.getAppContext().startActivity(i);
+                    } catch (Exception e) {
+
+                    }
                 }
             }
         });

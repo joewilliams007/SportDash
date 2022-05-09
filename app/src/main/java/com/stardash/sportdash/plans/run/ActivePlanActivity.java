@@ -404,7 +404,7 @@ public class ActivePlanActivity extends AppCompatActivity {
     }
 
     String plan() {
-        return thePlan;
+        return thePlan();
     }
 
     public void openAdvice(View view) {

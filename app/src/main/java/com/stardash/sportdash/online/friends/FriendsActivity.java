@@ -127,30 +127,9 @@ public class FriendsActivity extends AppCompatActivity {
             toast("no network");
         }
 
-        listenRefresh();
     }
 
-    private void listenRefresh() {
-        SwipeRefreshLayout mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
-        mySwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        TextView textView = findViewById(R.id.textViewMe);
-                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-                        vibrate();
-                        try {
-                            StarsocketConnector.sendMessage("getProfile " + textView.getText().toString().replace("#",""));
-                            Intent i = new Intent(getApplicationContext(), FriendsActivity.class);
-                            startActivity(i);
-                        } catch (Exception e) {
-                            toast("no network");
-                        }
-                    }
-                }
-        );
 
-    }
 
     private void getUserProfile() {
 
@@ -164,6 +143,10 @@ public class FriendsActivity extends AppCompatActivity {
             String age = profile.split(" ", 15)[5];
             String weight = profile.split(" ", 15)[6];
             String style = profile.split(" ", 15)[7];
+            String accountCreated = profile.split(" ", 15)[8];
+
+            TextView textViewDate = findViewById(R.id.textViewDate);
+            textViewDate.setText("StarKing/Queen since "+accountCreated);
 
             Account.setFriend(0, "#" + id + " " + username);
 

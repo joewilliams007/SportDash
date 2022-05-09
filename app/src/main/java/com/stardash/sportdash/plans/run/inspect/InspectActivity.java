@@ -3,11 +3,17 @@ package com.stardash.sportdash.plans.run.inspect;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stardash.sportdash.R;
@@ -20,12 +26,22 @@ import java.util.ArrayList;
 
 public class InspectActivity extends AppCompatActivity {
 
-    int elementsInPlan = 0;
+    int elementsInPlan = -1;
+    public static Boolean inspectingPlan = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspect);
+        if (Account.isAmoled()) {
+            ConstraintLayout main = findViewById(R.id.main);
+            main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                Window window = getWindow();
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                window.setStatusBarColor(Color.BLACK);
+            }
+        }
         buildPage();
     }
 
@@ -47,7 +63,7 @@ public class InspectActivity extends AppCompatActivity {
                 } else if (add.contains("S Ξ L Ξ C T")) {
 
                 } else {
-                    items += i + ".@" + add + "@" + seconds + " " + format + "\n";
+                    items += i-1 + ".@" + add + "@" + seconds + " " + format + "\n";
                     elementsInPlan++;
                 }
             } catch (Exception e){

@@ -85,10 +85,9 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.UpdateView
 
         if (currentItem.getText1().split(" ")[0].equals("NEWVER")) {
             holder.mTextView1.setText("NEW VERSION "+currentItem.getText3());
-            holder.mTextView1.setPadding(0,0,0,20);
-            holder.mTextView1.setGravity(Gravity.CENTER);
-            holder.mTextView2.setVisibility(View.GONE);
-            holder.mTextView3.setVisibility(View.GONE);
+            holder.mTextView2.setText("");
+            holder.mTextView3.setText("");
+
         } else {
 
             String versionName = BuildConfig.VERSION_NAME;

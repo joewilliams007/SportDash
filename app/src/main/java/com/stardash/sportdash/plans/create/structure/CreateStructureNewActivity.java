@@ -1,5 +1,6 @@
 package com.stardash.sportdash.plans.create.structure;
 
+import static com.stardash.sportdash.plans.run.inspect.InspectActivity.inspectingPlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.activity.OnBackPressedCallback;
@@ -58,6 +59,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        inspectingPlan = false;
         if (tappedItem){
             overridePendingTransition(R.anim.fadein_fast, R.anim.fadeout_fast);
         }

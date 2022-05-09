@@ -83,7 +83,7 @@ public class CommentsActivity extends AppCompatActivity {
 
                     try {
 
-            String s[] = StarsocketConnector.getMessage().split("NEXTMESSAGEIS:;");
+            String s[] = StarsocketConnector.getMessage().replaceAll(" undefined","").split("NEXTMESSAGEIS:;");
             String newS = s[s.length-1];
 
                 String ans = "";

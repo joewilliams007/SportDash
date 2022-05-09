@@ -76,29 +76,10 @@ public class RunPlanActivity extends AppCompatActivity {
             }
         }
       ismyplan();
-        listenRefresh();
 
     }
 
-    private void listenRefresh() {
-        SwipeRefreshLayout mySwipeRefreshLayout = findViewById(R.id.swiperefresh);
-        mySwipeRefreshLayout.setOnRefreshListener(
-                new SwipeRefreshLayout.OnRefreshListener() {
-                    @Override
-                    public void onRefresh() {
-                        vibrate();
-                        try {
-                            isRandom = true;
-                            Intent i = new Intent(getApplicationContext(), RunPlanActivity.class);
-                            startActivity(i);
-                        } catch (Exception e) {
-                            toast("no network");
-                        }
-                    }
-                }
-        );
 
-    }
 
     private void ismyplan() {
         try {
