@@ -80,7 +80,7 @@ public class CreatePlanActivity extends AppCompatActivity {
     private void generateResult() {
         TextView textViewDuration = findViewById(R.id.textViewLengthMin);
         TextView textViewSummary = findViewById(R.id.textViewSummary);
-        textViewSummary.setText(trainingPlan());
+        // textViewSummary.setText(trainingPlan());
         textViewDuration.setText(String.valueOf(trainingPlanDuration())+ " seconds or "+String.valueOf(trainingPlanDuration()/60)+ " minutes");
     }
 

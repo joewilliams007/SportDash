@@ -45,6 +45,7 @@ import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
+import com.stardash.sportdash.settings.account.TtsActivity;
 
 public class RunPlanActivity extends AppCompatActivity {
 
@@ -457,6 +458,12 @@ public class RunPlanActivity extends AppCompatActivity {
     public void inspectPlan(View view) {
         vibrate();
         Intent i = new Intent(this, InspectActivity.class);
+        startActivity(i);
+    }
+
+    public void ttsSettings(View view) {
+        vibrate();
+        Intent i = new Intent(this, TtsActivity.class);
         startActivity(i);
     }
 }

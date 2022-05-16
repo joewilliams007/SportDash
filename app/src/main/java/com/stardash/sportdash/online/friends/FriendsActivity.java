@@ -51,6 +51,7 @@ import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
+import com.stardash.sportdash.settings.SettingsActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -211,12 +212,14 @@ public class FriendsActivity extends AppCompatActivity {
 
             }
 
-            TextView textViewFollow = findViewById(R.id.textViewFollow);
+             TextView textViewFollow = findViewById(R.id.textViewFollow);
              TextView textViewMessage = findViewById(R.id.textViewMessage);
+             TextView textViewEdit = findViewById(R.id.textViewEdit);
             String idZ = textViewUserID.getText().toString().replace("#","");
             if(idZ.equals(Account.userid())){
                 textViewFollow.setVisibility(View.GONE);
                 textViewMessage.setVisibility(View.GONE);
+                textViewEdit.setVisibility(View.VISIBLE);
             }
 
             textViewXpToday.setText(xpToday + "/10.000 xp");
@@ -643,6 +646,12 @@ public class FriendsActivity extends AppCompatActivity {
             StarsocketConnector.sendMessage("followers " + id.replace("#",""));
         }
         Intent i = new Intent(this, FollowActivity.class);
+        startActivity(i);
+    }
+
+    public void editProfile(View view) {
+        vibrate();
+        Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
 }

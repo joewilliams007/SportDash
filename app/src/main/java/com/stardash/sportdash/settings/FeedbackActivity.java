@@ -52,7 +52,7 @@ public class FeedbackActivity extends AppCompatActivity {
                 EditText editTextTextMultiLine = findViewById(R.id.editTextTextMultiLine);
                 TextView textViewInfo = findViewById(R.id.textViewFeedbackInfo);
                 CheckBox checkBox = findViewById(R.id.checkBox);
-                checkBox.setVisibility(View.INVISIBLE);
+                checkBox.setVisibility(View.GONE);
                 textViewInfo.setText("please give a reason for reporting the plan");
                 editTextTextMultiLine.setText("report plan " + reportPlanId+"\nREASON: ");
                 reportingPlan = false;
@@ -87,8 +87,8 @@ public class FeedbackActivity extends AppCompatActivity {
                     int versionCode = BuildConfig.VERSION_CODE;
                     String versionName = BuildConfig.VERSION_NAME;
                     CheckBox checkBox = findViewById(R.id.checkBox);
+                    try {
                     if (checkBox.isChecked()) {
-
                         StarsocketConnector.sendMessage(
                                 "feedback "+Account.userid()+" \nFEEDBACK BY ID : #" + Account.userid()
                                         + "\nUSERNAME : " + Account.username()
@@ -140,6 +140,10 @@ public class FeedbackActivity extends AppCompatActivity {
                                         + "\nMESSAGE : " + editTextTextMultiLine.getText().toString()
                         );
                     }
+
+                    } catch (Exception e) {
+                        toast(".. no connection, try again later");
+                    }
                     toast("feedback submitted!");
                     TextView textViewSubmit = findViewById(R.id.textViewTopRight);
                     textViewSubmit.setText("H O M E");
@@ -148,7 +152,7 @@ public class FeedbackActivity extends AppCompatActivity {
 
 
                 } catch (Exception e) {
-                    toast(".. no connection, try again later");
+
                 }
             }
         }

@@ -34,6 +34,12 @@ public class RegisterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
+        try {
+            StarsocketConnector.sendMessage("hello , .. can you hear me?");
+        } catch (Exception e){
+            toast("no network");
+        }
     }
 
     public void openLogin(View view) {

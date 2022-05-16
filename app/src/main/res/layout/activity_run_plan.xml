@@ -464,6 +464,18 @@
         app:layout_constraintBottom_toTopOf="@+id/textViewStart"
         app:layout_constraintEnd_toStartOf="@+id/textViewComments" />
 
+    <TextView
+        android:id="@+id/textViewTts"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_green_background"
+        android:onClick="ttsSettings"
+        android:padding="10dp"
+        android:text="TTS"
+        android:textColor="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textViewStart" />
 
 
     <TextView
