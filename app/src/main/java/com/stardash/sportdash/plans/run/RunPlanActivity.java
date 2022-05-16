@@ -51,12 +51,8 @@ public class RunPlanActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
-
-
+        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_run_plan);
-
         try {
             if (isRandom) {
                 generatePlan();
@@ -76,10 +72,8 @@ public class RunPlanActivity extends AppCompatActivity {
             }
         }
       ismyplan();
-
+        viewPlan();
     }
-
-
 
     private void ismyplan() {
         try {
@@ -366,8 +360,21 @@ public class RunPlanActivity extends AppCompatActivity {
                 toast("no network");
             }
     }
-    public void getStars() {
+
+    public void viewPlan() {
+        try {
+            vibrate();
+            TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+            StarsocketConnector.sendMessage("viewPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#",""));
+
+        } catch (Exception e){
+
+        }
+    }
+
+    public void getStars() { // and views
         TextView textViewStarsAmount = findViewById(R.id.textViewStarsAmount);
+        TextView textViewViewsAmount = findViewById(R.id.textViewViewsAmount);
         try {
             TextView textViewPlanId = findViewById(R.id.textViewPlanId);
             StarsocketConnector.sendMessage("getStars "+textViewPlanId.getText().toString().replace("#",""));
@@ -379,7 +386,8 @@ public class RunPlanActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         String received = StarsocketConnector.getMessage();
-                        textViewStarsAmount.setText(received);
+                        textViewStarsAmount.setText(received.split("#")[0]);
+                        textViewViewsAmount.setText(received.split("#")[1]);
                     } catch (Exception e){
 
                     }

@@ -55,15 +55,60 @@
         android:id="@+id/textViewPlus"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textStyle="italic"
         android:layout_margin="10dp"
-        android:text="A D D  E L E M E N T"
-        android:padding="10dp"
+        android:background="@drawable/main_text_background_blue"
         android:onClick="addElement"
-        android:background="@drawable/main_text_background"
-        android:textColor="@color/projectLightBlue"
+        android:padding="10dp"
+        android:text="A D D  E L E M E N T"
+        android:textColor="@color/projectBlack"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDuplicate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_blue"
+        android:padding="10dp"
+        android:text="D U P L I C A T E  E L E M E N T"
+        android:textColor="@color/projectBlack"
+        android:textStyle="italic"
+        android:visibility="gone"
+        android:onClick="duplicateItem"
+        app:layout_constraintBottom_toTopOf="@+id/textViewPlus"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewUp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_blue"
+        android:onClick="scrollUp"
+        android:padding="10dp"
+        android:text="G O  U P"
+        android:visibility="gone"
+        android:textColor="@color/projectBlack"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewSubmit" />
+
+    <TextView
+        android:id="@+id/textViewDown"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_blue"
+        android:onClick="scrollDown"
+        android:padding="10dp"
+        android:text="G O  D O W N"
+        android:visibility="gone"
+        android:textColor="@color/projectBlack"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUp" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout

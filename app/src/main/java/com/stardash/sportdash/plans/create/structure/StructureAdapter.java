@@ -1,9 +1,11 @@
 package com.stardash.sportdash.plans.create.structure;
 
 import static android.content.Context.MODE_PRIVATE;
-import static com.stardash.sportdash.online.ProfileActivity.chatId;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
-import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_desc;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_name;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.e_time;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.tappedItem;
 import static com.stardash.sportdash.plans.run.inspect.InspectActivity.inspectingPlan;
@@ -33,6 +35,7 @@ import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.StructureViewHolder> {
 
@@ -91,6 +94,30 @@ public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.Stru
                 vibrate();
                 if (inspectingPlan) {
 
+                } else if(duplicateElement){
+                    SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
+                    SharedPreferences.Editor editor = settings.edit();
+                    int chosenID = Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""));
+                    editor.putInt("chooseId", chosenID).apply();
+                    tappedItem = true;
+                    editItem = true;
+
+                    String name = settings.getString(chosenID+" name", "");
+                    String description = settings.getString(chosenID+" description", "");
+                    String seconds = settings.getString(chosenID+" seconds", "0");
+
+                    e_desc = description;
+                    e_name = name;
+                    e_time = seconds;
+
+                    try {
+                        vibrate();
+                        Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
+                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MyApplication.getAppContext().startActivity(i);
+                    } catch (Exception e) {
+
+                    }
                 } else {
                     SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                     SharedPreferences.Editor editor = settings.edit();

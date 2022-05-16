@@ -1,6 +1,6 @@
 package com.stardash.sportdash.online.chat;
 
-import static com.stardash.sportdash.online.ProfileActivity.chatId;
+import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.ClipData;

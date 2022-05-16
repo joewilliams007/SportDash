@@ -8,48 +8,37 @@
     android:id="@+id/main"
     tools:context=".settings.FeedbackActivity">
 
-
     <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="F Ξ Ξ D B Λ C K"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/projectGreen"
+        android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewTopRight"
+        android:id="@+id/textViewFeedback"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="S U B M I T"
-        android:onClick="sendFeedback"
-        android:textColor="@color/projectLightBlue"
+        android:layout_marginEnd="84dp"
+        android:text="Feedback"
+        android:textColor="@color/black"
+        android:textSize="60dp"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewTopLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:onClick="goHome"
-        android:text="C Λ N C Ξ L"
-        android:textColor="@color/projectRed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
     <TextView
         android:id="@+id/textViewFeedbackInfo"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Feedback, Error report and Support questions can be send here.
-\nIf there are any feature requests, feel free to recommend them!\nYour personal ID will be send, in order to reply to your questions.
-\nPlease also send appearance issues!"
+        android:text="Feedback\nBugs\nReports\n\nAccount id will be sent."
         android:padding="10dp"
         android:background="@drawable/main_text_background"
         android:textColor="@color/white"
@@ -72,7 +61,7 @@
         android:textColorHint="@color/projectGrey"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
 
     <TextView
         android:id="@+id/textViewCustomToast"
@@ -102,5 +91,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFeedbackInfo" />
+
+    <TextView
+        android:id="@+id/textViewSettings"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="sendFeedback"
+        android:padding="10dp"
+        android:text="submit feedback"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <ImageView
+        android:id="@+id/imageViewSetting"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
+        app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

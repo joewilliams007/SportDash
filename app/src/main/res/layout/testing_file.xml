@@ -1,65 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewSharePage"
-        android:layout_width="0dp"
-        android:layout_height="120dp"
-        android:background="@drawable/main_text_background_track_white"
-        android:onClick="doNothing1"
-        android:padding="20dp"
-        android:elevation="4dp"
-        android:text="c a n c e l"
-        android:gravity="top|right"
-        android:textColor="@color/projectRed"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewCopyIdShare"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:elevation="4dp"
-        android:onClick="copyTextPlanIdLink"
-        android:padding="10dp"
-        android:text="C O P Y  L I N K"
-        android:textColor="@color/white"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewSharePage" />
-
-    <TextView
-        android:id="@+id/textViewCopyIdShare1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:elevation="4dp"
-        android:onClick="copyPlanIdLink"
-        android:padding="10dp"
-        android:text="S H A R E  L I N K"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewCopyIdShare3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:elevation="4dp"
-        android:onClick="copyPlanId"
-        android:padding="10dp"
-        android:text="S H A R E  T O  C H A T"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

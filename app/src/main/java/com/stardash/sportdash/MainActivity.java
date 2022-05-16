@@ -3,6 +3,7 @@ package com.stardash.sportdash;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.settings.app.vibrate;
@@ -16,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -65,6 +67,8 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,13 +78,14 @@ public class MainActivity extends AppCompatActivity {
         isInChat = false;
         tappedOnSearchItem = false;
         editItem = false;
+        duplicateElement = false;
 
         try {
             StarsocketConnector.sendMessage("boost");
         } catch (Exception e){
 
         }
-        setProfilePicture(); // set picture
+
         Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
         checkDeepLink(); // check if app was opened with a link
         checkServerStatus(); // is server online make github request
@@ -124,6 +129,7 @@ public class MainActivity extends AppCompatActivity {
         isShopNew();
 
     }
+    
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void isShopNew() {
@@ -164,9 +170,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     String inbox = StarsocketConnector.getMessage();
-                    if (inbox.equals("invalid_ip")){
-                        getInbox();
-                    } else if (inbox.length()>12){
+                    if (inbox.length()>12){
                         textView.setVisibility(View.VISIBLE);
 
                         char someChar = '#';
@@ -178,6 +182,9 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
                         textView.setText(" "+String.valueOf(count)+" ");
+                        if (count>0){
+                            toast("new messages!");
+                        }
                     }
                 }
             }, 500);
@@ -318,14 +325,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setProfilePicture() {
-        String picturePath = PreferenceManager.getDefaultSharedPreferences(this).getString("picturePath", "");
-        if(!picturePath.equals(""))
-        {
-            ImageView imageView = (ImageView) findViewById(R.id.imageViewSmallIcon);
-            imageView.setImageBitmap(BitmapFactory.decodeFile(picturePath));
-        }
-    }
+
 
     public void openSettings(View view) {
         vibrate();

@@ -3,13 +3,13 @@ package com.stardash.sportdash.online.friends;
 
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
-import static com.stardash.sportdash.online.ProfileActivity.chatId;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
@@ -43,6 +43,7 @@ import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
 import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
 import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.online.friends.follows.FollowActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.online.chat.ChatActivity;
@@ -57,7 +58,8 @@ import java.util.Locale;
 public class FriendsActivity extends AppCompatActivity {
     public static Boolean tappedOnSearchItem;
     public static String tappedOnSearchItemId;
-
+    public Boolean isFollowProcess = false;
+    public String theId;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +69,8 @@ public class FriendsActivity extends AppCompatActivity {
         isMyPlan = false; // so that the discard btn in active plan is gone
         isRandom = false;
         settingShowHideSearch = false;
+
+
 
         TextView textViewUrId = findViewById(R.id.textViewMe);
         textViewUrId.setText("#"+ Account.userid());
@@ -95,14 +99,21 @@ public class FriendsActivity extends AppCompatActivity {
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
+
+            TextView textViewName = findViewById(R.id.textViewUsername);
+            TextView textViewAbout = findViewById(R.id.textViewAbout);
+            TextView textViewPlans = findViewById(R.id.textViewPlans);
+            TextView textViewDate = findViewById(R.id.textViewDate);
+            textViewDate.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
+            textViewAbout.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
+            textViewPlans.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
+            textViewName.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
         }
 
-        String theId;
+
         if (tappedOnSearchItem){
             theId = tappedOnSearchItemId;
             tappedOnSearchItem = false;
@@ -134,36 +145,45 @@ public class FriendsActivity extends AppCompatActivity {
     private void getUserProfile() {
 
             String profile = StarsocketConnector.getMessage();
-
-            String id = profile.split(" ", 15)[0];
-            String username = profile.split(" ", 15)[1];
-            String xp = profile.split(" ", 15)[2];
-            String xpToday = profile.split(" ", 15)[3];
-            String xpWeek = profile.split(" ", 15)[4];
-            String age = profile.split(" ", 15)[5];
-            String weight = profile.split(" ", 15)[6];
-            String style = profile.split(" ", 15)[7];
-            String accountCreated = profile.split(" ", 15)[8];
+            String id = profile.split("ROFILE_OF_USER", 15)[0];
+            String username = profile.split("ROFILE_OF_USER", 15)[1];
+            String xp = profile.split("ROFILE_OF_USER", 15)[2];
+            String xpToday = profile.split("ROFILE_OF_USER", 15)[3];
+            String xpWeek = profile.split("ROFILE_OF_USER", 15)[4];
+            String age = profile.split("ROFILE_OF_USER", 15)[5];
+            String weight = profile.split("ROFILE_OF_USER", 15)[6];
+            String style = profile.split("ROFILE_OF_USER", 15)[7];
+            String accountCreated = profile.split("ROFILE_OF_USER", 15)[8];
+            String follows = profile.split("ROFILE_OF_USER", 15)[9];
+            String followers = profile.split("ROFILE_OF_USER", 15)[10];
+            String bio = profile.split("ROFILE_OF_USER", 15)[11];
 
             TextView textViewDate = findViewById(R.id.textViewDate);
             textViewDate.setText("StarKing/Queen since "+accountCreated);
-
             Account.setFriend(0, "#" + id + " " + username);
-
             TextView textViewUsername = findViewById(R.id.textViewMeUsername);
             textViewUsername.animate().translationXBy(-10f).setDuration(1000);
-
             TextView textViewUsername1 = findViewById(R.id.textViewUsername);
             TextView textViewUserID = findViewById(R.id.textViewMe);
             TextView textViewLevel = findViewById(R.id.textViewLevel);
             TextView textViewStyle = findViewById(R.id.textViewStyle);
             textViewStyle.animate().translationYBy(40f).setDuration(1000);
             textViewStyle.setText(style);
-            // textViewStyle.setText("^-^");
-
             TextView textViewXp = findViewById(R.id.textViewProgress);
             TextView textViewXpToday = findViewById(R.id.textViewProgressTd);
             TextView textViewXpWeek = findViewById(R.id.textViewProgressWk);
+            TextView textViewFollows = findViewById(R.id.textViewFollowingNr);
+            TextView textViewFollowers = findViewById(R.id.textViewFollowersNr);
+            TextView textViewBio = findViewById(R.id.textViewBio);
+
+            if(bio.equals("null")) {
+                textViewBio.setVisibility(View.GONE);
+            } else {
+                textViewBio.setText(bio);
+            }
+
+            textViewFollowers.setText(follows);
+            textViewFollows.setText(followers);
 
             int level = 100;
             try {
@@ -191,24 +211,64 @@ public class FriendsActivity extends AppCompatActivity {
 
             }
 
+            TextView textViewFollow = findViewById(R.id.textViewFollow);
+             TextView textViewMessage = findViewById(R.id.textViewMessage);
+            String idZ = textViewUserID.getText().toString().replace("#","");
+            if(idZ.equals(Account.userid())){
+                textViewFollow.setVisibility(View.GONE);
+                textViewMessage.setVisibility(View.GONE);
+            }
+
             textViewXpToday.setText(xpToday + "/10.000 xp");
             textViewXpWeek.setText(xpWeek + "/70.000 xp");
-
-            loadPlans(id);
-
+            checkFollow(id);
     }
 
+    private void checkFollow(String id) {
+        try {
+            TextView textViewId = findViewById(R.id.textViewMe);
+            TextView textViewFollow = findViewById(R.id.textViewFollow);
+            try {
+
+                StarsocketConnector.sendMessage("checkFollow " + Account.userid() +" "+ textViewId.getText().toString().split("#")[1]);
+                textViewFollow.setText("loading");
+
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String isFollow = StarsocketConnector.getMessage();
+                        if (isFollow.length()>10) {
+                            textViewFollow.setText("follow");
+
+                        } else {
+                            textViewFollow.setText("unfollow");
+                        }
+                        if(isFollowProcess){
+
+                        } else {
+                            loadPlans(id);
+                        }
+                    }
+                }, 200);
+
+            } catch (Exception e){
+            }
+        } catch (Exception e){
+        }
+
+    }
 
 
     public void onResume() {
         super.onResume();
         isInChat = false;
     }
-    @Override
+   /* @Override
     public void onBackPressed() {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
-    }
+    }*/
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -289,19 +349,22 @@ public class FriendsActivity extends AppCompatActivity {
 
     Boolean settingShowHideSearch;
     public void showSearch(View view) {
-        if (!settingShowHideSearch) {
-            settingShowHideSearch = true;
-            vibrate();
-            ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
-            searchLayout.setVisibility(View.VISIBLE);
-            searchLayout.animate().translationYBy(20f).setDuration(1000);
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    settingShowHideSearch = false;
-                }
-            }, 1000);
+        ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
+        if (searchLayout.getVisibility() != View.VISIBLE) {
+            if (!settingShowHideSearch) {
+                settingShowHideSearch = true;
+                vibrate();
+
+                searchLayout.setVisibility(View.VISIBLE);
+                searchLayout.animate().translationYBy(20f).setDuration(1000);
+                final Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        settingShowHideSearch = false;
+                    }
+                }, 1000);
+            }
         }
     }
 
@@ -330,6 +393,7 @@ public class FriendsActivity extends AppCompatActivity {
     public static String chatUsername;
     public static String chatId;
     public void openChat(View view) {
+
         vibrate();
         TextView textViewUsername = findViewById(R.id.textViewUsername);
         TextView textViewUserID = findViewById(R.id.textViewMe);
@@ -475,39 +539,110 @@ public class FriendsActivity extends AppCompatActivity {
 
     private Boolean rotating = false;
     public void rotate(View view) {
-        if (!rotating) {
-            rotating = true;
-            TextView textView = (TextView) findViewById(R.id.textViewStyle);
+        if(!isFollowProcess) {
+            if (!rotating) {
+                rotating = true;
+                TextView textView = (TextView) findViewById(R.id.textViewStyle);
 
-            int d = 5;
+                int d = 5;
 
-            RotateAnimation rotate = new RotateAnimation(0, d, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-            rotate.setDuration(250);
-            rotate.setInterpolator(new LinearInterpolator());
-            textView.startAnimation(rotate);
-            textView.animate().translationYBy(-10f).setDuration(1000);
+                RotateAnimation rotate = new RotateAnimation(0, d, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                rotate.setDuration(250);
+                rotate.setInterpolator(new LinearInterpolator());
+                textView.startAnimation(rotate);
+                textView.animate().translationYBy(-10f).setDuration(1000);
 
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    RotateAnimation rotate = new RotateAnimation(d, -d, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    rotate.setDuration(250);
-                    rotate.setInterpolator(new LinearInterpolator());
-                    textView.startAnimation(rotate);
-                }
-            }, 250);
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    RotateAnimation rotate = new RotateAnimation(-d, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
-                    rotate.setDuration(250);
-                    rotate.setInterpolator(new LinearInterpolator());
-                    textView.startAnimation(rotate);
-                    textView.animate().translationYBy(10f).setDuration(500);
-                    rotating = false;
-                }
-            }, 500);
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        RotateAnimation rotate = new RotateAnimation(d, -d, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                        rotate.setDuration(250);
+                        rotate.setInterpolator(new LinearInterpolator());
+                        textView.startAnimation(rotate);
+                    }
+                }, 250);
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        RotateAnimation rotate = new RotateAnimation(-d, 0, Animation.RELATIVE_TO_SELF, 0.5f, Animation.RELATIVE_TO_SELF, 0.5f);
+                        rotate.setDuration(250);
+                        rotate.setInterpolator(new LinearInterpolator());
+                        textView.startAnimation(rotate);
+                        textView.animate().translationYBy(10f).setDuration(500);
+                        rotating = false;
+                    }
+                }, 500);
+            }
         }
+    }
+
+    public void follow(View view) {
+        isFollowProcess = true;
+        vibrate();
+        try {
+            TextView textViewId = findViewById(R.id.textViewMe);
+            TextView textViewFollow = findViewById(R.id.textViewFollow);
+            TextView textViewUsername = findViewById(R.id.textViewUsername);
+            try {
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+                StarsocketConnector.sendMessage("follow " + Account.userid() +" "+ textViewId.getText().toString().split("#")[1]+" "+Account.username()+" "+ textViewUsername.getText().toString());
+
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        textViewFollow.setText("following");
+                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
+                    }
+                }, 100);
+
+            } catch (Exception e){
+                toast("no network");
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
+            }
+        } catch (Exception e){
+            toast("error");
+            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
+        }
+        try {
+            StarsocketConnector.sendMessage("getProfile " + theId);
+            try {
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        getUserProfile();
+                    }
+                }, 100);
+            } catch (Exception e) {
+                toast("no network");
+            }
+        } catch (Exception e) {
+            toast("no network");
+        }
+    }
+
+    public void openFollowers(View view) {
+        followPage(false);
+    }
+
+    public void openFollowing(View view) {
+        followPage(true);
+    }
+
+    public void followPage(Boolean b){
+        TextView textViewUserID = findViewById(R.id.textViewMe);
+        String id = textViewUserID.getText().toString();
+
+
+        vibrate();
+        if(b){
+            StarsocketConnector.sendMessage("follows " + id.replace("#",""));
+        } else {
+            StarsocketConnector.sendMessage("followers " + id.replace("#",""));
+        }
+        Intent i = new Intent(this, FollowActivity.class);
+        startActivity(i);
     }
 }

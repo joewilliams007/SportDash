@@ -12,8 +12,8 @@
         android:id="@+id/textViewCHatInbox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="I N B O X"
-        android:textColor="@color/black"
+        android:text="N O T I F I C A T I O N S"
+        android:textColor="@color/projectGreen"
         android:layout_margin="10dp"
         android:padding="10dp"
         android:textSize="20dp"
@@ -21,32 +21,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/inbox_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:scrollbars="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCHatInbox">
+        app:layout_constraintTop_toBottomOf="@+id/textViewCHatInbox" />
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/inboxChat"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:padding="10dp"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 
     <TextView
         android:id="@+id/textViewCustomToast"
@@ -64,15 +48,30 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewClear"
+        android:id="@+id/textViewRefresh"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="CLEAR INBOX"
-        android:onClick="clearInbox"
-        android:padding="10dp"
         android:layout_margin="10dp"
-        android:textColor="@color/white"
-        android:background="@drawable/main_text_background"
+        android:background="@drawable/track_green_background"
+        android:onClick="refreshInbox"
+        android:padding="10dp"
+        android:elevation="1dp"
+        android:text="REFRESH"
+        android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewClear"
+        android:elevation="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/track_red_background"
+        android:onClick="clearInbox"
+        android:padding="10dp"
+        android:text="CLEAR NOTIFICATIONS"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

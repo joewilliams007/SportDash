@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.stardash.sportdash">
 
     <uses-permission android:name="android.permission.INTERNET" />
@@ -16,6 +17,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".settings.account.GeneralActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.account.UpdateSettingsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.account.TtsActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.account.AccountActivity"
+            android:exported="false" />
+        <activity
+            android:name=".online.friends.follows.FollowActivity"
+            android:exported="false" />
+        <activity
             android:name=".plans.run.inspect.InspectActivity"
             android:exported="false" />
         <activity
@@ -27,13 +43,14 @@
         <activity
             android:name=".plans.run.SearchPlanActivity"
             android:exported="false"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait"
+            tools:ignore="LockedOrientationActivity" />
         <activity
-            android:name=".settings.ChatBackgroundActivity"
+            android:name=".settings.chat.ChatBackgroundActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".settings.ChatSettingsActivity"
+            android:name=".settings.chat.ChatSettingsActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

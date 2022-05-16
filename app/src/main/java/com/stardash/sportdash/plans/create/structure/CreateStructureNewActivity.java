@@ -24,6 +24,7 @@ import android.transition.TransitionManager;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.AbsListView;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -54,6 +55,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     static Boolean tappedItem = false;
     int elementsInPlan = 0;
     static public Boolean editItem;
+    static public Boolean duplicateElement;
     String zeFormat;
 
     @Override
@@ -95,6 +97,11 @@ public class CreateStructureNewActivity extends AppCompatActivity {
                 editTextDescription.setText(description);
                 editTextTime.setText(seconds);
 
+
+                if(duplicateElement){
+                    submitFinalElement();
+                }
+
         }
         EditText editTextName = findViewById(R.id.editTextName);
         EditText editTextDescription = findViewById(R.id.editTextDescription);
@@ -108,6 +115,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             View elementView = findViewById(R.id.elementLayout);
             elementView.setVisibility(View.VISIBLE);
         }
+
 
     }
 
@@ -134,6 +142,17 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         }
 
         createList(items);
+        if(elementsInPlan>0){
+            TextView textViewDuplicate = findViewById(R.id.textViewDuplicate);
+            textViewDuplicate.setVisibility(View.VISIBLE);
+        }
+
+        if(elementsInPlan>5){
+            TextView textViewUp = findViewById(R.id.textViewUp);
+            TextView textViewDown = findViewById(R.id.textViewDown);
+            textViewUp.setVisibility(View.VISIBLE);
+            textViewDown.setVisibility(View.VISIBLE);
+        }
 
     }
 
@@ -169,8 +188,22 @@ public class CreateStructureNewActivity extends AppCompatActivity {
 
     public void addElement(View view) {
         vibrate();
-        if (elementsInPlan>99 ){
+        if (elementsInPlan>99 ) {
             toast("100 elements is the maximum !");
+        } else if(duplicateElement) {
+            duplicateElement = false;
+            zeFormat = "seconds";
+            View elementView = findViewById(R.id.elementLayout);
+            elementView.setVisibility(View.VISIBLE);
+            editItem = false;
+
+            EditText editTextName = findViewById(R.id.editTextName);
+            EditText editTextDescription = findViewById(R.id.editTextDescription);
+            EditText editTextTime = findViewById(R.id.editTextTime);
+
+            editTextName.setText(e_name);
+            editTextDescription.setText(e_desc);
+            editTextTime.setText(e_time);
         } else {
             zeFormat = "seconds";
             View elementView = findViewById(R.id.elementLayout);
@@ -189,6 +222,10 @@ public class CreateStructureNewActivity extends AppCompatActivity {
 
     public void submitElement(View view) {
         vibrate();
+       submitFinalElement();
+    }
+
+    private void submitFinalElement() {
         View elementView = findViewById(R.id.elementLayout);
         elementView.setVisibility(View.GONE);
 
@@ -214,7 +251,10 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             SharedPreferences.Editor editor = settings.edit();
 
             String id;
-            if (editItem) {
+            if (duplicateElement){
+                id = String.valueOf(elementsInPlan+1);
+                duplicateElement = false;
+            } else if (editItem) {
                 id = Integer.toString(chosenId());
             } else {
                 id = String.valueOf(elementsInPlan+1);
@@ -225,6 +265,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             editor.putString(id + " seconds", seconds).apply();
             editor.putString(id + " format", zeFormat).apply();
             buildPage();
+            mRecyclerView.scrollToPosition(mStructureList.size() - 1);
         }
     }
 
@@ -412,8 +453,12 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     }
 
     public void finish(View view) {
-        Intent i = new Intent(this, CreatePlanActivity.class);
-        startActivity(i);
+        if (elementsInPlan<5){
+            toast("required elements: 5");
+        } else {
+            Intent i = new Intent(this, CreatePlanActivity.class);
+            startActivity(i);
+        }
         vibrate();
     }
 
@@ -431,11 +476,26 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             editor.putString(i+ " seconds","");
         }
 
-        editor.commit();
+        editor.apply();
 
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
         vibrate();
+    }
+
+    public void duplicateItem(View view) {
+        vibrate();
+        toast("tap element to duplicate");
+        duplicateElement = true;
+    }
+
+    public void scrollDown(View view) {
+        vibrate();
+        mRecyclerView.scrollToPosition(mStructureList.size() - 1);
+    }
+    public void scrollUp(View view) {
+        vibrate();
+        mRecyclerView.scrollToPosition(0);
     }
 
 }

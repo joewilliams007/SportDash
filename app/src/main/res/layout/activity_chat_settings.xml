@@ -6,36 +6,69 @@
     android:layout_height="match_parent"
     android:background="@color/projectGrey"
     android:id="@+id/main"
-    tools:context=".settings.ChatSettingsActivity">
+    tools:context=".settings.chat.ChatSettingsActivity">
 
     <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:elevation="2dp"
-        android:padding="2dp"
-        android:text="C H Λ T  S Ξ T T I N G S"
-        android:textColor="@color/projectLightBlue"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/projectGreen"
+        android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/textViewApp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="Chat"
+        android:textColor="@color/black"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+
+    <TextView
+        android:id="@+id/textViewBg"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:gravity="left"
-        android:onClick="openBackgroundStng"
+        android:gravity="center"
+        android:onClick="openBackground"
         android:padding="10dp"
-        android:text="Background Image"
-        android:textColor="@color/white"
-        android:textStyle="italic"
+        android:text="background image"
+        android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
 
+    <ImageView
+        android:id="@+id/imageViewSetting"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBg"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBg"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewAbout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:text="StarChat Settings"
+        android:textColor="@color/white"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewCustomToast"

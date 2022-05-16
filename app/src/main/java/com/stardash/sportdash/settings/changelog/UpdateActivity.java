@@ -1,5 +1,7 @@
 package com.stardash.sportdash.settings.changelog;
 
+import static com.stardash.sportdash.settings.app.vibrate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -101,14 +103,7 @@ public class UpdateActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.textViewFuture)).setVisibility(View.VISIBLE);
     }
 
-    public void vibrate(){
-        Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            v.vibrate(VibrationEffect.createOneShot(100, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            v.vibrate(100);
-        }
-    }
+
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);

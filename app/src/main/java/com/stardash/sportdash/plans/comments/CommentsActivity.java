@@ -98,7 +98,7 @@ public class CommentsActivity extends AppCompatActivity {
 
                 for (String element : chat) {
                     try {
-                        commentsList.add(new CommentsItem(element.split("@")[1], element.split("@")[2], element.split("@")[0]));
+                        commentsList.add(new CommentsItem(element.split("@")[0], element.split("@")[1], element.split("@")[2]));
                     } catch (Exception e) {
 
                     }

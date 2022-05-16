@@ -6,6 +6,7 @@ import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.content.Intent;
 import android.graphics.Color;
+import android.view.DragEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,6 +23,7 @@ import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.LeaderboardViewHolder> {
 
@@ -86,11 +88,12 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
             }
         });
 
+
         if (currentItem.getText1().contains("1. place")||currentItem.getText1().contains("2. place")||currentItem.getText1().contains("3. place")) {
             holder.mTextView1.setTextColor(Color.parseColor("#FFFDD835"));
         }
-    }
 
+    }
 
 
 

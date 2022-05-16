@@ -27,6 +27,7 @@ import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.plans.create.CreateStructureActivity;
 
 public class PlanActivity extends AppCompatActivity {
+    public static Boolean isMyPlan = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,49 +53,23 @@ public class PlanActivity extends AppCompatActivity {
         }
     }
 
-    public static Boolean isMyPlan = true;
-
     private void setPlanNames() {
         TextView textViewNamePlan1 = findViewById(R.id.textViewNamePlan1);
         TextView textViewNamePlan2 = findViewById(R.id.textViewNamePlan2);
         TextView textViewNamePlan3 = findViewById(R.id.textViewNamePlan3);
         TextView textViewNamePlan4 = findViewById(R.id.textViewNamePlan4);
         TextView textViewNamePlan5 = findViewById(R.id.textViewNamePlan5);
-        try {
-            textViewNamePlan1.setText(Account.plan(1).split("\n", 5)[2]);
-        } catch (Exception e){
-
-        }
-        try {
-        textViewNamePlan2.setText(Account.plan(2).split("\n",5)[2]);
-        } catch (Exception e){
-
-        }
-        try {
-        textViewNamePlan3.setText(Account.plan(3).split("\n",5)[2]);
-        } catch (Exception e){
-
-        }
-        try {
-        textViewNamePlan4.setText(Account.plan(4).split("\n",5)[2]);
-        } catch (Exception e){
-
-        }
-        try {
-        textViewNamePlan5.setText(Account.plan(5).split("\n",5)[2]);
-        } catch (Exception e){
-
-        }
-
+        try { textViewNamePlan1.setText(Account.plan(1).split("\n", 5)[2]); } catch (Exception e){}
+        try { textViewNamePlan2.setText(Account.plan(2).split("\n",5)[2]); } catch (Exception e){}
+        try { textViewNamePlan3.setText(Account.plan(3).split("\n",5)[2]); } catch (Exception e){ }
+        try { textViewNamePlan4.setText(Account.plan(4).split("\n",5)[2]); } catch (Exception e){}
+        try { textViewNamePlan5.setText(Account.plan(5).split("\n",5)[2]); } catch (Exception e){}
     }
-
-
 
     public void createPlan(View view) {
         Intent i = new Intent(this, CreateStructureNewActivity.class);
         startActivity(i);
     }
-
 
     private void runPlan(int plan) {
         vibrate();
@@ -117,9 +92,6 @@ public class PlanActivity extends AppCompatActivity {
             Intent i = new Intent(this, RunPlanActivity.class);
             startActivity(i);
         }
-
-
-
     }
 
     @Override
@@ -133,7 +105,7 @@ public class PlanActivity extends AppCompatActivity {
         if (Account.isCreate()){
             runPlan(1);
         } else if (textViewNamePlan.getText().toString().equals("EMPTY PLAN")){
-            Intent i = new Intent(this, CreateStructureActivity.class);
+            Intent i = new Intent(this, CreateStructureNewActivity.class);
             startActivity(i);
         } else {
             runPlan(1);
@@ -145,7 +117,7 @@ public class PlanActivity extends AppCompatActivity {
         if (Account.isCreate()){
             runPlan(2);
         } else if (textViewNamePlan.getText().toString().equals("EMPTY PLAN")){
-            Intent i = new Intent(this, CreateStructureActivity.class);
+            Intent i = new Intent(this, CreateStructureNewActivity.class);
             startActivity(i);
         } else {
             runPlan(2);
@@ -156,7 +128,7 @@ public class PlanActivity extends AppCompatActivity {
         if (Account.isCreate()){
             runPlan(3);
         } else if (textViewNamePlan.getText().toString().equals("EMPTY PLAN")){
-            Intent i = new Intent(this, CreateStructureActivity.class);
+            Intent i = new Intent(this, CreateStructureNewActivity.class);
             startActivity(i);
         } else {
             runPlan(3);
@@ -167,7 +139,7 @@ public class PlanActivity extends AppCompatActivity {
         if (Account.isCreate()){
             runPlan(4);
         } else if (textViewNamePlan.getText().toString().equals("EMPTY PLAN")){
-            Intent i = new Intent(this, CreateStructureActivity.class);
+            Intent i = new Intent(this,CreateStructureNewActivity.class);
             startActivity(i);
         } else {
             runPlan(4);
@@ -178,14 +150,12 @@ public class PlanActivity extends AppCompatActivity {
         if (Account.isCreate()){
             runPlan(5);
         } else if (textViewNamePlan.getText().toString().equals("EMPTY PLAN")){
-            Intent i = new Intent(this, CreateStructureActivity.class);
+            Intent i = new Intent(this, CreateStructureNewActivity.class);
             startActivity(i);
         } else {
             runPlan(5);
         }
     }
-
-
 
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
@@ -200,48 +170,6 @@ public class PlanActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    public void downloadPlans(View view) {
-        try {
-            toast("starting download .");
-            StarsocketConnector.sendMessage("downloadPlans " + Account.userid());
-            String received_plans = StarsocketConnector.getMessage().toString();
-
-            SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-            SharedPreferences.Editor editor = settings.edit();
-
-            String plan1 = received_plans.split("##########", 9)[1];
-            String plan2 = received_plans.split("##########", 9)[2];
-            String plan3 = received_plans.split("##########", 9)[3];
-            String plan4 = received_plans.split("##########", 9)[4];
-            String plan5 = received_plans.split("##########", 9)[5];
-
-            editor.putString("1 plan", String.valueOf(plan1)).apply();
-            editor.putString("2 plan", String.valueOf(plan2)).apply();
-            editor.putString("3 plan", String.valueOf(plan3)).apply();
-            editor.putString("4 plan", String.valueOf(plan4)).apply();
-            editor.putString("5 plan", String.valueOf(plan5)).apply();
-
-
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    toast("setting training plans ..");
-                }
-            }, 5000);
-
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    toast("success!");
-                    setPlanNames();
-                }
-            }, 10000);
-        } catch (Exception e){
-            toast("no network");
-        }
-    }
-
     public void uploadPlan(int planId) { // upload plan after user created it
         try {
         toast("uploading ...");
@@ -250,8 +178,6 @@ public class PlanActivity extends AppCompatActivity {
         } else {
             StarsocketConnector.sendMessage("upload_plans "+Account.userid()+" "+planId+" "+planId()+" ##########"+Account.plan(planId));
         }
-
-
             StarsocketConnector.getMessage();
             toast("success uploading plan of id "+String.valueOf(planId));
         } catch (Exception e){

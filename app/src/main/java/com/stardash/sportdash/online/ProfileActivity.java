@@ -307,15 +307,7 @@ public class ProfileActivity extends AppCompatActivity {
         super.onResume();
         isInChat = false;
     }
-    public static String chatId;
 
-    public void openChat(View view) {
-        vibrate();
-        TextView textViewUsername = findViewById(R.id.textViewUsername);
-        TextView textViewUserID = findViewById(R.id.textViewUserID);
-        chatId = textViewUserID.getText().toString().replace("#","");
-        Intent i = new Intent(this, ChatActivity.class);
-        startActivity(i);
-    }
+
 
 }

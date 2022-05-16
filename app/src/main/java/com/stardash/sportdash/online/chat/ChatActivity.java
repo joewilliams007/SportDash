@@ -1,7 +1,7 @@
 package com.stardash.sportdash.online.chat;
 
 import static android.graphics.BitmapFactory.*;
-import static com.stardash.sportdash.online.ProfileActivity.chatId;
+import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatUsername;
 import static com.stardash.sportdash.settings.app.vibrate;
 
@@ -43,6 +43,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
@@ -143,7 +144,7 @@ public class ChatActivity extends AppCompatActivity {
     static String olds;
     private void setRecyclerView() {
        try {
-        StarsocketConnector.sendMessage("getChat "+Account.userid()+" "+chatId);
+        StarsocketConnector.sendMessage("getChat "+Account.userid()+" "+ chatId);
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
             @Override

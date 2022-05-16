@@ -1,4 +1,4 @@
-package com.stardash.sportdash.settings;
+package com.stardash.sportdash.settings.chat;
 
 import static android.graphics.BitmapFactory.decodeFile;
 
@@ -29,7 +29,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.online.chat.ChatActivity;
+import com.stardash.sportdash.settings.Account;
 
 public class ChatBackgroundActivity extends AppCompatActivity {
 
@@ -39,14 +39,15 @@ public class ChatBackgroundActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat_background);
         setBg();
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.parseColor("#212121"));
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+            Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#000000"));
+            window.setStatusBarColor(Color.BLACK);
+
+            TextView textViewApp = findViewById(R.id.textViewApp);
+            textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
         }
     }
 

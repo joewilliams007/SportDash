@@ -8,46 +8,86 @@
     android:id="@+id/main"
     tools:context=".settings.AboutActivity">
 
+
     <TextView
-        android:id="@+id/textViewAbout"
+        android:elevation="2dp"
+        android:padding="2dp"
+        android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="S P O R T D Λ S H"
         android:layout_margin="10dp"
-        android:visibility="invisible"
-        android:gravity="center"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/projectGreen"
+        android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewAppAbout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:text="About"
+        android:textColor="@color/black"
+        android:textSize="60dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewInsta"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Instagram"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAppAbout" />
+
+    <TextView
+        android:id="@+id/textViewTwitter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="Twitter"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewInsta" />
+
+    <TextView
+        android:id="@+id/textViewSnap"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="SnapChat"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTwitter" />
 
 
     <ScrollView
         android:id="@+id/scrollView5"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageViewInsta">
+        app:layout_constraintTop_toBottomOf="@+id/textViewSnap">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/textViewApp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginStart="8dp"
-                android:text="SportDash"
-                android:textColor="@color/black"
-                android:textSize="50dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewSportDash"
@@ -61,46 +101,46 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+                tools:layout_editor_absoluteY="86dp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
     <ImageView
         android:id="@+id/imageViewInsta"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
         android:onClick="soon"
-        app:layout_constraintEnd_toStartOf="@+id/textViewAbout"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout"
-        app:srcCompat="@drawable/insta" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewInsta"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewInsta"
+        app:srcCompat="@drawable/arrow" />
+
 
     <ImageView
         android:id="@+id/imageViewTwitter"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
         android:onClick="soon"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewInsta"
-        app:layout_constraintEnd_toStartOf="@+id/imageViewSnap"
-        app:layout_constraintStart_toEndOf="@+id/imageViewInsta"
-        app:layout_constraintTop_toTopOf="@+id/imageViewInsta"
-        app:srcCompat="@drawable/twitter" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTwitter"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewInsta"
+        app:layout_constraintStart_toStartOf="@+id/imageViewInsta"
+        app:layout_constraintTop_toTopOf="@+id/textViewTwitter"
+        app:srcCompat="@drawable/arrow" />
 
     <ImageView
         android:id="@+id/imageViewSnap"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
         android:onClick="soon"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageViewInsta"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/textViewAbout"
-        app:layout_constraintTop_toTopOf="@+id/imageViewInsta"
-        app:srcCompat="@drawable/snap" />
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSnap"
+        app:layout_constraintEnd_toEndOf="@+id/imageViewTwitter"
+        app:layout_constraintStart_toStartOf="@+id/imageViewTwitter"
+        app:layout_constraintTop_toTopOf="@+id/textViewSnap"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/textViewCustomToast"

@@ -1,9 +1,10 @@
-package com.stardash.sportdash.settings;
+package com.stardash.sportdash.settings.chat;
 
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.content.ContextCompat;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -14,8 +15,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
-import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
+import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.settings.chat.ChatBackgroundActivity;
 
 public class ChatSettingsActivity extends AppCompatActivity {
 
@@ -24,18 +26,20 @@ public class ChatSettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat_settings);
 
-        Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.parseColor("#212121"));
+
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
+            Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#000000"));
+            window.setStatusBarColor(Color.BLACK);
+
+            TextView textViewApp = findViewById(R.id.textViewApp);
+            textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
         }
     }
 
-    public void openBackgroundStng(View view) {
+    public void openBackground(View view) {
         vibrate();
         Intent i = new Intent(this, ChatBackgroundActivity.class);
         startActivity(i);

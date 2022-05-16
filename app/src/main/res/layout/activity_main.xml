@@ -42,34 +42,6 @@
         app:layout_constraintTop_toBottomOf="@+id/progressBarWeek"
         app:layout_constraintVertical_bias="0.473" />
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardViewSmall"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp"
-        app:cardBackgroundColor="@color/projectGreen"
-        app:cardCornerRadius="250dp"
-        android:onClick="openSettings"
-        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
-        app:layout_constraintTop_toTopOf="@+id/textViewMe">
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            app:cardCornerRadius="250dp">
-
-            <ImageView
-                android:id="@+id/imageViewSmallIcon"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:scaleType="centerCrop"
-                android:src="@drawable/no_icon" />
-
-        </androidx.cardview.widget.CardView>
-
-    </androidx.cardview.widget.CardView>
-
     <ProgressBar
         android:id="@+id/progressBar"
         style="?android:attr/progressBarStyleHorizontal"
@@ -539,14 +511,13 @@
 
     <ImageView
         android:id="@+id/imageViewSetting"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:onClick="openSettings"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageViewEnergy1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewEnergy1"
-        app:srcCompat="@drawable/setting_green" />
-
+        app:srcCompat="@drawable/arrow" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -356,6 +356,18 @@ public class Account {
         }
         return plan;
     }
+    // vibration --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setVibration(boolean Vibration) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isVibration", Vibration);
+        editor.apply();
+    }
+    public static Boolean isVibration() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        Boolean Vibration = pref.getBoolean("isVibration", true);
+        return Vibration;
+    }
     // theme --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setAmoled(boolean amoled) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);

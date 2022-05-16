@@ -89,10 +89,24 @@ public class UpdateAdapter extends RecyclerView.Adapter<UpdateAdapter.UpdateView
             holder.mTextView3.setText("");
 
         } else {
+            String str = currentItem.getText3();
+            String strV = currentItem.getText3();
 
             String versionName = BuildConfig.VERSION_NAME;
+
+            Boolean isNewVer = false;
+            try {
+               if(Integer.parseInt(str.replaceAll("\\.", "")) >= Integer.parseInt(strV.replaceAll("\\.", ""))){
+                   isNewVer = true;
+               }
+            } catch (Exception e){
+
+            }
+
             if (currentItem.getText3().equals(versionName)) {
                 holder.mTextView3.setText("(your current version) version " + currentItem.getText3());
+            } else if (isNewVer) {
+                holder.mTextView3.setText("(update available!) version " + currentItem.getText3());
             } else {
                 holder.mTextView3.setText("version " + currentItem.getText3());
             }

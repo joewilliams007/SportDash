@@ -42,6 +42,7 @@ public class InspectActivity extends AppCompatActivity {
                 window.setStatusBarColor(Color.BLACK);
             }
         }
+        inspectingPlan = true;
         buildPage();
     }
 

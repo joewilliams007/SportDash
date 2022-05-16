@@ -4,6 +4,8 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import android.animation.ArgbEvaluator;
+import android.animation.ValueAnimator;
 import android.content.Intent;
 import android.graphics.Color;
 import android.view.LayoutInflater;
@@ -71,6 +73,20 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
         holder.mTextView2.setText(currentItem.getText2());
         holder.mTextView3.setText(currentItem.getText3());
 
+        Integer colorFrom = Color.parseColor("#14FFEC");
+        Integer colorTo = Color.parseColor("#FFFFFFFF");
+        ValueAnimator colorAnimation = ValueAnimator.ofObject(new ArgbEvaluator(), colorFrom, colorTo);
+        colorAnimation.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+
+            @Override
+            public void onAnimationUpdate(ValueAnimator animator) {
+                holder.mTextView3.setTextColor((Integer)animator.getAnimatedValue());
+            }
+
+        });
+        colorAnimation.setDuration(5000);
+        colorAnimation.start();
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,6 +102,29 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.Commen
                 } catch (Exception e) {
 
                 }
+            }
+        });
+
+        holder.itemView.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                try {
+                    String id = holder.mTextView3.getText().toString().split("-")[1];
+                    vibrate();
+                    StarsocketConnector.sendMessage("likeComment "+Account.userid()+" "+id);
+                    Intent i = new Intent(MyApplication.getAppContext(), CommentsActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MyApplication.getAppContext().startActivity(i);
+                } catch (Exception e) {
+
+                }
+
+                return true;
+
+            }
+
+            public void onClick(View view) {
+
             }
         });
     }
