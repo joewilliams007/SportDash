@@ -187,10 +187,16 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     }
 
     public void addElement(View view) {
+        if (duplicateElement) {
+            toast("cancelled duplicating");
+        }
+        duplicateElement = false;
+        TextView textViewUpload = findViewById(R.id.upload);
         vibrate();
         if (elementsInPlan>99 ) {
             toast("100 elements is the maximum !");
         } else if(duplicateElement) {
+            textViewUpload.setVisibility(View.VISIBLE);
             duplicateElement = false;
             zeFormat = "seconds";
             View elementView = findViewById(R.id.elementLayout);
@@ -205,6 +211,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             editTextDescription.setText(e_desc);
             editTextTime.setText(e_time);
         } else {
+            textViewUpload.setVisibility(View.VISIBLE);
             zeFormat = "seconds";
             View elementView = findViewById(R.id.elementLayout);
             elementView.setVisibility(View.VISIBLE);
@@ -225,11 +232,14 @@ public class CreateStructureNewActivity extends AppCompatActivity {
        submitFinalElement();
     }
 
-    private void submitFinalElement() {
+    public void cancelElement(View view) {
+        vibrate();
         View elementView = findViewById(R.id.elementLayout);
         elementView.setVisibility(View.GONE);
+        duplicateElement = false;
+    }
 
-
+    private void submitFinalElement() {
         EditText editTextName = findViewById(R.id.editTextName);
         EditText editTextDescription = findViewById(R.id.editTextDescription);
         EditText editTextSeconds = findViewById(R.id.editTextTime);
@@ -287,7 +297,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         vibrate();
         TextView textViewIterations = findViewById(R.id.textViewIterations);
         TextView textViewSeconds = findViewById(R.id.textViewSeconds);
-        textViewSeconds.setTextColor(Color.parseColor("#323232"));
+        textViewSeconds.setTextColor(Color.parseColor("#14FFEC"));
         textViewIterations.setTextColor(Color.parseColor("#E64868"));
     }
 
@@ -302,7 +312,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         TextView textViewIterations = findViewById(R.id.textViewIterations);
         TextView textViewSeconds = findViewById(R.id.textViewSeconds);
         textViewSeconds.setTextColor(Color.parseColor("#E64868"));
-        textViewIterations.setTextColor(Color.parseColor("#323232"));
+        textViewIterations.setTextColor(Color.parseColor("#14FFEC"));
     }
 
     @Override
@@ -318,15 +328,15 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     }
 
     public void searchElements(View view) {
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         vibrate();
         EditText editTextSearch = findViewById(R.id.editTextSearch);
-        String search = editTextSearch.getText().toString();
+        String search = editTextSearch.getText().toString().toLowerCase(Locale.ROOT);;
         if (search.length()<1){
             toast("enter element name");
         } else {
             try {
                 StarsocketConnector.sendMessage("searchElement ="+search);
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
                 getSearchResult();
             } catch (Exception e){
                 toast("no network");
@@ -414,24 +424,29 @@ public class CreateStructureNewActivity extends AppCompatActivity {
 
     public void uploadElement(View view) {
         vibrate();
-        toast("uploading");
+        toast("uploading to server");
         TextView textViewUpload = findViewById(R.id.upload);
 
         EditText editTextName = findViewById(R.id.editTextName);
         EditText editTextDescription = findViewById(R.id.editTextDescription);
         EditText editTextTime = findViewById(R.id.editTextTime);
-        String name = editTextName.getText().toString();
-        String desc = editTextDescription.getText().toString();
-        String time = editTextTime.getText().toString();
-        String id = Account.userid();
-        String username = Account.username();
+        String name = editTextName.getText().toString().replaceAll("@","").toLowerCase(Locale.ROOT);
+        String desc = editTextDescription.getText().toString().replaceAll("@","");
+        String time = editTextTime.getText().toString().replaceAll("@","");
+        String id = Account.userid().replaceAll("@","");
+        String username = Account.username().replaceAll("@","");
+        String all = name+desc;
 
         if (name.length()<1){
             toast("add name*");
         } else if (desc.length()<1){
             toast("add desc*");
-        } else if (time.length()<1){
+        } else if (time.length()<1) {
             toast("add time*");
+        } else if (all.contains("http")||all.contains("bit.ly")||all.contains("www.")||all.contains("com")) {
+            toast("links cant be uploaded");
+        } else if (all.contains("sex")||all.contains("fuck")||all.contains("porn")||all.contains("moan")||all.contains("make love")||all.contains("dick")||all.contains("pussy")||all.contains("cock")||all.contains("jerk")||all.contains("horny")) {
+            toast("kindly uninstall this app :((");
         } else {
             try {
                 textViewUpload.setVisibility(View.GONE);
@@ -444,7 +459,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
                         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
                         toast("success");
                     }
-                }, 3000);
+                }, 1000);
             } catch (Exception e) {
                 toast("no network");
                 ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
@@ -453,6 +468,8 @@ public class CreateStructureNewActivity extends AppCompatActivity {
     }
 
     public void finish(View view) {
+        ConstraintLayout elementLayout = findViewById(R.id.elementLayout);
+        if (elementLayout.getVisibility() == View.VISIBLE) return;
         if (elementsInPlan<5){
             toast("required elements: 5");
         } else {
@@ -498,4 +515,6 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         mRecyclerView.scrollToPosition(0);
     }
 
+    public void doNothing(View view) {
+    }
 }

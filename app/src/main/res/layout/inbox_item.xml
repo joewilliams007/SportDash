@@ -5,11 +5,11 @@
     android:layout_height="wrap_content"
     android:layout_margin="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="10dp">
+    app:cardCornerRadius="20dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/projectBlack"
+        android:background="@drawable/main_text_background_plus"
         android:layout_height="wrap_content">
 
         <TextView

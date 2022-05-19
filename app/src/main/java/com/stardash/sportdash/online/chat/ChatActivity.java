@@ -3,6 +3,7 @@ package com.stardash.sportdash.online.chat;
 import static android.graphics.BitmapFactory.*;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatUsername;
+import static com.stardash.sportdash.online.friends.FriendsActivity.openedChat;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.NonNull;
@@ -70,6 +71,7 @@ public class ChatActivity extends AppCompatActivity {
         updateChat = true;
         isInChat = true;
         isNew = true;
+        openedChat = true;
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_chat);

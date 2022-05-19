@@ -15,90 +15,155 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:textColor="@color/projectLightBlue"
-        android:text="@string/settings"
+        android:textColor="@color/projectGreen"
+        android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewAccount"
+        android:id="@+id/textViewApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="Account"
-        android:onClick="openAccountSettings"
+        android:text="Settings"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
     <TextView
-        android:id="@+id/textViewTts"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewAccount"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="TTS"
-        android:onClick="openTtsSettings"
-        android:textColor="@color/black"
-        android:textSize="60dp"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:onClick="openAccountSettings"
+        android:padding="10dp"
+        android:text="account"
+        android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
 
+    <ImageView
+        android:id="@+id/imageViewAccount"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAccount"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewAccount"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
-        android:id="@+id/textViewUpdates"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewPlans"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="84dp"
-        android:text="Updates"
-        android:onClick="openUpdates"
-        android:textColor="@color/black"
-        android:textSize="60dp"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:onClick="openPlansSettings"
+        android:padding="10dp"
+        android:text="plans"
+        android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTts" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
+
+    <ImageView
+        android:id="@+id/imageViewPlans"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewPlans"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewPlans"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewChat"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openChatSettings"
+        android:padding="10dp"
+        android:text="chats"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
+
+    <ImageView
+        android:id="@+id/imageViewChat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewChat"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewChat"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/textViewGeneral"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginEnd="84dp"
+        android:gravity="center"
         android:onClick="openGeneral"
-        android:text="General"
-        android:textColor="@color/black"
-        android:textSize="60dp"
-        android:textStyle="bold"
+        android:padding="10dp"
+        android:text="general"
+        android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUpdates" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChat" />
+
+    <ImageView
+        android:id="@+id/imageViewGeneral"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGeneral"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewGeneral"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
-        android:id="@+id/textViewChatSettings"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewUpdates"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:layout_marginEnd="84dp"
-        android:onClick="openChatSettings"
-        android:text="Chat"
-        android:textColor="@color/black"
-        android:textSize="60dp"
-        android:textStyle="bold"
+        android:gravity="center"
+        android:onClick="openUpdates"
+        android:padding="10dp"
+        android:text="updates"
+        android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGeneral" />
+
+    <ImageView
+        android:id="@+id/imageViewUpdates"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewUpdates"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewUpdates"
+        app:srcCompat="@drawable/arrow" />
+
 
     <TextView
         android:id="@+id/textViewAbout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:gravity="center"
         android:text="SportDash Settings"
-        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_plus"
         android:padding="10dp"
+        android:textColor="@color/projectBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

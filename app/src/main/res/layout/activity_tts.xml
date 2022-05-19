@@ -28,7 +28,7 @@
         android:gravity=""
         android:text="TEXT\nTO\nSPEECH"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
@@ -83,12 +83,13 @@
         android:id="@+id/textViewAbout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:gravity="center"
         android:text="TTS stands for Text To Speech\n
 if enabled elements will be red out loud during training"
-        android:textColor="@color/white"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_plus"
         android:padding="10dp"
+        android:textColor="@color/projectBlack"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

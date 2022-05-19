@@ -2,6 +2,7 @@ package com.stardash.sportdash.settings.account;
 
 import static android.content.Intent.FLAG_ACTIVITY_NEW_TASK;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.reportingPlan;
+import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +35,7 @@ import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.AboutActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.FeedbackActivity;
+import com.stardash.sportdash.signIn.LockActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
 
 public class GeneralActivity extends AppCompatActivity {
@@ -61,9 +63,11 @@ public class GeneralActivity extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.checkBoxLocalhost);
         CheckBox checkBoxTheme = findViewById(R.id.checkBoxTheme);
         CheckBox checkBoxVibration = findViewById(R.id.checkBoxVibration);
+        CheckBox checkBoxDataSaver = findViewById(R.id.checkBoxDataSaver);
         checkBoxVibration.setChecked(Account.isVibration());
         checkBox.setChecked(Account.localhost());
         checkBoxTheme.setChecked(Account.isAmoled());
+        checkBoxDataSaver.setChecked(Account.isDataSaver());
     }
 
     public void openDeviceLinksSettings(View view) {
@@ -96,6 +100,12 @@ public class GeneralActivity extends AppCompatActivity {
         if (Account.isVibration()) {
             vibrate();
         }
+        checkBoxes();
+    }
+
+    public void dataSaver(View view) {
+        Account.setDataSaver(!Account.isDataSaver());
+        vibrate();
         checkBoxes();
     }
 
@@ -165,6 +175,18 @@ public class GeneralActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void openAppLock(View view) {
+        vibrate();
+        if (Account.Lock().equals("none")) {
+            Intent i = new Intent(this, AppLockSettingsActivity.class);
+            startActivity(i);
+        } else {
+            changeLock = "appLock";
+            Intent i = new Intent(this, LockActivity.class);
+            startActivity(i);
+        }
+    }
+
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -210,5 +232,9 @@ public class GeneralActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-
+    public void openCustomize(View view) {
+        vibrate();
+        Intent i = new Intent(this, CustomizeActivity.class);
+        startActivity(i);
+    }
 }

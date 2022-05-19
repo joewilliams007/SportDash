@@ -27,7 +27,7 @@
         android:layout_margin="10dp"
         android:text="General"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
@@ -69,20 +69,31 @@
         app:layout_constraintTop_toBottomOf="@+id/checkBoxTheme"
         tools:layout_editor_absoluteX="10dp" />
 
+    <CheckBox
+        android:id="@+id/checkBoxDataSaver"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checked="true"
+        android:onClick="dataSaver"
+        android:text="data saver"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalhost"
+        tools:layout_editor_absoluteX="10dp" />
+
     <TextView
         android:id="@+id/textViewAboutSportDash"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:gravity="center"
-        android:padding="10dp"
         android:onClick="openAbout"
+        android:padding="10dp"
         android:text="about SportDash"
         android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewCustomize" />
 
     <ImageView
         android:id="@+id/imageViewAboutSportDash"
@@ -179,8 +190,9 @@
         android:text="send feedback"
         android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalhost" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxDataSaver" />
 
     <ImageView
         android:id="@+id/imageViewFeedback"
@@ -190,6 +202,56 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewFeedback"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewFeedback"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewCustomize"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openCustomize"
+        android:padding="10dp"
+        android:text="customize"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
+
+    <ImageView
+        android:id="@+id/imageViewCustomize"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCustomize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewCustomize"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewLock"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openAppLock"
+        android:padding="10dp"
+        android:text="app lock"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
+
+    <ImageView
+        android:id="@+id/imageViewLock"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewLock"
         app:srcCompat="@drawable/arrow" />
 
     <TextView
@@ -237,10 +299,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_plus"
+        android:padding="10dp"
+        android:textColor="@color/projectBlack"
         android:gravity="center"
         android:text="general settings"
-        android:textColor="@color/white"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

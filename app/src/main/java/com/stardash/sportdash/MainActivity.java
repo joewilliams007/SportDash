@@ -6,6 +6,7 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.RequiresApi;
@@ -54,6 +55,8 @@ import com.stardash.sportdash.plans.run.SearchPlanActivity;
 import com.stardash.sportdash.settings.AboutActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.SettingsActivity;
+import com.stardash.sportdash.settings.account.AppLockSettingsActivity;
+import com.stardash.sportdash.signIn.LockActivity;
 import com.stardash.sportdash.signIn.LoginActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
 
@@ -66,7 +69,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static Boolean loggedIn = false;
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -80,10 +83,26 @@ public class MainActivity extends AppCompatActivity {
         editItem = false;
         duplicateElement = false;
 
+        TextView textViewTracking = findViewById(R.id.textViewBottom);
+        TextView textViewName = findViewById(R.id.textViewDetail);
+        ImageView imageView = findViewById(R.id.floatingActionButton8);
+        if(!Account.isTrackingHome()) {
+            textViewTracking.setVisibility(View.GONE);
+            imageView.setVisibility(View.GONE);
+        }
+        if (!Account.isHomeName()) {
+            textViewName.setVisibility(View.GONE);
+        }
         try {
             StarsocketConnector.sendMessage("boost");
         } catch (Exception e){
 
+        }
+
+        changeLock = "app";
+        if (Account.isAppLock() && !loggedIn && !Account.password().equals("none")) {
+            Intent i = new Intent(this, LockActivity.class);
+            startActivity(i);
         }
 
         Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
@@ -129,8 +148,11 @@ public class MainActivity extends AppCompatActivity {
         isShopNew();
 
     }
-    
-
+    @Override
+    public  void onDestroy() {
+        super.onDestroy();
+        loggedIn = false;
+    }
     @RequiresApi(api = Build.VERSION_CODES.O)
     private void isShopNew() {
         TextView textViewNew = findViewById(R.id.textViewNew);
@@ -303,8 +325,6 @@ public class MainActivity extends AppCompatActivity {
         checkDeepLink();
     }
 
-
-
     private void checkDeepLink(){
         Intent intent = getIntent();
         String action = intent.getAction();
@@ -474,8 +494,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void openFeed(View view) {
-        Intent i = new Intent(this, FeedActivity.class);
-        startActivity(i);
         vibrate();
+        toast("available soon");
     }
 }

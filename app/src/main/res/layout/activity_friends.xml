@@ -27,6 +27,23 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/textViewBioUnder"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toTopOf="@+id/textViewLevel"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewBio"
+                app:layout_constraintTop_toTopOf="@+id/textViewBio" />
+
+
+            <TextView
                 android:id="@+id/textViewBio"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,7 +92,8 @@
                 android:onClick="follow"
                 android:padding="10dp"
                 android:text="follow"
-                android:textColor="@color/white"
+                android:background="@drawable/main_text_background_plus"
+                android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMessage" />
 
@@ -89,7 +107,8 @@
                 android:onClick="editProfile"
                 android:padding="10dp"
                 android:text="edit profile"
-                android:textColor="@color/white"
+                android:background="@drawable/main_text_background_plus"
+                android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
@@ -102,7 +121,8 @@
                 android:onClick="openChat"
                 android:padding="10dp"
                 android:text="message"
-                android:textColor="@color/white"
+                android:background="@drawable/main_text_background_plus"
+                android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
@@ -136,7 +156,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:layout_marginTop="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="showSearch"
@@ -294,11 +314,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewOpenSearch" />
 
             <TextView
+                android:id="@+id/textViewPlan1under"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPlan1"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlan1" />
+
+
+            <TextView
                 android:id="@+id/textViewPlan1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="plan1"
@@ -309,24 +345,41 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan1Txt" />
 
+
             <TextView
                 android:id="@+id/textViewPlan1Txt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
+                android:layout_marginStart="4dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="plan 1"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewDownload" />
+
+            <TextView
+                android:id="@+id/textViewPlan2under"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPlan1"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlan2" />
+
 
             <TextView
                 android:id="@+id/textViewPlan2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="plan2"
@@ -350,11 +403,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan1" />
 
             <TextView
+                android:id="@+id/textViewPlan3under"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPlan1"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlan3" />
+
+
+            <TextView
                 android:id="@+id/textViewPlan3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="plan3"
@@ -379,11 +448,27 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan2" />
 
             <TextView
+                android:id="@+id/textViewPlan4under"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPlan1"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlan4" />
+
+
+            <TextView
                 android:id="@+id/textViewPlan4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="plan4"
@@ -403,16 +488,31 @@
                 android:padding="10dp"
                 android:text="plan 4"
                 android:textColor="@color/white"
-
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan3" />
+
+            <TextView
+                android:id="@+id/textViewPlan5under"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="5dp"
+                android:background="@drawable/track_green_background"
+                android:elevation="2dp"
+                android:gravity="center"
+                android:onClick="plan1"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/textViewPlan1"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlan5" />
+
 
             <TextView
                 android:id="@+id/textViewPlan5"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:gravity="center"
                 android:onClick="plan5"
@@ -556,7 +656,31 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFollowersNr" />
 
+            <TextView
+                android:id="@+id/textViewDownload"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_plus"
+                android:textColor="@color/projectBlack"
+                android:padding="10dp"
+                android:onClick="downloadPlansBtn"
+                android:text="Download"
+                app:layout_constraintEnd_toStartOf="@+id/textViewDownloadDataSaver"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
 
+            <TextView
+                android:id="@+id/textViewDownloadDataSaver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_plus"
+                android:padding="10dp"
+                android:onClick="dataSaverSettings"
+                android:textColor="@color/projectBlack"
+                android:text="Data Saver Settings"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
@@ -566,7 +690,7 @@
         android:layout_height="0dp"
         android:visibility="gone"
         android:layout_marginTop="20dp"
-        android:background="@drawable/main_text_background_track_no_border"
+        android:background="@drawable/main_text_background_plus"
         android:elevation="15dp"
         android:onClick="doNth"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -592,7 +716,7 @@
             android:onClick="hideSearch"
             android:padding="10dp"
             android:text="C A N C E L"
-            android:textColor="@color/projectGrey"
+            android:textColor="@color/projectGreen"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -606,7 +730,7 @@
             android:onClick="searchUsers"
             android:padding="10dp"
             android:text="S E A R C H"
-            android:textColor="@color/projectGrey"
+            android:textColor="@color/projectGreen"
             app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
@@ -616,7 +740,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/main_text_background"
+            android:background="@drawable/main_text_background_plus"
             android:hint="search user"
             android:inputType="textPersonName"
             android:padding="10dp"

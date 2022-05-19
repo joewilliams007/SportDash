@@ -24,23 +24,36 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp" />
 
-
     <TextView
-        android:id="@+id/textViewMe"
+        android:id="@+id/textViewMeUnder"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="10dp"
-        android:background="@drawable/track_green_background"
+        android:background="@drawable/track_green_background_plus"
         android:onClick="openMyPlans"
         android:padding="10dp"
         android:text=""
         android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toTopOf="@+id/textViewFriends"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.55"
+        app:layout_constraintStart_toStartOf="@+id/textViewMe"
+        app:layout_constraintTop_toTopOf="@+id/textViewMe" />
+
+
+    <TextView
+        android:id="@+id/textViewMe"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        android:background="@drawable/main_text_background_plus"
+        android:onClick="openMyPlans"
+        android:padding="10dp"
+        android:text=""
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/textViewFriends"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarWeek"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintTop_toBottomOf="@+id/progressBarWeek" />
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -131,15 +144,13 @@
         android:gravity="center"
         android:padding="10dp"
         android:onClick="addResult"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/main_text_background"
         app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton8"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton8"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="@+id/floatingActionButton8" />
 
     <TextView
         android:id="@+id/textViewWeekAmount"
@@ -188,9 +199,10 @@
 
     <TextView
         android:id="@+id/textViewDetail"
-        android:layout_width="0dip"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:text="J O E J O E"
+        android:layout_margin="10dp"
         android:gravity="center"
         android:textColor="@color/projectGrey"
         android:background="@drawable/main_text_background_white"
@@ -202,10 +214,10 @@
         android:id="@+id/textViewShop"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/track_green_background"
         android:gravity="bottom|right"
         android:onClick="openShop"
@@ -235,10 +247,10 @@
         android:id="@+id/textViewLog"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/track_green_background"
         android:gravity="bottom|right"
         android:padding="10dp"
@@ -253,15 +265,15 @@
         android:id="@+id/textViewFeed"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="10dp"
         android:background="@drawable/track_green_background"
         android:gravity="bottom|right"
         android:padding="10dp"
         android:text="FEED"
         android:onClick="openFeed"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
         android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toTopOf="@+id/textViewDetail"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
@@ -272,10 +284,10 @@
         android:id="@+id/textViewFriends"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/track_green_background"
         android:padding="10dp"
         android:onClick="openFriendsList"
@@ -289,10 +301,10 @@
         android:id="@+id/textViewAchievements"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/track_green_background"
         android:padding="10dp"
         android:text="ACHIEVEMENTS"
@@ -306,10 +318,10 @@
         android:id="@+id/textViewClub"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="5dp"
-        android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/track_green_background"
         android:padding="10dp"
         android:onClick="openClub"
@@ -384,20 +396,19 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="#1"
-        android:textColor="@color/projectGrey"
+        android:textColor="@color/projectGreen"
         android:textSize="60dp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/textViewMe"
-        app:layout_constraintTop_toBottomOf="@+id/progressBarWeek" />
+        app:layout_constraintTop_toTopOf="@+id/textViewMeUnder" />
 
     <TextView
         android:id="@+id/textViewLevel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
         android:padding="10dp"
         android:text="Level 10"
-        android:textColor="@color/projectGrey"
+        android:textColor="@color/projectGreen"
         android:textStyle="bold"
         app:layout_constraintStart_toEndOf="@+id/textViewId"
         app:layout_constraintTop_toTopOf="@+id/textViewId" />
@@ -408,10 +419,24 @@
         android:layout_height="wrap_content"
         android:onClick="openMyPlans"
         android:padding="10dp"
+        android:textStyle="bold|italic"
         android:text="TRAINING PLANS"
-        android:textColor="@color/projectGrey"
+        android:textColor="@color/projectGreen"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
         app:layout_constraintStart_toStartOf="@+id/textViewMe" />
+
+    <TextView
+        android:id="@+id/textViewRandom"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="randomPlan"
+        android:padding="10dp"
+        android:text="RANDOM PLAN"
+        android:textColor="@color/projectGreen"
+        android:textStyle="bold|italic"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMe" />
+
 
     <TextView
         android:id="@+id/textViewCustomToast"
@@ -461,17 +486,6 @@
         app:layout_constraintEnd_toEndOf="@+id/imageViewInbox"
         app:layout_constraintTop_toTopOf="@+id/imageViewInbox" />
 
-    <ImageView
-        android:id="@+id/imageViewRandom"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:elevation="4dp"
-        android:padding="10dp"
-        android:onClick="randomPlan"
-        android:src="@drawable/shuffle"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
-        app:layout_constraintEnd_toEndOf="@+id/textViewMe" />
-
 
 
     <TextView
@@ -519,5 +533,56 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/imageViewEnergy1"
         app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewCoins"
+        android:layout_width="0dp"
+        android:gravity="right"
+        android:layout_marginEnd="10dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/blue_text_background"
+        android:padding="10dp"
+        android:text="150"
+        android:textColor="@color/projectBlack"
+        android:textStyle="italic|bold"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/textViewLevel" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCoins"
+        app:layout_constraintStart_toStartOf="@+id/textViewRandom"
+        app:layout_constraintTop_toTopOf="@+id/textViewCoins"
+        app:srcCompat="@drawable/star1" />
+
+    <TextView
+        android:id="@+id/textViewDashes"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/blue_text_background"
+        android:gravity="right"
+        android:padding="10dp"
+        android:textStyle="italic|bold"
+        android:text="20"
+        android:textColor="@color/projectBlack"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCoins" />
+
+    <ImageView
+        android:id="@+id/imageView227"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDashes"
+        app:layout_constraintStart_toStartOf="@+id/textViewRandom"
+        app:layout_constraintTop_toTopOf="@+id/textViewDashes"
+        app:srcCompat="@drawable/star2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

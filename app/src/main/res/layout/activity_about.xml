@@ -28,7 +28,7 @@
         android:layout_margin="10dp"
         android:text="About"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />

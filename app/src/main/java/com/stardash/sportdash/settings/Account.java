@@ -356,6 +356,40 @@ public class Account {
         }
         return plan;
     }
+    // Lock --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setLock(String AppLock) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("Lock", AppLock);
+        editor.apply();
+    }
+    public static String Lock() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getString("Lock", "none");
+    }
+
+    // AppLock --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setAppLock(boolean AppLock) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isAppLock", AppLock);
+        editor.apply();
+    }
+    public static Boolean isAppLock() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isAppLock", false);
+    }
+    // ChatLock --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setChatLock(boolean ChatLock) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isChatLock", ChatLock);
+        editor.apply();
+    }
+    public static Boolean isChatLock() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isChatLock", false);
+    }
     // vibration --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setVibration(boolean Vibration) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
@@ -365,8 +399,40 @@ public class Account {
     }
     public static Boolean isVibration() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
-        Boolean Vibration = pref.getBoolean("isVibration", true);
-        return Vibration;
+        return pref.getBoolean("isVibration", true);
+    }
+    // DataSaver --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setDataSaver(boolean DataSaver) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isDataSaver", DataSaver);
+        editor.apply();
+    }
+    public static Boolean isDataSaver() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isDataSaver", false);
+    }
+    // HomeName --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setHomeName(boolean HomeName) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isHomeName", HomeName);
+        editor.apply();
+    }
+    public static Boolean isHomeName() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isHomeName", true);
+    }
+    // TrackingHome --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setTrackingHome(boolean TrackingHome) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isTrackingHome", TrackingHome);
+        editor.apply();
+    }
+    public static Boolean isTrackingHome() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isTrackingHome", true);
     }
     // theme --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setAmoled(boolean amoled) {
@@ -377,8 +443,7 @@ public class Account {
     }
     public static Boolean isAmoled() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
-        Boolean amoled = pref.getBoolean("isAmoled", false);
-        return amoled;
+        return pref.getBoolean("isAmoled", false);
     }
     // localhost --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -28,7 +28,7 @@
         android:layout_marginEnd="84dp"
         android:text="Feedback"
         android:textColor="@color/black"
-        android:textSize="60dp"
+        android:textSize="50dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
@@ -116,4 +116,17 @@
         app:layout_constraintTop_toTopOf="@+id/textViewSettings"
         app:srcCompat="@drawable/arrow" />
 
+    <TextView
+        android:id="@+id/textViewAbout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="Feedback"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_plus"
+        android:padding="10dp"
+        android:textColor="@color/projectBlack"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

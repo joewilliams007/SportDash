@@ -5,6 +5,7 @@ import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -52,6 +53,8 @@ import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.settings.SettingsActivity;
+import com.stardash.sportdash.settings.account.GeneralActivity;
+import com.stardash.sportdash.signIn.LockActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -61,6 +64,8 @@ public class FriendsActivity extends AppCompatActivity {
     public static String tappedOnSearchItemId;
     public Boolean isFollowProcess = false;
     public String theId;
+    public Boolean skipDataSaver;
+    public static Boolean openedChat;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,8 +75,8 @@ public class FriendsActivity extends AppCompatActivity {
         isMyPlan = false; // so that the discard btn in active plan is gone
         isRandom = false;
         settingShowHideSearch = false;
-
-
+        skipDataSaver = false;
+        openedChat = false;
 
         TextView textViewUrId = findViewById(R.id.textViewMe);
         textViewUrId.setText("#"+ Account.userid());
@@ -112,6 +117,13 @@ public class FriendsActivity extends AppCompatActivity {
             textViewAbout.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
             textViewPlans.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
             textViewName.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
+        }
+
+        if (!Account.isDataSaver()) {
+            TextView textViewDaterSaver = findViewById(R.id.textViewDownloadDataSaver);
+            TextView textViewDownload = findViewById(R.id.textViewDownload);
+            textViewDaterSaver.setVisibility(View.GONE);
+            textViewDownload.setVisibility(View.GONE);
         }
 
 
@@ -176,9 +188,14 @@ public class FriendsActivity extends AppCompatActivity {
             TextView textViewFollows = findViewById(R.id.textViewFollowingNr);
             TextView textViewFollowers = findViewById(R.id.textViewFollowersNr);
             TextView textViewBio = findViewById(R.id.textViewBio);
+            TextView textViewBioUnder = findViewById(R.id.textViewBioUnder);
 
             if(bio.equals("null")) {
                 textViewBio.setVisibility(View.GONE);
+                textViewBioUnder.setVisibility(View.GONE);
+            } else if(bio.length()<1) {
+                textViewBio.setVisibility(View.GONE);
+                textViewBioUnder.setVisibility(View.GONE);
             } else {
                 textViewBio.setText(bio);
             }
@@ -396,50 +413,65 @@ public class FriendsActivity extends AppCompatActivity {
     public static String chatUsername;
     public static String chatId;
     public void openChat(View view) {
-
         vibrate();
         TextView textViewUsername = findViewById(R.id.textViewUsername);
         TextView textViewUserID = findViewById(R.id.textViewMe);
         chatUsername = textViewUsername.getText().toString();
         chatId = textViewUserID.getText().toString().replace("#","");
-        Intent i = new Intent(this, ChatActivity.class);
-        startActivity(i);
+        openedChat = false;
+
+        changeLock = "chat";
+        if (Account.isChatLock() && !Account.password().equals("none")) {
+            changeLock = "chat";
+            Intent i = new Intent(this, LockActivity.class);
+            startActivity(i);
+        } else {
+            Intent i = new Intent(this, ChatActivity.class);
+            startActivity(i);
+        }
     }
 
     private void loadPlans(String id) {
-        StarsocketConnector.sendMessage("downloadPlans " + id);
-        try {
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String received_plans = StarsocketConnector.getMessage().toString();
-
-                    SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    try {
-                        String plan1 = received_plans.split("##########", 9)[1];
-                        String plan2 = received_plans.split("##########", 9)[2];
-                        String plan3 = received_plans.split("##########", 9)[3];
-                        String plan4 = received_plans.split("##########", 9)[4];
-                        String plan5 = received_plans.split("##########", 9)[5];
-
-                        editor.putString("1 planFriend", String.valueOf(plan1)).apply();
-                        editor.putString("2 planFriend", String.valueOf(plan2)).apply();
-                        editor.putString("3 planFriend", String.valueOf(plan3)).apply();
-                        editor.putString("4 planFriend", String.valueOf(plan4)).apply();
-                        editor.putString("5 planFriend", String.valueOf(plan5)).apply();
-
-                        setPlanNames();
-                    } catch (Exception e){
-                        toast("error loading plans");
-                    }
-                }
-            }, 500);
-        } catch (Exception e){
-            toast("no network");
+        if (Account.isDataSaver()) {
+                setPlanNames();
+        } else {
+            loadPlansFinal(id);
         }
+    }
 
+    public void loadPlansFinal(String id) {
+            StarsocketConnector.sendMessage("downloadPlans " + id);
+            try {
+                final Handler handler = new Handler(Looper.getMainLooper());
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        String received_plans = StarsocketConnector.getMessage().toString();
+
+                        SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = settings.edit();
+                        try {
+                            String plan1 = received_plans.split("##########", 9)[1];
+                            String plan2 = received_plans.split("##########", 9)[2];
+                            String plan3 = received_plans.split("##########", 9)[3];
+                            String plan4 = received_plans.split("##########", 9)[4];
+                            String plan5 = received_plans.split("##########", 9)[5];
+
+                            editor.putString("1 planFriend", String.valueOf(plan1)).apply();
+                            editor.putString("2 planFriend", String.valueOf(plan2)).apply();
+                            editor.putString("3 planFriend", String.valueOf(plan3)).apply();
+                            editor.putString("4 planFriend", String.valueOf(plan4)).apply();
+                            editor.putString("5 planFriend", String.valueOf(plan5)).apply();
+
+                            setPlanNames();
+                        } catch (Exception e) {
+                            toast("error loading plans");
+                        }
+                    }
+                }, 500);
+            } catch (Exception e) {
+                toast("no network");
+            }
     }
 
     private void setPlanNames() {
@@ -449,6 +481,11 @@ public class FriendsActivity extends AppCompatActivity {
         TextView textViewNamePlan4 = findViewById(R.id.textViewPlan4);
         TextView textViewNamePlan5 = findViewById(R.id.textViewPlan5);
         String empty = "E M P T Y";
+        if (Account.isDataSaver() && !skipDataSaver) {
+            empty = "Download";
+        } else if (Account.isDataSaver()) {
+            toast("downloaded!");
+        }
         try {
             textViewNamePlan1.setText(Account.planFriend(1).split("\n", 5)[2]);
         } catch (Exception e){
@@ -479,63 +516,73 @@ public class FriendsActivity extends AppCompatActivity {
     public void plan1(View view) {
         vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan1);
-        if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
-            toast("empty plan");
-        } else {
-            openPlan(1);
-        }
+        String text =  textViewNamePlan.getText().toString();
+        openPlan(1, text);
     }
     public void plan2(View view) {
         vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan2);
-        if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
-            toast("empty plan");
-        } else {
-            openPlan(2);
-        }
+        String text =  textViewNamePlan.getText().toString();
+        openPlan(2, text);
     }
+
     public void plan3(View view) {
         vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan3);
-        if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
-            toast("empty plan");
-        } else {
-            openPlan(3);
-        }
+        String text =  textViewNamePlan.getText().toString();
+        openPlan(3, text);
     }
     public void plan4(View view) {
         vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan4);
-        if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
-            toast("empty plan");
-        } else {
-            openPlan(4);
-        }
+        String text =  textViewNamePlan.getText().toString();
+        openPlan(4, text);
     }
     public void plan5(View view) {
         vibrate();
         TextView textViewNamePlan = findViewById(R.id.textViewPlan5);
-        if (textViewNamePlan.getText().toString().equals("E M P T Y")) {
+        String text =  textViewNamePlan.getText().toString();
+        openPlan(5, text);
+    }
+
+    private void openPlan(int id, String text) {
+        if (text.equals("E M P T Y")) {
             toast("empty plan");
+        } else if (text.equals("loading")) {
+            toast("empty plan");
+        } else if (text.equals("Download")) {
+            try {
+                toast("downloading");
+                TextView textViewId = findViewById(R.id.textViewMe);
+                loadPlansFinal(textViewId.getText().toString().split("#")[1]);
+                skipDataSaver = true;
+            } catch (Exception e){
+                toast("no network");
+            }
         } else {
-            openPlan(5);
+            Account.setIsMine(false);
+            isMyPlan= false;
+            SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+
+            Account.setActiveIterations(0); // set iterations to none done
+            editor.putInt("selectedPlan", id).commit(); // for running plan
+
+            Intent i = new Intent(this, RunPlanActivity.class);
+            startActivity(i);
         }
     }
 
-    private void openPlan(int id) {
-        Account.setIsMine(false);
-        isMyPlan= false;
-        SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-        SharedPreferences.Editor editor = settings.edit();
-
-        Account.setActiveIterations(0); // set iterations to none done
-        editor.putInt("selectedPlan", id).commit(); // for running plan
-
-        Intent i = new Intent(this, RunPlanActivity.class);
-        startActivity(i);
-
+    public void downloadPlansBtn(View view) {
+        skipDataSaver = true;
+        TextView textViewId = findViewById(R.id.textViewMe);
+        vibrate();
+        try {
+            loadPlansFinal(textViewId.getText().toString().split("#")[1]);
+        } catch (Exception e){
+            toast("no network");
+        }
     }
-
 
     public void doNth(View view) {
     }
@@ -654,4 +701,12 @@ public class FriendsActivity extends AppCompatActivity {
         Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
+
+    public void dataSaverSettings(View view) {
+        vibrate();
+        Intent i = new Intent(this, GeneralActivity.class);
+        startActivity(i);
+    }
+
+
 }
