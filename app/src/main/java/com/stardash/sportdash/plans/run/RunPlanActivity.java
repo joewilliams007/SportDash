@@ -1,5 +1,6 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.MainActivity.runningPlan;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
@@ -54,29 +55,29 @@ public class RunPlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_run_plan);
+        runningPlan = true;
+
         try {
             if (isRandom) {
                 generatePlan();
             } else {
                 setPlan();
             }
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
-      ismyplan();
+      isMyPlan();
         viewPlan();
     }
 
-    private void ismyplan() {
+    private void isMyPlan() {
         try {
             TextView textViewDiscard = findViewById(R.id.textViewTopLeft);
             TextView textViewReport = findViewById(R.id.textViewReport);
@@ -207,25 +208,7 @@ public class RunPlanActivity extends AppCompatActivity {
             startActivity(i);
         } else {
             this.finish();
-            /* AlertDialog.Builder builder = new AlertDialog.Builder(RunPlanActivity.this);
-            builder.setTitle(R.string.app_name);
-            builder.setIcon(R.mipmap.ic_launcher);
-            builder.setMessage("If You Enjoy The App Please Rate us?")
-                    .setCancelable(false)
-                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            Intent play =
-                                    new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=kd.travellingtips"));
-                            startActivity(play);
-                        }
-                    })
-                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                        public void onClick(DialogInterface dialog, int id) {
-                            finish();
-                        }
-                    });
-            AlertDialog alert = builder.create();
-            alert.show(); */
+
         }
     }
 
@@ -237,7 +220,7 @@ public class RunPlanActivity extends AppCompatActivity {
         SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
         int planInt = pref.getInt("selectedPlan", 0);
 
-        editor.putString(String.valueOf(planInt)+ " plan", "EMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\n").commit();
+        editor.putString(String.valueOf(planInt)+ " plan", "EMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\nEMPTY PLAN\n").apply();
         Intent i = new Intent(this, PlanActivity.class);
         startActivity(i);
     }
@@ -253,11 +236,12 @@ public class RunPlanActivity extends AppCompatActivity {
                 Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                 i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 MyApplication.getAppContext().startActivity(i);
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -277,11 +261,9 @@ public class RunPlanActivity extends AppCompatActivity {
         SharedPreferences.Editor editor = settings.edit();
         CheckBox checkBox = findViewById(R.id.checkBox);
         editor.putBoolean("online",false).apply();
-
-        editor.putString("category", "none").commit();
-        editor.putString("committed plan",thePlan()).commit();
-
-        editor.putBoolean("create", true).commit();
+        editor.putString("category", "none").apply();
+        editor.putString("committed plan",thePlan()).apply();
+        editor.putBoolean("create", true).apply();
 
         Intent i = new Intent(this, PlanActivity.class);
         startActivity(i);
@@ -303,16 +285,13 @@ public class RunPlanActivity extends AppCompatActivity {
                     isRandom = true;
                     setPlan();
                     isMyPlan = false;
-                    ismyplan();
+                    isMyPlan();
                 }
             }, 1000);
-
         } catch (Exception e){
             toast("no network");
         }
     }
-
-
 
     public static String reportPlanId;
     public static Boolean reportingPlan;
@@ -367,8 +346,7 @@ public class RunPlanActivity extends AppCompatActivity {
             vibrate();
             TextView textViewPlanId = findViewById(R.id.textViewPlanId);
             StarsocketConnector.sendMessage("viewPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#",""));
-
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
     }

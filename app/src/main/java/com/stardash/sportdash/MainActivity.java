@@ -9,13 +9,16 @@ import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
@@ -70,7 +73,7 @@ import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     public static Boolean loggedIn = false;
-
+    public static Boolean runningPlan = false;
 
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
@@ -82,6 +85,27 @@ public class MainActivity extends AppCompatActivity {
         tappedOnSearchItem = false;
         editItem = false;
         duplicateElement = false;
+        runningPlan = false;
+
+       /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            builder.setTitle(R.string.app_name);
+            builder.setIcon(R.drawable.logo);
+            builder.setMessage("Hey Hey")
+                    .setCancelable(false)
+                    .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            Intent play =
+                                    new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=kd.travellingtips"));
+                            startActivity(play);
+                        }
+                    })
+                    .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int id) {
+                            finish();
+                        }
+                    });
+            AlertDialog alert = builder.create();
+            alert.show(); */
 
         TextView textViewTracking = findViewById(R.id.textViewBottom);
         TextView textViewName = findViewById(R.id.textViewDetail);
@@ -95,7 +119,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
             StarsocketConnector.sendMessage("boost");
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
 
@@ -114,7 +138,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 setUserStats(); // set user progress
                 Account.getXp(1);
-            } catch (Exception e){
+            } catch (Exception ignored){
 
             }
 
@@ -131,16 +155,14 @@ public class MainActivity extends AppCompatActivity {
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
 
-                TextView textViewId = findViewById(R.id.textViewId);
-                TextView textViewLevel = findViewById(R.id.textViewLevel);
-                textViewId.setTextColor(Color.parseColor("#000000"));
-                textViewLevel.setTextColor(Color.parseColor("#000000"));
-            }
+            TextView textViewId = findViewById(R.id.textViewId);
+            TextView textViewLevel = findViewById(R.id.textViewLevel);
+            textViewId.setTextColor(Color.parseColor("#000000"));
+            textViewLevel.setTextColor(Color.parseColor("#000000"));
         }
 
         getInbox();
@@ -189,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
             final Handler handler = new Handler(Looper.getMainLooper());
             handler.postDelayed(new Runnable() {
+                @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
                     String inbox = StarsocketConnector.getMessage();
@@ -211,7 +234,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             }, 500);
 
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
     }
@@ -222,27 +245,26 @@ public class MainActivity extends AppCompatActivity {
             Call<Model> call = methods.getAllData(clickName);
             call.enqueue(new Callback<Model>() {
                 @Override
-                public void onResponse(Call<Model> call, Response<Model> response) {
+                public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
 
+                    assert response.body() != null;
                     String build = response.body().getBuild();
                     String version = response.body().getVersion();
                     String updateInfo = response.body().getUpdateInfo();
                     String ip = response.body().getBuild();
                     String status = response.body().getStatus();
 
-                    if (status.equals("online")) {
-
-                    } else {
+                    if (!status.equals("online")) {
                         toast("server is under maintenance");
                     }
                 }
 
                 @Override
-                public void onFailure(Call<Model> call, Throwable t) {
+                public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
 
                 }
             });
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
     }
@@ -330,9 +352,7 @@ public class MainActivity extends AppCompatActivity {
         String action = intent.getAction();
         Uri data = intent.getData();
 
-        if (data == null){
-
-        } else {
+        if (data != null) {
             if (data.toString().contains("user=")) {
                 Intent i = new Intent(this, FriendsActivity.class);
                 i.putExtra("friendHashtag", data.toString());
@@ -374,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("create", false).commit();
+        editor.putBoolean("create", false).apply();
 
         Intent i = new Intent(this, ResultActivity.class);
         startActivity(i);
@@ -387,16 +407,12 @@ public class MainActivity extends AppCompatActivity {
         vibrate();
     }
 
-    public void openInfo(View view) {
-        Intent i = new Intent(this, AboutActivity.class);
-        startActivity(i);
-    }
 
     public void openMyPlans(View view) {
         vibrate();
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putBoolean("create", false).commit();
+        editor.putBoolean("create", false).apply();
         Intent i = new Intent(this, PlanActivity.class);
         startActivity(i);
     }
@@ -436,9 +452,6 @@ public class MainActivity extends AppCompatActivity {
         //startActivity(i);
     }
 
-
-
-
     public void openClub(View view) {
         toast("clubs will be available soon");
         vibrate();
@@ -476,6 +489,7 @@ public class MainActivity extends AppCompatActivity {
         vibrate();
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);

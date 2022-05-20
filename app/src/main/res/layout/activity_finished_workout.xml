@@ -9,48 +9,112 @@
     tools:context=".plans.run.FinishedWorkoutActivity">
 
     <TextView
+        android:elevation="2dp"
+        android:padding="2dp"
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="F I N I S H E D\nW O R K O U T"
         android:textColor="@color/projectGreen"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textViewCongrats"
+        android:id="@+id/textViewApp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="not bad, you completed the workout!"
         android:layout_margin="10dp"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
+        android:gravity=""
+        android:text="Finished\nPlan"
+        android:textColor="@color/black"
+        android:textSize="50dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
+    <CheckBox
+        android:id="@+id/checkBoxStar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checked="false"
+        android:text="star this plan"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
+        tools:layout_editor_absoluteX="-10dp" />
+
+    <CheckBox
+        android:id="@+id/checkBoxFollow"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:checked="false"
+        android:text="follow creator"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxStar"
+        tools:layout_editor_absoluteX="10dp" />
+
     <TextView
-        android:id="@+id/textViewCongrats2"
+        android:id="@+id/textViewCreator"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="You have x energy left.\nShare Workout with friends, send per select friend or via app link"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="submit\nand open profile of creator"
         android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCongrats" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxFollow" />
+
+    <ImageView
+        android:id="@+id/imageViewCreator"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCreator"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewCreator"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
-        android:id="@+id/textViewNext"
-        android:layout_width="wrap_content"
+        android:id="@+id/textViewSubmit"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="NEXT"
+        android:gravity="center"
         android:onClick="next"
-        android:textColor="@color/black"
         android:padding="10dp"
-        android:background="@drawable/track_green_background"
+        android:text="submit"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewCreator" />
+
+    <ImageView
+        android:id="@+id/imageViewSubmit"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSubmit"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSubmit"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewOverview"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background_plus"
+        android:padding="10dp"
+        android:text="Overview\n\nduration: x minutes\npower usage: 3"
+        android:textColor="@color/projectBlack"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

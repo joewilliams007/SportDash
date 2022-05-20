@@ -1,5 +1,6 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.MainActivity.runningPlan;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -44,30 +45,25 @@ public class ActivePlanActivity extends AppCompatActivity {
         }
 
 
-            toast("now doing iteration "+String.valueOf(activeIterations()+1)+ " of "+String.valueOf(iterationsOfPlan()));
+        toast("now doing iteration "+String.valueOf(activeIterations()+1)+ " of "+String.valueOf(iterationsOfPlan()));
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
     }
 
     int iterationsOfPlan() {
         String firstRow = plan().split("\n",5)[1];
-        int iterationsInt = Integer.parseInt(firstRow.split(" ",5)[3]);
-
-        return iterationsInt;
+        return Integer.parseInt(firstRow.split(" ",5)[3]);
     }
 
     int activeIterations() {
         SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
-        int activeIterations = pref.getInt("activeIterations", 0);
-        return activeIterations;
+        return pref.getInt("activeIterations", 0);
     }
 
     public void onClickStart(View view) {
@@ -227,40 +223,8 @@ public class ActivePlanActivity extends AppCompatActivity {
         }
     }
 
-    private void planInformation() {
-        try {
-            String name = plan().split("\n",5)[2];
-            String category = plan().split("\n",5)[4];
-            String description = plan().split("\n",5)[3];
-            String firstRow = plan().split("\n",5)[1];
-            String difficultyInt = firstRow.split(" ",5)[1];
-            String difficulty = "none";
-            String energy = firstRow.split(" ",5)[2];
-            String duration = "none";
 
-            try{
-                int number = Integer.parseInt(firstRow.split(" ",5)[0]);
-                duration = String.valueOf(number/60);
-            }
-            catch (NumberFormatException ex){
-                ex.printStackTrace();
-            }
 
-            if (difficultyInt.equals("0")){
-                difficulty = "normal";
-            } else if (difficultyInt.equals("1")){
-                difficulty = "hard";
-            }else if (difficultyInt.equals("2")){
-                difficulty = "ultra hard";
-            }else if (difficultyInt.equals("3")){
-                difficulty = "unbeatable hard";
-            }
-
-        } catch (Exception e){
-        }
-    }
-
-    TextToSpeech textToSpeech;
 
     public void setCurrentElement(){
         int currentElement = activeElement;
@@ -274,35 +238,20 @@ public class ActivePlanActivity extends AppCompatActivity {
     }
 
     private void speakElement() {
-
         String elementNames = plan().split("\n",20)[16];
         String selectedElement = elementNames.split("&",25)[activeElement];
 
         if (selectedElement.length()<1){
-            if (isTtsName()){
-                speakFinished();
-            }
+
         } else {
-            if (isTtsName()){
+            if (isTtsName()&&runningPlan) {
                 speakName();
             }
         }
 
     }
+    TextToSpeech textToSpeech;
 
-    private void speakFinished() {
-        textToSpeech = new TextToSpeech(ActivePlanActivity.this
-                , new TextToSpeech.OnInitListener() {
-            @Override
-            public void onInit(int i) {
-                if (i == TextToSpeech.SUCCESS) {
-                    int lang = textToSpeech.setLanguage(Locale.ENGLISH);
-                    String name = plan().split("\n",5)[2];
-                    int speech = textToSpeech.speak("Workout "+name+ " finished!",TextToSpeech.QUEUE_FLUSH,null);
-                }
-            }
-        });
-    }
 
     private void speakDescription() {
         textToSpeech = new TextToSpeech(ActivePlanActivity.this
@@ -336,7 +285,7 @@ public class ActivePlanActivity extends AppCompatActivity {
                     } else { ;
                         int speech = textToSpeech.speak(selectedElement+" seconds",TextToSpeech.QUEUE_FLUSH,null);
                     }
-                    if (isTtsDescription()) {
+                    if (isTtsDescription()&&runningPlan) {
                         speakDescription();
                     }
                 }
@@ -353,10 +302,7 @@ public class ActivePlanActivity extends AppCompatActivity {
                     TextView textViewElement = findViewById(R.id.textViewElement);
                     int lang = textToSpeech.setLanguage(Locale.ENGLISH);
                     int speech = textToSpeech.speak(textViewElement.getText().toString(),TextToSpeech.QUEUE_FLUSH,null);
-
-
-                        speakTime();
-
+                    speakTime();
                 }
             }
         });
@@ -423,6 +369,7 @@ public class ActivePlanActivity extends AppCompatActivity {
             cancelTimer();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
+        runningPlan = false;
     }
 
     public void skipElement(View view) {

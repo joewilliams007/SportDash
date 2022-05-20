@@ -1,5 +1,8 @@
 package com.stardash.sportdash.network.tcp;
 
+import android.os.Handler;
+import android.os.Looper;
+
 import com.stardash.sportdash.settings.Account;
 
 public class StarsocketConnector {
@@ -35,9 +38,17 @@ public class StarsocketConnector {
 
 
     public static String getMessage(){
+        final Handler handler = new Handler(Looper.getMainLooper());
         aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
         String message = socket.receiveMessage();
-        socket.stopConnection();
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                socket.stopConnection();
+            }
+        }, 300);
+
         return message;
     }
 

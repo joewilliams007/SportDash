@@ -488,26 +488,41 @@ public class FriendsActivity extends AppCompatActivity {
         }
         try {
             textViewNamePlan1.setText(Account.planFriend(1).split("\n", 5)[2]);
+            if (Account.isDataSaver() && !skipDataSaver) {
+                textViewNamePlan1.setText(empty);
+            }
         } catch (Exception e){
             textViewNamePlan1.setText(empty);
         }
         try {
             textViewNamePlan2.setText(Account.planFriend(2).split("\n",5)[2]);
+            if (Account.isDataSaver() && !skipDataSaver) {
+                textViewNamePlan2.setText(empty);
+            }
         } catch (Exception e){
             textViewNamePlan2.setText(empty);
         }
         try {
             textViewNamePlan3.setText(Account.planFriend(3).split("\n",5)[2]);
+            if (Account.isDataSaver() && !skipDataSaver) {
+                textViewNamePlan3.setText(empty);
+            }
         } catch (Exception e){
             textViewNamePlan3.setText(empty);
         }
         try {
             textViewNamePlan4.setText(Account.planFriend(4).split("\n",5)[2]);
+            if (Account.isDataSaver() && !skipDataSaver) {
+                textViewNamePlan4.setText(empty);
+            }
         } catch (Exception e){
             textViewNamePlan4.setText(empty);
         }
         try {
             textViewNamePlan5.setText(Account.planFriend(5).split("\n",5)[2]);
+            if (Account.isDataSaver() && !skipDataSaver) {
+                textViewNamePlan5.setText(empty);
+            }
         } catch (Exception e){
             textViewNamePlan5.setText(empty);
         }

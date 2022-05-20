@@ -1,5 +1,8 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.MainActivity.runningPlan;
+import static com.stardash.sportdash.settings.app.vibrate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
@@ -29,34 +32,30 @@ public class FinishedWorkoutActivity extends AppCompatActivity {
 
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("activeIterations", activeIterations()+1).commit(); // add 1 iteration done
+        editor.putInt("activeIterations", activeIterations()+1).apply(); // add 1 iteration done
 
         activeIterations();
         iterationsFinished();
-
+        runningPlan = false;
 
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
     }
     private void iterationsFinished() {
         if (iterations() > activeIterations()){
             Intent i = new Intent(this, ActivePlanActivity.class);
             startActivity(i);
-        } else  {
-
         }
     }
 
     public void next(View view) {
-
+        vibrate();
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
@@ -69,22 +68,18 @@ public class FinishedWorkoutActivity extends AppCompatActivity {
     int iterations() {
 
             String firstRow = plan().split("\n",5)[1];
-            int iterationsInt = Integer.parseInt(firstRow.split(" ",5)[3]);
 
-        return iterationsInt;
+        return Integer.parseInt(firstRow.split(" ",5)[3]);
     }
 
     int activeIterations() {
         SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
-        int activeIterations = pref.getInt("activeIterations", 0);
-        return activeIterations;
+        return pref.getInt("activeIterations", 0);
     }
 
     String plan() {
         SharedPreferences pref = this.getSharedPreferences("sport", 0); // 0 - for private mode
         int planInt = pref.getInt("selectedPlan", 0);
-
-        String plan = pref.getString(String.valueOf(planInt)+" plan", null);
-        return plan;
+        return pref.getString(String.valueOf(planInt)+" plan", null);
     }
 }
