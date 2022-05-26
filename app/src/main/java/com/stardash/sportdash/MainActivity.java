@@ -23,7 +23,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
+import android.graphics.BlurMaskFilter;
 import android.graphics.Color;
+import android.graphics.MaskFilter;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Build;
@@ -34,6 +36,9 @@ import android.os.StrictMode;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.preference.PreferenceManager;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.MaskFilterSpan;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -86,6 +91,7 @@ public class MainActivity extends AppCompatActivity {
         editItem = false;
         duplicateElement = false;
         runningPlan = false;
+
 
        /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle(R.string.app_name);

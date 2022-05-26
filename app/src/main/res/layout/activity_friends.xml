@@ -34,7 +34,6 @@
                 android:background="@drawable/track_green_background"
                 android:elevation="2dp"
                 android:gravity="center"
-                android:onClick="plan1"
                 android:padding="10dp"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toTopOf="@+id/textViewLevel"
@@ -88,27 +87,27 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="follow"
                 android:padding="10dp"
                 android:text="follow"
-                android:background="@drawable/main_text_background_plus"
                 android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMessage" />
 
             <TextView
                 android:id="@+id/textViewEdit"
-                android:visibility="gone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="editProfile"
                 android:padding="10dp"
                 android:text="edit profile"
-                android:background="@drawable/main_text_background_plus"
                 android:textColor="@color/projectBlack"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
 
@@ -117,11 +116,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="openChat"
                 android:padding="10dp"
                 android:text="message"
-                android:background="@drawable/main_text_background_plus"
                 android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
@@ -250,13 +249,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="76dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="userid"
                 android:textColor="@color/white"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProgressWkTxt" />
-
 
             <ProgressBar
                 android:id="@+id/progressBarWeek"
@@ -568,8 +568,8 @@
                 android:id="@+id/imageViewSetting"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="5dp"
                 android:onClick="openFollowing"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewFollowing"
                 app:layout_constraintStart_toEndOf="@+id/textViewFollowing"
                 app:layout_constraintTop_toTopOf="@+id/textViewFollowing"
@@ -605,8 +605,8 @@
                 android:id="@+id/imageViewSetting1"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:padding="5dp"
                 android:onClick="openFollowers"
+                android:padding="5dp"
                 app:layout_constraintBottom_toBottomOf="@+id/textViewFollowers"
                 app:layout_constraintStart_toEndOf="@+id/textViewFollowers"
                 app:layout_constraintTop_toTopOf="@+id/textViewFollowers"
@@ -638,12 +638,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlan5" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewStarsNr" />
 
             <TextView
                 android:id="@+id/textViewStyle"
                 android:layout_width="wrap_content"
-                android:visibility="invisible"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:elevation="2dp"
@@ -653,6 +652,7 @@
                 android:textColor="@color/black"
                 android:textSize="20dp"
                 android:textStyle="bold"
+                android:visibility="invisible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewFollowersNr" />
 
@@ -662,10 +662,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background_plus"
-                android:textColor="@color/projectBlack"
-                android:padding="10dp"
                 android:onClick="downloadPlansBtn"
+                android:padding="10dp"
                 android:text="Download"
+                android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toStartOf="@+id/textViewDownloadDataSaver"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
 
@@ -675,12 +675,51 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background_plus"
-                android:padding="10dp"
                 android:onClick="dataSaverSettings"
-                android:textColor="@color/projectBlack"
+                android:padding="10dp"
                 android:text="Data Saver Settings"
+                android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
+
+            <TextView
+                android:id="@+id/textViewAllStars"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_marginStart="12dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:onClick="openStars"
+                android:text="s t a r e d  p l a n s"
+                android:textColor="@color/projectGreen"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan5" />
+
+            <TextView
+                android:id="@+id/textViewStarsNr"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:elevation="2dp"
+                android:padding="10dp"
+                android:text="0"
+                android:onClick="openStars"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewAllStars" />
+
+
+            <ImageView
+                android:id="@+id/imageViewAllStars"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:onClick="openStars"
+                android:padding="5dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewAllStars"
+                app:layout_constraintStart_toEndOf="@+id/textViewAllStars"
+                app:layout_constraintTop_toTopOf="@+id/textViewAllStars"
+                app:srcCompat="@drawable/arrow" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

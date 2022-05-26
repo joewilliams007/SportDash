@@ -17,6 +17,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".plans.run.live.LivePlanGenerateActivity"
+            android:exported="false" />
+        <activity
+            android:name=".plans.run.live.LivePlanActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.account.CustomizeActivity"
             android:exported="false" />
         <activity

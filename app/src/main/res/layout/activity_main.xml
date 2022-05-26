@@ -585,4 +585,6 @@
         app:layout_constraintTop_toTopOf="@+id/textViewDashes"
         app:srcCompat="@drawable/star2" />
 
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

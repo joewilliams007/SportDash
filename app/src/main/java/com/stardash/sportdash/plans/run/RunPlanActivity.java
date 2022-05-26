@@ -6,22 +6,17 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -32,17 +27,15 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.plans.run.inspect.InspectActivity;
+import com.stardash.sportdash.plans.run.live.LivePlanActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.comments.CommentsActivity;
 import com.stardash.sportdash.settings.FeedbackActivity;
-import com.stardash.sportdash.online.LobbyActivity;
-import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
@@ -74,7 +67,7 @@ public class RunPlanActivity extends AppCompatActivity {
             window.setStatusBarColor(Color.BLACK);
         }
       isMyPlan();
-        viewPlan();
+
     }
 
     private void isMyPlan() {
@@ -318,7 +311,9 @@ public class RunPlanActivity extends AppCompatActivity {
             try {
                 vibrate();
                 TextView textViewPlanId = findViewById(R.id.textViewPlanId);
-                StarsocketConnector.sendMessage("starPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#",""));
+                TextView textViewPlanName = findViewById(R.id.textViewPlanName);
+                String desc = " %%%"+textViewPlanName.getText().toString();
+                StarsocketConnector.sendMessage("starPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#","")+desc);
                 final Handler handler = new Handler(Looper.getMainLooper());
                // TextView textViewItem1 = findViewById(R.id.textViewItem1);
 
@@ -332,6 +327,7 @@ public class RunPlanActivity extends AppCompatActivity {
                         } else if (received.contains("star-added")) {
                             toast("star added");
                         }
+                        viewPlan();
                         getStars();
                     }
                 }, 500);
@@ -354,6 +350,7 @@ public class RunPlanActivity extends AppCompatActivity {
     public void getStars() { // and views
         TextView textViewStarsAmount = findViewById(R.id.textViewStarsAmount);
         TextView textViewViewsAmount = findViewById(R.id.textViewViewsAmount);
+        TextView textViewStarPlan = findViewById(R.id.textViewStarPlan);
         try {
             TextView textViewPlanId = findViewById(R.id.textViewPlanId);
             StarsocketConnector.sendMessage("getStars "+textViewPlanId.getText().toString().replace("#",""));
@@ -367,6 +364,13 @@ public class RunPlanActivity extends AppCompatActivity {
                         String received = StarsocketConnector.getMessage();
                         textViewStarsAmount.setText(received.split("#")[0]);
                         textViewViewsAmount.setText(received.split("#")[1]);
+
+                        String star_status = received.split("#")[2];
+                        if (star_status.equals("1")) {
+                            textViewStarPlan.setText("UN-STAR");
+                        } else {
+                            textViewStarPlan.setText("STAR");
+                        }
                     } catch (Exception e){
 
                     }
@@ -442,6 +446,12 @@ public class RunPlanActivity extends AppCompatActivity {
     public void ttsSettings(View view) {
         vibrate();
         Intent i = new Intent(this, TtsActivity.class);
+        startActivity(i);
+    }
+
+    public void livePlan(View view) {
+        vibrate();
+        Intent i = new Intent(this, LivePlanActivity.class);
         startActivity(i);
     }
 }

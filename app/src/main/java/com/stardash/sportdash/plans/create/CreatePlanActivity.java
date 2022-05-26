@@ -53,14 +53,14 @@ public class CreatePlanActivity extends AppCompatActivity {
 
             SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();
-            editor.putBoolean("editing", false).commit();
+            editor.putBoolean("editing", false).apply();
         }
 
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         int number = 0;
-        editor.putInt("planDifficulty", number).commit();
-        editor.putInt("planDifficulty", number).commit();
+        editor.putInt("planDifficulty", number).apply();
+        editor.putInt("planDifficulty", number).apply();
 
         generateResult();
         listenSeekbarDifficulty();
@@ -69,12 +69,12 @@ public class CreatePlanActivity extends AppCompatActivity {
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
+
+
     }
 
     private void generateResult() {

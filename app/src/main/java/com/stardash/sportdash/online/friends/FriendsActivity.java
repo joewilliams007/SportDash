@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -66,6 +67,7 @@ public class FriendsActivity extends AppCompatActivity {
     public String theId;
     public Boolean skipDataSaver;
     public static Boolean openedChat;
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -84,11 +86,10 @@ public class FriendsActivity extends AppCompatActivity {
         Bundle extras = getIntent().getExtras(); // get link hashtag if opened from link
         if (extras != null) {
             String value = extras.getString("friendHashtag").toString();
-            EditText editTextHashtag = findViewById(R.id.editTextTextPersonNameHashtag);
-            String id = value.split("#",3)[1];
-            editTextHashtag.setText(id);
-            vibrate();
             EditText editText = findViewById(R.id.editTextTextPersonNameHashtag);
+            String id = value.split("#",3)[1];
+            editText.setText(id);
+            vibrate();
             if (editText.getText().toString().length()<1){
                 toast("enter id");
             } else {
@@ -170,6 +171,7 @@ public class FriendsActivity extends AppCompatActivity {
             String follows = profile.split("ROFILE_OF_USER", 15)[9];
             String followers = profile.split("ROFILE_OF_USER", 15)[10];
             String bio = profile.split("ROFILE_OF_USER", 15)[11];
+            String stars = profile.split("ROFILE_OF_USER", 15)[12];
 
             TextView textViewDate = findViewById(R.id.textViewDate);
             textViewDate.setText("StarKing/Queen since "+accountCreated);
@@ -187,6 +189,7 @@ public class FriendsActivity extends AppCompatActivity {
             TextView textViewXpWeek = findViewById(R.id.textViewProgressWk);
             TextView textViewFollows = findViewById(R.id.textViewFollowingNr);
             TextView textViewFollowers = findViewById(R.id.textViewFollowersNr);
+            TextView textViewStarsNr = findViewById(R.id.textViewStarsNr);
             TextView textViewBio = findViewById(R.id.textViewBio);
             TextView textViewBioUnder = findViewById(R.id.textViewBioUnder);
 
@@ -202,6 +205,7 @@ public class FriendsActivity extends AppCompatActivity {
 
             textViewFollowers.setText(follows);
             textViewFollows.setText(followers);
+            textViewStarsNr.setText(stars);
 
             int level = 100;
             try {
@@ -689,26 +693,32 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     public void openFollowers(View view) {
-        followPage(false);
+        page(0);
     }
 
     public void openFollowing(View view) {
-        followPage(true);
+        page(1);
     }
 
-    public void followPage(Boolean b){
+    public void openStars(View view) {
+        page(2);
+    }
+    public static Boolean isStars;
+    public void page(int i){
+        isStars = false;
         TextView textViewUserID = findViewById(R.id.textViewMe);
         String id = textViewUserID.getText().toString();
-
-
         vibrate();
-        if(b){
-            StarsocketConnector.sendMessage("follows " + id.replace("#",""));
-        } else {
-            StarsocketConnector.sendMessage("followers " + id.replace("#",""));
+        if(i == 1) {
+            StarsocketConnector.sendMessage("followsPage " + id.replace("#", ""));
+        } else if (i == 2) {
+            isStars = true;
+            StarsocketConnector.sendMessage("starsPage " + id.replace("#", ""));
+        } else if (i == 0) {
+            StarsocketConnector.sendMessage("followersPage " + id.replace("#",""));
         }
-        Intent i = new Intent(this, FollowActivity.class);
-        startActivity(i);
+        Intent it = new Intent(this, FollowActivity.class);
+        startActivity(it);
     }
 
     public void editProfile(View view) {

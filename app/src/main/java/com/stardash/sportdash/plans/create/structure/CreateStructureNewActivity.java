@@ -36,6 +36,7 @@ import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
 import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.plans.create.CreatePlanActivity;
+import com.stardash.sportdash.plans.run.ResultActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.SettingsActivity;
 
@@ -70,11 +71,9 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                Window window = getWindow();
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-                window.setStatusBarColor(Color.BLACK);
-            }
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(Color.BLACK);
         }
 
         elementUseSeconds();
@@ -274,6 +273,9 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             editor.putString(id + " description", description).apply();
             editor.putString(id + " seconds", seconds).apply();
             editor.putString(id + " format", zeFormat).apply();
+
+            ConstraintLayout constraintLayout = findViewById(R.id.elementLayout);
+            constraintLayout.setVisibility(View.GONE);
             buildPage();
             mRecyclerView.scrollToPosition(mStructureList.size() - 1);
         }
@@ -331,7 +333,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         vibrate();
         EditText editTextSearch = findViewById(R.id.editTextSearch);
         String search = editTextSearch.getText().toString().toLowerCase(Locale.ROOT);;
-        if (search.length()<1){
+        if (search.length()>200){
             toast("enter element name");
         } else {
             try {
@@ -366,7 +368,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
                     createListSearch(res);
                 }
             }
-        }, 1000);
+        }, 250);
     }
 
     private ArrayList<ElementSearchItem> mElementSearchList;
@@ -473,7 +475,13 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         if (elementsInPlan<5){
             toast("required elements: 5");
         } else {
-            Intent i = new Intent(this, CreatePlanActivity.class);
+            SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
+            SharedPreferences.Editor editor = settings.edit();
+
+            editor.putBoolean("create", true).apply();
+            editor.putBoolean("editing", true).apply();
+
+            Intent i = new Intent(this, ResultActivity.class);
             startActivity(i);
         }
         vibrate();

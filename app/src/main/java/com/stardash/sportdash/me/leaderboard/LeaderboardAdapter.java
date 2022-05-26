@@ -89,7 +89,7 @@ public class LeaderboardAdapter extends RecyclerView.Adapter<LeaderboardAdapter.
         });
 
 
-        if (currentItem.getText1().contains("1. place")||currentItem.getText1().contains("2. place")||currentItem.getText1().contains("3. place")) {
+        if (currentItem.getText1().split("\\.")[0].equals(" 1")||currentItem.getText1().split("\\.")[0].equals(" 2")||currentItem.getText1().split("\\.")[0].equals(" 3")) {
             holder.mTextView1.setTextColor(Color.parseColor("#FFFDD835"));
         }
 

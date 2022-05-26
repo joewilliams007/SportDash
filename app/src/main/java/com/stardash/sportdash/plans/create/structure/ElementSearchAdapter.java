@@ -113,9 +113,15 @@ public class ElementSearchAdapter extends RecyclerView.Adapter<ElementSearchAdap
                     try {
                       StarsocketConnector.sendMessage("deleteElement " + element_id);
                         vibrate();
-                        vibrate();
+                        String deleted = "deleted element";
+                        holder.mTextView1.setText(deleted);
+                        holder.mTextView2.setText(deleted);
+                        holder.mTextView3.setText(deleted);
                     } catch (Exception e) {
-
+                        String deleted = "error deleting";
+                        holder.mTextView1.setText(deleted);
+                        holder.mTextView2.setText(deleted);
+                        holder.mTextView3.setText(deleted);
                     }
                 } else {
                     try {

@@ -39,6 +39,7 @@
         android:layout_margin="10dp"
         android:checked="true"
         android:onClick="enableAppLock"
+
         android:text="lock app"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp"

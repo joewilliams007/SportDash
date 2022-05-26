@@ -13,10 +13,12 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.text.InputType;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stardash.sportdash.R;
@@ -125,6 +127,42 @@ public class AccountActivity extends AppCompatActivity {
             @Override
             public void run() {
                 textViewCustomToast.setVisibility(View.GONE);
+            }
+        }, 3000);
+    }
+
+    public void savePassword(View view) {
+        EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
+        vibrate();
+        if (editTextPassword.getText().toString().replaceAll(" ","").length()<5){
+            toast("enter a password with min 5 length");
+        } else {
+            try {
+                if (editTextPassword.getText().toString().contains(" ")){
+                    toast("all blank spaces will be removed");
+                }
+                StarsocketConnector.sendMessage("setPassword " + Account.userid() + " " + editTextPassword.getText().toString().replaceAll(" ",""));
+                toast("updated password!");
+                Account.setPassword(editTextPassword.getText().toString().replaceAll(" ",""));
+                editTextPassword.setText("");
+            } catch (Exception e) {
+                toast("network error");
+            }
+        }
+    }
+
+    public void showPassword(View view) {
+        vibrate();
+        EditText editTextPassword = findViewById(R.id.editTextTextPersonNamePassword);
+        ImageView imageViewEye = findViewById(R.id.imageViewEye);
+        imageViewEye.setVisibility(View.GONE);
+        editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PERSON_NAME);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                editTextPassword.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
+                imageViewEye.setVisibility(View.VISIBLE);
             }
         }, 3000);
     }
