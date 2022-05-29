@@ -27,6 +27,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.stardash.sportdash.MainActivity;
@@ -60,14 +61,12 @@ public class GeneralActivity extends AppCompatActivity {
     }
 
     private void checkBoxes() {
-        CheckBox checkBox = findViewById(R.id.checkBoxLocalhost);
-        CheckBox checkBoxTheme = findViewById(R.id.checkBoxTheme);
-        CheckBox checkBoxVibration = findViewById(R.id.checkBoxVibration);
-        CheckBox checkBoxDataSaver = findViewById(R.id.checkBoxDataSaver);
+        Switch checkBox = findViewById(R.id.checkBoxLocalhost);
+        Switch checkBoxTheme = findViewById(R.id.checkBoxTheme);
+        Switch checkBoxVibration = findViewById(R.id.checkBoxVibration);
         checkBoxVibration.setChecked(Account.isVibration());
         checkBox.setChecked(Account.localhost());
         checkBoxTheme.setChecked(Account.isAmoled());
-        checkBoxDataSaver.setChecked(Account.isDataSaver());
     }
 
     public void openDeviceLinksSettings(View view) {
@@ -103,11 +102,7 @@ public class GeneralActivity extends AppCompatActivity {
         checkBoxes();
     }
 
-    public void dataSaver(View view) {
-        Account.setDataSaver(!Account.isDataSaver());
-        vibrate();
-        checkBoxes();
-    }
+
 
     public void setThemeAmoled() {
             ConstraintLayout main = findViewById(R.id.main);
@@ -235,6 +230,12 @@ public class GeneralActivity extends AppCompatActivity {
     public void openCustomize(View view) {
         vibrate();
         Intent i = new Intent(this, CustomizeActivity.class);
+        startActivity(i);
+    }
+
+    public void openDataSaver(View view) {
+        vibrate();
+        Intent i = new Intent(this, DataSaverActivity.class);
         startActivity(i);
     }
 }

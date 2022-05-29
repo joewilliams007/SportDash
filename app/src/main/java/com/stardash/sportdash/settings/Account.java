@@ -37,13 +37,23 @@ public class Account {
     // reward --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static String rewardDay() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
-        String result = pref.getString("rewardDay", null);
-        return result;
+        return pref.getString("rewardDay", null);
     }
     public static void setRewardDay(String day) {
         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
         SharedPreferences.Editor editor = settings.edit();
         editor.putString("rewardDay", day);
+        editor.apply();
+    }
+    // ip --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static String ip() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("ipConfig", 0); // 0 - for private mode
+        return pref.getString("ip", null);
+    }
+    public static void setIp(String ip) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("ipConfig", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("ip", ip);
         editor.apply();
     }
     // shop new? --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -411,6 +421,17 @@ public class Account {
     public static Boolean isDataSaver() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
         return pref.getBoolean("isDataSaver", false);
+    }
+    // DataSaverMobile --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static void setMobileDataSaver(boolean DataSaver) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putBoolean("isMobileDataSaver", DataSaver);
+        editor.apply();
+    }
+    public static Boolean isMobileDataSaver() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getBoolean("isMobileDataSaver", false);
     }
     // HomeName --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static void setHomeName(boolean HomeName) {

@@ -2,6 +2,7 @@ package com.stardash.sportdash.signIn;
 
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
@@ -19,6 +20,9 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.network.api.Methods;
+import com.stardash.sportdash.network.api.Model;
+import com.stardash.sportdash.network.api.RetrofitClient;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
@@ -28,6 +32,10 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RegisterActivity extends AppCompatActivity {
 
     @Override
@@ -35,11 +43,46 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        try {
-            StarsocketConnector.sendMessage("hello , .. can you hear me?");
-        } catch (Exception e){
-            toast("no network");
-        }
+            try {
+                Methods methods = RetrofitClient.getRetrofitInstance().create(Methods.class);
+                String clickName = "https://joewilliams007.github.io/jsonapi/adress.json";
+                Call<Model> call = methods.getAllData(clickName);
+                call.enqueue(new Callback<Model>() {
+                    @Override
+                    public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
+
+                        assert response.body() != null;
+                        String build = response.body().getBuild();
+                        String version = response.body().getVersion();
+                        String updateInfo = response.body().getUpdateInfo();
+                        String ip = response.body().getIp();
+                        String status = response.body().getStatus();
+
+                        if (ip.length()>1) {
+                            Account.setIp(ip);
+                        }
+
+                        if (!status.equals("online")) {
+                            toast("server is under maintenance");
+                        }
+
+                        try {
+                            StarsocketConnector.sendMessage("hello , .. can you hear me?");
+                        } catch (Exception e){
+                            toast("no network");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
+                        toast("could not connect to github");
+                    }
+                });
+            } catch (Exception ignored){
+
+            }
+
+
     }
 
     public void openLogin(View view) {

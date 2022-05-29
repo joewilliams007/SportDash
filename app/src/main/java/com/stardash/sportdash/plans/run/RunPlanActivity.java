@@ -1,9 +1,12 @@
 package com.stardash.sportdash.plans.run;
 
 import static com.stardash.sportdash.MainActivity.runningPlan;
+import static com.stardash.sportdash.online.friends.FriendsActivity.isStars;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
+import static com.stardash.sportdash.online.friends.follows.FollowActivity.pageStatus;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.plans.run.live.LivePlanActivity.livePlanId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +26,17 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
+import android.provider.MediaStore;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
+import com.stardash.sportdash.online.friends.follows.FollowActivity;
 import com.stardash.sportdash.plans.run.inspect.InspectActivity;
 import com.stardash.sportdash.plans.run.live.LivePlanActivity;
 import com.stardash.sportdash.settings.Account;
@@ -175,7 +181,9 @@ public class RunPlanActivity extends AppCompatActivity {
         }
 
     }
+    public static String thePlan;
     public static Boolean isRandom;
+    public static Boolean isSpecificPlan;
     public static String thePlan() {
         String plan = "err";
 
@@ -186,13 +194,15 @@ public class RunPlanActivity extends AppCompatActivity {
             plan = thePlan;
         } else if (Account.isMine()) {
             plan = pref.getString(String.valueOf(planInt) + " plan", null);
-        } else {
+        } else if (isSpecificPlan) {
+          plan = thePlan;
+        } else{
              plan = pref.getString(planInt+" planFriend", "empty");
         }
 
         return plan;
     }
-    static String thePlan;
+
 
     @Override
     public void onBackPressed() {
@@ -263,6 +273,7 @@ public class RunPlanActivity extends AppCompatActivity {
     }
 
     public void generateRandomPlan(View view) {
+        isSpecificPlan = false;
         generatePlan();
     }
 
@@ -364,6 +375,13 @@ public class RunPlanActivity extends AppCompatActivity {
                         String received = StarsocketConnector.getMessage();
                         textViewStarsAmount.setText(received.split("#")[0]);
                         textViewViewsAmount.setText(received.split("#")[1]);
+                        ImageView imageViewVerified = findViewById(R.id.imageViewVerified);
+
+                        if(Integer.parseInt(received.split("#")[0]) > 4) {
+                            imageViewVerified.setVisibility(View.VISIBLE);
+                        } else {
+                            imageViewVerified.setVisibility(View.GONE);
+                        }
 
                         String star_status = received.split("#")[2];
                         if (star_status.equals("1")) {
@@ -451,7 +469,35 @@ public class RunPlanActivity extends AppCompatActivity {
 
     public void livePlan(View view) {
         vibrate();
+        TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+        livePlanId = textViewPlanId.getText().toString().split("#")[1];
         Intent i = new Intent(this, LivePlanActivity.class);
         startActivity(i);
+    }
+
+    public void pageStars(View view) {
+        try {
+            pageStatus = "Stars";
+            isStars = false;
+            TextView textViewPlanId = findViewById(R.id.textViewPlanId);
+            String id = textViewPlanId.getText().toString();
+            vibrate();
+            StarsocketConnector.sendMessage("plansStarsPage " + id.replace("#", ""));
+            Intent it = new Intent(this, FollowActivity.class);
+            startActivity(it);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
+
+    public void openMusicApp(View view) {
+        vibrate();
+        try {
+            Intent intent = new Intent(MediaStore.INTENT_ACTION_MUSIC_PLAYER);
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+        } catch (Exception e){
+            toast("no music player found");
+        }
     }
 }

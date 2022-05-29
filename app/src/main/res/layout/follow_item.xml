@@ -31,8 +31,8 @@
             android:gravity="center"
             android:text="Line 2"
             android:textColor="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/textViewLine3"
-            app:layout_constraintStart_toEndOf="@+id/textViewLine1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView

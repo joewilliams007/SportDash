@@ -1,8 +1,11 @@
 package com.stardash.sportdash.plans.create;
 
+import static com.stardash.sportdash.settings.app.vibrate;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -23,6 +26,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.plans.run.PlanActivity;
 import com.stardash.sportdash.R;
@@ -413,6 +417,7 @@ public class CreatePlanActivity extends AppCompatActivity {
             EditText editTextDescription = findViewById(R.id.editTextTextPersonNameElementCustomDescription);
             TextView textViewCategory = findViewById(R.id.textViewChoose);
             TextView textViewMin = findViewById(R.id.textViewLengthMin);
+            EditText editTextTags = findViewById(R.id.editTextTags);
             int duration = Integer.parseInt(textViewMin.getText().toString().split(" ")[0]);
 
             if (editTextName.getText().toString().length()<1){
@@ -425,6 +430,8 @@ public class CreatePlanActivity extends AppCompatActivity {
                 CheckBox checkBox = findViewById(R.id.checkBox);
                 if (checkBox.isChecked()) {
                     toast("the workout is to short to be public");
+                } else if (editTextTags.getText().toString().length()>150) {
+                    toast("tags entry is too long");
                 } else {
                     completeGeneratePlan();
                 }
@@ -437,6 +444,23 @@ public class CreatePlanActivity extends AppCompatActivity {
     }
 
     private void completeGeneratePlan() {
+        CheckBox checkBox = findViewById(R.id.checkBox);
+        if (checkBox.isChecked()) {
+            try {
+                StarsocketConnector.sendMessage("ping");
+                startUpload();
+            } catch (Exception e) {
+                toast("no network\nuncheck visibility?");
+            }
+        } else {
+            startUpload();
+        }
+    }
+
+    public static String planTags;
+    private void startUpload() {
+        EditText editTextTags = findViewById(R.id.editTextTags);
+        planTags = editTextTags.getText().toString().replaceAll(" ","");
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
         CheckBox checkBox = findViewById(R.id.checkBox);
@@ -447,8 +471,8 @@ public class CreatePlanActivity extends AppCompatActivity {
         }
 
         TextView textViewCategory = findViewById(R.id.textViewChoose);
-        editor.putString("category", String.valueOf(textViewCategory.getText().toString())).commit();
-        editor.putString("committed plan", String.valueOf(trainingPlan())).commit();
+        editor.putString("category", String.valueOf(textViewCategory.getText().toString())).apply();
+        editor.putString("committed plan", String.valueOf(trainingPlan())).apply();
         Intent i = new Intent(this, PlanActivity.class);
         startActivity(i);
         addPlan();
@@ -457,7 +481,7 @@ public class CreatePlanActivity extends AppCompatActivity {
     public void addPlan(){
         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
         SharedPreferences.Editor editor = settings.edit();
-        editor.putInt("planTotal", myTotalPlans()+1).commit();
+        editor.putInt("planTotal", myTotalPlans()+1).apply();
     }
 
     int myTotalPlans() {
@@ -466,6 +490,7 @@ public class CreatePlanActivity extends AppCompatActivity {
         return plans;
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -477,5 +502,20 @@ public class CreatePlanActivity extends AppCompatActivity {
                 textViewCustomToast.setVisibility(View.GONE);
             }
         }, 3000);
+    }
+
+    public void showTags(View view) {
+        vibrate();
+        CheckBox checkBox = findViewById(R.id.checkBox);
+        TextView textViewTags = findViewById(R.id.textViewTags);
+        EditText editTextTags = findViewById(R.id.editTextTags);
+        if (checkBox.isChecked()) {
+            textViewTags.setVisibility(View.VISIBLE);
+            editTextTags.setVisibility(View.VISIBLE);
+        } else {
+            textViewTags.setVisibility(View.GONE);
+            editTextTags.setVisibility(View.GONE);
+        }
+
     }
 }

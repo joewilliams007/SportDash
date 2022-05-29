@@ -32,9 +32,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxName"
         android:layout_width="match_parent"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
@@ -44,12 +49,17 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewApp"
         tools:layout_editor_absoluteX="-10dp" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxTracking"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:onClick="enableTracking"
         android:text="tracking activity on start page"
         android:textColor="@color/white"

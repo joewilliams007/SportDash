@@ -28,7 +28,7 @@ public class aClientsocket {
         serverPort = port;
         try {
 
-            String ip = "87.184.96.149";
+            String ip = Account.ip();
             if (Account.localhost()) {
                 ip = "192.168.2.107";
             }
@@ -42,6 +42,8 @@ public class aClientsocket {
             System.out.println("server can not be found.");
         } catch (IOException e) {
             System.out.println("an error occurred while waiting for server response.");
+        } catch (Exception ignored){
+
         }
     }
 
@@ -66,6 +68,7 @@ public class aClientsocket {
             System.out.println("An error occured while thrying to send the message");
         }
         System.out.println("Message send attempt over. ");
+
     }
 
     public String receiveMessage() {

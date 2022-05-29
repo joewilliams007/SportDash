@@ -33,33 +33,16 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
     <Switch
-        android:id="@+id/switchEveryone"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="open to everyone"
-        android:textColor="@color/white"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:checked="true"
-        android:enabled="true"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
-
-    <Switch
         android:id="@+id/switchFollowing"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:checked="true"
-        android:enabled="true"
         android:padding="10dp"
         android:text="open to people i follow only"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchEveryone"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -69,13 +52,13 @@
         android:layout_margin="10dp"
         android:checked="true"
         android:enabled="true"
-        android:padding="10dp"
         android:onClick="enableProfile"
+        android:padding="10dp"
         android:text="show on my profile"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switchFollowing"
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -83,16 +66,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:checked="true"
-        android:enabled="true"
         android:onClick="enablePassword"
         android:padding="10dp"
         android:text="password only"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProfile"
+        app:layout_constraintTop_toBottomOf="@+id/switchFollowing"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <EditText
@@ -135,4 +116,18 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/switchProfile" />
 
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

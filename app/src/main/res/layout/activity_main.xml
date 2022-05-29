@@ -534,57 +534,5 @@
         app:layout_constraintTop_toTopOf="@+id/imageViewEnergy1"
         app:srcCompat="@drawable/arrow" />
 
-    <TextView
-        android:id="@+id/textViewCoins"
-        android:layout_width="0dp"
-        android:gravity="right"
-        android:layout_marginEnd="10dp"
-        android:layout_height="wrap_content"
-        android:background="@drawable/blue_text_background"
-        android:padding="10dp"
-        android:text="150"
-        android:textColor="@color/projectBlack"
-        android:textStyle="italic|bold"
-        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toTopOf="@+id/textViewLevel" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewCoins"
-        app:layout_constraintStart_toStartOf="@+id/textViewRandom"
-        app:layout_constraintTop_toTopOf="@+id/textViewCoins"
-        app:srcCompat="@drawable/star1" />
-
-    <TextView
-        android:id="@+id/textViewDashes"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="10dp"
-        android:layout_marginTop="10dp"
-        android:background="@drawable/blue_text_background"
-        android:gravity="right"
-        android:padding="10dp"
-        android:textStyle="italic|bold"
-        android:text="20"
-        android:textColor="@color/projectBlack"
-        app:layout_constraintEnd_toEndOf="@+id/textViewMe"
-        app:layout_constraintStart_toStartOf="@+id/imageView2"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCoins" />
-
-    <ImageView
-        android:id="@+id/imageView227"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewDashes"
-        app:layout_constraintStart_toStartOf="@+id/textViewRandom"
-        app:layout_constraintTop_toTopOf="@+id/textViewDashes"
-        app:srcCompat="@drawable/star2" />
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

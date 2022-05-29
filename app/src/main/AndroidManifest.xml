@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.stardash.sportdash">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -16,6 +17,12 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
+        <activity
+            android:name=".plans.run.live.CreatingLiveActivity"
+            android:exported="false" />
+        <activity
+            android:name=".settings.account.DataSaverActivity"
+            android:exported="false" />
         <activity
             android:name=".plans.run.live.LivePlanGenerateActivity"
             android:exported="false" />
@@ -113,10 +120,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".me.AchievementsActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".online.LobbyActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

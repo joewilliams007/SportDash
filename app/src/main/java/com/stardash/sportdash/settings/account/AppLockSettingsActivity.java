@@ -11,6 +11,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.stardash.sportdash.MainActivity;
@@ -29,8 +30,8 @@ public class AppLockSettingsActivity extends AppCompatActivity {
     }
 
     private void checkBoxes() {
-        CheckBox checkBoxApp = findViewById(R.id.checkBoxApp);
-        CheckBox checkBoxChats = findViewById(R.id.checkBoxChats);
+        Switch checkBoxApp = findViewById(R.id.checkBoxApp);
+        Switch checkBoxChats = findViewById(R.id.checkBoxChats);
         checkBoxApp.setChecked(Account.isAppLock());
         checkBoxChats.setChecked(Account.isChatLock());
     }

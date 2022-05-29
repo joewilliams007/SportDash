@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.stardash.sportdash.R;
@@ -47,8 +48,8 @@ public class TtsActivity extends AppCompatActivity {
     }
 
     private void setCheckBoxes() {
-        CheckBox checkBoxNames = findViewById(R.id.checkBoxNames);
-        CheckBox checkBoxDescriptions = findViewById(R.id.checkBoxDescriptions);
+        Switch checkBoxNames = findViewById(R.id.checkBoxNames);
+        Switch checkBoxDescriptions = findViewById(R.id.checkBoxDescriptions);
         checkBoxNames.setChecked(ttsNames());
         checkBoxDescriptions.setChecked(ttsDescriptions());
     }

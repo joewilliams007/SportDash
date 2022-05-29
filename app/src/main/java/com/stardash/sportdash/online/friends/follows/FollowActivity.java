@@ -5,6 +5,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -12,6 +13,8 @@ import android.os.Looper;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
@@ -26,11 +29,16 @@ import java.util.ArrayList;
 
 public class FollowActivity extends AppCompatActivity {
 
+    public static String pageStatus;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_follow);
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+
+        TextView textViewTop = findViewById(R.id.textViewTop);
+        textViewTop.setText(pageStatus);
 
         final Handler handler = new Handler(Looper.getMainLooper());
         handler.postDelayed(new Runnable() {
@@ -38,7 +46,7 @@ public class FollowActivity extends AppCompatActivity {
             public void run() {
                 getData();
             }
-        }, 100);
+        }, 200);
     }
 
     private void getData() {

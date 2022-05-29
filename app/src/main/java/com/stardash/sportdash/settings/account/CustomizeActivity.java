@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.Switch;
 
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
@@ -23,8 +24,8 @@ public class CustomizeActivity extends AppCompatActivity {
     }
 
     private void checkBoxes() {
-        CheckBox checkBox = findViewById(R.id.checkBoxName);
-        CheckBox checkBoxTracking = findViewById(R.id.checkBoxTracking);
+        Switch checkBox = findViewById(R.id.checkBoxName);
+        Switch checkBoxTracking = findViewById(R.id.checkBoxTracking);
         checkBox.setChecked(Account.isHomeName());
         checkBoxTracking.setChecked(Account.isTrackingHome());
     }

@@ -33,52 +33,56 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxVibration"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:onClick="enableVibration"
         android:text="vibration"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp"
-        tools:layout_editor_absoluteX="-10dp" />
+        tools:layout_editor_absoluteX="-10dp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxTheme"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:onClick="enableAmoled"
         android:text="amoled dark mode"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxVibration"
         tools:layout_editor_absoluteX="10dp" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxLocalhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
         android:onClick="enableLocalhost"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:text="localhost"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxTheme"
-        tools:layout_editor_absoluteX="10dp" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDataSaver"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:checked="true"
-        android:onClick="dataSaver"
-        android:text="data saver"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalhost"
         tools:layout_editor_absoluteX="10dp" />
 
     <TextView
@@ -192,7 +196,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxDataSaver" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalhost" />
 
     <ImageView
         android:id="@+id/imageViewFeedback"
@@ -215,9 +219,9 @@
         android:text="customize"
         android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewDataSaver" />
 
     <ImageView
         android:id="@+id/imageViewCustomize"
@@ -252,6 +256,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewLock"
+        app:srcCompat="@drawable/arrow" />
+
+    <TextView
+        android:id="@+id/textViewDataSaver"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openDataSaver"
+        android:padding="10dp"
+        android:text="data saver"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
+
+    <ImageView
+        android:id="@+id/imageViewDataSaver"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDataSaver"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewDataSaver"
         app:srcCompat="@drawable/arrow" />
 
     <TextView
@@ -307,4 +335,5 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

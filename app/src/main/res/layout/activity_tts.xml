@@ -33,22 +33,32 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxNames"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:onClick="enableNames"
         android:text="element names"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxDescriptions"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:checked="true"
         android:onClick="enableDescriptions"
         android:text="element descriptions"

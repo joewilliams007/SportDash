@@ -5,6 +5,9 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.isStars;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.annotation.SuppressLint;
@@ -95,6 +98,8 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                             try {
                                 StarsocketConnector.sendMessage("downloadPlanById " + id);
 
+
+
                                 final Handler handler = new Handler(Looper.getMainLooper());
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -105,6 +110,10 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                                         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = settings.edit();
                                         String plan1 = received;
+
+                                        isSpecificPlan = true;
+                                        thePlan = received;
+                                        isRandom = false;
 
                                         if (plan1.equals("err")) {
                                             vibrate();
@@ -120,7 +129,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                                             MyApplication.getAppContext().startActivity(i);
                                         }
                                     }
-                                }, 1000);
+                                }, 125);
                             } catch (Exception e){
 
                             }

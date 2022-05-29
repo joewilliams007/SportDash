@@ -2,6 +2,7 @@ package com.stardash.sportdash.online.friends;
 
 
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
+import static com.stardash.sportdash.online.friends.follows.FollowActivity.pageStatus;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
@@ -22,6 +23,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
@@ -40,6 +42,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
 import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
@@ -54,6 +57,7 @@ import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.settings.SettingsActivity;
+import com.stardash.sportdash.settings.account.DataSaverActivity;
 import com.stardash.sportdash.settings.account.GeneralActivity;
 import com.stardash.sportdash.signIn.LockActivity;
 
@@ -103,6 +107,10 @@ public class FriendsActivity extends AppCompatActivity {
             }
             //The key argument here must match that used in the other activity
         }
+
+
+
+
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
@@ -229,7 +237,7 @@ public class FriendsActivity extends AppCompatActivity {
                 ObjectAnimator.ofInt(progressBarWeek, "progress", Integer.valueOf(xpWeek))
                         .setDuration(600)
                         .start();
-            } catch (Exception e){
+            } catch (Exception ignored){
 
             }
 
@@ -438,10 +446,26 @@ public class FriendsActivity extends AppCompatActivity {
     private void loadPlans(String id) {
         if (Account.isDataSaver()) {
                 setPlanNames();
+                final ConnectivityManager connMgr = (ConnectivityManager)
+                        this.getSystemService(Context.CONNECTIVITY_SERVICE);
+                final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+                final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+                if (wifi.isConnectedOrConnecting ()) {
+                    if (!Account.isMobileDataSaver()) {
+                        loadPlansFinal(id);
+                        skipDataSaver = true;
+                    }
+                } else if (mobile.isConnectedOrConnecting ()) {
+                    //
+                } else {
+                    //
+                }
         } else {
             loadPlansFinal(id);
         }
     }
+
+
 
     public void loadPlansFinal(String id) {
             StarsocketConnector.sendMessage("downloadPlans " + id);
@@ -488,7 +512,7 @@ public class FriendsActivity extends AppCompatActivity {
         if (Account.isDataSaver() && !skipDataSaver) {
             empty = "Download";
         } else if (Account.isDataSaver()) {
-            toast("downloaded!");
+
         }
         try {
             textViewNamePlan1.setText(Account.planFriend(1).split("\n", 5)[2]);
@@ -693,32 +717,39 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
     public void openFollowers(View view) {
+        pageStatus = "Followers";
         page(0);
     }
 
     public void openFollowing(View view) {
+        pageStatus = "Following";
         page(1);
     }
 
     public void openStars(View view) {
+        pageStatus = "Stars";
         page(2);
     }
     public static Boolean isStars;
     public void page(int i){
-        isStars = false;
-        TextView textViewUserID = findViewById(R.id.textViewMe);
-        String id = textViewUserID.getText().toString();
-        vibrate();
-        if(i == 1) {
-            StarsocketConnector.sendMessage("followsPage " + id.replace("#", ""));
-        } else if (i == 2) {
-            isStars = true;
-            StarsocketConnector.sendMessage("starsPage " + id.replace("#", ""));
-        } else if (i == 0) {
-            StarsocketConnector.sendMessage("followersPage " + id.replace("#",""));
+        try {
+            isStars = false;
+            TextView textViewUserID = findViewById(R.id.textViewMe);
+            String id = textViewUserID.getText().toString();
+            vibrate();
+            if (i == 1) {
+                StarsocketConnector.sendMessage("followsPage " + id.replace("#", ""));
+            } else if (i == 2) {
+                isStars = true;
+                StarsocketConnector.sendMessage("starsPage " + id.replace("#", ""));
+            } else if (i == 0) {
+                StarsocketConnector.sendMessage("followersPage " + id.replace("#", ""));
+            }
+            Intent it = new Intent(this, FollowActivity.class);
+            startActivity(it);
+        } catch (Exception e){
+            toast("no network");
         }
-        Intent it = new Intent(this, FollowActivity.class);
-        startActivity(it);
     }
 
     public void editProfile(View view) {
@@ -729,7 +760,7 @@ public class FriendsActivity extends AppCompatActivity {
 
     public void dataSaverSettings(View view) {
         vibrate();
-        Intent i = new Intent(this, GeneralActivity.class);
+        Intent i = new Intent(this, DataSaverActivity.class);
         startActivity(i);
     }
 

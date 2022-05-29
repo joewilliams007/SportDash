@@ -1,6 +1,8 @@
 package com.stardash.sportdash.plans.run;
 
+import static com.stardash.sportdash.plans.create.CreatePlanActivity.planTags;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,7 +36,7 @@ public class PlanActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_plan);
         setPlanNames();
-
+        isSpecificPlan = false;
         TextView textViewCreate = findViewById(R.id.textViewCreate);
         if (Account.isCreate()){
             textViewCreate.setVisibility(View.GONE);
@@ -174,7 +176,7 @@ public class PlanActivity extends AppCompatActivity {
         try {
         toast("uploading ...");
         if (online()){
-            StarsocketConnector.sendMessage("upload_plans_everyone "+Account.userid()+" "+planId+" "+planId()+" XXXXXXXX"+category()+"XXXXXXXX ##########"+Account.plan(planId));
+            StarsocketConnector.sendMessage("upload_plans_everyone "+Account.userid()+" "+planId+" "+planId()+" XXXXXXXX"+category()+"XXXXXXXX ##########"+Account.plan(planId)+"##########"+planTags) ;
         } else {
             StarsocketConnector.sendMessage("upload_plans "+Account.userid()+" "+planId+" "+planId()+" ##########"+Account.plan(planId));
         }

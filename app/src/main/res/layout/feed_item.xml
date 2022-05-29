@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_margin="10dp"
-    app:cardCornerRadius="2dp"
     android:layout_height="wrap_content"
+    app:cardCornerRadius="20dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
@@ -20,11 +20,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/track_green_background"
-            android:padding="10dp"
             android:gravity="center"
+            android:padding="10dp"
             android:text="Workout"
             android:textColor="@color/black"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -35,8 +34,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/track_green_background"
             android:layout_margin="10dp"
-            android:text="This is the best workout ever :))))\n
-\n20 min\n#1-31231"
+            android:text="This is the best workout ever :))))"
             android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -44,17 +42,30 @@
 
         <TextView
             android:id="@+id/textViewLine3"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:text="body, king"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textViewLine2" />
+
+        <TextView
+            android:id="@+id/textViewLine4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-           android:gravity="right"
-            android:layout_marginRight="10dp"
-            android:paddingLeft="10dp"
+            android:layout_marginEnd="8dp"
+            android:gravity="right"
             android:padding="10dp"
+            android:paddingLeft="10dp"
             android:text="102 views, 12 stars"
             android:textColor="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLine2" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLine3" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

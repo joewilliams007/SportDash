@@ -6,6 +6,7 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSear
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
 import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
@@ -51,6 +52,7 @@ import com.stardash.sportdash.network.api.Model;
 import com.stardash.sportdash.network.api.RetrofitClient;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.feed.FeedActivity;
+import com.stardash.sportdash.online.feed.FeedAdapter;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.online.chat.InboxActivity;
@@ -91,7 +93,9 @@ public class MainActivity extends AppCompatActivity {
         editItem = false;
         duplicateElement = false;
         runningPlan = false;
+        isSpecificPlan = false;
 
+        checkServerStatus(); // is server online make github request
 
        /* AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
             builder.setTitle(R.string.app_name);
@@ -116,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textViewTracking = findViewById(R.id.textViewBottom);
         TextView textViewName = findViewById(R.id.textViewDetail);
         ImageView imageView = findViewById(R.id.floatingActionButton8);
-        if(!Account.isTrackingHome()) {
+        if (!Account.isTrackingHome()) {
             textViewTracking.setVisibility(View.GONE);
             imageView.setVisibility(View.GONE);
         }
@@ -125,7 +129,7 @@ public class MainActivity extends AppCompatActivity {
         }
         try {
             StarsocketConnector.sendMessage("boost");
-        } catch (Exception ignored){
+        } catch (Exception ignored) {
 
         }
 
@@ -137,20 +141,20 @@ public class MainActivity extends AppCompatActivity {
 
         Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
         checkDeepLink(); // check if app was opened with a link
-        checkServerStatus(); // is server online make github request
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        if (Account.loggedIn()){
+        if (Account.loggedIn()) {
             try {
                 setUserStats(); // set user progress
                 Account.getXp(1);
-            } catch (Exception ignored){
+            } catch (Exception ignored) {
 
             }
 
             try {
-                StarsocketConnector.sendMessage("connecting "+" #"+Account.userid());
-            } catch (Exception e){
+                StarsocketConnector.sendMessage("connecting " + " #" + Account.userid());
+            } catch (Exception e) {
                 toast("no network");
             }
         } else {
@@ -257,8 +261,12 @@ public class MainActivity extends AppCompatActivity {
                     String build = response.body().getBuild();
                     String version = response.body().getVersion();
                     String updateInfo = response.body().getUpdateInfo();
-                    String ip = response.body().getBuild();
+                    String ip = response.body().getIp();
                     String status = response.body().getStatus();
+
+                    if (ip.length()>1) {
+                        Account.setIp(ip);
+                    }
 
                     if (!status.equals("online")) {
                         toast("server is under maintenance");
@@ -515,6 +523,12 @@ public class MainActivity extends AppCompatActivity {
 
     public void openFeed(View view) {
         vibrate();
-        toast("available soon");
+        try {
+            StarsocketConnector.sendMessage("all_time "+ Account.userid());
+            Intent i = new Intent(this, FeedActivity.class);
+            startActivity(i);
+        } catch (Exception e){
+            toast("no network");
+        }
     }
 }

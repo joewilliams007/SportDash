@@ -68,6 +68,33 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameElementCustom" />
 
+    <TextView
+        android:id="@+id/textViewTags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Tags (comma separated) maximum 5"
+        android:background="@drawable/main_text_background"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+
+    <EditText
+        android:id="@+id/editTextTags"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/main_text_background"
+        android:hint="Tags (comma separated)"
+        android:importantForAutofill="no"
+        android:inputType="textPersonName"
+        android:padding="10dp"
+        android:textColor="@color/projectGreen"
+        android:textColorHint="@color/projectBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTags" />
 
     <TextView
         android:id="@+id/textViewLength"
@@ -316,9 +343,11 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="upload to categories (+10 points/day)"
+        android:background="@drawable/main_text_background"
+        android:text="for anyone visible"
         android:checked="true"
-        android:textColor="@color/projectGreen"
+        android:onClick="showTags"
+        android:textColor="@color/white"
         android:textColorHint="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

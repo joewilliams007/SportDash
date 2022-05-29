@@ -32,17 +32,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <CheckBox
-        android:id="@+id/checkBox"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:checked="true"
-        android:text="show my stared plans on my profile"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
-        tools:layout_editor_absoluteX="-10dp" />
-
     <TextView
         android:id="@+id/textViewTts"
         android:layout_width="0dp"
@@ -55,7 +44,7 @@
         android:textColor="@color/projectGreen"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
 
     <ImageView
         android:id="@+id/imageViewTts"

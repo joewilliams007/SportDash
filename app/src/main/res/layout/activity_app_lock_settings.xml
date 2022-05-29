@@ -32,26 +32,35 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxApp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
         android:onClick="enableAppLock"
-
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:text="lock app"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp"
         tools:layout_editor_absoluteX="-10dp" />
 
-    <CheckBox
+    <Switch
         android:id="@+id/checkBoxChats"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:checked="true"
         android:text="lock chats"
+        android:buttonTint="@color/projectGreen"
+        android:backgroundTint="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:textColorHighlight="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
         android:onClick="enableChatLock"
         android:textColor="@color/white"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxApp"
