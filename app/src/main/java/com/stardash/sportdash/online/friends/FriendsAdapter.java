@@ -110,7 +110,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
                     Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     MyApplication.getAppContext().startActivity(i);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }
@@ -128,7 +128,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
                     Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     MyApplication.getAppContext().startActivity(i);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }
@@ -146,7 +146,7 @@ public class FriendsAdapter extends RecyclerView.Adapter<FriendsAdapter.FriendsV
                     Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                     i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     MyApplication.getAppContext().startActivity(i);
-                } catch (Exception e) {
+                } catch (Exception ignored) {
 
                 }
             }

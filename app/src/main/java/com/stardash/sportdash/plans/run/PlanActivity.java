@@ -69,6 +69,7 @@ public class PlanActivity extends AppCompatActivity {
     }
 
     public void createPlan(View view) {
+        vibrate();
         Intent i = new Intent(this, CreateStructureNewActivity.class);
         startActivity(i);
     }

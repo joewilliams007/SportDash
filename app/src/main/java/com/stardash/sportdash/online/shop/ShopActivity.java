@@ -97,7 +97,9 @@ public class ShopActivity extends AppCompatActivity {
     int version = BuildConfig.VERSION_CODE;
     private void getShop() {
         try {
-            StarsocketConnector.sendMessage("shop "+String.valueOf(version));
+            try {
+                StarsocketConnector.sendMessage("shop " + String.valueOf(version));
+
             final Handler handler = new Handler(Looper.getMainLooper());
             TextView textViewItem1 = findViewById(R.id.textViewItem1);
             TextView textViewItem2 = findViewById(R.id.textViewItem2);
@@ -119,6 +121,7 @@ public class ShopActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
+                    try {
                     String received = StarsocketConnector.getMessage();
                     if (received.contains("outdated-app")){
                         toast("update SportDash app to access shop");
@@ -199,11 +202,15 @@ public class ShopActivity extends AppCompatActivity {
                         } catch (Exception e){
                             toast("unknown error please update app or report error");
                         }
-
+                    }
+                    } catch (Exception e){
+                        toast("no network");
                     }
                 }
             }, 100);
-
+            } catch (Exception e){
+                toast("no network");
+            }
         } catch (Exception e){
             toast("no network");
         }

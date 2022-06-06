@@ -33,6 +33,7 @@ import com.stardash.sportdash.online.chat.ChatItem;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
+import com.stardash.sportdash.settings.account.AccountActivity;
 
 import java.util.ArrayList;
 import java.util.Locale;
@@ -50,15 +51,23 @@ public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.Stru
 
     public static  class StructureViewHolder extends RecyclerView.ViewHolder{
 
+        public View mView1;
         public TextView mTextView1;
         public TextView mTextView2;
         public TextView mTextView3;
+        public TextView mTextView4;
+        public TextView mTextView5;
+        public TextView mTextView6;
 
         public StructureViewHolder(@NonNull View itemView) {
             super(itemView);
             mTextView1 = itemView.findViewById(R.id.textViewLine1);
             mTextView2 = itemView.findViewById(R.id.textViewLine2);
             mTextView3 = itemView.findViewById(R.id.textViewLine3);
+            mTextView4 = itemView.findViewById(R.id.textViewLine4);
+            mTextView5 = itemView.findViewById(R.id.textViewLine5);
+            mTextView6 = itemView.findViewById(R.id.textViewLine6);
+            mView1 = itemView.findViewById(R.id.view);
         }
     }
 
@@ -70,8 +79,7 @@ public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.Stru
     @Override
     public StructureViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.element_item,parent, false);
-        StructureViewHolder evh = new StructureViewHolder(v);
-        return evh;
+        return new StructureViewHolder(v);
     }
 
     @Override
@@ -88,55 +96,85 @@ public class StructureAdapter extends RecyclerView.Adapter<StructureAdapter.Stru
         holder.mTextView2.setText(currentItem.getText2());
         holder.mTextView3.setText(currentItem.getText3());
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        holder.mTextView4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putInt("chooseId", Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""))).apply();
+                tappedItem = true;
+                editItem = true;
+                try {
+                    vibrate();
+                    Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MyApplication.getAppContext().startActivity(i);
+                } catch (Exception ignored) {
+
+                }
+            }
+        });
+        holder.mTextView5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                duplicateElement = true;
                 vibrate();
-                if (inspectingPlan) {
+                SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
+                SharedPreferences.Editor editor = settings.edit();
+                int chosenID = Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""));
+                editor.putInt("chooseId", chosenID).apply();
+                tappedItem = true;
+                editItem = true;
 
-                } else if(duplicateElement){
-                    SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    int chosenID = Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""));
-                    editor.putInt("chooseId", chosenID).apply();
-                    tappedItem = true;
-                    editItem = true;
+                String name = settings.getString(chosenID+" name", "");
+                String description = settings.getString(chosenID+" description", "");
+                String seconds = settings.getString(chosenID+" seconds", "0");
 
-                    String name = settings.getString(chosenID+" name", "");
-                    String description = settings.getString(chosenID+" description", "");
-                    String seconds = settings.getString(chosenID+" seconds", "0");
+                e_desc = description;
+                e_name = name;
+                e_time = seconds;
 
-                    e_desc = description;
-                    e_name = name;
-                    e_time = seconds;
+                try {
+                    Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MyApplication.getAppContext().startActivity(i);
+                } catch (Exception ignored) {
 
-                    try {
-                        vibrate();
-                        Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        MyApplication.getAppContext().startActivity(i);
-                    } catch (Exception e) {
-
-                    }
-                } else {
-                    SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putInt("chooseId", Integer.parseInt(holder.mTextView1.getText().toString().replace(".", ""))).apply();
-                    tappedItem = true;
-                    editItem = true;
-                    try {
-                        vibrate();
-                        Intent i = new Intent(MyApplication.getAppContext(), CreateStructureNewActivity.class);
-                        i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        MyApplication.getAppContext().startActivity(i);
-                    } catch (Exception e) {
-
-                    }
                 }
             }
         });
 
 
+        holder.mTextView6.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vibrate();
+                holder.mTextView4.setVisibility(View.GONE);
+                holder.mTextView5.setVisibility(View.GONE);
+                holder.mTextView6.setVisibility(View.GONE);
+                holder.mView1.setVisibility(View.GONE);
+            }
+        });
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                vibrate();
+                if (!inspectingPlan) {
+                    if (holder.mTextView4.getVisibility() == View.GONE) {
+                        holder.mTextView4.setVisibility(View.VISIBLE);
+                        holder.mTextView5.setVisibility(View.VISIBLE);
+                        holder.mTextView6.setVisibility(View.VISIBLE);
+                        holder.mView1.setVisibility(View.VISIBLE);
+                    } else {
+                        holder.mTextView4.setVisibility(View.GONE);
+                        holder.mTextView5.setVisibility(View.GONE);
+                        holder.mTextView6.setVisibility(View.GONE);
+                        holder.mView1.setVisibility(View.GONE);
+                    }
+                }
+            }
+        });
 
     }
 

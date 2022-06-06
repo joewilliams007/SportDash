@@ -2,6 +2,7 @@ package com.stardash.sportdash;
 
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
+import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.editItem;
@@ -117,21 +118,6 @@ public class MainActivity extends AppCompatActivity {
             AlertDialog alert = builder.create();
             alert.show(); */
 
-        TextView textViewTracking = findViewById(R.id.textViewBottom);
-        TextView textViewName = findViewById(R.id.textViewDetail);
-        ImageView imageView = findViewById(R.id.floatingActionButton8);
-        if (!Account.isTrackingHome()) {
-            textViewTracking.setVisibility(View.GONE);
-            imageView.setVisibility(View.GONE);
-        }
-        if (!Account.isHomeName()) {
-            textViewName.setVisibility(View.GONE);
-        }
-        try {
-            StarsocketConnector.sendMessage("boost");
-        } catch (Exception ignored) {
-
-        }
 
         changeLock = "app";
         if (Account.isAppLock() && !loggedIn && !Account.password().equals("none")) {
@@ -175,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
             textViewLevel.setTextColor(Color.parseColor("#000000"));
         }
 
-        getInbox();
+        // getInbox();
         isNewLogin();
         isShopNew();
 
@@ -224,22 +210,26 @@ public class MainActivity extends AppCompatActivity {
                 @SuppressLint("SetTextI18n")
                 @Override
                 public void run() {
-                    String inbox = StarsocketConnector.getMessage();
-                    if (inbox.length()>12){
-                        textView.setVisibility(View.VISIBLE);
+                    try {
+                        String inbox = StarsocketConnector.getMessage();
+                        if (inbox.length()>12){
+                            textView.setVisibility(View.VISIBLE);
 
-                        char someChar = '#';
-                        int count = 0;
+                            char someChar = '#';
+                            int count = 0;
 
-                        for (int i = 0; i < inbox.length(); i++) {
-                            if (inbox.charAt(i) == someChar) {
-                                count++;
+                            for (int i = 0; i < inbox.length(); i++) {
+                                if (inbox.charAt(i) == someChar) {
+                                    count++;
+                                }
+                            }
+                            textView.setText(" "+String.valueOf(count)+" ");
+                            if (count>0){
+                                toast("new messages!");
                             }
                         }
-                        textView.setText(" "+String.valueOf(count)+" ");
-                        if (count>0){
-                            toast("new messages!");
-                        }
+                    } catch (Exception ignored){
+
                     }
                 }
             }, 500);
@@ -383,7 +373,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void openSettings(View view) {
         vibrate();
-
         Intent i = new Intent(this, SettingsActivity.class);
         startActivity(i);
     }
@@ -451,13 +440,42 @@ public class MainActivity extends AppCompatActivity {
             textViewClose.setVisibility(View.GONE);
         }
     }
-
+    // NAVBAR
     public void openFriendsList(View view) {
         vibrate();
         invalidId = false;
+        friendsSearchRequest = false;
         Intent i = new Intent(this, FriendsActivity.class);
         startActivity(i);
     }
+    public void openFriendsSearch(View view) {
+        invalidId = false;
+        friendsSearchRequest = true;
+        Intent i = new Intent(this, FriendsActivity.class);
+        startActivity(i);
+    }
+
+    public void openInbox(View view) {
+        Intent i = new Intent(this, InboxActivity.class);
+        startActivity(i);
+        vibrate();
+    }
+    public void openFeed(View view) {
+        vibrate();
+        try {
+            StarsocketConnector.sendMessage("all_time "+ Account.userid());
+            Intent i = new Intent(this, FeedActivity.class);
+            startActivity(i);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
+    public void openHome(View view) {
+        vibrate();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    // END OF NAVBAR
 
     public void openAchievements(View view) {
         vibrate();
@@ -471,11 +489,7 @@ public class MainActivity extends AppCompatActivity {
         vibrate();
     }
 
-    public void openInbox(View view) {
-        Intent i = new Intent(this, InboxActivity.class);
-        startActivity(i);
-        vibrate();
-    }
+
 
     public void openLog(View view) {
         vibrate();
@@ -521,14 +535,7 @@ public class MainActivity extends AppCompatActivity {
         //
     }
 
-    public void openFeed(View view) {
-        vibrate();
-        try {
-            StarsocketConnector.sendMessage("all_time "+ Account.userid());
-            Intent i = new Intent(this, FeedActivity.class);
-            startActivity(i);
-        } catch (Exception e){
-            toast("no network");
-        }
-    }
+
+
+
 }

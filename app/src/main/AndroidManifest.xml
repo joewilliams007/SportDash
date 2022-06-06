@@ -18,6 +18,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".settings.account.security.SecurityActivity"
+            android:exported="false" />
+        <activity
+            android:name=".online.upload.UploadActivity"
+            android:exported="false" />
+        <activity
             android:name=".plans.run.live.CreatingLiveActivity"
             android:exported="false" />
         <activity

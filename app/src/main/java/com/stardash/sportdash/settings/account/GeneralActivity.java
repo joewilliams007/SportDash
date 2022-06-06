@@ -51,7 +51,9 @@ public class GeneralActivity extends AppCompatActivity {
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
 
             TextView textViewApp = findViewById(R.id.textViewApp);
             textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
@@ -195,31 +197,6 @@ public class GeneralActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    public void boostConnection(View view) {
-
-            vibrate();
-            try {
-                toast("boosting ..");
-                StarsocketConnector.sendMessage("boost");
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        toast("boosting ...");
-                        vibrate();
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                vibrate();
-                                toast("boosted connection");
-                            }
-                        }, 1000);
-                    }
-                }, 1000);
-            } catch (Exception e){
-                toast("no network");
-            }
-    }
 
     public void restartApp(View view) {
         vibrate();

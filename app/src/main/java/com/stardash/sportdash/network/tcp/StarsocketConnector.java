@@ -31,32 +31,27 @@ public class StarsocketConnector {
     }
 
     public static void sendMessage(String message){
-
-                try  {
-                    aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
-                    socket.sendMessage(Account.userid()+" "+Account.password()+" "+Account.username()+" §"+message);
-                    socket.stopConnection();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-
+        try  {
+            aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
+            socket.sendMessage(Account.userid()+" "+Account.password()+" "+Account.username()+" §"+message);
+            socket.stopConnection();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 
     public static String getMessage(){
+        final Handler handler = new Handler(Looper.getMainLooper());
+        aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
+        String message = socket.receiveMessage();
 
-
-                    final Handler handler = new Handler(Looper.getMainLooper());
-                    aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
-                    String message = socket.receiveMessage();
-
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            socket.stopConnection();
-                        }
-                    }, 300);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                socket.stopConnection();
+            }
+            }, 300);
 
         return message;
     }

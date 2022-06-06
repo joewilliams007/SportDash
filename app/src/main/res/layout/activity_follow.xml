@@ -46,7 +46,7 @@
         android:gravity="center"
         android:padding="10dp"
         android:text="StarPage"
-        android:textColor="@color/projectBlack"
+        android:textColor="@color/white"
         android:textStyle="italic"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

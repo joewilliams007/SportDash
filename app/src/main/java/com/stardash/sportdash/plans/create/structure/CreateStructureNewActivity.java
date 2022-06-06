@@ -73,7 +73,9 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
         }
 
         elementUseSeconds();
@@ -141,10 +143,6 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         }
 
         createList(items);
-        if(elementsInPlan>0){
-            TextView textViewDuplicate = findViewById(R.id.textViewDuplicate);
-            textViewDuplicate.setVisibility(View.VISIBLE);
-        }
 
         if(elementsInPlan>5){
             TextView textViewUp = findViewById(R.id.textViewUp);

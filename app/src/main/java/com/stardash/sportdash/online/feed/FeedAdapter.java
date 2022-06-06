@@ -1,6 +1,7 @@
 package com.stardash.sportdash.online.feed;
 
 import static android.content.Context.MODE_PRIVATE;
+import static com.stardash.sportdash.online.feed.FeedActivity.items_count;
 import static com.stardash.sportdash.online.feed.FeedActivity.text_item;
 import static com.stardash.sportdash.online.friends.FriendsActivity.isStars;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
@@ -35,6 +36,7 @@ import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.settings.changelog.UpdateItem;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder> {
 
@@ -48,7 +50,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
 
     public static  class FeedViewHolder extends RecyclerView.ViewHolder{
-
+        public TextView mTextView0;
         public TextView mTextView1;
         public TextView mTextView2;
         public TextView mTextView3;
@@ -56,6 +58,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
+            mTextView0 = itemView.findViewById(R.id.textViewLine0);
             mTextView1 = itemView.findViewById(R.id.textViewLine1);
             mTextView2 = itemView.findViewById(R.id.textViewLine2);
             mTextView3 = itemView.findViewById(R.id.textViewLine3);
@@ -71,14 +74,15 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
     @Override
     public FeedViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v;
-        if (text_item) {
-            v = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_text_item,parent, false);
+         // if (text_item) {
+           // v = LayoutInflater.from(parent.getContext()).inflate(R.layout.black_feed_item,parent, false);
             text_item = false;
-        } else {
+       // } else {
             v = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_item,parent, false);
-            text_item = true;
-        }
+           // text_item = true;
+       // }
 
+      //  v = LayoutInflater.from(parent.getContext()).inflate(R.layout.feed_item,parent, false);
 
         return new FeedViewHolder(v);
     }
@@ -87,17 +91,34 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
     public void onBindViewHolder(@NonNull FeedViewHolder holder, int position) {
         FeedItem currentItem = mFeedList.get(position);
 
-
+            holder.mTextView0.setText(currentItem.getText0().toUpperCase(Locale.ROOT));
             holder.mTextView1.setText(currentItem.getText1());
             holder.mTextView2.setText(currentItem.getText2());
             holder.mTextView3.setText(currentItem.getText3());
             holder.mTextView4.setText(currentItem.getText4());
+        items_count++;
+
+        holder.mTextView0.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String id = holder.mTextView3.getText().toString().split("#")[1].split("-")[0];
+
+                vibrate();
+                tappedOnSearchItem = true;
+                tappedOnSearchItemId = id;
+                Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                MyApplication.getAppContext().startActivity(i);
+            }
+        });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String id = holder.mTextView3.getText().toString().split("#")[1];
+                vibrate();
 
                 try {
                         try {

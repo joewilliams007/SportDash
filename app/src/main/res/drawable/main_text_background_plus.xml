@@ -9,6 +9,7 @@
         android:startColor="@color/projectGrey"
         android:endColor="@color/projectGrey"
         android:angle="500" />
+
     <padding
         android:left="1dp"
         android:right="1dp"

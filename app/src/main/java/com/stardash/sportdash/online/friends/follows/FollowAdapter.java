@@ -98,8 +98,6 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                             try {
                                 StarsocketConnector.sendMessage("downloadPlanById " + id);
 
-
-
                                 final Handler handler = new Handler(Looper.getMainLooper());
                                 handler.postDelayed(new Runnable() {
                                     @Override
@@ -130,7 +128,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                                         }
                                     }
                                 }, 125);
-                            } catch (Exception e){
+                            } catch (Exception ignored){
 
                             }
                         } else {

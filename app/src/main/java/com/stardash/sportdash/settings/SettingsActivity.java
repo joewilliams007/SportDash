@@ -4,7 +4,6 @@ import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.content.ContextCompat;
 
 import android.content.ClipData;
 import android.content.ClipboardManager;
@@ -12,6 +11,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -21,9 +21,11 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.stardash.sportdash.R;
+import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.account.AccountActivity;
 import com.stardash.sportdash.settings.account.GeneralActivity;
 import com.stardash.sportdash.settings.account.PlansSettingsActivity;
+import com.stardash.sportdash.settings.account.security.SecurityActivity;
 import com.stardash.sportdash.settings.account.UpdateSettingsActivity;
 import com.stardash.sportdash.settings.account.ChatSettingsActivity;
 
@@ -39,8 +41,12 @@ public class SettingsActivity extends AppCompatActivity {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
         }
 
     }
@@ -104,4 +110,14 @@ public class SettingsActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    public void openSecurity(View view) {
+        vibrate();
+        try {
+            StarsocketConnector.sendMessage("accountActivity " + Account.userid());
+            Intent i = new Intent(this, SecurityActivity.class);
+            startActivity(i);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
 }

@@ -139,18 +139,18 @@
         android:id="@+id/textViewBottom"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="s t a r t\nt r a c k i n g"
-        android:textColor="@color/projectGreen"
-        android:gravity="center"
-        android:padding="10dp"
-        android:onClick="addResult"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:background="@drawable/main_text_background"
-        app:layout_constraintBottom_toBottomOf="@+id/floatingActionButton8"
+        android:gravity="center"
+        android:onClick="addResult"
+        android:padding="10dp"
+        android:text="s t a r t\nt r a c k i n g"
+        android:textColor="@color/projectGreen"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/floatingActionButton8" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewWeekAmount"
@@ -173,42 +173,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
-    <ImageView
-        android:id="@+id/floatingActionButton8"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_margin="10dp"
-        android:padding="10dp"
-        android:rotation="-270"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/arrow" />
-
-
-    <ImageView
-        android:id="@+id/imageView5"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background"
-        android:onClick="openFriends"
-        app:layout_constraintBottom_toTopOf="@+id/textViewBottom"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/textViewDetail"
         android:layout_width="0dp"
         android:layout_height="40dp"
-        android:text="J O E J O E"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:textColor="@color/projectGrey"
+        android:layout_marginLeft="20dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginRight="20dp"
         android:background="@drawable/main_text_background_white"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView5"
-        app:layout_constraintEnd_toEndOf="@+id/imageView5"
-        app:layout_constraintStart_toStartOf="@+id/imageView5" />
+        android:gravity="center"
+        android:text="J O E J O E"
+        android:textColor="@color/projectGrey"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutNavBar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewShop"
@@ -337,9 +316,9 @@
         android:layout_height="wrap_content"
         android:text=""
         android:visibility="invisible"
-        app:layout_constraintBottom_toTopOf="@+id/imageView5"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="861dp" />
 
     <ImageView
         android:id="@+id/imageViewEnergy1"
@@ -413,30 +392,6 @@
         app:layout_constraintStart_toEndOf="@+id/textViewId"
         app:layout_constraintTop_toTopOf="@+id/textViewId" />
 
-    <TextView
-        android:id="@+id/textViewPlan"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="openMyPlans"
-        android:padding="10dp"
-        android:textStyle="bold|italic"
-        android:text="TRAINING PLANS"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
-        app:layout_constraintStart_toStartOf="@+id/textViewMe" />
-
-    <TextView
-        android:id="@+id/textViewRandom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="randomPlan"
-        android:padding="10dp"
-        android:text="RANDOM PLAN"
-        android:textColor="@color/projectGreen"
-        android:textStyle="bold|italic"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewMe"
-        app:layout_constraintEnd_toEndOf="@+id/textViewMe" />
-
 
     <TextView
         android:id="@+id/textViewCustomToast"
@@ -453,16 +408,89 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imageViewInbox"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:onClick="openInbox"
-        android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewFriends"
-        app:layout_constraintEnd_toEndOf="@+id/textViewFriends"
-        app:srcCompat="@drawable/inbox" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutNavBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/projectBlack"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewHome"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/imageViewHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:onClick="openHome"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dash_selected" />
+
+        <ImageView
+            android:id="@+id/imageViewEnergyHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openInbox"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewProfile"
+            app:layout_constraintStart_toEndOf="@+id/imageViewHome"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/energy_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewFeed"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="openFeed"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/feed_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewSearch"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openFriendsSearch"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewHome"
+            app:layout_constraintStart_toEndOf="@+id/imageViewFeed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="openFriendsList"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_removebg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <ImageView
         android:id="@+id/imageView3"
@@ -478,13 +506,11 @@
     <TextView
         android:id="@+id/textViewInbox"
         android:layout_width="wrap_content"
-        android:visibility="gone"
-        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:background="@drawable/main_text_background_red"
         android:onClick="openInbox"
-        app:layout_constraintEnd_toEndOf="@+id/imageViewInbox"
-        app:layout_constraintTop_toTopOf="@+id/imageViewInbox" />
+        android:textColor="@color/white"
+        android:visibility="gone" />
 
 
 

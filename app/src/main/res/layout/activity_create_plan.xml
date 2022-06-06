@@ -344,7 +344,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:background="@drawable/main_text_background"
-        android:text="for anyone visible"
+        android:text="show in feed"
         android:checked="true"
         android:onClick="showTags"
         android:textColor="@color/white"

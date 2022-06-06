@@ -41,7 +41,7 @@
         android:onClick="openAccountSettings"
         android:padding="10dp"
         android:text="account"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -66,7 +66,7 @@
         android:onClick="openPlansSettings"
         android:padding="10dp"
         android:text="plans"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAccount" />
@@ -90,7 +90,7 @@
         android:onClick="openChatSettings"
         android:padding="10dp"
         android:text="chats"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
@@ -114,7 +114,7 @@
         android:onClick="openGeneral"
         android:padding="10dp"
         android:text="general"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewChat" />
@@ -138,7 +138,7 @@
         android:onClick="openUpdates"
         android:padding="10dp"
         android:text="updates"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewGeneral" />
@@ -153,6 +153,30 @@
         app:layout_constraintTop_toTopOf="@+id/textViewUpdates"
         app:srcCompat="@drawable/arrow" />
 
+
+    <TextView
+        android:id="@+id/textViewSecurity"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openSecurity"
+        android:padding="10dp"
+        android:text="security"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewUpdates" />
+
+    <ImageView
+        android:id="@+id/imageViewSecurity"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSecurity"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSecurity"
+        app:srcCompat="@drawable/arrow" />
 
     <TextView
         android:id="@+id/textViewAbout"

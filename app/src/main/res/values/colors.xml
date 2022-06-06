@@ -13,6 +13,7 @@
     <color name="darkMode">#14FFEC</color>
     <color name="projectBlue">#0D7377</color>
     <color name="projectLightBlue">#00ff00</color> // #14FFEC
+    <color name="projectLightBluePlus">#14FFEC</color> //
     <color name="projectGreen" tools:ignore="MissingDefaultResource"> #0eff00</color> //#0eff00
     <color name="projectRed">#E64868</color>
     <color name="projectYellow">#FFFDD835</color>

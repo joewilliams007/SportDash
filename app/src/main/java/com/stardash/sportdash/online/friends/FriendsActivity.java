@@ -48,6 +48,8 @@ import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
 import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
 import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.online.ProfileActivity;
+import com.stardash.sportdash.online.chat.InboxActivity;
+import com.stardash.sportdash.online.feed.FeedActivity;
 import com.stardash.sportdash.online.friends.follows.FollowActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
 import com.stardash.sportdash.settings.Account;
@@ -67,6 +69,7 @@ import java.util.Locale;
 public class FriendsActivity extends AppCompatActivity {
     public static Boolean tappedOnSearchItem;
     public static String tappedOnSearchItemId;
+    public static Boolean friendsSearchRequest = false;
     public Boolean isFollowProcess = false;
     public String theId;
     public Boolean skipDataSaver;
@@ -75,7 +78,7 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+       // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_friends);
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         isMyPlan = false; // so that the discard btn in active plan is gone
@@ -109,14 +112,21 @@ public class FriendsActivity extends AppCompatActivity {
         }
 
 
-
+        if (friendsSearchRequest) {
+            friendsSearchRequest = false;
+            showSearchFinal();
+        }
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
 
             TextView textViewName = findViewById(R.id.textViewUsername);
             TextView textViewAbout = findViewById(R.id.textViewAbout);
@@ -164,25 +174,27 @@ public class FriendsActivity extends AppCompatActivity {
 
 
 
+    @SuppressLint("SetTextI18n")
     private void getUserProfile() {
-
+        try {
+            String separator = "PROFILE_OF_USER";
             String profile = StarsocketConnector.getMessage();
-            String id = profile.split("ROFILE_OF_USER", 15)[0];
-            String username = profile.split("ROFILE_OF_USER", 15)[1];
-            String xp = profile.split("ROFILE_OF_USER", 15)[2];
-            String xpToday = profile.split("ROFILE_OF_USER", 15)[3];
-            String xpWeek = profile.split("ROFILE_OF_USER", 15)[4];
-            String age = profile.split("ROFILE_OF_USER", 15)[5];
-            String weight = profile.split("ROFILE_OF_USER", 15)[6];
-            String style = profile.split("ROFILE_OF_USER", 15)[7];
-            String accountCreated = profile.split("ROFILE_OF_USER", 15)[8];
-            String follows = profile.split("ROFILE_OF_USER", 15)[9];
-            String followers = profile.split("ROFILE_OF_USER", 15)[10];
-            String bio = profile.split("ROFILE_OF_USER", 15)[11];
-            String stars = profile.split("ROFILE_OF_USER", 15)[12];
+            String id = profile.split(separator, 15)[0];
+            String username = profile.split(separator, 15)[1];
+            String xp = profile.split(separator, 15)[2];
+            String xpToday = profile.split(separator, 15)[3];
+            String xpWeek = profile.split(separator, 15)[4];
+            String age = profile.split(separator, 15)[5];
+            String weight = profile.split(separator, 15)[6];
+            String style = profile.split(separator, 15)[7];
+            String accountCreated = profile.split(separator, 15)[8];
+            String follows = profile.split(separator, 15)[9];
+            String followers = profile.split(separator, 15)[10];
+            String bio = profile.split(separator, 15)[11];
+            String stars = profile.split(separator, 15)[12];
 
             TextView textViewDate = findViewById(R.id.textViewDate);
-            textViewDate.setText("StarKing/Queen since "+accountCreated);
+            textViewDate.setText("StarKing/Queen since " + accountCreated);
             Account.setFriend(0, "#" + id + " " + username);
             TextView textViewUsername = findViewById(R.id.textViewMeUsername);
             textViewUsername.animate().translationXBy(-10f).setDuration(1000);
@@ -201,10 +213,10 @@ public class FriendsActivity extends AppCompatActivity {
             TextView textViewBio = findViewById(R.id.textViewBio);
             TextView textViewBioUnder = findViewById(R.id.textViewBioUnder);
 
-            if(bio.equals("null")) {
+            if (bio.equals("null")) {
                 textViewBio.setVisibility(View.GONE);
                 textViewBioUnder.setVisibility(View.GONE);
-            } else if(bio.length()<1) {
+            } else if (bio.length() < 1) {
                 textViewBio.setVisibility(View.GONE);
                 textViewBioUnder.setVisibility(View.GONE);
             } else {
@@ -222,7 +234,7 @@ public class FriendsActivity extends AppCompatActivity {
             } catch (NumberFormatException ex) {
                 ex.printStackTrace();
             }
-            String usernameLines = username.replace("","\n").toUpperCase(Locale.ROOT);
+            String usernameLines = username.replace("", "\n").toUpperCase(Locale.ROOT);
             textViewUsername.setText(usernameLines);
             textViewUsername1.setText(username);
             textViewUserID.setText("#" + id);
@@ -237,15 +249,15 @@ public class FriendsActivity extends AppCompatActivity {
                 ObjectAnimator.ofInt(progressBarWeek, "progress", Integer.valueOf(xpWeek))
                         .setDuration(600)
                         .start();
-            } catch (Exception ignored){
+            } catch (Exception ignored) {
 
             }
 
-             TextView textViewFollow = findViewById(R.id.textViewFollow);
-             TextView textViewMessage = findViewById(R.id.textViewMessage);
-             TextView textViewEdit = findViewById(R.id.textViewEdit);
-            String idZ = textViewUserID.getText().toString().replace("#","");
-            if(idZ.equals(Account.userid())){
+            TextView textViewFollow = findViewById(R.id.textViewFollow);
+            TextView textViewMessage = findViewById(R.id.textViewMessage);
+            TextView textViewEdit = findViewById(R.id.textViewEdit);
+            String idZ = textViewUserID.getText().toString().replace("#", "");
+            if (idZ.equals(Account.userid())) {
                 textViewFollow.setVisibility(View.GONE);
                 textViewMessage.setVisibility(View.GONE);
                 textViewEdit.setVisibility(View.VISIBLE);
@@ -254,8 +266,12 @@ public class FriendsActivity extends AppCompatActivity {
             textViewXpToday.setText(xpToday + "/10.000 xp");
             textViewXpWeek.setText(xpWeek + "/70.000 xp");
             checkFollow(id);
+        } catch (Exception e){
+            toast("no network");
+        }
     }
 
+    @SuppressLint("SetTextI18n")
     private void checkFollow(String id) {
         try {
             TextView textViewId = findViewById(R.id.textViewMe);
@@ -284,9 +300,9 @@ public class FriendsActivity extends AppCompatActivity {
                     }
                 }, 200);
 
-            } catch (Exception e){
+            } catch (Exception ignored){
             }
-        } catch (Exception e){
+        } catch (Exception ignored){
         }
 
     }
@@ -301,6 +317,7 @@ public class FriendsActivity extends AppCompatActivity {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }*/
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -331,8 +348,7 @@ public class FriendsActivity extends AppCompatActivity {
                     String received = StarsocketConnector.getMessage().replaceAll("undefined","");
 
                     try {
-                        String rest = received;
-                        createFriendsList(rest);
+                        createFriendsList(received);
                         buildRecyclerView();
 
                     } catch (Exception e){
@@ -362,7 +378,7 @@ public class FriendsActivity extends AppCompatActivity {
         for (String element : user) {
             try {
                 mFriendsList.add(new FriendsItem(element.split("@")[0], element.split("@")[1], element.split("@")[2]));
-            } catch (Exception e) {
+            } catch (Exception ignored) {
 
             }
         }
@@ -381,12 +397,19 @@ public class FriendsActivity extends AppCompatActivity {
 
     Boolean settingShowHideSearch;
     public void showSearch(View view) {
+        showSearchFinal();
+    }
+
+    private void showSearchFinal() {
         ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
+        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
+        ConstraintLayout constraintLayoutNavBar = findViewById(R.id.constraintLayoutNavBar);
         if (searchLayout.getVisibility() != View.VISIBLE) {
             if (!settingShowHideSearch) {
                 settingShowHideSearch = true;
                 vibrate();
-
+                constraintLayoutNavBarSearch.setVisibility(View.VISIBLE);
+                constraintLayoutNavBar.setVisibility(View.INVISIBLE);
                 searchLayout.setVisibility(View.VISIBLE);
                 searchLayout.animate().translationYBy(20f).setDuration(1000);
                 final Handler handler = new Handler();
@@ -395,7 +418,7 @@ public class FriendsActivity extends AppCompatActivity {
                     public void run() {
                         settingShowHideSearch = false;
                     }
-                }, 1000);
+                }, 1100);
             }
         }
     }
@@ -404,7 +427,11 @@ public class FriendsActivity extends AppCompatActivity {
         if (!settingShowHideSearch) {
             vibrate();
             settingShowHideSearch = true;
+            ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
+            ConstraintLayout constraintLayoutNavBar = findViewById(R.id.constraintLayoutNavBar);
+            constraintLayoutNavBarSearch.setVisibility(View.GONE);
             ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
+            constraintLayoutNavBar.setVisibility(View.VISIBLE);
             searchLayout.animate().translationYBy(4000f).setDuration(1000);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
@@ -479,11 +506,12 @@ public class FriendsActivity extends AppCompatActivity {
                         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
                         try {
-                            String plan1 = received_plans.split("##########", 9)[1];
-                            String plan2 = received_plans.split("##########", 9)[2];
-                            String plan3 = received_plans.split("##########", 9)[3];
-                            String plan4 = received_plans.split("##########", 9)[4];
-                            String plan5 = received_plans.split("##########", 9)[5];
+                            String separator = "##########";
+                            String plan1 = received_plans.split(separator, 9)[1];
+                            String plan2 = received_plans.split(separator, 9)[2];
+                            String plan3 = received_plans.split(separator, 9)[3];
+                            String plan4 = received_plans.split(separator, 9)[4];
+                            String plan5 = received_plans.split(separator, 9)[5];
 
                             editor.putString("1 planFriend", String.valueOf(plan1)).apply();
                             editor.putString("2 planFriend", String.valueOf(plan2)).apply();
@@ -764,5 +792,51 @@ public class FriendsActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    // NAVBAR
+    public void openFriendsList(View view) {
+        vibrate();
+        invalidId = false;
+        friendsSearchRequest = false;
+        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
+        if (constraintLayoutNavBarSearch.getVisibility() == View.VISIBLE) {
+            Intent i = new Intent(this, FriendsActivity.class);
+            startActivity(i);
+        } else {
+            vibrate();
+        }
 
+    }
+    public void openFriendsSearch(View view) {
+        invalidId = false;
+        friendsSearchRequest = true;
+        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
+        if (constraintLayoutNavBarSearch.getVisibility() != View.VISIBLE) {
+            Intent i = new Intent(this, FriendsActivity.class);
+            startActivity(i);
+        } else {
+            vibrate();
+        }
+    }
+
+    public void openInbox(View view) {
+        Intent i = new Intent(this, InboxActivity.class);
+        startActivity(i);
+        vibrate();
+    }
+    public void openFeed(View view) {
+        vibrate();
+        try {
+            StarsocketConnector.sendMessage("all_time "+ Account.userid());
+            Intent i = new Intent(this, FeedActivity.class);
+            startActivity(i);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
+    public void openHome(View view) {
+        vibrate();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    // END OF NAVBAR
 }

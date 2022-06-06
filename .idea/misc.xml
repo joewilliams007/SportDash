@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.182370820668693" />
         <entry key="..\:/Users/Ananas/Desktop/APPS/SportDash/app/src/main/res/drawable/main_text_background_track.xml" value="0.3635" />
         <entry key="..\:/Users/Ananas/Desktop/APPS/SportDash/app/src/main/res/drawable/main_text_background_track_white.xml" value="0.1305" />
         <entry key="..\:/Users/Ananas/Desktop/APPS/SportDash/app/src/main/res/layout/activity_about.xml" value="0.26875" />
@@ -95,15 +96,23 @@
         <entry key="app/src/main/res/drawable-v24/main_text_background_track_noBorder.xml" value="0.3055" />
         <entry key="app/src/main/res/drawable-v24/main_text_background_track_no_border.xml" value="0.3635" />
         <entry key="app/src/main/res/drawable-v24/main_text_background_white_real.xml" value="0.3055" />
+        <entry key="app/src/main/res/drawable/black_feed.xml" value="0.3485" />
+        <entry key="app/src/main/res/drawable/home.xml" value="0.3495" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.3495" />
+        <entry key="app/src/main/res/drawable/icon_home.xml" value="0.3495" />
         <entry key="app/src/main/res/drawable/main_text_background.xml" value="0.2895" />
+        <entry key="app/src/main/res/drawable/main_text_background_menu.xml" value="0.3485" />
         <entry key="app/src/main/res/drawable/main_text_background_plus.xml" value="0.3485" />
+        <entry key="app/src/main/res/drawable/main_text_background_plus_no_bottom.xml" value="0.2775" />
         <entry key="app/src/main/res/drawable/main_text_background_red.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/main_text_background_track.xml" value="0.3055" />
         <entry key="app/src/main/res/drawable/main_text_background_track_white.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/main_text_background_white.xml" value="0.3055" />
+        <entry key="app/src/main/res/drawable/track_blue_background.xml" value="0.3485" />
         <entry key="app/src/main/res/drawable/track_green_background.xml" value="0.2895" />
         <entry key="app/src/main/res/drawable/track_green_background_plus.xml" value="0.3485" />
         <entry key="app/src/main/res/drawable/track_green_background_plus_top.xml" value="0.3485" />
+        <entry key="app/src/main/res/drawable/track_red_background.xml" value="0.2775" />
         <entry key="app/src/main/res/layout/activity_about.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_account.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_achievements.xml" value="0.3625" />
@@ -130,7 +139,7 @@
         <entry key="app/src/main/res/layout/activity_general.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_guide_structure_plan.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_images.xml" value="0.34791666666666665" />
-        <entry key="app/src/main/res/layout/activity_inbox.xml" value="0.3515625" />
+        <entry key="app/src/main/res/layout/activity_inbox.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_inspect.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_leaderboard.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/activity_live_plan.xml" value="0.28559213339033773" />
@@ -138,7 +147,7 @@
         <entry key="app/src/main/res/layout/activity_lobby.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_lock.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.1796875" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_plan.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_plans_settings.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_profile.xml" value="0.35208333333333336" />
@@ -148,6 +157,7 @@
         <entry key="app/src/main/res/layout/activity_reward.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_run_plan.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_search_plan.xml" value="0.28504273504273503" />
+        <entry key="app/src/main/res/layout/activity_security.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/activity_shop.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/activity_terms_of_service.xml" value="0.34791666666666665" />
@@ -155,6 +165,8 @@
         <entry key="app/src/main/res/layout/activity_tts.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/activity_update.xml" value="0.28547008547008546" />
         <entry key="app/src/main/res/layout/activity_update_settings.xml" value="0.34791666666666665" />
+        <entry key="app/src/main/res/layout/activity_upload.xml" value="0.28559213339033773" />
+        <entry key="app/src/main/res/layout/black_feed_item.xml" value="0.284737067122702" />
         <entry key="app/src/main/res/layout/chat_item.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/comments_item.xml" value="0.34791666666666665" />
         <entry key="app/src/main/res/layout/element_item.xml" value="0.3625" />
@@ -167,6 +179,7 @@
         <entry key="app/src/main/res/layout/leaderboard_item.xml" value="0.3515625" />
         <entry key="app/src/main/res/layout/list_item.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/plan_item.xml" value="0.3625" />
+        <entry key="app/src/main/res/layout/security_item.xml" value="0.28559213339033773" />
         <entry key="app/src/main/res/layout/settings_activity.xml" value="0.28547008547008546" />
         <entry key="app/src/main/res/layout/testing_file.xml" value="0.3625" />
         <entry key="app/src/main/res/layout/update_item.xml" value="0.34791666666666665" />

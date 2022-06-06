@@ -9,15 +9,14 @@
     tools:context=".online.chat.InboxActivity">
 
     <TextView
-        android:id="@+id/textViewCHatInbox"
+        android:elevation="2dp"
+        android:padding="2dp"
+        android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="N O T I F I C A T I O N S"
-        android:textColor="@color/projectGreen"
         android:layout_margin="10dp"
-        android:padding="10dp"
-        android:textSize="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textColor="@color/projectGreen"
+        android:text="N O T I F I C Λ T I O N S"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -25,12 +24,11 @@
         android:id="@+id/inbox_recycler_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:scrollbars="vertical"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutNavBar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewCHatInbox" />
-
+        app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
     <TextView
         android:id="@+id/textViewCustomToast"
@@ -47,31 +45,174 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/textViewRefresh"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutNavBar"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/track_green_background"
-        android:onClick="refreshInbox"
-        android:padding="10dp"
-        android:elevation="1dp"
-        android:text="REFRESH"
-        android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <TextView
-        android:id="@+id/textViewClear"
-        android:elevation="1dp"
-        android:layout_width="wrap_content"
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/projectBlack"
+            app:layout_constraintBottom_toTopOf="@+id/imageViewHome"
+            app:layout_constraintStart_toStartOf="parent" />
+
+
+        <ImageView
+            android:id="@+id/imageViewHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:onClick="openHome"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dash_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewEnergyHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openInbox"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewProfile"
+            app:layout_constraintStart_toEndOf="@+id/imageViewHome"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/energy_selected" />
+
+        <ImageView
+            android:id="@+id/imageViewFeed"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="openFeed"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/feed_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewSearch"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openFriendsSearch"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewHome"
+            app:layout_constraintStart_toEndOf="@+id/imageViewFeed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="openFriendsList"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_removebg" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <HorizontalScrollView
+        android:id="@+id/horizontalScrollView"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/track_red_background"
-        android:onClick="clearInbox"
-        android:padding="10dp"
-        android:text="CLEAR NOTIFICATIONS"
-        android:textColor="@color/projectGrey"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        android:scrollbars="none"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+
+        <TextView
+            android:id="@+id/textViewAll"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginStart="16dp"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:text="ALL"
+            android:onClick="showAll"
+            android:textColor="#14FFEC"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewStars"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:text="STARS"
+            android:onClick="showStars"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textViewComments"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:text="COMMENTS"
+            android:onClick="showComments"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textViewChat"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewChat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:text="CHAT"
+            android:onClick="showChat"
+            android:textColor="@color/white"
+            app:layout_constraintStart_toEndOf="@+id/textViewAll"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textViewFollowing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/main_text_background"
+            android:padding="10dp"
+            android:text="FOLLOWS"
+            android:onClick="showFollows"
+            android:textColor="@color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textViewStars"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

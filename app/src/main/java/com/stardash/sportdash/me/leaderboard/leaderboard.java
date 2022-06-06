@@ -60,16 +60,20 @@ public class leaderboard extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
+                    try {
                     String received = StarsocketConnector.getMessage().replaceAll("\"", "");
 
-                    try {
-                        String rest = received;
+                        try {
+                            String rest = received;
 
-                        createBoardList(rest);
-                        buildRecyclerView();
+                            createBoardList(rest);
+                            buildRecyclerView();
 
+                        } catch (Exception e){
+                                toast("not enough users to determine all");
+                        }
                     } catch (Exception e){
-                            toast("not enough users to determine all");
+                        toast("no network");
                     }
                 }
             }, 200);

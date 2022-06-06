@@ -1,25 +1,36 @@
 package com.stardash.sportdash.online.feed;
 
+import static com.stardash.sportdash.online.ProfileActivity.invalidId;
+import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
 import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
 import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
+import com.stardash.sportdash.online.chat.InboxActivity;
+import com.stardash.sportdash.online.friends.FriendsActivity;
+import com.stardash.sportdash.online.upload.UploadActivity;
+import com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity;
 import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.settings.SettingsActivity;
 
 import java.util.ArrayList;
 
@@ -34,31 +45,53 @@ public class FeedActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
-                buildRecyclerView();
-                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+                try {
+                    createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
+                    buildRecyclerView();
+                    ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+                } catch (Exception ignored) {
+                    toast("no network");
+                    ImageView imageViewNone = findViewById(R.id.imageViewNone);
+                    imageViewNone.setVisibility(View.VISIBLE);
+                }
             }
         }, 100);
     }
 
     private void getFeed(String type) {
+
+
+        ImageView imageViewNone = findViewById(R.id.imageViewNone);
+        imageViewNone.setVisibility(View.GONE);
+        items_count = 0;
+
+
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         StarsocketConnector.sendMessage(type+" "+Account.userid());
 
         TextView textViewFollowing = findViewById(R.id.textViewFollowing);
         TextView textViewFresh = findViewById(R.id.textViewFresh);
         TextView textViewAll = findViewById(R.id.textViewAll);
+        TextView textViewTrending = findViewById(R.id.textViewTrending);
 
         if (type.equals("all_time")) {
+            textViewTrending.setTextColor(Color.parseColor("#FFFFFFFF"));
             textViewFollowing.setTextColor(Color.parseColor("#FFFFFFFF"));
             textViewFresh.setTextColor(Color.parseColor("#FFFFFFFF"));
             textViewAll.setTextColor(Color.parseColor("#14FFEC"));
         } else if (type.equals("feed_fresh")) {
             textViewFollowing.setTextColor(Color.parseColor("#FFFFFFFF"));
+            textViewTrending.setTextColor(Color.parseColor("#FFFFFFFF"));
             textViewFresh.setTextColor(Color.parseColor("#14FFEC"));
             textViewAll.setTextColor(Color.parseColor("#FFFFFFFF"));
         } else if (type.equals("feed_following")) {
             textViewFollowing.setTextColor(Color.parseColor("#14FFEC"));
+            textViewTrending.setTextColor(Color.parseColor("#FFFFFFFF"));
+            textViewFresh.setTextColor(Color.parseColor("#FFFFFFFF"));
+            textViewAll.setTextColor(Color.parseColor("#FFFFFFFF"));
+        } else if (type.equals("feed_trending")) {
+            textViewFollowing.setTextColor(Color.parseColor("#FFFFFFFF"));
+            textViewTrending.setTextColor(Color.parseColor("#14FFEC"));
             textViewFresh.setTextColor(Color.parseColor("#FFFFFFFF"));
             textViewAll.setTextColor(Color.parseColor("#FFFFFFFF"));
         }
@@ -68,9 +101,17 @@ public class FeedActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
-                buildRecyclerView();
-                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+                try {
+                    items_count = 0;
+                    createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
+                    buildRecyclerView();
+                    ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+                    imageViewNone.setVisibility(View.GONE);
+                } catch (Exception e) {
+                    toast("no network");
+                    ImageView imageViewNone = findViewById(R.id.imageViewNone);
+                    imageViewNone.setVisibility(View.VISIBLE);
+                }
             }
         }, 300);
     }
@@ -80,6 +121,7 @@ public class FeedActivity extends AppCompatActivity {
     private FeedAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
 
+    public static int items_count;
     public static Boolean text_item = false;
     public void createFeedList(String rest){
         String[] user = rest.split("\n");
@@ -96,7 +138,9 @@ public class FeedActivity extends AppCompatActivity {
                 String stars = element.split(separator)[4];
                 String id = element.split(separator)[5];
                 String date = element.split(separator)[6].split("\\.")[0]+element.split(separator)[6].split("\\.")[2];
-                mFeedList.add(new FeedItem(name, desc,tags+" #"+id,date+" "+views+" views "+stars+" stars"));
+                String username = element.split(separator)[7];
+                mFeedList.add(new FeedItem(username,name, desc,tags+" #"+id,date+" "+views+" views "+stars+" stars"));
+
             } catch (Exception ignored) {
 
             }
@@ -104,6 +148,8 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     public void buildRecyclerView(){
+
+
         mRecyclerView = findViewById(R.id.feed_recycler_view);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new LinearLayoutManager(FeedActivity.this);
@@ -127,5 +173,93 @@ public class FeedActivity extends AppCompatActivity {
         getFeed("feed_fresh");
     }
 
+    public void showTrending(View view) {
+        vibrate();
+        getFeed("feed_trending");
+    }
 
+    public void toast(String message){
+        TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
+        textViewCustomToast.setVisibility(View.VISIBLE);
+        textViewCustomToast.setText(message);
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                textViewCustomToast.setVisibility(View.GONE);
+            }
+        }, 3000);
+    }
+
+
+    public void openUpload(View view) {
+        vibrate();
+        Intent i = new Intent(this, UploadActivity.class);
+        startActivity(i);
+    }
+
+    boolean animatingUpload = false;
+    public void showUpload(View view) {
+        vibrate();
+        ConstraintLayout constraintLayout = findViewById(R.id.upload);
+        if(constraintLayout.getVisibility() == View.GONE && !animatingUpload) {
+            animatingUpload = true;
+            constraintLayout.setVisibility(View.VISIBLE);
+            constraintLayout.animate().translationYBy(-20f).setDuration(1000);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    animatingUpload = false;
+                }
+            }, 1100);
+        } else if(!animatingUpload) {
+            constraintLayout.animate().translationYBy(20f).setDuration(0);
+            constraintLayout.setVisibility(View.GONE);
+            animatingUpload = false;
+        }
+    }
+
+    public void newPlan(View view) {
+        vibrate();
+        Intent i = new Intent(this, CreateStructureNewActivity.class);
+        startActivity(i);
+    }
+
+    // NAVBAR
+    public void openFriendsList(View view) {
+        vibrate();
+        invalidId = false;
+        friendsSearchRequest = false;
+        Intent i = new Intent(this, FriendsActivity.class);
+        startActivity(i);
+    }
+    public void openFriendsSearch(View view) {
+        invalidId = false;
+        friendsSearchRequest = true;
+        Intent i = new Intent(this, FriendsActivity.class);
+        startActivity(i);
+    }
+
+    public void openInbox(View view) {
+        Intent i = new Intent(this, InboxActivity.class);
+        startActivity(i);
+        vibrate();
+    }
+    public void openFeed(View view) {
+        vibrate();
+        try {
+            StarsocketConnector.sendMessage("all_time "+ Account.userid());
+            Intent i = new Intent(this, FeedActivity.class);
+            startActivity(i);
+        } catch (Exception e){
+            toast("no network");
+        }
+    }
+    public void openHome(View view) {
+        vibrate();
+        Intent i = new Intent(this, MainActivity.class);
+        startActivity(i);
+    }
+    // END OF NAVBAR
 }

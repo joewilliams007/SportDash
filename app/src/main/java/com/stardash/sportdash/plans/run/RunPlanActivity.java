@@ -70,7 +70,9 @@ public class RunPlanActivity extends AppCompatActivity {
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
         }
       isMyPlan();
 
@@ -136,14 +138,19 @@ public class RunPlanActivity extends AppCompatActivity {
                 ex.printStackTrace();
             }
 
-            if (difficultyInt.equals("0")){
-                difficulty = "normal";
-            } else if (difficultyInt.equals("1")){
-                difficulty = "hard";
-            }else if (difficultyInt.equals("2")){
-                difficulty = "ultra hard";
-            }else if (difficultyInt.equals("3")){
-                difficulty = "unbeatable hard";
+            switch (difficultyInt) {
+                case "0":
+                    difficulty = "normal";
+                    break;
+                case "1":
+                    difficulty = "hard";
+                    break;
+                case "2":
+                    difficulty = "ultra hard";
+                    break;
+                case "3":
+                    difficulty = "unbeatable hard";
+                    break;
             }
 
             TextView textViewPlanSport = findViewById(R.id.textViewPlanSport);
@@ -176,7 +183,7 @@ public class RunPlanActivity extends AppCompatActivity {
             textViewTopRight.setVisibility(View.VISIBLE);
             getStars();
 
-        } catch (Exception e){
+        } catch (Exception ignored){
 
         }
 
@@ -285,11 +292,15 @@ public class RunPlanActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    thePlan = StarsocketConnector.getMessage().toString();
-                    isRandom = true;
-                    setPlan();
-                    isMyPlan = false;
-                    isMyPlan();
+                    try {
+                        thePlan = StarsocketConnector.getMessage().toString();
+                        isRandom = true;
+                        setPlan();
+                        isMyPlan = false;
+                        isMyPlan();
+                    } catch (Exception e){
+                        toast("no network");
+                    }
                 }
             }, 1000);
         } catch (Exception e){
@@ -332,14 +343,18 @@ public class RunPlanActivity extends AppCompatActivity {
                     @SuppressLint("SetTextI18n")
                     @Override
                     public void run() {
-                        String received = StarsocketConnector.getMessage();
-                        if (received.contains("star-removed")) {
-                            toast("star removed");
-                        } else if (received.contains("star-added")) {
-                            toast("star added");
+                        try {
+                            String received = StarsocketConnector.getMessage();
+                            if (received.contains("star-removed")) {
+                                toast("star removed");
+                            } else if (received.contains("star-added")) {
+                                toast("star added");
+                            }
+                            viewPlan();
+                            getStars();
+                        } catch (Exception e){
+                            toast("no network");
                         }
-                        viewPlan();
-                        getStars();
                     }
                 }, 500);
 
@@ -358,6 +373,7 @@ public class RunPlanActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void getStars() { // and views
         TextView textViewStarsAmount = findViewById(R.id.textViewStarsAmount);
         TextView textViewViewsAmount = findViewById(R.id.textViewViewsAmount);
@@ -373,8 +389,7 @@ public class RunPlanActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         String received = StarsocketConnector.getMessage();
-                        textViewStarsAmount.setText(received.split("#")[0]);
-                        textViewViewsAmount.setText(received.split("#")[1]);
+
                         ImageView imageViewVerified = findViewById(R.id.imageViewVerified);
 
                         if(Integer.parseInt(received.split("#")[0]) > 4) {
@@ -383,13 +398,21 @@ public class RunPlanActivity extends AppCompatActivity {
                             imageViewVerified.setVisibility(View.GONE);
                         }
 
+                        if (received.contains("&")) {
+                            textViewStarsAmount.setText("not available");
+                            textViewViewsAmount.setText("not available");
+                        } else {
+                            textViewStarsAmount.setText(received.split("#")[0]);
+                            textViewViewsAmount.setText(received.split("#")[1]);
+                        }
+
                         String star_status = received.split("#")[2];
                         if (star_status.equals("1")) {
                             textViewStarPlan.setText("UN-STAR");
                         } else {
                             textViewStarPlan.setText("STAR");
                         }
-                    } catch (Exception e){
+                    } catch (Exception ignored){
 
                     }
                 }
