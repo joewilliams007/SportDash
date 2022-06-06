@@ -251,8 +251,8 @@
         android:background="@drawable/track_green_background"
         android:gravity="bottom|right"
         android:padding="10dp"
-        android:text="FEED"
-        android:onClick="openFeed"
+        android:onClick="openLeaderboard"
+        android:text="LEADERBOARD"
         android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toTopOf="@+id/textViewDetail"
         app:layout_constraintEnd_toStartOf="@+id/textView10"
@@ -269,8 +269,8 @@
         android:layout_marginRight="20dp"
         android:background="@drawable/track_green_background"
         android:padding="10dp"
-        android:onClick="openFriendsList"
-        android:text="FRIENDS\nsearch your friends"
+        android:onClick="openSettings"
+        android:text="SETTINGS\nAccount and App settings"
         android:textColor="@color/projectGrey"
         app:layout_constraintBottom_toTopOf="@+id/textViewAchievements"
         app:layout_constraintEnd_toEndOf="parent"
@@ -491,17 +491,6 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:padding="10dp"
-        android:onClick="openLeaderboard"
-        android:layout_margin="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewAchievements"
-        app:layout_constraintEnd_toEndOf="@+id/textViewAchievements"
-        app:srcCompat="@drawable/leader" />
 
     <TextView
         android:id="@+id/textViewInbox"
