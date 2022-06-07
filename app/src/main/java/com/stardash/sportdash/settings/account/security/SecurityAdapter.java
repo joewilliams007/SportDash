@@ -11,6 +11,7 @@ import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
@@ -79,13 +80,20 @@ public class SecurityAdapter extends RecyclerView.Adapter<SecurityAdapter.Securi
         return new SecurityViewHolder(v);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull SecurityViewHolder holder, int position) {
         SecurityItem currentItem = mSecurityList.get(position);
 
             holder.mTextView0.setText(currentItem.getText0().toUpperCase(Locale.ROOT));
             holder.mTextView1.setText(currentItem.getText1());
-            holder.mTextView2.setText(currentItem.getText2());
+
+            if (currentItem.getText2().contains("From null")) {
+                holder.mTextView2.setText("location could not be identified");
+            } else {
+                holder.mTextView2.setText(currentItem.getText2());
+            }
+
             holder.mTextView3.setText(currentItem.getText3());
             holder.mTextView4.setText(currentItem.getText4());
 

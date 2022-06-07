@@ -71,37 +71,47 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewBio" />
 
+            <ImageView
+                android:id="@+id/imageViewLevel"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLevelTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewLevelTxt"
+                app:srcCompat="@drawable/level_removebg" />
+
             <TextView
                 android:id="@+id/textViewLevelTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="level"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLevel"
                 app:layout_constraintTop_toBottomOf="@+id/textViewBio" />
 
             <TextView
                 android:id="@+id/textViewFollow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="follow"
                 android:padding="10dp"
                 android:text="follow"
                 android:textColor="@color/projectBlack"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewFollow"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMessage" />
 
             <TextView
                 android:id="@+id/textViewEdit"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="editProfile"
@@ -109,22 +119,52 @@
                 android:text="edit profile"
                 android:textColor="@color/projectBlack"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewEdit"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+
+            <ImageView
+                android:id="@+id/imageViewEdit"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:onClick="editProfile"
+                app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
+                app:srcCompat="@drawable/edit_profile_removebg" />
 
             <TextView
                 android:id="@+id/textViewMessage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:onClick="openChat"
                 android:padding="10dp"
                 android:text="message"
                 android:textColor="@color/projectBlack"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/imageViewMessage"
                 app:layout_constraintTop_toBottomOf="@+id/textViewUsername" />
+
+            <ImageView
+                android:id="@+id/imageViewMessage"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                android:onClick="openChat"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewUsername"
+                app:srcCompat="@drawable/message_removebg" />
+
+            <ImageView
+                android:id="@+id/imageViewFollow"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="follow"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewMessage"
+                app:srcCompat="@drawable/follow_removebg" />
 
             <TextView
                 android:id="@+id/textViewAbout"
@@ -167,16 +207,26 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <ImageView
+                android:id="@+id/imageViewProgress"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewProgressTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewProgressTxt"
+                app:srcCompat="@drawable/progress_removebg" />
+
             <TextView
                 android:id="@+id/textViewProgressTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="progress"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewLevel"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLevelTxt" />
 
             <TextView
@@ -192,16 +242,27 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLevel" />
 
+
+            <ImageView
+                android:id="@+id/imageViewProgressToday"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewProgressTdTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewProgressTdTxt"
+                app:srcCompat="@drawable/day_removebg" />
+
             <TextView
                 android:id="@+id/textViewProgressTdTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="today"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewProgress"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProgressTxt" />
 
             <ProgressBar
@@ -232,31 +293,49 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProgress" />
 
+
+            <ImageView
+                android:id="@+id/imageViewProgressWeek"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewProgressWkTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewProgressWkTxt"
+                app:srcCompat="@drawable/week_removebg" />
+
             <TextView
                 android:id="@+id/textViewProgressWkTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="week"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewProgress"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProgressTdTxt" />
 
 
+            <ImageView
+                android:id="@+id/imageViewUserId"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewIdTxt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewIdTxt"
+                app:srcCompat="@drawable/id_removebg" />
             <TextView
                 android:id="@+id/textViewIdTxt"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:padding="10dp"
                 android:text="userid"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageViewProgress"
                 app:layout_constraintTop_toBottomOf="@+id/textViewProgressWkTxt" />
 
             <ProgressBar
@@ -683,18 +762,28 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
 
+
+            <ImageView
+                android:id="@+id/imageViewStars"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewAllStars"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlan5under"
+                app:srcCompat="@drawable/star_removebg" />
+
             <TextView
                 android:id="@+id/textViewAllStars"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginTop="10dp"
                 android:elevation="2dp"
                 android:onClick="openStars"
                 android:padding="10dp"
-                android:text="s t a r e d  p l a n s"
-                android:textColor="@color/projectGreen"
-                app:layout_constraintStart_toStartOf="parent"
+                android:text="starred  plans"
+                android:textColor="@color/white"
+                app:layout_constraintStart_toEndOf="@+id/imageViewStars"
                 app:layout_constraintTop_toBottomOf="@+id/textViewPlan5" />
 
             <TextView
@@ -914,6 +1003,21 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/search_selected" />
 
+        <TextView
+            android:id="@+id/textViewNotification1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/track_green_background"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:padding="2dp"
+            android:elevation="1dp"
+            android:visibility="invisible"
+            android:textColor="@color/projectBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEnergyHome"
+            app:srcCompat="@drawable/energy_selected" />
+
         <ImageView
             android:id="@+id/imageViewProfile"
             android:layout_width="60dp"
@@ -963,6 +1067,21 @@
             app:layout_constraintStart_toEndOf="@+id/imageViewHome"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/energy_removebg" />
+
+        <TextView
+            android:id="@+id/textViewNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/track_green_background"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:padding="2dp"
+            android:elevation="1dp"
+            android:visibility="invisible"
+            android:textColor="@color/projectBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEnergyHome"
+            app:srcCompat="@drawable/energy_selected" />
 
         <ImageView
             android:id="@+id/imageViewFeed"

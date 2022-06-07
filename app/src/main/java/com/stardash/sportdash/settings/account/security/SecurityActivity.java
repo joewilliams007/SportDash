@@ -62,7 +62,7 @@ public class SecurityActivity extends AppCompatActivity {
                     }
 
                 String date = element.split(separator)[2].split("\\.")[0]+element.split(separator)[2].split("\\.")[2];
-            mSecurityList.add(new SecurityItem("SECURITY ALERT",type, location,"ip "+ip,date));
+            mSecurityList.add(new SecurityItem("SECURITY ALERT",type, location,"IP "+ip,date));
 
         }
     }

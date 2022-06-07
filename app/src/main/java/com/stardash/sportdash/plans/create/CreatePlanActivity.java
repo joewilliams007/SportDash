@@ -22,6 +22,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -51,7 +52,7 @@ public class CreatePlanActivity extends AppCompatActivity {
                 if (activity().length() > 1) {
                     textViewCategory.setText(activity());
                 }
-            } catch (Exception e){
+            } catch (Exception ignored){
 
             }
 
@@ -509,12 +510,15 @@ public class CreatePlanActivity extends AppCompatActivity {
         CheckBox checkBox = findViewById(R.id.checkBox);
         TextView textViewTags = findViewById(R.id.textViewTags);
         EditText editTextTags = findViewById(R.id.editTextTags);
+        ImageView imageViewTags = findViewById(R.id.imageViewTags);
         if (checkBox.isChecked()) {
             textViewTags.setVisibility(View.VISIBLE);
             editTextTags.setVisibility(View.VISIBLE);
+            imageViewTags.setVisibility(View.VISIBLE);
         } else {
             textViewTags.setVisibility(View.GONE);
             editTextTags.setVisibility(View.GONE);
+            imageViewTags.setVisibility(View.GONE);
         }
 
     }

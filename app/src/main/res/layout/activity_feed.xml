@@ -280,6 +280,20 @@
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/energy_removebg" />
 
+        <TextView
+            android:id="@+id/textViewNotification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/track_green_background"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:padding="2dp"
+            android:visibility="invisible"
+            android:textColor="@color/projectBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEnergyHome"
+            app:srcCompat="@drawable/energy_selected" />
+
         <ImageView
             android:id="@+id/imageViewFeed"
             android:layout_width="60dp"

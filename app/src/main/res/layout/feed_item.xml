@@ -36,44 +36,77 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+
+            <ImageView
+                android:id="@+id/imageView0"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="17dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLine1"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewLine1"
+                app:srcCompat="@drawable/plan_removebg" />
+
             <TextView
                 android:id="@+id/textViewLine1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background_plus"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="Workout"
                 android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView0"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLine0" />
 
             <TextView
                 android:id="@+id/textViewLine2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background"
                 android:padding="10dp"
                 android:text="This is the best workout ever :))))"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView1"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLine1" />
+
+            <ImageView
+                android:id="@+id/imageView1"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLine2"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewLine2"
+                app:srcCompat="@drawable/description_removebg" />
 
             <TextView
                 android:id="@+id/textViewLine3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
                 android:background="@drawable/main_text_background"
                 android:padding="10dp"
                 android:text="body, king"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
                 app:layout_constraintTop_toBottomOf="@+id/textViewLine2" />
+
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewLine3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/textViewLine3"
+                app:srcCompat="@drawable/tags_removebg" />
 
             <TextView
                 android:id="@+id/textViewLine4"

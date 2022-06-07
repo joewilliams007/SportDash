@@ -1,6 +1,9 @@
 package com.stardash.sportdash.online.feed;
 
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
+import static com.stardash.sportdash.online.chat.InboxActivity.amount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
 import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
 import static com.stardash.sportdash.settings.app.vibrate;
 
@@ -9,6 +12,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -54,8 +58,28 @@ public class FeedActivity extends AppCompatActivity {
                     ImageView imageViewNone = findViewById(R.id.imageViewNone);
                     imageViewNone.setVisibility(View.VISIBLE);
                 }
+                checkNotifications();
             }
         }, 100);
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void checkNotifications() {
+        TextView textViewNotification = findViewById(R.id.textViewNotification);
+        notificationAmount();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int notif = notifications();
+                if (notif>0) {
+                    textViewNotification.setVisibility(View.VISIBLE);
+                    textViewNotification.setText(" "+ notif +" ");
+                } else  {
+                    textViewNotification.setVisibility(View.INVISIBLE);
+                }
+            }
+        }, 400);
     }
 
     private void getFeed(String type) {

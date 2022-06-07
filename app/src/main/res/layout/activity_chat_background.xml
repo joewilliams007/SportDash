@@ -44,6 +44,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBg"
+        app:srcCompat="@drawable/image_removebg" />
     <TextView
         android:id="@+id/textViewBg"
         android:layout_width="0dp"
@@ -53,7 +61,7 @@
         android:onClick="setBackground"
         android:padding="10dp"
         android:text="background image"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

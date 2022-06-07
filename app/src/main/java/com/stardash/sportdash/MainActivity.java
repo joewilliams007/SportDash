@@ -2,6 +2,9 @@ package com.stardash.sportdash;
 
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
+import static com.stardash.sportdash.online.chat.InboxActivity.amount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
 import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity.duplicateElement;
@@ -164,8 +167,29 @@ public class MainActivity extends AppCompatActivity {
         // getInbox();
         isNewLogin();
         isShopNew();
+        checkNotifications();
 
     }
+
+    @SuppressLint("SetTextI18n")
+    public void checkNotifications() {
+        TextView textViewNotification = findViewById(R.id.textViewNotification);
+        notificationAmount();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int notif = notifications();
+                if (notif>0) {
+                    textViewNotification.setVisibility(View.VISIBLE);
+                    textViewNotification.setText(" "+ notif +" ");
+                } else  {
+                    textViewNotification.setVisibility(View.INVISIBLE);
+                }
+            }
+        }, 400);
+    }
+
     @Override
     public  void onDestroy() {
         super.onDestroy();
@@ -200,44 +224,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void getInbox() {
-        TextView textView = findViewById(R.id.textViewInbox);
-        try {
-            StarsocketConnector.sendMessage("mychatinbox " + Account.userid());
-
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @SuppressLint("SetTextI18n")
-                @Override
-                public void run() {
-                    try {
-                        String inbox = StarsocketConnector.getMessage();
-                        if (inbox.length()>12){
-                            textView.setVisibility(View.VISIBLE);
-
-                            char someChar = '#';
-                            int count = 0;
-
-                            for (int i = 0; i < inbox.length(); i++) {
-                                if (inbox.charAt(i) == someChar) {
-                                    count++;
-                                }
-                            }
-                            textView.setText(" "+String.valueOf(count)+" ");
-                            if (count>0){
-                                toast("new messages!");
-                            }
-                        }
-                    } catch (Exception ignored){
-
-                    }
-                }
-            }, 500);
-
-        } catch (Exception ignored){
-
-        }
-    }
     public void checkServerStatus() {
         try {
             Methods methods = RetrofitClient.getRetrofitInstance().create(Methods.class);

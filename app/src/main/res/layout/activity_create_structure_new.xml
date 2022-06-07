@@ -67,37 +67,6 @@
 
 
 
-    <TextView
-        android:id="@+id/textViewUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background_blue"
-        android:onClick="scrollUp"
-        android:padding="10dp"
-        android:text="U P"
-        android:visibility="gone"
-        android:textColor="@color/projectBlack"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSubmit" />
-
-    <TextView
-        android:id="@+id/textViewDown"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:background="@drawable/main_text_background_blue"
-        android:onClick="scrollDown"
-        android:padding="10dp"
-        android:text="D O W N"
-        android:visibility="gone"
-        android:textColor="@color/projectBlack"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewUp" />
-
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/elementLayout"
         android:layout_width="match_parent"
@@ -110,7 +79,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UsingOnClickInXml">
+
+        <ImageView
+            android:id="@+id/imageViewName"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextName"
+            app:srcCompat="@drawable/plan_removebg" />
 
         <TextView
             android:id="@+id/textViewElement"
@@ -149,7 +129,8 @@
             android:id="@+id/editTextName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/main_text_background_plus"
             android:ems="10"
             android:hint="name*"
@@ -160,14 +141,15 @@
             android:textStyle="italic"
 
             app:layout_constraintEnd_toStartOf="@+id/upload"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewName"
             app:layout_constraintTop_toBottomOf="@+id/view2" />
 
         <EditText
             android:id="@+id/editTextDescription"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/main_text_background_plus"
             android:ems="10"
             android:hint="description*"
@@ -177,14 +159,25 @@
             android:textColorHint="@color/white"
             android:textStyle="italic"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewDesc"
             app:layout_constraintTop_toBottomOf="@+id/editTextName" />
+
+        <ImageView
+            android:id="@+id/imageViewDesc"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextDescription"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextDescription"
+            app:srcCompat="@drawable/description_removebg" />
 
         <EditText
             android:id="@+id/editTextTime"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="10dp"
             android:background="@drawable/main_text_background_plus"
             android:ems="10"
             android:hint="duration*"
@@ -194,9 +187,18 @@
             android:textColorHint="@color/white"
             android:textStyle="italic"
             app:layout_constraintEnd_toStartOf="@+id/textViewSeconds"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/imageViewTime"
             app:layout_constraintTop_toBottomOf="@+id/editTextDescription" />
 
+        <ImageView
+            android:id="@+id/imageViewTime"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextTime"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextTime"
+            app:srcCompat="@drawable/duration_removebg" />
         <TextView
             android:id="@+id/textViewSeconds"
             android:layout_width="wrap_content"
@@ -228,10 +230,9 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_margin="10dp"
-            android:background="@color/projectGreen"
+            android:background="@color/projectBlack"
             android:elevation="-5dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.761"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/editTextTime" />
 
@@ -240,7 +241,7 @@
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_margin="10dp"
-            android:background="@color/projectGreen"
+            android:background="@color/projectBlack"
             android:elevation="-5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

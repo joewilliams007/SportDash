@@ -9,6 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -43,6 +44,7 @@ public class InboxActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
       //  overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_inbox);
+
 
         currentType = "all";
         getInbox();
@@ -151,12 +153,73 @@ public class InboxActivity extends AppCompatActivity {
                     } catch (Exception e){
                         toast("no network");
                     }
+                    checkNotifications();
                 }
             }, 500);
 
         } catch (Exception e){
             toast("no network");
         }
+    }
+
+    @SuppressLint("SetTextI18n")
+    public void checkNotifications() {
+        TextView textViewNotification = findViewById(R.id.textViewNotification);
+        notificationAmount();
+        final Handler handler = new Handler(Looper.getMainLooper());
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                int notif = notifications();
+                if (notif>0) {
+                    textViewNotification.setVisibility(View.VISIBLE);
+                    textViewNotification.setText(" "+ notif +" ");
+                } else  {
+                    textViewNotification.setVisibility(View.INVISIBLE);
+                    amount = 0;
+                }
+            }
+        }, 400);
+    }
+
+
+    static public void notificationAmount() {
+        amount = 0;
+        try {
+            StarsocketConnector.sendMessage("notifications all");
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        amount = 0;
+                        String inbox = StarsocketConnector.getMessage();
+                        String rest = inbox.replaceAll("undefined","");
+                        String[] user = rest.split("\n");
+                        String separator = "NOTIF_DIVIDER";
+                        for (String element : user) {
+                            try {
+                             //   String type = element.split(separator)[0].toUpperCase(Locale.ROOT).replaceAll(" ","");
+                                String viewed = element.split(separator)[5];
+                                if (viewed.equals("0")) {
+                                    amount++;
+                                }
+                            } catch (Exception ignored) {
+                            }
+                        }
+                    } catch (Exception ignored){
+                    }
+                }
+            }, 300);
+
+        } catch (Exception ignored){
+        }
+    }
+
+
+    public static int amount = 0;
+    static public int notifications(){
+        return amount;
     }
 
     private ArrayList<InboxItem> mInboxList;

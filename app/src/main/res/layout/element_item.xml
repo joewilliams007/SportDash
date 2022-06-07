@@ -33,6 +33,16 @@
             app:layout_constraintStart_toEndOf="@+id/textViewLine1"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewLine3"
+            app:layout_constraintEnd_toStartOf="@+id/textViewLine3"
+            app:layout_constraintTop_toTopOf="@+id/textViewLine3"
+            app:srcCompat="@drawable/duration_removebg" />
+
         <TextView
             android:id="@+id/textViewLine3"
             android:layout_width="0dp"
@@ -40,10 +50,8 @@
             android:layout_margin="10dp"
             android:gravity="right"
             android:text="Line 3"
-            android:paddingBottom="10dp"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewLine2" />
 
         <TextView

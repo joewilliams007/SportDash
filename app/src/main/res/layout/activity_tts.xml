@@ -47,7 +47,8 @@
         android:onClick="enableNames"
         android:text="element names"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
         android:id="@+id/checkBoxDescriptions"
@@ -63,7 +64,8 @@
         android:onClick="enableDescriptions"
         android:text="element descriptions"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxNames" />
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxNames"
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/textViewSettings"
@@ -74,10 +76,19 @@
         android:text="more device settings"
         android:padding="10dp"
         android:onClick="openDeviceTtsSettings"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxDescriptions" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
+        app:srcCompat="@drawable/moresettings_removebg" />
 
     <ImageView
         android:id="@+id/imageViewSetting"
@@ -85,7 +96,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSettings"
         app:layout_constraintTop_toTopOf="@+id/textViewSettings"
         app:srcCompat="@drawable/arrow" />
 

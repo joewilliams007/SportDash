@@ -144,12 +144,6 @@ public class CreateStructureNewActivity extends AppCompatActivity {
 
         createList(items);
 
-        if(elementsInPlan>5){
-            TextView textViewUp = findViewById(R.id.textViewUp);
-            TextView textViewDown = findViewById(R.id.textViewDown);
-            textViewUp.setVisibility(View.VISIBLE);
-            textViewDown.setVisibility(View.VISIBLE);
-        }
 
     }
 

@@ -9,7 +9,6 @@
     tools:context=".settings.account.ChatSettingsActivity">
 
     <TextView
-        android:elevation="2dp"
         android:padding="2dp"
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
@@ -19,6 +18,25 @@
         android:text="@string/s_p_o_r_t_d_s_h"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewBg"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewBg"
+        app:srcCompat="@drawable/image_removebg" />
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAppLock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewAppLock"
+        app:srcCompat="@drawable/lock_removebg" />
 
     <TextView
         android:id="@+id/textViewApp"
@@ -42,7 +60,7 @@
         android:onClick="openBackground"
         android:padding="10dp"
         android:text="background image"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
@@ -53,7 +71,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewBg"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewBg"
         app:layout_constraintTop_toTopOf="@+id/textViewBg"
         app:srcCompat="@drawable/arrow" />
 
@@ -66,7 +84,7 @@
         android:onClick="openAppLock"
         android:padding="10dp"
         android:text="lock chats"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBg" />
@@ -77,7 +95,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAppLock"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAppLock"
         app:layout_constraintTop_toTopOf="@+id/textViewAppLock"
         app:srcCompat="@drawable/arrow" />
 

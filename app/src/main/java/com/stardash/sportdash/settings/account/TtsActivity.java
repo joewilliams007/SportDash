@@ -12,6 +12,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -37,8 +38,12 @@ public class TtsActivity extends AppCompatActivity {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
 
             TextView textViewApp = findViewById(R.id.textViewApp);
             textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
@@ -48,8 +53,8 @@ public class TtsActivity extends AppCompatActivity {
     }
 
     private void setCheckBoxes() {
-        Switch checkBoxNames = findViewById(R.id.checkBoxNames);
-        Switch checkBoxDescriptions = findViewById(R.id.checkBoxDescriptions);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch checkBoxNames = findViewById(R.id.checkBoxNames);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch checkBoxDescriptions = findViewById(R.id.checkBoxDescriptions);
         checkBoxNames.setChecked(ttsNames());
         checkBoxDescriptions.setChecked(ttsDescriptions());
     }

@@ -75,7 +75,7 @@
         android:padding="10dp"
         android:text="set code"
         android:onClick="setCodeBtn"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxChats" />
@@ -86,7 +86,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewLock"
         app:layout_constraintTop_toTopOf="@+id/textViewLock"
         app:srcCompat="@drawable/arrow" />
 
@@ -99,7 +99,7 @@
         android:onClick="removeCodeBtn"
         android:padding="10dp"
         android:text="remove code"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
@@ -110,9 +110,28 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewRemoveLock"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewRemoveLock"
         app:layout_constraintTop_toTopOf="@+id/textViewRemoveLock"
         app:srcCompat="@drawable/arrow" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewLock"
+        app:srcCompat="@drawable/passcode_removebg" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewRemoveLock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewRemoveLock"
+        app:srcCompat="@drawable/minus_removebg" />
 
     <TextView
         android:id="@+id/textViewCustomToast"

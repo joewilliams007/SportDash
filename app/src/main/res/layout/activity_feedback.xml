@@ -92,6 +92,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewFeedbackInfo" />
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
+        app:srcCompat="@drawable/feedback_removebg" />
     <TextView
         android:id="@+id/textViewSettings"
         android:layout_width="0dp"
@@ -101,7 +109,7 @@
         android:onClick="sendFeedback"
         android:padding="10dp"
         android:text="submit feedback"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBox" />
@@ -112,7 +120,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSettings"
         app:layout_constraintTop_toTopOf="@+id/textViewSettings"
         app:srcCompat="@drawable/arrow" />
 

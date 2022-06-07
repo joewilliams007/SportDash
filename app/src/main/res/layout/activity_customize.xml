@@ -32,6 +32,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewRestart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewRestart"
+        app:srcCompat="@drawable/restart_removebg" />
+
     <Switch
         android:id="@+id/checkBoxName"
         android:layout_width="match_parent"
@@ -75,7 +84,7 @@
         android:onClick="restartApp"
         android:padding="10dp"
         android:text="restart app"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxTracking" />
@@ -86,7 +95,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewRestart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewRestart"
         app:layout_constraintTop_toTopOf="@+id/textViewRestart"
         app:srcCompat="@drawable/arrow" />
 

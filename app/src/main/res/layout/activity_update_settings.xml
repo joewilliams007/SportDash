@@ -9,7 +9,6 @@
     tools:context=".settings.account.UpdateSettingsActivity">
 
     <TextView
-        android:elevation="2dp"
         android:padding="2dp"
         android:id="@+id/textViewTop"
         android:layout_width="wrap_content"
@@ -63,10 +62,11 @@
         android:padding="10dp"
         android:onClick="checkUpdate"
         android:text="check for update"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewAbout"
+        tools:ignore="UsingOnClickInXml" />
 
     <ImageView
         android:id="@+id/imageViewSetting"
@@ -74,7 +74,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewMyVersionCheckUpdate"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewMyVersionCheckUpdate"
         app:layout_constraintTop_toTopOf="@+id/textViewMyVersionCheckUpdate"
         app:srcCompat="@drawable/arrow" />
 
@@ -87,7 +87,7 @@
         android:padding="10dp"
         android:text="changelog"
         android:onClick="openChangelog"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewMyVersionCheckUpdate" />
@@ -98,7 +98,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewChangelog"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewChangelog"
         app:layout_constraintTop_toTopOf="@+id/textViewChangelog"
         app:srcCompat="@drawable/arrow" />
 
@@ -116,6 +116,24 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewMyVersionCheckUpdate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewMyVersionCheckUpdate"
+        app:srcCompat="@drawable/checkupdate_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewChangelog"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewChangelog"
+        app:srcCompat="@drawable/changelog_removebg" />
 
     <TextView
         android:id="@+id/textViewAboutInfo"

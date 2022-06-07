@@ -38,9 +38,10 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="@string/username"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewUsername"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUsername"
+        app:layout_constraintTop_toTopOf="@+id/imageViewUsername" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameUsername"
@@ -53,19 +54,29 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/projectBlack"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCopySave111"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSaveUsername"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+
+    <ImageView
+        android:id="@+id/imageViewUsername"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="saveUsername"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewApp"
+        app:srcCompat="@drawable/id_removebg" />
 
     <TextView
         android:id="@+id/textViewAge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:text="@string/age"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameUsername" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewAge"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAge"
+        app:layout_constraintTop_toTopOf="@+id/imageViewAge" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameAge"
@@ -78,19 +89,30 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/projectBlack"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCopySave11"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSaveAge"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewAge" />
+
+    <ImageView
+        android:id="@+id/imageViewWeight"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="saveUsername"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameAge"
+        app:srcCompat="@drawable/weight_removebg" />
 
     <TextView
         android:id="@+id/textViewWeight"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:text="weight"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameAge" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewWeight"
+        app:layout_constraintStart_toEndOf="@+id/imageViewWeight"
+        app:layout_constraintTop_toTopOf="@+id/imageViewWeight" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameWeight"
@@ -103,19 +125,29 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/projectBlack"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCopySave1"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSaveWeight"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewWeight" />
+
+    <ImageView
+        android:id="@+id/imageViewBio"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="saveUsername"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameWeight"
+        app:srcCompat="@drawable/bio_removebg" />
 
     <TextView
         android:id="@+id/textViewBio"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:text="bio / description"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameWeight" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewBio"
+        app:layout_constraintStart_toEndOf="@+id/imageViewWeight"
+        app:layout_constraintTop_toTopOf="@+id/imageViewBio" />
 
     <EditText
         android:id="@+id/editTextTextPersonNameBio"
@@ -128,57 +160,65 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/projectBlack"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCopySaveBio"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSaveBio"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewBio" />
 
-    <TextView
-        android:id="@+id/textViewCopySaveBio"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageViewSaveBio"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="saveBio"
         android:padding="10dp"
-        android:text="@string/save"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameBio"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameBio" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameBio"
+        app:srcCompat="@drawable/save_removebg" />
 
-    <TextView
-        android:id="@+id/textViewCopySave1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:id="@+id/imageViewSaveWeight"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="saveWeight"
         android:padding="10dp"
-        android:text="@string/save"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameWeight"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameWeight" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameWeight"
+        app:srcCompat="@drawable/save_removebg" />
 
-    <TextView
-        android:id="@+id/textViewCopySave11"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageViewSaveAge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="saveAge"
         android:padding="10dp"
-        android:text="@string/save"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameAge"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameAge" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameAge"
+        app:srcCompat="@drawable/save_removebg" />
 
-    <TextView
-        android:id="@+id/textViewCopySave111"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+
+    <ImageView
+        android:id="@+id/imageViewSaveUsername"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="saveUsername"
         android:padding="10dp"
-        android:text="@string/save"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNameUsername"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameUsername" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNameUsername"
+        app:srcCompat="@drawable/save_removebg" />
+
+    <ImageView
+        android:id="@+id/imageViewAge"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="saveUsername"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameUsername"
+        app:srcCompat="@drawable/age_removebg" />
 
     <TextView
         android:id="@+id/textViewAboutInfo"
@@ -194,15 +234,25 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+    <ImageView
+        android:id="@+id/imageViewPassword"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:onClick="saveUsername"
+        android:padding="10dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameBio"
+        app:srcCompat="@drawable/password_removebg" />
+
     <TextView
         android:id="@+id/textViewPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
         android:text="password"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonNameBio" />
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/imageViewPassword"
+        app:layout_constraintStart_toEndOf="@+id/imageViewWeight"
+        app:layout_constraintTop_toTopOf="@+id/imageViewPassword" />
 
     <EditText
         android:id="@+id/editTextTextPersonNamePassword"
@@ -215,7 +265,7 @@
         android:padding="10dp"
         android:textColor="@color/white"
         android:textColorHint="@color/projectBlack"
-        app:layout_constraintEnd_toStartOf="@+id/textViewCopySavePassword"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewSavePassword"
         app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewPassword" />
@@ -231,17 +281,16 @@
         app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNamePassword"
         app:srcCompat="@drawable/eye" />
 
-    <TextView
-        android:id="@+id/textViewCopySavePassword"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/imageViewSavePassword"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:onClick="savePassword"
         android:padding="10dp"
-        android:text="@string/save"
-        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="@+id/editTextTextPersonNamePassword"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNamePassword" />
+        app:layout_constraintTop_toTopOf="@+id/editTextTextPersonNamePassword"
+        app:srcCompat="@drawable/save_removebg" />
 
     <TextView
         android:id="@+id/textViewCustomToast"

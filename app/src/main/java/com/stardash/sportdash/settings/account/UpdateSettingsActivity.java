@@ -2,14 +2,19 @@ package com.stardash.sportdash.settings.account;
 
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -24,6 +29,7 @@ import com.stardash.sportdash.network.api.Methods;
 import com.stardash.sportdash.network.api.Model;
 import com.stardash.sportdash.network.api.RetrofitClient;
 import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.settings.changelog.UpdateActivity;
 
 import retrofit2.Call;
@@ -45,8 +51,12 @@ public class UpdateSettingsActivity extends AppCompatActivity {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.BLACK);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.BLACK);
+            }
 
             TextView textViewApp = findViewById(R.id.textViewApp);
             textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
@@ -60,8 +70,9 @@ public class UpdateSettingsActivity extends AppCompatActivity {
         Call<Model> call = methods.getAllData(clickName);
         call.enqueue(new Callback<Model>() {
             @Override
-            public void onResponse(Call<Model> call, Response<Model> response) {
+            public void onResponse(@NonNull Call<Model> call, @NonNull Response<Model> response) {
 
+                assert response.body() != null;
                 String build = response.body().getBuild();
                 String version = response.body().getVersion();
                 String updateInfo = response.body().getUpdateInfo();
@@ -74,16 +85,48 @@ public class UpdateSettingsActivity extends AppCompatActivity {
                     String versionName = BuildConfig.VERSION_NAME;
 
                     if (versionCode<Integer.parseInt(build)) {
-                        toast("new version is available!\nnew version "+version);
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateSettingsActivity.this);
+                        builder.setTitle("Updates");
+                        builder.setIcon(R.drawable.update_removebg);
+                        builder.setMessage("An update is available! ( VER "+version+" )\n\nWhats new?\n"+updateInfo+"\n\nLaunch app store?")
+                                .setCancelable(false)
+                                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        vibrate();
+                                        Intent play =
+                                                new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=com.stardash.sportdash"));
+                                        startActivity(play);
+                                    }
+                                })
+                                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                      vibrate();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
+
                     } else {
-                        toast("you have the latest version!");
+
+                        AlertDialog.Builder builder = new AlertDialog.Builder(UpdateSettingsActivity.this);
+                        builder.setTitle("Updates");
+                        builder.setIcon(R.drawable.update_removebg);
+                        builder.setMessage("You have the latest version!")
+                                .setCancelable(false)
+                                .setPositiveButton("close", new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        vibrate();
+                                    }
+                                });
+                        AlertDialog alert = builder.create();
+                        alert.show();
                     }
 
                 }
             }
 
             @Override
-            public void onFailure(Call<Model> call, Throwable t) {
+            public void onFailure(@NonNull Call<Model> call, @NonNull Throwable t) {
                 toast("no network");
             }
         });

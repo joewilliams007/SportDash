@@ -9,9 +9,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 
+import android.annotation.SuppressLint;
 import android.app.AlarmManager;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -36,6 +39,7 @@ import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.AboutActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.FeedbackActivity;
+import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.signIn.LockActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
 
@@ -50,7 +54,9 @@ public class GeneralActivity extends AppCompatActivity {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 window.setStatusBarColor(Color.BLACK);
             }
@@ -63,9 +69,9 @@ public class GeneralActivity extends AppCompatActivity {
     }
 
     private void checkBoxes() {
-        Switch checkBox = findViewById(R.id.checkBoxLocalhost);
-        Switch checkBoxTheme = findViewById(R.id.checkBoxTheme);
-        Switch checkBoxVibration = findViewById(R.id.checkBoxVibration);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch checkBox = findViewById(R.id.checkBoxLocalhost);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch checkBoxTheme = findViewById(R.id.checkBoxTheme);
+        @SuppressLint("UseSwitchCompatOrMaterialCode") Switch checkBoxVibration = findViewById(R.id.checkBoxVibration);
         checkBoxVibration.setChecked(Account.isVibration());
         checkBox.setChecked(Account.localhost());
         checkBoxTheme.setChecked(Account.isAmoled());
@@ -73,10 +79,27 @@ public class GeneralActivity extends AppCompatActivity {
 
     public void openDeviceLinksSettings(View view) {
         vibrate();
-        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
-        Uri uri = Uri.fromParts("package", getPackageName(), null);
-        intent.setData(uri);
-        startActivity(intent);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GeneralActivity.this);
+        builder.setTitle("Default Links");
+        builder.setIcon(R.drawable.default_removebg);
+        builder.setMessage("/SetAsDefault/SupportedWebAddresses\n\nLaunch Setting to enable?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        vibrate();
+                        Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                        Uri uri = Uri.fromParts("package", getPackageName(), null);
+                        intent.setData(uri);
+                        startActivity(intent);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        vibrate();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 
     public void enableLocalhost(View view) {
@@ -104,8 +127,6 @@ public class GeneralActivity extends AppCompatActivity {
         checkBoxes();
     }
 
-
-
     public void setThemeAmoled() {
             ConstraintLayout main = findViewById(R.id.main);
             //Let's change background's color from blue to red.
@@ -116,10 +137,14 @@ public class GeneralActivity extends AppCompatActivity {
             trans.startTransition(2000);
 
             Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(Color.BLACK);
+        }
 
-            TextView textViewApp = findViewById(R.id.textViewApp);
+        TextView textViewApp = findViewById(R.id.textViewApp);
             textViewApp.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
     }
 
@@ -134,8 +159,12 @@ public class GeneralActivity extends AppCompatActivity {
             trans.startTransition(2000);
 
             Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             window.setStatusBarColor(Color.parseColor("#323232"));
+        }
         TextView textViewApp = findViewById(R.id.textViewApp);
         textViewApp.setTextColor(ContextCompat.getColor(this, R.color.black));
     }
@@ -149,21 +178,40 @@ public class GeneralActivity extends AppCompatActivity {
 
     public void logout(View view) {
         vibrate();
-        Account.setLoggedIn(false);
-        Account.setCoins(0);
-        Account.setEnergy(5);
-        Account.setAge(0);
-        Account.setId("0");
-        Account.setWeight(0);
-        Account.setXp(0);
-        SharedPreferences settings = this.getSharedPreferences("account", Context.MODE_PRIVATE);
-        settings.edit().clear().apply();
-        SharedPreferences settings1 = this.getSharedPreferences("me", Context.MODE_PRIVATE);
-        settings1.edit().clear().apply();
-        SharedPreferences settings2 = this.getSharedPreferences("sport", Context.MODE_PRIVATE);
-        settings2.edit().clear().apply();
-        Intent i = new Intent(this, RegisterActivity.class);
-        startActivity(i);
+        AlertDialog.Builder builder = new AlertDialog.Builder(GeneralActivity.this);
+        builder.setTitle("StarDash");
+        builder.setMessage("Are you sure you want to logout?")
+                .setCancelable(false)
+                .setIcon(R.drawable.logout_removebg)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        vibrate();
+                        Account.setLoggedIn(false);
+                        Account.setCoins(0);
+                        Account.setEnergy(5);
+                        Account.setAge(0);
+                        Account.setId("0");
+                        Account.setWeight(0);
+                        Account.setXp(0);
+                        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", Context.MODE_PRIVATE);
+                        settings.edit().clear().apply();
+                        SharedPreferences settings1 = MyApplication.getAppContext().getSharedPreferences("me", Context.MODE_PRIVATE);
+                        settings1.edit().clear().apply();
+                        SharedPreferences settings2 = MyApplication.getAppContext().getSharedPreferences("sport", Context.MODE_PRIVATE);
+                        settings2.edit().clear().apply();
+                        Intent i = new Intent(MyApplication.getAppContext(), RegisterActivity.class);
+                        startActivity(i);
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        vibrate();
+                   //     finish();
+                    }
+                });
+        AlertDialog alert = builder.create();
+        alert.show();
+
     }
 
     public void openAbout(View view) {
@@ -184,6 +232,7 @@ public class GeneralActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);

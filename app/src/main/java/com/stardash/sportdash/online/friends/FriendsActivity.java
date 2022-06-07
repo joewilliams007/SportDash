@@ -2,6 +2,9 @@ package com.stardash.sportdash.online.friends;
 
 
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
+import static com.stardash.sportdash.online.chat.InboxActivity.amount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
+import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
 import static com.stardash.sportdash.online.friends.follows.FollowActivity.pageStatus;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
@@ -110,7 +113,7 @@ public class FriendsActivity extends AppCompatActivity {
             }
             //The key argument here must match that used in the other activity
         }
-
+        checkNotifications();
 
         if (friendsSearchRequest) {
             friendsSearchRequest = false;
@@ -170,9 +173,25 @@ public class FriendsActivity extends AppCompatActivity {
             toast("no network");
         }
 
+
+
     }
 
+    @SuppressLint("SetTextI18n")
+    public void checkNotifications() {
+        TextView textViewNotification = findViewById(R.id.textViewNotification);
+        TextView textViewNotification1 = findViewById(R.id.textViewNotification1);
+                if (amount>0) {
+                    textViewNotification.setVisibility(View.VISIBLE);
+                    textViewNotification.setText(" "+ amount +" ");
+                    textViewNotification1.setVisibility(View.VISIBLE);
+                    textViewNotification1.setText(" "+ amount +" ");
+                } else  {
+                    textViewNotification.setVisibility(View.INVISIBLE);
+                    textViewNotification1.setVisibility(View.INVISIBLE);
+                }
 
+    }
 
     @SuppressLint("SetTextI18n")
     private void getUserProfile() {
@@ -256,11 +275,21 @@ public class FriendsActivity extends AppCompatActivity {
             TextView textViewFollow = findViewById(R.id.textViewFollow);
             TextView textViewMessage = findViewById(R.id.textViewMessage);
             TextView textViewEdit = findViewById(R.id.textViewEdit);
+            ImageView imageViewMessage = findViewById(R.id.imageViewMessage);
+            ImageView imageViewEdit = findViewById(R.id.imageViewEdit);
+            ImageView imageViewFollow = findViewById(R.id.imageViewFollow);
             String idZ = textViewUserID.getText().toString().replace("#", "");
             if (idZ.equals(Account.userid())) {
                 textViewFollow.setVisibility(View.GONE);
                 textViewMessage.setVisibility(View.GONE);
                 textViewEdit.setVisibility(View.VISIBLE);
+                imageViewEdit.setVisibility(View.VISIBLE);
+                imageViewMessage.setVisibility(View.GONE);
+                imageViewFollow.setVisibility(View.GONE);
+            } else {
+                imageViewEdit.setVisibility(View.GONE);
+                imageViewMessage.setVisibility(View.VISIBLE);
+                imageViewFollow.setVisibility(View.VISIBLE);
             }
 
             textViewXpToday.setText(xpToday + "/10.000 xp");
@@ -276,10 +305,13 @@ public class FriendsActivity extends AppCompatActivity {
         try {
             TextView textViewId = findViewById(R.id.textViewMe);
             TextView textViewFollow = findViewById(R.id.textViewFollow);
+            ImageView imageViewFollow = findViewById(R.id.imageViewFollow);
             try {
 
                 StarsocketConnector.sendMessage("checkFollow " + Account.userid() +" "+ textViewId.getText().toString().split("#")[1]);
                 textViewFollow.setText("loading");
+                imageViewFollow.setImageResource(R.drawable.follow_loading_removebg);
+
 
                 final Handler handler = new Handler(Looper.getMainLooper());
                 handler.postDelayed(new Runnable() {
@@ -288,9 +320,10 @@ public class FriendsActivity extends AppCompatActivity {
                         String isFollow = StarsocketConnector.getMessage();
                         if (isFollow.length()>10) {
                             textViewFollow.setText("follow");
-
+                            imageViewFollow.setImageResource(R.drawable.follow_removebg);
                         } else {
                             textViewFollow.setText("unfollow");
+                            imageViewFollow.setImageResource(R.drawable.unfollow_removebg);
                         }
                         if(isFollowProcess){
 
@@ -528,6 +561,7 @@ public class FriendsActivity extends AppCompatActivity {
             } catch (Exception e) {
                 toast("no network");
             }
+
     }
 
     private void setPlanNames() {
@@ -583,6 +617,8 @@ public class FriendsActivity extends AppCompatActivity {
             textViewNamePlan5.setText(empty);
         }
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
+
+
     }
     public void plan1(View view) {
         vibrate();

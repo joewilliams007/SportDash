@@ -3,19 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:cardCornerRadius="20dp">
+    android:background="@color/projectGrey"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@drawable/main_text_background_plus"
+        android:background="@color/projectGrey"
         android:layout_height="wrap_content">
+
+
+        <TextView
+            android:id="@+id/textViewBioUnder"
+            android:layout_width="0dp"
+            android:layout_height="35dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="15dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/track_green_background"
+            android:gravity="center"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewLine2" />
 
         <TextView
             android:id="@+id/textViewLine1"
             android:layout_width="0dp"
             android:rotation="-15"
+            android:visibility="invisible"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:text="Line 1"
@@ -26,11 +44,17 @@
         <TextView
             android:id="@+id/textViewLine2"
             android:layout_width="0dp"
+            android:layout_marginTop="10dp"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/main_text_background"
             android:gravity="center"
+            android:padding="10dp"
             android:text="Line 2"
             android:textColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -48,13 +72,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <ImageView
             android:id="@+id/imageViewSetting"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:padding="5dp"
             app:layout_constraintBottom_toBottomOf="@+id/textViewLine2"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/textViewBioUnder"
             app:layout_constraintTop_toTopOf="@+id/textViewLine2"
             app:srcCompat="@drawable/arrow" />
 

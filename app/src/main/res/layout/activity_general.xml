@@ -33,22 +33,33 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
 
 
+    <ImageView
+        android:id="@+id/imageViewVibration"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/checkBoxVibration"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/checkBoxVibration"
+        app:srcCompat="@drawable/vibration_removebg" />
+
     <Switch
         android:id="@+id/checkBoxVibration"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:checked="true"
-        android:buttonTint="@color/projectGreen"
+        android:layout_marginTop="10dp"
         android:backgroundTint="@color/projectGreen"
-        android:thumbTint="@color/projectGreen"
-        android:textColorHighlight="@color/projectGreen"
-        android:trackTint="@color/projectGreen"
+        android:buttonTint="@color/projectGreen"
+        android:checked="true"
         android:onClick="enableVibration"
         android:text="vibration"
         android:textColor="@color/white"
+        android:textColorHighlight="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewVibration"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp"
-        tools:layout_editor_absoluteX="-10dp"
         tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <Switch
@@ -56,34 +67,36 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:checked="true"
-        android:buttonTint="@color/projectGreen"
         android:backgroundTint="@color/projectGreen"
-        android:thumbTint="@color/projectGreen"
-        android:textColorHighlight="@color/projectGreen"
-        android:trackTint="@color/projectGreen"
+        android:buttonTint="@color/projectGreen"
+        android:checked="true"
         android:onClick="enableAmoled"
         android:text="amoled dark mode"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxVibration"
-        tools:layout_editor_absoluteX="10dp" />
+        android:textColorHighlight="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxVibration" />
 
     <Switch
         android:id="@+id/checkBoxLocalhost"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
+        android:backgroundTint="@color/projectGreen"
+        android:buttonTint="@color/projectGreen"
         android:checked="true"
         android:onClick="enableLocalhost"
-        android:buttonTint="@color/projectGreen"
-        android:backgroundTint="@color/projectGreen"
-        android:thumbTint="@color/projectGreen"
-        android:textColorHighlight="@color/projectGreen"
-        android:trackTint="@color/projectGreen"
         android:text="localhost"
         android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@+id/checkBoxTheme"
-        tools:layout_editor_absoluteX="10dp" />
+        android:textColorHighlight="@color/projectGreen"
+        android:thumbTint="@color/projectGreen"
+        android:trackTint="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/checkBoxTheme" />
 
     <TextView
         android:id="@+id/textViewAboutSportDash"
@@ -94,7 +107,7 @@
         android:onClick="openAbout"
         android:padding="10dp"
         android:text="about SportDash"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewCustomize" />
@@ -105,7 +118,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewAboutSportDash"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewAboutSportDash"
         app:layout_constraintTop_toTopOf="@+id/textViewAboutSportDash"
         app:srcCompat="@drawable/arrow" />
 
@@ -118,7 +131,7 @@
         android:onClick="openDeviceLinksSettings"
         android:padding="10dp"
         android:text="set as default (enable)"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +143,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewSettings"
         app:layout_constraintTop_toTopOf="@+id/textViewSettings"
         app:srcCompat="@drawable/arrow" />
 
@@ -143,7 +156,7 @@
         android:onClick="restartApp"
         android:padding="10dp"
         android:text="restart app"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLogout" />
@@ -154,7 +167,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewRestart"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewRestart"
         app:layout_constraintTop_toTopOf="@+id/textViewRestart"
         app:srcCompat="@drawable/arrow" />
 
@@ -167,11 +180,87 @@
         android:onClick="openFeedback"
         android:padding="10dp"
         android:text="send feedback"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/checkBoxLocalhost" />
+
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewFeedback"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewFeedback"
+        app:srcCompat="@drawable/feedback_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewLock"
+        app:srcCompat="@drawable/lock_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewDataSaver"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewDataSaver"
+        app:srcCompat="@drawable/datasaver_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewCustomize"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewCustomize"
+        app:srcCompat="@drawable/customize_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewAboutSportDash"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewAboutSportDash"
+        app:srcCompat="@drawable/about_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewSettings"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewSettings"
+        app:srcCompat="@drawable/default_removebg" />
+
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewLogout"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewLogout"
+        app:srcCompat="@drawable/logout_removebg" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewRestart"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewRestart"
+        app:srcCompat="@drawable/restart_removebg" />
+
+
 
     <ImageView
         android:id="@+id/imageViewFeedback"
@@ -179,7 +268,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewFeedback"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewFeedback"
         app:layout_constraintTop_toTopOf="@+id/textViewFeedback"
         app:srcCompat="@drawable/arrow" />
 
@@ -192,9 +281,8 @@
         android:onClick="openCustomize"
         android:padding="10dp"
         android:text="customize"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewDataSaver" />
 
@@ -204,7 +292,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewCustomize"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewCustomize"
         app:layout_constraintTop_toTopOf="@+id/textViewCustomize"
         app:srcCompat="@drawable/arrow" />
 
@@ -217,7 +305,7 @@
         android:onClick="openAppLock"
         android:padding="10dp"
         android:text="app lock"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -229,7 +317,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewLock"
         app:layout_constraintTop_toTopOf="@+id/textViewLock"
         app:srcCompat="@drawable/arrow" />
 
@@ -242,7 +330,7 @@
         android:onClick="openDataSaver"
         android:padding="10dp"
         android:text="data saver"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
@@ -253,7 +341,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDataSaver"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewDataSaver"
         app:layout_constraintTop_toTopOf="@+id/textViewDataSaver"
         app:srcCompat="@drawable/arrow" />
 
@@ -266,7 +354,7 @@
         android:onClick="logout"
         android:padding="10dp"
         android:text="logout"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -278,7 +366,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewLogout"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewLogout"
         app:layout_constraintTop_toTopOf="@+id/textViewLogout"
         app:srcCompat="@drawable/arrow" />
 

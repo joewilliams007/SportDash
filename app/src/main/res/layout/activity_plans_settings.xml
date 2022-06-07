@@ -8,6 +8,15 @@
     android:background="@color/projectGrey"
     tools:context=".settings.account.PlansSettingsActivity">
 
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTts"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewTts"
+        app:srcCompat="@drawable/tts_removebg" />
+
     <TextView
         android:elevation="2dp"
         android:padding="2dp"
@@ -41,7 +50,7 @@
         android:onClick="openTtsSettings"
         android:padding="10dp"
         android:text="text to speech"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewApp" />
@@ -52,7 +61,7 @@
         android:layout_height="30dp"
         android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewTts"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textViewTts"
         app:layout_constraintTop_toTopOf="@+id/textViewTts"
         app:srcCompat="@drawable/arrow" />
 
