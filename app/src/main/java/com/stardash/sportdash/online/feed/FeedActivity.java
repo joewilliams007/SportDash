@@ -1,10 +1,12 @@
 package com.stardash.sportdash.online.feed;
 
+import static com.stardash.sportdash.MainActivity.loggedIn;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.InboxActivity.amount;
 import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
 import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
 import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
+import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -35,6 +37,8 @@ import com.stardash.sportdash.online.upload.UploadActivity;
 import com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.SettingsActivity;
+import com.stardash.sportdash.signIn.LockActivity;
+import com.stardash.sportdash.signIn.RegisterActivity;
 
 import java.util.ArrayList;
 
@@ -44,23 +48,21 @@ public class FeedActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_feed);
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
-                    buildRecyclerView();
-                    ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                } catch (Exception ignored) {
-                    toast("no network");
-                    ImageView imageViewNone = findViewById(R.id.imageViewNone);
-                    imageViewNone.setVisibility(View.VISIBLE);
-                }
-                checkNotifications();
+
+        changeLock = "app";
+        if (Account.isAppLock() && !loggedIn && !Account.password().equals("none")) {
+            Intent i = new Intent(this, LockActivity.class);
+            startActivity(i);
+        } else {
+            if (!Account.loggedIn()) {
+                Intent i = new Intent(this, RegisterActivity.class);
+                startActivity(i);
             }
-        }, 100);
+        }
+
+        checkNotifications();
+        getFeed("all_time");
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
     }
 
     @SuppressLint("SetTextI18n")
@@ -83,13 +85,7 @@ public class FeedActivity extends AppCompatActivity {
     }
 
     private void getFeed(String type) {
-
-
-        ImageView imageViewNone = findViewById(R.id.imageViewNone);
-        imageViewNone.setVisibility(View.GONE);
         items_count = 0;
-
-
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
         StarsocketConnector.sendMessage(type+" "+Account.userid());
 
@@ -130,11 +126,8 @@ public class FeedActivity extends AppCompatActivity {
                     createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
                     buildRecyclerView();
                     ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                    imageViewNone.setVisibility(View.GONE);
                 } catch (Exception e) {
                     toast("no network");
-                    ImageView imageViewNone = findViewById(R.id.imageViewNone);
-                    imageViewNone.setVisibility(View.VISIBLE);
                 }
             }
         }, 300);

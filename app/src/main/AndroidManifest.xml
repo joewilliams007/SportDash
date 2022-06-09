@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.INSTALL_SHORTCUT" />
 
     <application
         android:name=".settings.MyApplication"
@@ -17,6 +18,9 @@
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
+        <activity
+            android:name=".settings.account.security.SecureActivity"
+            android:exported="false" />
         <activity
             android:name=".settings.account.security.SecurityActivity"
             android:exported="false" />
@@ -238,6 +242,10 @@
                     android:host="userid"
                     android:scheme="sportdash" />
             </intent-filter>
+
+            <meta-data
+                android:name="android.app.shortcuts"
+                android:resource="@xml/feed_shortcut" />
         </activity>
     </application>
 

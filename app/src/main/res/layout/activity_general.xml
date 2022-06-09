@@ -200,15 +200,6 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:padding="10dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/textViewLock"
-        app:srcCompat="@drawable/lock_removebg" />
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="@+id/textViewDataSaver"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/textViewDataSaver"
@@ -297,31 +288,6 @@
         app:srcCompat="@drawable/arrow" />
 
     <TextView
-        android:id="@+id/textViewLock"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:gravity="center"
-        android:onClick="openAppLock"
-        android:padding="10dp"
-        android:text="app lock"
-        android:textColor="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
-
-    <ImageView
-        android:id="@+id/imageViewLock"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:padding="5dp"
-        app:layout_constraintBottom_toBottomOf="@+id/textViewLock"
-        app:layout_constraintEnd_toEndOf="@+id/textViewLock"
-        app:layout_constraintTop_toTopOf="@+id/textViewLock"
-        app:srcCompat="@drawable/arrow" />
-
-    <TextView
         android:id="@+id/textViewDataSaver"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -333,7 +299,7 @@
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewLock" />
+        app:layout_constraintTop_toBottomOf="@+id/textViewFeedback" />
 
     <ImageView
         android:id="@+id/imageViewDataSaver"

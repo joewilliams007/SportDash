@@ -48,7 +48,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:layout_marginTop="8dp"
                 android:background="@drawable/main_text_background_plus"
                 android:elevation="2dp"
                 android:padding="10dp"
@@ -56,7 +55,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewAbout" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewFollowersNr" />
 
             <TextView
                 android:id="@+id/textViewLevel"
@@ -165,30 +164,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewMessage"
                 app:srcCompat="@drawable/follow_removebg" />
-
-            <TextView
-                android:id="@+id/textViewAbout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="About"
-                android:textColor="@color/black"
-                android:textSize="50dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewFollowersNr" />
-
-            <TextView
-                android:id="@+id/textViewPlans"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
-                android:text="Plans"
-                android:textColor="@color/black"
-                android:textSize="50dp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewMe" />
 
             <TextView
                 android:id="@+id/textViewOpenSearch"
@@ -382,13 +357,12 @@
             <TextView
                 android:id="@+id/textViewUsername"
                 android:layout_width="0dp"
+                android:padding="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:gravity="right"
+                android:gravity="left"
                 android:text="loading"
-                android:textColor="@color/black"
-                android:textSize="50dp"
-                android:textStyle="bold"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textViewOpenSearch" />
@@ -747,7 +721,7 @@
                 android:text="Download"
                 android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toStartOf="@+id/textViewDownloadDataSaver"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMe" />
 
             <TextView
                 android:id="@+id/textViewDownloadDataSaver"
@@ -760,7 +734,7 @@
                 android:text="Data Saver Settings"
                 android:textColor="@color/projectBlack"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlans" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMe" />
 
 
             <ImageView

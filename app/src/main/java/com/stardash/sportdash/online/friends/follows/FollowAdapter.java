@@ -37,7 +37,7 @@ import java.util.ArrayList;
 
 public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowViewHolder> {
 
-    private ArrayList<FollowItem> mFollowList;
+    private final ArrayList<FollowItem> mFollowList;
 
     public static class FollowViewHolder extends RecyclerView.ViewHolder{
 
@@ -62,8 +62,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
     @Override
     public FollowViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.follow_item,parent, false);
-        FollowViewHolder evh = new FollowViewHolder(v);
-        return evh;
+        return new FollowViewHolder(v);
     }
 
     @SuppressLint("SetTextI18n")
@@ -103,17 +102,19 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                                     @Override
                                     public void run() {
 
-                                        String received = StarsocketConnector.getMessage().toString();
+                                        String received = null;
+
+                                            received = StarsocketConnector.getMessage().toString();
+
 
                                         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                                         SharedPreferences.Editor editor = settings.edit();
-                                        String plan1 = received;
 
                                         isSpecificPlan = true;
                                         thePlan = received;
                                         isRandom = false;
 
-                                        if (plan1.equals("err")) {
+                                        if (received.equals("err")) {
                                             vibrate();
                                         } else {
                                             Account.setIsMine(false);
@@ -139,7 +140,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             MyApplication.getAppContext().startActivity(i);
                         }
-                    } catch (Exception e) {
+                    } catch (Exception ignored) {
 
                     }
             }

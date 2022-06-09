@@ -382,7 +382,6 @@ public class RunPlanActivity extends AppCompatActivity {
             TextView textViewPlanId = findViewById(R.id.textViewPlanId);
             StarsocketConnector.sendMessage("getStars "+textViewPlanId.getText().toString().replace("#",""));
             final Handler handler = new Handler(Looper.getMainLooper());
-
             handler.postDelayed(new Runnable() {
                 @SuppressLint("SetTextI18n")
                 @Override

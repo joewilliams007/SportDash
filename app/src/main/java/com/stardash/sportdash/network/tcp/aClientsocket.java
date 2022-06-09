@@ -1,6 +1,11 @@
 package com.stardash.sportdash.network.tcp;
 
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+
 import com.stardash.sportdash.settings.Account;
+import com.stardash.sportdash.settings.MyApplication;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -30,10 +35,25 @@ public class aClientsocket {
 
             String ip = Account.ip();
             if (Account.localhost()) {
-                ip = "192.168.2.107";
+
+                    final ConnectivityManager connMgr = (ConnectivityManager) MyApplication.getAppContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+
+                    if (connMgr != null) {
+                        NetworkInfo activeNetworkInfo = connMgr.getActiveNetworkInfo();
+
+                        if (activeNetworkInfo != null) { // connected to the internet
+                            // connected to the mobile provider's data plan
+                            if (activeNetworkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                                // connected to wifi
+                                ip = "192.168.2.107";
+                            } else {
+                                ip = Account.ip();
+                            }
+                        }
+                    }
             }
             socket = new Socket(ip, serverPort);
-
+            socket.setSoTimeout(100);
             toServer = socket.getOutputStream();
             fromServer = socket.getInputStream();
             System.out.println("successfully connected to server!");

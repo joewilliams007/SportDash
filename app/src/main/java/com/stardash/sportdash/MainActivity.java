@@ -1,5 +1,6 @@
 package com.stardash.sportdash;
 
+import static com.stardash.sportdash.network.tcp.StarsocketConnector.serverOffline;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
 import static com.stardash.sportdash.online.chat.InboxActivity.amount;
@@ -122,17 +123,19 @@ public class MainActivity extends AppCompatActivity {
             alert.show(); */
 
 
-        changeLock = "app";
-        if (Account.isAppLock() && !loggedIn && !Account.password().equals("none")) {
-            Intent i = new Intent(this, LockActivity.class);
-            startActivity(i);
-        }
+
 
         Account.setAddingFriend(false); // so that if you canceled adding friends it knows but you have no friends [...] :)
         checkDeepLink(); // check if app was opened with a link
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
+        changeLock = "app";
+        if (Account.isAppLock() && !loggedIn && !Account.password().equals("none")) {
+            Intent i = new Intent(this, LockActivity.class);
+            startActivity(i);
+        }
         if (Account.loggedIn()) {
             try {
                 setUserStats(); // set user progress
@@ -185,6 +188,10 @@ public class MainActivity extends AppCompatActivity {
                     textViewNotification.setText(" "+ notif +" ");
                 } else  {
                     textViewNotification.setVisibility(View.INVISIBLE);
+                }
+
+                if (serverOffline) {
+                    toast("SERVER IS OFFLINE AND UNDER MAINTENANCE");
                 }
             }
         }, 400);

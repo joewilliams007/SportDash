@@ -1,5 +1,6 @@
 package com.stardash.sportdash.network.tcp;
 
+import android.os.AsyncTask;
 import android.os.Handler;
 import android.os.Looper;
 
@@ -30,28 +31,55 @@ public class StarsocketConnector {
         socket.stopConnection();
     }
 
+    public static Boolean serverOffline = false;
     public static void sendMessage(String message){
         try  {
-            aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
-            socket.sendMessage(Account.userid()+" "+Account.password()+" "+Account.username()+" §"+message);
-            socket.stopConnection();
+            AsyncTask.execute(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        aClientsocket socket = new aClientsocket(nodeMessageSendServerPort);
+                        socket.sendMessage(Account.userid() + " " + Account.password() + " " + Account.username() + " §" + message);
+                        serverOffline = false;
+                        handler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                socket.stopConnection();
+                            }
+                        }, 300);
+                        socket.stopConnection();
+                    } catch (Exception e) {
+                        serverOffline = true;
+                    }
+                }
+            });
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-
-    public static String getMessage(){
-        final Handler handler = new Handler(Looper.getMainLooper());
+    public static String getMessage() {
+      /*  final Handler handler = new Handler(Looper.getMainLooper());
         aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
         String message = socket.receiveMessage();
 
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                socket.stopConnection();
-            }
-            }, 300);
+                    socket.stopConnection();
+                }
+            }, 300); */
+
+        getMessage AsyncMessage = new getMessage();
+        Thread thread = new Thread(AsyncMessage);
+        thread.start();
+        try {
+            thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String message = AsyncMessage.getAsyncMessage();
 
         return message;
     }

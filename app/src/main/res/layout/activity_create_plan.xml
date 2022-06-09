@@ -159,7 +159,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
+                android:background="@drawable/main_text_background_plus"
                 android:hint="Tags (comma separated)"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"

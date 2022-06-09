@@ -5,20 +5,20 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main"
-    android:background="@color/projectBlack"
+    android:background="@color/projectGrey"
     tools:context=".online.chat.ChatActivity">
 
     <EditText
         android:id="@+id/editTextTextPersonName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:alpha="0.7"
         android:background="@drawable/track_green_background"
         android:ems="10"
-        android:hint="send message"
         android:inputType="textMultiLine"
+        android:maxLines="10"
         android:padding="10dp"
-        android:alpha="0.7"
-        android:layout_margin="10dp"
         android:textColor="@color/projectGrey"
         android:textColorHint="@color/projectGrey"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -26,19 +26,33 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
+
+    <ImageView
+        android:id="@+id/imageViewUser"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:paddingTop="10dp"
+        android:onClick="openProfile"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
+        app:layout_constraintStart_toEndOf="@+id/imageViewBack"
+        app:layout_constraintTop_toTopOf="@+id/textViewTop"
+        app:srcCompat="@drawable/id_removebg" />
+
     <TextView
         android:id="@+id/textViewTop"
-        android:elevation="-1dp"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/projectBlack"
+        android:background="@color/projectGrey"
+        android:elevation="-1dp"
         android:gravity="center"
-        android:padding="10dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:onClick="openProfile"
         android:text="J O E J O E"
-        android:textColor="@color/projectGreen"
+        android:textColor="@color/white"
         android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewUser"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -48,26 +62,28 @@
         android:layout_height="wrap_content"
         android:elevation="1dp"
         android:onClick="home"
+        android:visibility="gone"
         android:padding="10dp"
         android:text="B A C K"
         android:textColor="@color/white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="UsingOnClickInXml" />
 
-    <TextView
+    <ImageView
         android:id="@+id/textViewOptions"
-        android:background="@color/projectBlack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:src="@drawable/edit1_removebg"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
         android:elevation="1dp"
-        android:padding="10dp"
-        android:text=". . ."
         android:onClick="showOptions"
         android:textStyle="bold"
         android:rotation="-90"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+
 
     <TextView
         android:id="@+id/textViewSend"
@@ -100,133 +116,146 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chat_recycler_view"
-        android:elevation="1dp"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_margin="10dp"
         android:scrollbars="vertical"
         app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewSet" />
-
-    <TextView
-        android:id="@+id/textViewSet"
-        android:background="@color/projectBlack"
-        android:padding="10dp"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewOptionBlock"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:padding="10dp"
-        android:text="B L O C K"
-        android:textStyle="italic"
-        android:textColor="@color/projectRed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewOptionBottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:padding="10dp"
-        android:text="D O W N"
-        android:onClick="scrollDown"
-        android:textColor="@color/white"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewOptionUp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:padding="10dp"
-        android:text="U P"
-        android:onClick="scrollUp"
-        android:textColor="@color/white"
-        android:textStyle="italic"
-        app:layout_constraintEnd_toStartOf="@+id/textViewOptionBottom"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewOptionClear"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:padding="10dp"
-        android:onClick="clearChat"
-        android:text="C L E A R  C H A T"
-        android:textColor="@color/projectRed"
-        android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/textViewOptionBlock"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-    <TextView
-        android:id="@+id/textViewOptionBg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:padding="10dp"
-        android:text="B G"
-        android:onClick="setBackground"
-        android:textColor="@color/projectYellow"
-        android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/textViewOptionClear"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
-
-    <TextView
-        android:id="@+id/textViewOptionNone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:elevation="1dp"
-        android:onClick="noBg"
-        android:padding="10dp"
-        android:text="N O B G"
-        android:textColor="@color/projectLightBlue"
-        android:textStyle="italic"
-        app:layout_constraintStart_toEndOf="@+id/textViewOptionBg"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
-
+        app:layout_constraintTop_toBottomOf="@+id/view4" />
 
     <ImageView
         android:id="@+id/imageViewBg"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginBottom="10dp"
         android:elevation="-1dp"
+        android:src="@color/projectGrey"
+        android:layout_marginBottom="10dp"
+        android:background="@color/projectGrey"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/editTextTextPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/textViewSend"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop"
-        app:layout_constraintVertical_bias="1.0" />
-
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar.Horizontal"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="16dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/white"
-        android:indeterminateTintMode="src_atop"
-        android:max="100"
-        android:progress="60"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/view4"
+        tools:targetApi="lollipop" />
+    <ImageView
+        android:id="@+id/imageViewBack"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        android:rotation="-180"
+        android:onClick="goBack"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="@+id/textViewTop"
+        app:srcCompat="@drawable/arrow" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutSet"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop">
+
+        <TextView
+            android:id="@+id/textViewOptionBottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:onClick="scrollDown"
+            android:padding="10dp"
+            android:text="+"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewOptionUp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textViewOptionUp" />
+
+        <TextView
+            android:id="@+id/textViewOptionUp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:elevation="1dp"
+            android:onClick="scrollUp"
+            android:padding="10dp"
+            android:text="-"
+            android:textColor="@color/white"
+            android:textStyle="italic"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewOptionNone"
+            app:layout_constraintEnd_toStartOf="@+id/textViewOptionBottom"
+            app:layout_constraintTop_toTopOf="@+id/textViewOptionNone" />
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ImageView
+            android:id="@+id/textViewOptionBg"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:elevation="1dp"
+            android:onClick="setBackground"
+            android:padding="10dp"
+            android:src="@drawable/image_removebg"
+            android:text="B G"
+            android:textColor="@color/projectYellow"
+            android:textStyle="italic"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/textViewOptionNone"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:elevation="1dp"
+            android:onClick="noBg"
+            android:padding="10dp"
+            android:src="@drawable/trashbin_removebg"
+            android:text="N O B G"
+            android:textColor="@color/projectLightBluePlus"
+            android:textStyle="italic"
+            app:layout_constraintStart_toEndOf="@+id/textViewOptionBg"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/textViewShortCut"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:elevation="1dp"
+            android:onClick="addShortcut"
+            android:rotation="-90"
+            android:src="@drawable/moresettings_removebg"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/textViewOptionNone"
+            app:layout_constraintTop_toTopOf="@+id/textViewOptionNone" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <View
+        android:id="@+id/view4"
+        android:layout_width="match_parent"
+        android:layout_height="0.1dp"
+        android:background="@color/projectBlack"
+        android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayoutSet" />
+
+
+
+        <ProgressBar
+            android:id="@+id/progressBar"
+            style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="16dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            android:indeterminateTintMode="src_atop"
+            android:max="100"
+            android:progress="60"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>

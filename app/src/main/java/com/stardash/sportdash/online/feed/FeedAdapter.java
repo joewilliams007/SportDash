@@ -7,11 +7,13 @@ import static com.stardash.sportdash.online.friends.FriendsActivity.isStars;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
+import static com.stardash.sportdash.plans.run.RunPlanActivity.commentsPlanId;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
 import static com.stardash.sportdash.settings.app.vibrate;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -21,6 +23,7 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -30,6 +33,7 @@ import com.stardash.sportdash.BuildConfig;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.online.friends.FriendsActivity;
+import com.stardash.sportdash.plans.comments.CommentsActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
@@ -55,6 +59,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
         public TextView mTextView2;
         public TextView mTextView3;
         public TextView mTextView4;
+        public TextView mTextViewStars;
+        public ImageView mImageViewStar;
+        public ImageView mImageViewComments;
 
         public FeedViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -63,6 +70,9 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             mTextView2 = itemView.findViewById(R.id.textViewLine2);
             mTextView3 = itemView.findViewById(R.id.textViewLine3);
             mTextView4 = itemView.findViewById(R.id.textViewLine4);
+            mImageViewStar = itemView.findViewById(R.id.imageViewStar);
+            mTextViewStars = itemView.findViewById(R.id.textViewStars);
+            mImageViewComments = itemView.findViewById(R.id.imageViewComment);
         }
     }
 
@@ -112,6 +122,97 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
             }
         });
 
+        holder.mTextView4.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                try {
+                    String id = holder.mTextView3.getText().toString().split("#")[1];
+                    vibrate();
+                    ImageView img = holder.mImageViewStar;
+                    if (img.getVisibility() == View.VISIBLE) {
+                        img.setVisibility(View.GONE);
+                        holder.mImageViewComments.setVisibility(View.GONE);
+                    } else {
+                        StarsocketConnector.sendMessage("getStars " + id);
+                        img.setVisibility(View.VISIBLE);
+                        holder.mImageViewComments.setVisibility(View.VISIBLE);
+                        final Handler handler = new Handler(Looper.getMainLooper());
+                        handler.postDelayed(new Runnable() {
+                            @SuppressLint("SetTextI18n")
+                            @Override
+                            public void run() {
+                                try {
+                                    String received = StarsocketConnector.getMessage();
+                                    String star_status = received.split("#")[2];
+                                    if (star_status.equals("1")) {
+                                        holder.mImageViewStar.setImageResource(R.drawable.star_filled);
+                                        holder.mTextViewStars.setText("true");
+                                    } else {
+                                        holder.mImageViewStar.setImageResource(R.drawable.star_removebg);
+                                        holder.mTextViewStars.setText("false");
+                                    }
+                                }catch (Exception e) {
+                                    holder.mTextView4.setText("there was an error.");
+                                }
+                            }
+                        }, 500);
+
+
+                    }
+                }catch (Exception e) {
+                    holder.mTextView4.setText("there was an error.");
+                }
+            }
+        });
+
+        holder.mImageViewComments.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                vibrate();
+                    commentsPlanId = holder.mTextView3.getText().toString().split("#")[1];
+                    Intent i = new Intent(MyApplication.getAppContext(), CommentsActivity.class);
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    MyApplication.getAppContext().startActivity(i);
+            }
+        });
+
+        holder.mImageViewStar.setOnClickListener(new View.OnClickListener() {
+            @SuppressLint("SetTextI18n")
+            @Override
+            public void onClick(View v) {
+                vibrate();
+                try {
+                    String id = holder.mTextView3.getText().toString().split("#")[1];
+
+                    String desc = " %%%" + holder.mTextView1.getText().toString();
+                    StarsocketConnector.sendMessage("starPlan " + Account.userid() + " " + id + desc);
+
+
+                    if (holder.mTextViewStars.getText().equals("false")) {
+                        holder.mImageViewStar.setImageResource(R.drawable.star_filled);
+                        holder.mTextViewStars.setText("true");
+
+                        String Line4 = holder.mTextView4.getText().toString();
+                        String endLine4 = Line4.split("views ")[1];
+                        String stars = endLine4.split(" stars")[0];
+                        int starsInt = Integer.parseInt(stars);
+                        holder.mTextView4.setText(Line4.replace(endLine4, String.valueOf(starsInt + 1) + " stars"));
+                    } else {
+                        holder.mImageViewStar.setImageResource(R.drawable.star_removebg);
+                        holder.mTextViewStars.setText("false");
+                        String Line4 = holder.mTextView4.getText().toString();
+                        String endLine4 = Line4.split("views ")[1];
+                        String stars = endLine4.split(" stars")[0];
+                        int starsInt = Integer.parseInt(stars);
+                        holder.mTextView4.setText(Line4.replace(endLine4, String.valueOf(starsInt - 1) + " stars"));
+                    }
+                }catch (Exception e) {
+                    holder.mTextView4.setText("there was an error.");
+                }
+            }
+        });
+
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -119,7 +220,8 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
 
                 String id = holder.mTextView3.getText().toString().split("#")[1];
                 vibrate();
-
+                holder.mImageViewStar.setVisibility(View.GONE);
+                holder.mImageViewComments.setVisibility(View.GONE);
                 try {
                         try {
                             StarsocketConnector.sendMessage("downloadPlanById " + id);

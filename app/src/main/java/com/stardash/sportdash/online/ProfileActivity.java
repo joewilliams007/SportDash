@@ -158,9 +158,14 @@ public class ProfileActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                String received_plans = StarsocketConnector.getMessage().toString();
+                        String received_plans = null;
+                        try {
+                            received_plans = StarsocketConnector.getMessage().toString();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
 
-                SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
+                        SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
                 SharedPreferences.Editor editor = settings.edit();
                         try {
                             String plan1 = received_plans.split("##########", 9)[1];

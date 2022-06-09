@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
@@ -71,8 +72,13 @@ public class FollowActivity extends AppCompatActivity {
 
         for (String element : user) {
             try {
-                mFollowList.add(new FollowItem(element.split("@")[0], element.split("@")[1], element.split("@")[2]));
-            } catch (Exception e) {
+                if (element.contains("undefined")) {
+
+                } else {
+                    mFollowList.add(new FollowItem(element.split("@")[0], element.split("@")[1], element.split("@")[2]));
+
+                }
+            } catch (Exception ignored) {
 
             }
         }
@@ -90,6 +96,7 @@ public class FollowActivity extends AppCompatActivity {
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);

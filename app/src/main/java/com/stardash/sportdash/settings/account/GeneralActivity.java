@@ -220,17 +220,6 @@ public class GeneralActivity extends AppCompatActivity {
         startActivity(i);
     }
 
-    public void openAppLock(View view) {
-        vibrate();
-        if (Account.Lock().equals("none")) {
-            Intent i = new Intent(this, AppLockSettingsActivity.class);
-            startActivity(i);
-        } else {
-            changeLock = "appLock";
-            Intent i = new Intent(this, LockActivity.class);
-            startActivity(i);
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     public void toast(String message){

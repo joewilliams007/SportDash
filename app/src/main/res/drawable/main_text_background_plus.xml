@@ -8,7 +8,7 @@
     <gradient
         android:startColor="@color/projectGrey"
         android:endColor="@color/projectGrey"
-        android:angle="500" />
+        android:angle="1" />
 
     <padding
         android:left="1dp"

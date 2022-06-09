@@ -25,6 +25,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.TextView;
 
+import com.stardash.sportdash.network.tcp.getMessage;
 import com.stardash.sportdash.online.feed.FeedActivity;
 import com.stardash.sportdash.online.feed.FeedAdapter;
 import com.stardash.sportdash.online.feed.FeedItem;
@@ -45,8 +46,11 @@ public class InboxActivity extends AppCompatActivity {
       //  overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_inbox);
 
-
         currentType = "all";
+        String notif = Account.notifications();
+        if (notif!=null) {
+            createFeedList(Account.notifications());
+        }
         getInbox();
 
         if (Account.isAmoled()) {
@@ -65,8 +69,7 @@ public class InboxActivity extends AppCompatActivity {
     @Override
     public void onResume(){
         super.onResume();
-       getInbox();
-
+        getInbox();
     }
 
     public void showFollows(View view) {
@@ -194,6 +197,7 @@ public class InboxActivity extends AppCompatActivity {
                     try {
                         amount = 0;
                         String inbox = StarsocketConnector.getMessage();
+                        Account.setNotifications(inbox);
                         String rest = inbox.replaceAll("undefined","");
                         String[] user = rest.split("\n");
                         String separator = "NOTIF_DIVIDER";
@@ -255,7 +259,7 @@ public class InboxActivity extends AppCompatActivity {
                 } else if (type.equals("COMMENT")){
                     mInboxList.add(new InboxItem("COMMENT", from_name+" has commented on your plan!",from_id+" "+notif_id+" "+viewed+" "+plan_id,finalTime));
                 } else if (type.equals("CHAT")){
-
+                    mInboxList.add(new InboxItem("CHAT", from_name+" has sent you a text message!",from_id+" "+notif_id+" "+viewed+" "+from_name,finalTime));
                 } else {
 
                 }

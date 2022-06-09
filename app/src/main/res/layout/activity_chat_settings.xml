@@ -127,4 +127,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDisclaimer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:padding="10dp"
+        android:text="Please read the following information.\nSportDash chat currently only provides you the 100 latest chat messages of any given chat. In the future you will certainly be able to see all your old messages as well. There is no End to End encryption so we advise you to not send any private information of yours in the chats.\n\nThe last 100 chat messages of any chat will also be saved on your phone, to enable viewing them offline and via chat shortcuts. Chat shortcuts can link from your home screen to any chat."
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewAppLock" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

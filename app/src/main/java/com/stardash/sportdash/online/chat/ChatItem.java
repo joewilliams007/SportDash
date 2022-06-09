@@ -4,12 +4,14 @@ public class ChatItem {
     private String mText1;
     private String mText2;
     private String mText3;
+    private String mText4;
 
 
-    public ChatItem (String text1, String text2, String text3) {
+    public ChatItem (String text1, String text2, String text3, String text4) {
         mText1 = text1;
         mText2 = text2;
         mText3 = text3;
+        mText4 = text4;
     }
 
     public void changeText1(String text){
@@ -26,6 +28,10 @@ public class ChatItem {
 
     public String getText3(){
         return mText3;
+    }
+
+    public String getText4(){
+        return mText4;
     }
 }
 

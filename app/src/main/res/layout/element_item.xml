@@ -106,7 +106,7 @@
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginTop="10dp"
-            android:background="@color/projectBlack"
+            android:background="@color/projectGrey"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textViewLine3" />
 

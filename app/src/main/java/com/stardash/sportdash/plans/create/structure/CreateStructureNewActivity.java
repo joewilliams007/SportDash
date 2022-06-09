@@ -344,7 +344,8 @@ public class CreateStructureNewActivity extends AppCompatActivity {
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                String search_result = StarsocketConnector.getMessage().replaceAll("undefined","");
+                String search_result = null;
+                    search_result = StarsocketConnector.getMessage().replaceAll("undefined","");
                 processSearchResult(search_result);
             }
 

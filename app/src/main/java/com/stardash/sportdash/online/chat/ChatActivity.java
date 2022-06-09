@@ -4,6 +4,8 @@ import static android.graphics.BitmapFactory.*;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatUsername;
 import static com.stardash.sportdash.online.friends.FriendsActivity.openedChat;
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
+import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import androidx.annotation.NonNull;
@@ -11,30 +13,30 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.pm.ShortcutInfoCompat;
+import androidx.core.content.pm.ShortcutManagerCompat;
+import androidx.core.graphics.drawable.IconCompat;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
-import android.view.LayoutInflater;
+import android.view.DragEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AbsListView;
@@ -42,7 +44,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.stardash.sportdash.network.tcp.getMessage;
 import com.stardash.sportdash.online.ProfileActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.settings.Account;
@@ -50,24 +54,22 @@ import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.MyApplication;
+import com.stardash.sportdash.settings.chat.ChatBackgroundActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 public class ChatActivity extends AppCompatActivity {
 
-    private ArrayList<ChatItem> mChatList;
-
-    private RecyclerView mRecyclerView;
-    private ChatAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         updateChat = false;
+        editingMessage = false;
         updateChat = true;
         isInChat = true;
         isNew = true;
@@ -77,32 +79,47 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         TextView textViewTop = findViewById(R.id.textViewTop);
 
-        check();
 
+        Bundle extras = getIntent().getExtras(); // get link hashtag if opened from link
+        if (extras != null) {
+            chatUsername = extras.getString("USERNAME").toString();
+            chatId = extras.getString("ID").toString();
+        }
+        String savedChat = Account.chat(chatId);
+        if (savedChat!=null){
+            createList(savedChat);
+        }
+        check();
         textViewTop.setText(chatUsername);
         showSet();
-
+        setBg();
 
         Window window = getWindow();
-        window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-        window.setStatusBarColor(Color.parseColor("#212121"));
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+        }
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+
+        }
 
         if (Account.isAmoled()) {
             ConstraintLayout main = findViewById(R.id.main);
             main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
             TextView textView = findViewById(R.id.textViewHome);
             textView.setTextColor(Color.parseColor("#FFFFFF"));
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.setStatusBarColor(Color.parseColor("#000000"));
-            TextView textViewSet = findViewById(R.id.textViewSet);
-            textViewSet.setBackgroundColor(Color.parseColor("#000000"));
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            }
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(Color.parseColor("#000000"));
+            }
         }
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
        // setRecyclerView();
-        setBg();
 
-        mRecyclerView = findViewById(R.id.chat_recycler_view);
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            mRecyclerView = findViewById(R.id.chat_recycler_view);
+            mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
 
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
@@ -115,24 +132,57 @@ public class ChatActivity extends AppCompatActivity {
                 super.onScrollStateChanged(recyclerView, newState);
 
                 if (newState == AbsListView.OnScrollListener.SCROLL_STATE_FLING) {
-                    // Do something
+
                 } else if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
-                    // Do something
+
                 } else {
-                    // Do something
+
                 }
             }
         });
     }
+
+    public void onPause(){
+        super.onPause();
+        scheduleTaskExecutor.shutdown();
+        isInChat = false;
+    }
+    public void onResume(){
+        super.onResume();
+        try {
+            scheduleTaskExecutor.shutdown();
+        } catch (Exception ignored){
+
+        }
+        isInChat = true;
+        check();
+    }
+    public void onDestroy(){
+        super.onDestroy();
+        isInChat = false;
+        scheduleTaskExecutor.shutdown();
+    }
+    public void onStop(){
+        super.onStop();
+        isInChat = false;
+        scheduleTaskExecutor.shutdown();
+    }
+    public void onBackPressed(){
+        super.onBackPressed();
+        isInChat = false;
+        scheduleTaskExecutor.shutdown();
+        finish();
+    }
+        public ScheduledExecutorService scheduleTaskExecutor;
     public static Boolean isNew;
-    public static Boolean isInChat;
+    public static Boolean isInChat = false;
     public void check(){
-        ScheduledExecutorService scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
+        scheduleTaskExecutor = Executors.newScheduledThreadPool(5);
 
         // This schedule a runnable task every 2 minutes
         scheduleTaskExecutor.scheduleAtFixedRate(new Runnable() {
             public void run() {
-                setRecyclerView();
+                getData();
                 if (!isInChat){
                     scheduleTaskExecutor.shutdown();
                 }
@@ -140,73 +190,129 @@ public class ChatActivity extends AppCompatActivity {
         }, 0, 2, TimeUnit.SECONDS);
     }
 
+    public void refreshChat(View view) {
+    }
+
+
+
 
     public static Boolean updateChat;
-    static ArrayList<ChatItem> chatList;
-    static String olds;
-    private void setRecyclerView() {
-       try {
-        StarsocketConnector.sendMessage("getChat "+Account.userid()+" "+ chatId);
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
+    private void getData() {
+        try {
+            StarsocketConnector.sendMessage("getChat "+chatId);
+            final Handler handler = new Handler(Looper.getMainLooper());
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
                     try {
-
-                        String s[] = StarsocketConnector.getMessage().replaceAll("undefined","").split("NEXTMESSAGEIS:;");
-
-
-                        if (s[s.length-1].equals(olds)&&!isNew) {
-
-                        } else {
-                            olds = s[s.length-1];
-                            isNew = false;
-
-                            String ans = "";
-                            for (int i = s.length - 1; i >= 0; i--) {
-                                ans += s[i] + "NEXTMESSAGEIS:;";
-                            }
-
-                            String[] chat = ans.split("NEXTMESSAGEIS:;");
-
-
-                            chatList = new ArrayList<>();
-
-                            for (String element : chat) {
-                                try {
-                                    chatList.add(new ChatItem(element.split("@")[1], element.split("@")[2], element.split("@")[0]));
-                                } catch (Exception e) {
-
-                                }
-                            }
-
-
-                            // chatList.add(new ChatItem("JoeJoe", "Hi how are you?", "10.44 pm"));
-
-                            mRecyclerView = findViewById(R.id.chat_recycler_view);
-                            mRecyclerView.setHasFixedSize(true);
-                            mLayoutManager = new LinearLayoutManager(ChatActivity.this);
-                            mAdapter = new ChatAdapter(chatList);
-
-                            mRecyclerView.setLayoutManager(mLayoutManager);
-                            mRecyclerView.setAdapter(mAdapter);
-
-                            //  mRecyclerView.scrollToPosition(chatList.size() - 1);
-
-                            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-                         }
-                        } catch(Exception e){
-                            toast("no network");
-                            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+                       String received = StarsocketConnector.getMessage().replaceAll("undefined", "");
+                        createList(received);
+                        isInChat = true;
+                    } catch (Exception e) {
+                        toast("no network");
                     }
+                }
+            }, 200);
+
+        } catch (Exception e){
+            toast("no network");
+            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
+        }
+    }
+
+    private ArrayList<ChatItem> mChatList;
+    private RecyclerView mRecyclerView;
+    private ChatAdapter mAdapter;
+    private LinearLayoutManager mLayoutManager;
+
+    public String lastMessageId = "0";
+    public String newMessageId = "00";
+    public int currentChats = 0;
+    public void createList(String data){
+        String[] user = data.split("NEXTTEXTMESSAGE");
+
+        mChatList = new ArrayList<>();
+        String separator = "CHAT_DIVIDER";
+
+        for (String element : user) {
+            try {
+
+                String message_id = element.split(separator)[0];
+                String text = element.split(separator)[1];
+                String to_id = element.split(separator)[2];
+                String from_id = element.split(separator)[3];
+                String viewed = element.split(separator)[4];
+                String edited = element.split(separator)[5];
+                String deleted = element.split(separator)[6];
+                String date = element.split(separator)[7];
+                String type = element.split(separator)[8];
+                String from_name = element.split(separator)[9];
+
+                if (currentChats == 0){
+                    newMessageId = message_id;
+                    currentChats++;
+                }
+
+                if (deleted.equals("1")) {
+                    text = "this message was deleted";
+                }
+
+                Calendar calendar = Calendar.getInstance(); isInChat = false;
+                calendar.setTimeInMillis(Long.parseLong(date)*1000);
+                @SuppressLint("SimpleDateFormat") SimpleDateFormat sdf = new SimpleDateFormat("HH:mm");
+                String dateString = sdf.format(calendar.getTime());
+
+                if (!text.equals("editedMessage")) {
+                    mChatList.add(new ChatItem(from_name,text,dateString,from_id+" "+to_id+" "+message_id+" "+viewed+" "+deleted+" "+edited));
+                }
+
+
+            } catch (Exception ignored) {
 
             }
-        }, 2000);
+        }
+        isInChat = true;
+        if (lastMessageId.equals(newMessageId)) {
 
-       } catch (Exception e){
-           toast("no network");
-       }
+        } else {
+            buildRecyclerView();
+            Account.setChat(data,chatId);
+            lastMessageId = newMessageId;
+        }
+        currentChats = 0;
+    }
+
+    public static Boolean editingMessage = false;
+    public void buildRecyclerView(){
+        mRecyclerView = findViewById(R.id.chat_recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(ChatActivity.this);
+        mLayoutManager.setStackFromEnd(true);
+        mLayoutManager.setReverseLayout(true);
+        mAdapter = new ChatAdapter(mChatList);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.setAdapter(mAdapter);
+        isInChat = true;
+        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
+        mRecyclerView.scrollToPosition(0);
+        mRecyclerView.addOnLayoutChangeListener(new View.OnLayoutChangeListener() {
+            @Override
+            public void onLayoutChange(View v,
+                                       int left, int top, int right, int bottom,
+                                       int oldLeft, int oldTop, int oldRight, int oldBottom) {
+                if (bottom < oldBottom) {
+                    if (!editingMessage) {
+                        mRecyclerView.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRecyclerView.smoothScrollToPosition(0);
+                            }
+                        }, 100);
+                    }
+                }
+            }
+        });
+
     }
 
 
@@ -216,12 +322,17 @@ public class ChatActivity extends AppCompatActivity {
         EditText editTextMessage = findViewById(R.id.editTextTextPersonName);
         if (editTextMessage.getText().toString().length()<1){
             toast("enter a message");
-        } else if (editTextMessage.getText().toString().length()>150){
+            isInChat = true;
+        } else if (editTextMessage.getText().toString().length()>2000){
             toast("message is too long");
+            isInChat = true;
+        } else if (editTextMessage.getText().toString().replaceAll(" ","").length()<1) {
+
         } else {
             ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-                StarsocketConnector.sendMessage("chat " + Account.userid() + " " + chatId + " MESSAGE&" + editTextMessage.getText().toString().replace("#","(hashtag)")+ " MESSAGE&" + Account.username());
+                StarsocketConnector.sendMessage("chat " + chatId + " TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","(hashtag)"));
                 editTextMessage.setText("");
+            isInChat = true;
           //  setRecyclerView();
         }
 
@@ -233,6 +344,7 @@ public class ChatActivity extends AppCompatActivity {
         startActivity(i);
     }
 
+    @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
         textViewCustomToast.setVisibility(View.VISIBLE);
@@ -252,49 +364,24 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void showSet() {
-        TextView textViewSet = findViewById(R.id.textViewSet);
-        TextView textViewOptionBlock = findViewById(R.id.textViewOptionBlock);
-        TextView textViewOptionClear = findViewById(R.id.textViewOptionClear);
-        TextView textViewOptionUp = findViewById(R.id.textViewOptionUp);
-        TextView textViewOptionDown = findViewById(R.id.textViewOptionBottom);
-        TextView textViewOptionBg = findViewById(R.id.textViewOptionBg);
-        TextView textViewOptionNoBg = findViewById(R.id.textViewOptionNone);
-
-        if (textViewSet.getVisibility() == View.VISIBLE){
-            textViewOptionBlock.setVisibility(View.GONE);
-            textViewOptionUp.setVisibility(View.GONE);
-            textViewSet.setVisibility(View.GONE);
-            textViewOptionClear.setVisibility(View.GONE);
-            textViewOptionDown.setVisibility(View.GONE);
-            textViewOptionBg.setVisibility(View.GONE);
-            textViewOptionNoBg.setVisibility(View.GONE);
+        ConstraintLayout constraintLayoutSet = findViewById(R.id.constraintLayoutSet);
+        if ( constraintLayoutSet.getVisibility() == View.VISIBLE){
+            constraintLayoutSet.setVisibility(View.GONE);
         } else {
-           // textViewOptionBlock.setVisibility(View.VISIBLE);
-            textViewOptionUp.setVisibility(View.VISIBLE);
-            textViewSet.setVisibility(View.VISIBLE);
-            textViewOptionClear.setVisibility(View.VISIBLE);
-            textViewOptionDown.setVisibility(View.VISIBLE);
-            textViewOptionBg.setVisibility(View.VISIBLE);
-            textViewOptionNoBg.setVisibility(View.VISIBLE);
+            constraintLayoutSet.setVisibility(View.VISIBLE);
         }
     }
 
 
     public void scrollDown(View view) {
         vibrate();
-        mRecyclerView.scrollToPosition(chatList.size() - 1);
+        mRecyclerView.smoothScrollToPosition((mChatList.size() - 1));
     }
     public void scrollUp(View view) {
         vibrate();
-        mRecyclerView.scrollToPosition(0);
+        mRecyclerView.smoothScrollToPosition(0);
     }
-
-
-    public void clearChat(View view) {
-        vibrate();
-        StarsocketConnector.sendMessage("clearChat " + Account.userid() + " " + chatId);
-        setRecyclerView();
-    }
+    
 
     public void setBackground(View view) {
         vibrate();
@@ -337,17 +424,17 @@ public class ChatActivity extends AppCompatActivity {
     }
 
     private void setBg() {
-            String picturePath = PreferenceManager.getDefaultSharedPreferences(this).getString("picturePathBg", "");
-            ImageView imageView = (ImageView) findViewById(R.id.imageViewBg);
-            if(!picturePath.equals(""))
-            {
-                imageView.setImageBitmap(decodeFile(picturePath));
-                imageView.setVisibility(View.VISIBLE);
-            }
-            else
-            {
-                imageView.setVisibility(View.INVISIBLE);
-            }
+        String picturePath = PreferenceManager.getDefaultSharedPreferences(this).getString("picturePathBg", "");
+        ImageView imageView = (ImageView) findViewById(R.id.imageViewBg);
+        if(!picturePath.equals(""))
+        {
+            imageView.setImageBitmap(decodeFile(picturePath));
+            imageView.setVisibility(View.VISIBLE);
+        }
+        else
+        {
+            imageView.setVisibility(View.INVISIBLE);
+        }
     }
 
     @Override
@@ -357,7 +444,7 @@ public class ChatActivity extends AppCompatActivity {
         if (PICK_IMAGE == 100 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             selectImage();
         } else {
-          //  toast("tap select!");
+            //  toast("tap select!");
             selectImage();
             // requestPermission();
         }
@@ -383,7 +470,6 @@ public class ChatActivity extends AppCompatActivity {
 
         }
     }
-
     public void noBg(View view) {
         vibrate();
         PreferenceManager.getDefaultSharedPreferences(this).edit().putString("picturePathBg", null).apply();
@@ -394,12 +480,38 @@ public class ChatActivity extends AppCompatActivity {
     public void openProfile(View view) {
         try {
             vibrate();
-            StarsocketConnector.sendMessage("getProfile " + chatId);
-            Intent i = new Intent(MyApplication.getAppContext(), ProfileActivity.class);
+            tappedOnSearchItem = true;
+            tappedOnSearchItemId = chatId;
+            Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             MyApplication.getAppContext().startActivity(i);
         } catch (Exception e) {
+            toast("no network");
+        }
+    }
 
+
+    public void goBack(View view) {
+        scheduleTaskExecutor.shutdown();
+        isInChat = false;
+        vibrate();
+        finish();
+    }
+
+    public void addShortcut(View view) {
+        vibrate();
+        if (ShortcutManagerCompat.isRequestPinShortcutSupported(getApplicationContext())) {
+            ShortcutInfoCompat shortcutInfo = new ShortcutInfoCompat.Builder(getApplicationContext(), chatId)
+                    .setIntent(new Intent(getApplicationContext(), ChatActivity.class).setAction(Intent.ACTION_MAIN)
+                            .putExtra("ID",chatId)
+                            .putExtra("USERNAME",chatUsername)
+                    ) // !!! intent's action must be set on oreo
+                    .setShortLabel(chatUsername)
+                    .setIcon(IconCompat.createWithResource(getApplicationContext(), R.drawable.star1))
+                    .build();
+            ShortcutManagerCompat.requestPinShortcut(getApplicationContext(), shortcutInfo, null);
+        } else {
+            Toast.makeText(ChatActivity.this,"launcher does not support short cut icon",Toast.LENGTH_LONG).show();
         }
     }
 }

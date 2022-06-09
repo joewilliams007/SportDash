@@ -317,7 +317,12 @@ public class FriendsActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        String isFollow = StarsocketConnector.getMessage();
+                        String isFollow = null;
+                        try {
+                            isFollow = StarsocketConnector.getMessage();
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                         if (isFollow.length()>10) {
                             textViewFollow.setText("follow");
                             imageViewFollow.setImageResource(R.drawable.follow_removebg);
@@ -378,7 +383,10 @@ public class FriendsActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String received = StarsocketConnector.getMessage().replaceAll("undefined","");
+                    String received = null;
+
+                        received = StarsocketConnector.getMessage().replaceAll("undefined","");
+
 
                     try {
                         createFriendsList(received);
@@ -534,7 +542,10 @@ public class FriendsActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        String received_plans = StarsocketConnector.getMessage().toString();
+                        String received_plans = null;
+
+                            received_plans = StarsocketConnector.getMessage().toString();
+
 
                         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();

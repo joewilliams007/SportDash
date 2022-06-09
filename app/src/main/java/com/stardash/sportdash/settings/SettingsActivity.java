@@ -25,6 +25,7 @@ import com.stardash.sportdash.network.tcp.StarsocketConnector;
 import com.stardash.sportdash.settings.account.AccountActivity;
 import com.stardash.sportdash.settings.account.GeneralActivity;
 import com.stardash.sportdash.settings.account.PlansSettingsActivity;
+import com.stardash.sportdash.settings.account.security.SecureActivity;
 import com.stardash.sportdash.settings.account.security.SecurityActivity;
 import com.stardash.sportdash.settings.account.UpdateSettingsActivity;
 import com.stardash.sportdash.settings.account.ChatSettingsActivity;
@@ -111,13 +112,8 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     public void openSecurity(View view) {
-        vibrate();
-        try {
-            StarsocketConnector.sendMessage("accountActivity " + Account.userid());
-            Intent i = new Intent(this, SecurityActivity.class);
-            startActivity(i);
-        } catch (Exception e){
-            toast("no network");
-        }
+            vibrate();
+        Intent i = new Intent(this, SecureActivity.class);
+        startActivity(i);
     }
 }

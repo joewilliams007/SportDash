@@ -4,12 +4,14 @@ import static android.content.Context.MODE_PRIVATE;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatUsername;
 import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
+import static com.stardash.sportdash.online.friends.FriendsActivity.openedChat;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItem;
 import static com.stardash.sportdash.online.friends.FriendsActivity.tappedOnSearchItemId;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isRandom;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.isSpecificPlan;
 import static com.stardash.sportdash.plans.run.RunPlanActivity.thePlan;
+import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
 
 import android.annotation.SuppressLint;
@@ -39,6 +41,7 @@ import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
 import com.stardash.sportdash.settings.Account;
 import com.stardash.sportdash.settings.MyApplication;
+import com.stardash.sportdash.signIn.LockActivity;
 
 import java.util.ArrayList;
 
@@ -115,6 +118,15 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
                 holder.mImageView1.setImageDrawable(myDrawable);
             }
             holder.mTextView3.setVisibility(View.GONE);
+        } else if (currentItem.getText1().equals("CHAT")) {
+            if (currentItem.getText3().split(" ")[2].equals("0")) {
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable myDrawable = MyApplication.getAppContext().getResources().getDrawable(R.drawable.message_filled);
+                holder.mImageView1.setImageDrawable(myDrawable);
+            } else {
+                @SuppressLint("UseCompatLoadingForDrawables") Drawable myDrawable = MyApplication.getAppContext().getResources().getDrawable(R.drawable.message_removebg);
+                holder.mImageView1.setImageDrawable(myDrawable);
+            }
+            holder.mTextView3.setVisibility(View.GONE);
         }
 
         // holder.mTextView1.setTextColor(Color.parseColor("#14FFEC"));
@@ -122,46 +134,31 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
         holder.mTextView1.setText(currentItem.getText1());
         holder.mTextView2.setText(currentItem.getText2());
         holder.mTextView3.setText(currentItem.getText3());
-        try {
-            holder.mTextView4.setText(currentItem.getText4().split("\\.")[0] + currentItem.getText4().split("\\.")[2]);
-        } catch (Exception e) {
-            holder.mTextView4.setText("not available");
-        }
+        holder.mTextView4.setText(currentItem.getText4());
 
-        holder.mTextView2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                try {
-                    String notif_id = holder.mTextView3.getText().toString().split(" ")[1];
-                    try {
-                        StarsocketConnector.sendMessage("viewNotification " + notif_id);
-                    } catch (Exception ignored){
 
-                    }
-                    vibrate();
-                    friendsSearchRequest = false;
-                    String user_id = holder.mTextView3.getText().toString().split(" ")[0];
-                    tappedOnSearchItem = true;
-                    tappedOnSearchItemId = user_id;
-                    Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MyApplication.getAppContext().startActivity(i);
-                } catch (Exception ignored){
 
-                }
-            }
-        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     vibrate();
                     String notif_id = holder.mTextView3.getText().toString().split(" ")[1];
-                    try {
-                        StarsocketConnector.sendMessage("viewNotification " + notif_id);
-                    } catch (Exception ignored){
+                    if (holder.mTextView1.getText().toString().equals("CHAT")) {
+                        String from_id = holder.mTextView3.getText().toString().split(" ")[0];
+                        try {
+                            StarsocketConnector.sendMessage("viewNotificationChat " + from_id);
+                        } catch (Exception ignored){
 
+                        }
+                    } else {
+                        try {
+                            StarsocketConnector.sendMessage("viewNotification " + notif_id);
+                        } catch (Exception ignored){
+
+                        }
                     }
+
                     if (holder.mTextView1.getText().toString().equals("STAR") || holder.mTextView1.getText().toString().equals("COMMENT")) {
                         try {
                             String plan_id = holder.mTextView3.getText().toString().split(" ")[3];
@@ -171,7 +168,10 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    String received = StarsocketConnector.getMessage();
+                                    String received = null;
+
+                                        received = StarsocketConnector.getMessage();
+
                                     SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = settings.edit();
 
@@ -204,6 +204,32 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
                             Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             MyApplication.getAppContext().startActivity(i);
+                        } catch (Exception ignored){
+
+                        }
+
+                    } else if (holder.mTextView1.getText().toString().equals("CHAT")) {
+                        try {
+                            vibrate();
+                            String from_id = holder.mTextView3.getText().toString().split(" ")[0];
+
+                            chatUsername = holder.mTextView3.getText().toString().split(" ")[3];
+                            chatId = from_id;
+                            openedChat = false;
+
+                            changeLock = "chat";
+                            if (Account.isChatLock() && !Account.password().equals("none")) {
+                                changeLock = "chat";
+                                Intent i = new Intent(MyApplication.getAppContext(), LockActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                MyApplication.getAppContext().startActivity(i);
+                            } else {
+                                Intent i = new Intent(MyApplication.getAppContext(), ChatActivity.class);
+                                i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                MyApplication.getAppContext().startActivity(i);
+                            }
+
+
                         } catch (Exception ignored){
 
                         }

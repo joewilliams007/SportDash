@@ -45,6 +45,28 @@ public class Account {
         editor.putString("rewardDay", day);
         editor.apply();
     }
+    // notifications --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static String notifications() {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getString("notifications", null);
+    }
+    public static void setNotifications(String n) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("notifications", n);
+        editor.apply();
+    }
+    // chat messages --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+    public static String chat(String id) {
+        SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("account", 0); // 0 - for private mode
+        return pref.getString("chat "+id, null);
+    }
+    public static void setChat(String chat, String id) {
+        SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("account", 0);
+        SharedPreferences.Editor editor = settings.edit();
+        editor.putString("chat "+id, chat);
+        editor.apply();
+    }
     // ip --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     public static String ip() {
         SharedPreferences pref = MyApplication.getAppContext().getSharedPreferences("ipConfig", 0); // 0 - for private mode
