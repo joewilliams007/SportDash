@@ -1,6 +1,8 @@
 package com.stardash.sportdash.online.chat;
 
 import static com.stardash.sportdash.online.chat.ChatActivity.editingMessage;
+import static com.stardash.sportdash.online.chat.ChatActivity.isReply;
+import static com.stardash.sportdash.online.chat.ChatActivity.replyText;
 import static com.stardash.sportdash.online.friends.FriendsActivity.chatId;
 import static com.stardash.sportdash.settings.app.vibrate;
 
@@ -45,6 +47,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
     public static  class ChatViewHolder extends RecyclerView.ViewHolder{
 
+        public TextView mTextView0;
         public TextView mTextView1;
         public TextView mTextView2;
         public TextView mTextView3;
@@ -53,10 +56,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
         public TextView mTextViewMetaData;
         public EditText mEditText;
         public ImageView mImageViewTick;
+        public ImageView mImageViewReply;
         public ConstraintLayout mConstraintLayout;
 
         public ChatViewHolder(@NonNull View itemView) {
             super(itemView);
+            mTextView0 = itemView.findViewById(R.id.textViewLine0);
             mTextView1 = itemView.findViewById(R.id.textViewLine1);
             mTextView2 = itemView.findViewById(R.id.textViewLine2);
             mTextView3 = itemView.findViewById(R.id.textViewLine3);
@@ -65,6 +70,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             mConstraintLayout = itemView.findViewById(R.id.options);
             mImageViewEdit = itemView.findViewById(R.id.imageViewEdit);
             mEditText = itemView.findViewById(R.id.editText);
+            mImageViewReply = itemView.findViewById(R.id.imageViewReply);
             mImageViewTick = itemView.findViewById(R.id.imageViewTick);
         }
     }
@@ -86,7 +92,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
 
         holder.mTextView1.setText(currentItem.getText1());
-        holder.mTextView2.setText(currentItem.getText2());
+
+        if (currentItem.getText2().contains("TEXT=")) {
+            holder.mTextView0.setVisibility(View.VISIBLE);
+            holder.mTextView0.setText(currentItem.getText2().split("TEXT=")[0]);
+            holder.mTextView2.setText(currentItem.getText2().split("TEXT=")[1]);
+        } else {
+            holder.mTextView2.setText(currentItem.getText2());
+            holder.mTextView0.setVisibility(View.GONE);
+        }
+        
         holder.mTextView3.setText(currentItem.getText3());
         holder.mTextViewMetaData.setText(currentItem.getText4());
 
@@ -115,7 +130,19 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.mTextView1.setTextColor(Color.parseColor("#14FFEC"));
         }
 
-
+        holder.mImageViewReply.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (isReply) {
+                    isReply = false;
+                    replyText = holder.mTextView2.getText().toString();
+                    holder.mImageViewReply.setImageResource(R.drawable.comment_removebg);
+                } else {
+                    isReply = true;
+                    holder.mImageViewReply.setImageResource(R.drawable.comment_filled);
+                }
+            }
+        });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override

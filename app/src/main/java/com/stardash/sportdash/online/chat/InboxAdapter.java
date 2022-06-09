@@ -82,8 +82,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
     @Override
     public InboxViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.inbox_item,parent, false);
-        InboxViewHolder evh = new InboxViewHolder(v);
-        return evh;
+        return new InboxViewHolder(v);
     }
 
     @SuppressLint("SetTextI18n")

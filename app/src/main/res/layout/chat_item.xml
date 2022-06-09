@@ -13,16 +13,31 @@
         android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/textViewLine0"
+            android:layout_width="0dp"
+            android:visibility="gone"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/track_blue_background"
+            android:padding="10dp"
+            android:text="Line 0"
+            android:textColor="@color/projectGrey"
+            android:textIsSelectable="true"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewEditMessageStatus"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
             android:id="@+id/textViewLine1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="10dp"
+            android:layout_marginLeft="10dp"
             android:background="@drawable/main_text_background"
             android:padding="10dp"
             android:text="Line 1"
             android:textColor="@color/projectGreen"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="@+id/textViewLine2" />
 
         <TextView
             android:id="@+id/textViewLine2"
@@ -36,7 +51,7 @@
             android:textIsSelectable="true"
             app:layout_constraintEnd_toStartOf="@+id/imageViewEditMessageStatus"
             app:layout_constraintStart_toEndOf="@+id/textViewLine1"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLine0" />
 
         <TextView
             android:id="@+id/textViewLine3"
@@ -137,7 +152,7 @@
                 android:id="@+id/imageViewEdit"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
-                android:padding="10dp"
+                android:padding="12dp"
                 app:layout_constraintStart_toEndOf="@+id/imageViewCopy"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/edit1_removebg" />
@@ -152,11 +167,21 @@
                 app:srcCompat="@drawable/trashbin_removebg" />
 
             <ImageView
+                android:id="@+id/imageViewReply"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:padding="14dp"
+                app:layout_constraintStart_toEndOf="@+id/imageViewDelete"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/comment_removebg" />
+
+
+            <ImageView
                 android:id="@+id/imageViewCancel"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="10dp"
-                app:layout_constraintStart_toEndOf="@+id/imageViewDelete"
+                app:layout_constraintStart_toEndOf="@+id/imageViewReply"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/cancel_removebg" />
         </androidx.constraintlayout.widget.ConstraintLayout>

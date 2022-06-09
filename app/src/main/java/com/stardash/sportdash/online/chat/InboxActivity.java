@@ -255,11 +255,11 @@ public class InboxActivity extends AppCompatActivity {
                 if(type.equals("STAR")) {
                     mInboxList.add(new InboxItem("STAR", from_name+" has starred your plan!",from_id+" "+notif_id+" "+viewed+" "+plan_id,finalTime));
                 } else if (type.equals("FOLLOW")) {
-                    mInboxList.add(new InboxItem("FOLLOW", from_name+" has followed you!",from_id+" "+notif_id+" "+viewed,finalTime));
+                    mInboxList.add(new InboxItem("FOLLOW", from_name+" has started following you!",from_id+" "+notif_id+" "+viewed,finalTime));
                 } else if (type.equals("COMMENT")){
                     mInboxList.add(new InboxItem("COMMENT", from_name+" has commented on your plan!",from_id+" "+notif_id+" "+viewed+" "+plan_id,finalTime));
                 } else if (type.equals("CHAT")){
-                    mInboxList.add(new InboxItem("CHAT", from_name+" has sent you a text message!",from_id+" "+notif_id+" "+viewed+" "+from_name,finalTime));
+                    mInboxList.add(new InboxItem("CHAT", from_name+" "+notification_text,from_id+" "+notif_id+" "+viewed+" "+from_name,finalTime));
                 } else {
 
                 }

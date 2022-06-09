@@ -73,6 +73,7 @@ public class ChatActivity extends AppCompatActivity {
         updateChat = true;
         isInChat = true;
         isNew = true;
+        isReply = false;
         openedChat = true;
         super.onCreate(savedInstanceState);
         overridePendingTransition(R.anim.fadein, R.anim.fadeout);
@@ -193,9 +194,6 @@ public class ChatActivity extends AppCompatActivity {
     public void refreshChat(View view) {
     }
 
-
-
-
     public static Boolean updateChat;
     private void getData() {
         try {
@@ -238,7 +236,7 @@ public class ChatActivity extends AppCompatActivity {
             try {
 
                 String message_id = element.split(separator)[0];
-                String text = element.split(separator)[1];
+                String text = element.split(separator)[1].replaceAll("-hashtag","#");
                 String to_id = element.split(separator)[2];
                 String from_id = element.split(separator)[3];
                 String viewed = element.split(separator)[4];
@@ -316,7 +314,8 @@ public class ChatActivity extends AppCompatActivity {
     }
 
 
-
+    public static Boolean isReply = false;
+    public static String replyText = "";
     public void sendMessage(View view) {
         vibrate();
         EditText editTextMessage = findViewById(R.id.editTextTextPersonName);
@@ -329,9 +328,13 @@ public class ChatActivity extends AppCompatActivity {
         } else if (editTextMessage.getText().toString().replaceAll(" ","").length()<1) {
 
         } else {
-            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-                StarsocketConnector.sendMessage("chat " + chatId + " TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","(hashtag)"));
-                editTextMessage.setText("");
+                ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
+                if (isReply) {
+                    StarsocketConnector.sendMessage("chat " + chatId + " reply TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","-hashtag")+"TEXTMESSAGESP:"+replyText);
+                } else {
+                    StarsocketConnector.sendMessage("chat " + chatId + " noReply TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","-hashtag"));
+                }
+               editTextMessage.setText("");
             isInChat = true;
           //  setRecyclerView();
         }
