@@ -92,4 +92,15 @@ public class StarsocketConnector {
         return data;
     }
 
+    public static String getReplyTo(String message) {
+        sendMessage(message);
+        try {
+            Thread.sleep(200);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        String answer;
+        answer = getMessage();
+        return answer;
+    }
 }

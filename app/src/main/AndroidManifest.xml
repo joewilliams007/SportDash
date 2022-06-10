@@ -19,6 +19,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SportDash">
         <activity
+            android:name=".online.SearchActivity"
+            android:exported="false" />
+        <activity
+            android:name=".online.chat.ChatInfoActivity"
+            android:exported="false" />
+        <activity
             android:name=".settings.account.security.SecureActivity"
             android:exported="false" />
         <activity
@@ -109,7 +115,7 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".online.chat.InboxActivity"
+            android:name=".online.notifications.InboxActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

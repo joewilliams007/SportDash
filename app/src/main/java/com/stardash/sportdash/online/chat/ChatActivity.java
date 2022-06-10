@@ -330,6 +330,7 @@ public class ChatActivity extends AppCompatActivity {
         } else {
                 ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
                 if (isReply) {
+                    isReply = false;
                     StarsocketConnector.sendMessage("chat " + chatId + " reply TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","-hashtag")+"TEXTMESSAGESP:"+replyText);
                 } else {
                     StarsocketConnector.sendMessage("chat " + chatId + " noReply TEXTMESSAGESP:" + editTextMessage.getText().toString().replace("#","-hashtag"));
@@ -483,9 +484,7 @@ public class ChatActivity extends AppCompatActivity {
     public void openProfile(View view) {
         try {
             vibrate();
-            tappedOnSearchItem = true;
-            tappedOnSearchItemId = chatId;
-            Intent i = new Intent(MyApplication.getAppContext(), FriendsActivity.class);
+            Intent i = new Intent(MyApplication.getAppContext(), ChatInfoActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             MyApplication.getAppContext().startActivity(i);
         } catch (Exception e) {
@@ -505,7 +504,9 @@ public class ChatActivity extends AppCompatActivity {
         vibrate();
         if (ShortcutManagerCompat.isRequestPinShortcutSupported(getApplicationContext())) {
             ShortcutInfoCompat shortcutInfo = new ShortcutInfoCompat.Builder(getApplicationContext(), chatId)
-                    .setIntent(new Intent(getApplicationContext(), ChatActivity.class).setAction(Intent.ACTION_MAIN)
+                    .setIntent(new Intent(getApplicationContext(), ChatActivity.class)
+                            .setAction(Intent.ACTION_MAIN)
+                            .setFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                             .putExtra("ID",chatId)
                             .putExtra("USERNAME",chatUsername)
                     ) // !!! intent's action must be set on oreo

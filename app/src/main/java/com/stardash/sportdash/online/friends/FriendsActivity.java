@@ -2,9 +2,7 @@ package com.stardash.sportdash.online.friends;
 
 
 import static com.stardash.sportdash.online.chat.ChatActivity.isInChat;
-import static com.stardash.sportdash.online.chat.InboxActivity.amount;
-import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
-import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
+import static com.stardash.sportdash.online.notifications.InboxActivity.amount;
 import static com.stardash.sportdash.online.friends.follows.FollowActivity.pageStatus;
 import static com.stardash.sportdash.plans.run.PlanActivity.isMyPlan;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
@@ -17,7 +15,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
@@ -29,12 +26,8 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.VibrationEffect;
-import android.os.Vibrator;
-import android.text.Layout;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -45,13 +38,9 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
-import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
-import com.stardash.sportdash.me.leaderboard.leaderboard;
-import com.stardash.sportdash.online.ProfileActivity;
-import com.stardash.sportdash.online.chat.InboxActivity;
+import com.stardash.sportdash.online.SearchActivity;
+import com.stardash.sportdash.online.notifications.InboxActivity;
 import com.stardash.sportdash.online.feed.FeedActivity;
 import com.stardash.sportdash.online.friends.follows.FollowActivity;
 import com.stardash.sportdash.plans.run.RunPlanActivity;
@@ -60,10 +49,8 @@ import com.stardash.sportdash.online.chat.ChatActivity;
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
-import com.stardash.sportdash.settings.MyApplication;
 import com.stardash.sportdash.settings.SettingsActivity;
 import com.stardash.sportdash.settings.account.DataSaverActivity;
-import com.stardash.sportdash.settings.account.GeneralActivity;
 import com.stardash.sportdash.signIn.LockActivity;
 
 import java.util.ArrayList;
@@ -81,19 +68,17 @@ public class FriendsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // overridePendingTransition(R.anim.fadein, R.anim.fadeout);
         setContentView(R.layout.activity_friends);
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        isMyPlan = false; // so that the discard btn in active plan is gone
+
+        isMyPlan = false;
         isRandom = false;
-        settingShowHideSearch = false;
         skipDataSaver = false;
         openedChat = false;
 
         TextView textViewUrId = findViewById(R.id.textViewMe);
         textViewUrId.setText("#"+ Account.userid());
 
-        Bundle extras = getIntent().getExtras(); // get link hashtag if opened from link
+        Bundle extras = getIntent().getExtras();
         if (extras != null) {
             String value = extras.getString("friendHashtag").toString();
             EditText editText = findViewById(R.id.editTextTextPersonNameHashtag);
@@ -111,34 +96,6 @@ public class FriendsActivity extends AppCompatActivity {
                     toast("no network");
                 }
             }
-            //The key argument here must match that used in the other activity
-        }
-        checkNotifications();
-
-        if (friendsSearchRequest) {
-            friendsSearchRequest = false;
-            showSearchFinal();
-        }
-
-        if (Account.isAmoled()) {
-            ConstraintLayout main = findViewById(R.id.main);
-            main.setBackgroundDrawable(new ColorDrawable(Color.BLACK));
-            Window window = getWindow();
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            }
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                window.setStatusBarColor(Color.BLACK);
-            }
-
-            TextView textViewName = findViewById(R.id.textViewUsername);
-            TextView textViewAbout = findViewById(R.id.textViewAbout);
-            TextView textViewPlans = findViewById(R.id.textViewPlans);
-            TextView textViewDate = findViewById(R.id.textViewDate);
-            textViewDate.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
-            textViewAbout.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
-            textViewPlans.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
-            textViewName.setTextColor(ContextCompat.getColor(this, R.color.darkMode));
         }
 
         if (!Account.isDataSaver()) {
@@ -148,56 +105,31 @@ public class FriendsActivity extends AppCompatActivity {
             textViewDownload.setVisibility(View.GONE);
         }
 
-
         if (tappedOnSearchItem){
             theId = tappedOnSearchItemId;
             tappedOnSearchItem = false;
         } else {
             theId = Account.userid();
         }
-
-        try {
-            StarsocketConnector.sendMessage("getProfile " + theId);
-            try {
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        getUserProfile();
-                    }
-                }, 100);
-            } catch (Exception e) {
-                toast("no network");
-            }
-        } catch (Exception e) {
-            toast("no network");
-        }
-
-
-
+        getUserProfile();
     }
 
     @SuppressLint("SetTextI18n")
     public void checkNotifications() {
         TextView textViewNotification = findViewById(R.id.textViewNotification);
-        TextView textViewNotification1 = findViewById(R.id.textViewNotification1);
                 if (amount>0) {
                     textViewNotification.setVisibility(View.VISIBLE);
                     textViewNotification.setText(" "+ amount +" ");
-                    textViewNotification1.setVisibility(View.VISIBLE);
-                    textViewNotification1.setText(" "+ amount +" ");
                 } else  {
                     textViewNotification.setVisibility(View.INVISIBLE);
-                    textViewNotification1.setVisibility(View.INVISIBLE);
                 }
-
     }
 
     @SuppressLint("SetTextI18n")
     private void getUserProfile() {
         try {
             String separator = "PROFILE_OF_USER";
-            String profile = StarsocketConnector.getMessage();
+            String profile = StarsocketConnector.getReplyTo("getProfile " + theId);
             String id = profile.split(separator, 15)[0];
             String username = profile.split(separator, 15)[1];
             String xp = profile.split(separator, 15)[2];
@@ -262,10 +194,10 @@ public class FriendsActivity extends AppCompatActivity {
             ProgressBar progressBarToday = findViewById(R.id.progressBarToday);
             ProgressBar progressBarWeek = findViewById(R.id.progressBarWeek);
             try {
-                ObjectAnimator.ofInt(progressBarToday, "progress", Integer.valueOf(xpToday))
+                ObjectAnimator.ofInt(progressBarToday, "progress", Integer.parseInt(xpToday))
                         .setDuration(600)
                         .start();
-                ObjectAnimator.ofInt(progressBarWeek, "progress", Integer.valueOf(xpWeek))
+                ObjectAnimator.ofInt(progressBarWeek, "progress", Integer.parseInt(xpWeek))
                         .setDuration(600)
                         .start();
             } catch (Exception ignored) {
@@ -308,18 +240,12 @@ public class FriendsActivity extends AppCompatActivity {
             ImageView imageViewFollow = findViewById(R.id.imageViewFollow);
             try {
 
-                StarsocketConnector.sendMessage("checkFollow " + Account.userid() +" "+ textViewId.getText().toString().split("#")[1]);
                 textViewFollow.setText("loading");
                 imageViewFollow.setImageResource(R.drawable.follow_loading_removebg);
 
-
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
                         String isFollow = null;
                         try {
-                            isFollow = StarsocketConnector.getMessage();
+                            isFollow = StarsocketConnector.getReplyTo("checkFollow " + Account.userid() +" "+ textViewId.getText().toString().split("#")[1]);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -330,13 +256,9 @@ public class FriendsActivity extends AppCompatActivity {
                             textViewFollow.setText("unfollow");
                             imageViewFollow.setImageResource(R.drawable.unfollow_removebg);
                         }
-                        if(isFollowProcess){
-
-                        } else {
-                            loadPlans(id);
-                        }
-                    }
-                }, 200);
+                if (!isFollowProcess) {
+                    loadPlans(id);
+                }
 
             } catch (Exception ignored){
             }
@@ -346,15 +268,6 @@ public class FriendsActivity extends AppCompatActivity {
     }
 
 
-    public void onResume() {
-        super.onResume();
-        isInChat = false;
-    }
-   /* @Override
-    public void onBackPressed() {
-        Intent i = new Intent(this, MainActivity.class);
-        startActivity(i);
-    }*/
     @SuppressLint("SetTextI18n")
     public void toast(String message){
         TextView textViewCustomToast = findViewById(R.id.textViewCustomToast);
@@ -369,127 +282,8 @@ public class FriendsActivity extends AppCompatActivity {
         }, 3000);
     }
 
-    public void searchUsers(View view) {
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        vibrate();
-        EditText editTextSearch = findViewById(R.id.editTextSearch);
-        getFriends(editTextSearch.getText().toString().replaceAll(" ",""));
-    }
-
-    private void getFriends(String search) {
-        try {
-            StarsocketConnector.sendMessage("searchFriends ="+search);
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String received = null;
-
-                        received = StarsocketConnector.getMessage().replaceAll("undefined","");
 
 
-                    try {
-                        createFriendsList(received);
-                        buildRecyclerView();
-
-                    } catch (Exception e){
-                        toast("no accounts found");
-                        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-
-                    }
-                }
-            }, 200);
-        } catch (Exception e){
-            toast("no network");
-            ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-
-        }
-    }
-
-    private ArrayList<FriendsItem> mFriendsList;
-    private RecyclerView mRecyclerView;
-    private FriendsAdapter mAdapter;
-    private RecyclerView.LayoutManager mLayoutManager;
-
-    public void createFriendsList(String rest){
-        String[] user = rest.split("\n");
-
-        mFriendsList = new ArrayList<>();
-
-        for (String element : user) {
-            try {
-                mFriendsList.add(new FriendsItem(element.split("@")[0], element.split("@")[1], element.split("@")[2]));
-            } catch (Exception ignored) {
-
-            }
-        }
-    }
-
-    public void buildRecyclerView(){
-        mRecyclerView = findViewById(R.id.search_recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-        mLayoutManager = new LinearLayoutManager(FriendsActivity.this);
-        mAdapter = new FriendsAdapter(mFriendsList);
-        mRecyclerView.setLayoutManager(mLayoutManager);
-        mRecyclerView.setAdapter(mAdapter);
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
-
-    }
-
-    Boolean settingShowHideSearch;
-    public void showSearch(View view) {
-        showSearchFinal();
-    }
-
-    private void showSearchFinal() {
-        ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
-        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
-        ConstraintLayout constraintLayoutNavBar = findViewById(R.id.constraintLayoutNavBar);
-        if (searchLayout.getVisibility() != View.VISIBLE) {
-            if (!settingShowHideSearch) {
-                settingShowHideSearch = true;
-                vibrate();
-                constraintLayoutNavBarSearch.setVisibility(View.VISIBLE);
-                constraintLayoutNavBar.setVisibility(View.INVISIBLE);
-                searchLayout.setVisibility(View.VISIBLE);
-                searchLayout.animate().translationYBy(20f).setDuration(1000);
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        settingShowHideSearch = false;
-                    }
-                }, 1100);
-            }
-        }
-    }
-
-    public void hideSearch(View view) {
-        if (!settingShowHideSearch) {
-            vibrate();
-            settingShowHideSearch = true;
-            ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
-            ConstraintLayout constraintLayoutNavBar = findViewById(R.id.constraintLayoutNavBar);
-            constraintLayoutNavBarSearch.setVisibility(View.GONE);
-            ConstraintLayout searchLayout = findViewById(R.id.searchLayout);
-            constraintLayoutNavBar.setVisibility(View.VISIBLE);
-            searchLayout.animate().translationYBy(4000f).setDuration(1000);
-            final Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    searchLayout.setVisibility(View.GONE);
-                    searchLayout.animate().translationYBy(-4000f).setDuration(1);
-                    handler.postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            settingShowHideSearch = false;
-                        }
-                    }, 100);
-                }
-            }, 1000);
-        }
-    }
     public static String chatUsername;
     public static String chatId;
     public void openChat(View view) {
@@ -523,10 +317,8 @@ public class FriendsActivity extends AppCompatActivity {
                         loadPlansFinal(id);
                         skipDataSaver = true;
                     }
-                } else if (mobile.isConnectedOrConnecting ()) {
-                    //
                 } else {
-                    //
+                    mobile.isConnectedOrConnecting();
                 }
         } else {
             loadPlansFinal(id);
@@ -536,17 +328,8 @@ public class FriendsActivity extends AppCompatActivity {
 
 
     public void loadPlansFinal(String id) {
-            StarsocketConnector.sendMessage("downloadPlans " + id);
             try {
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        String received_plans = null;
-
-                            received_plans = StarsocketConnector.getMessage().toString();
-
-
+                        String received_plans = StarsocketConnector.getReplyTo("downloadPlans " + id);
                         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
                         try {
@@ -567,12 +350,10 @@ public class FriendsActivity extends AppCompatActivity {
                         } catch (Exception e) {
                             toast("error loading plans");
                         }
-                    }
-                }, 500);
             } catch (Exception e) {
                 toast("no network");
             }
-
+        checkNotifications();
     }
 
     private void setPlanNames() {
@@ -584,8 +365,8 @@ public class FriendsActivity extends AppCompatActivity {
         String empty = "E M P T Y";
         if (Account.isDataSaver() && !skipDataSaver) {
             empty = "Download";
-        } else if (Account.isDataSaver()) {
-
+        } else {
+            Account.isDataSaver();
         }
         try {
             textViewNamePlan1.setText(Account.planFriend(1).split("\n", 5)[2]);
@@ -700,9 +481,6 @@ public class FriendsActivity extends AppCompatActivity {
         } catch (Exception e){
             toast("no network");
         }
-    }
-
-    public void doNth(View view) {
     }
 
     private Boolean rotating = false;
@@ -842,27 +620,11 @@ public class FriendsActivity extends AppCompatActivity {
     // NAVBAR
     public void openFriendsList(View view) {
         vibrate();
-        invalidId = false;
-        friendsSearchRequest = false;
-        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
-        if (constraintLayoutNavBarSearch.getVisibility() == View.VISIBLE) {
-            Intent i = new Intent(this, FriendsActivity.class);
-            startActivity(i);
-        } else {
-            vibrate();
-        }
-
     }
     public void openFriendsSearch(View view) {
-        invalidId = false;
-        friendsSearchRequest = true;
-        ConstraintLayout constraintLayoutNavBarSearch = findViewById(R.id.constraintLayoutNavBarSearch);
-        if (constraintLayoutNavBarSearch.getVisibility() != View.VISIBLE) {
-            Intent i = new Intent(this, FriendsActivity.class);
-            startActivity(i);
-        } else {
-            vibrate();
-        }
+        vibrate();
+        Intent i = new Intent(this, SearchActivity.class);
+        startActivity(i);
     }
 
     public void openInbox(View view) {

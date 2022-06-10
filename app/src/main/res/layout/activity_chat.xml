@@ -41,17 +41,18 @@
 
     <TextView
         android:id="@+id/textViewTop"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:background="@color/projectGrey"
         android:elevation="-1dp"
-        android:gravity="center"
+        android:gravity="left"
+        android:onClick="openProfile"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
-        android:onClick="openProfile"
         android:text="J O E J O E"
         android:textColor="@color/white"
         android:textStyle="italic"
+        app:layout_constraintEnd_toStartOf="@+id/textViewOptions"
         app:layout_constraintStart_toEndOf="@+id/imageViewUser"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -78,7 +79,6 @@
         android:elevation="1dp"
         android:onClick="showOptions"
         android:textStyle="bold"
-        android:rotation="-90"
         android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

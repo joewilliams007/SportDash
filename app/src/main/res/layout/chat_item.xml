@@ -15,29 +15,29 @@
         <TextView
             android:id="@+id/textViewLine0"
             android:layout_width="0dp"
-            android:visibility="gone"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:background="@drawable/track_blue_background"
+            android:background="@drawable/main_text_background"
             android:padding="10dp"
             android:text="Line 0"
-            android:textColor="@color/projectGrey"
+            android:textColor="@color/white"
             android:textIsSelectable="true"
             app:layout_constraintEnd_toStartOf="@+id/imageViewEditMessageStatus"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+
         <TextView
             android:id="@+id/textViewLine1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_margin="10dp"
             android:background="@drawable/main_text_background"
             android:padding="10dp"
             android:text="Line 1"
             android:textColor="@color/projectGreen"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/textViewLine2" />
+            app:layout_constraintTop_toBottomOf="@+id/textViewLine0" />
 
         <TextView
             android:id="@+id/textViewLine2"
@@ -57,8 +57,8 @@
             android:id="@+id/textViewLine3"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:padding="10dp"
             android:gravity="right"
+            android:padding="10dp"
             android:text="Line 3"
             android:textColor="@color/white"
             app:layout_constraintEnd_toStartOf="@+id/imageViewTick"
@@ -94,7 +94,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewLine2">
+            app:layout_constraintTop_toBottomOf="@+id/textViewLine3">
 
             <TextView
                 android:id="@+id/textViewLine8"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:id="@+id/main"
     android:background="@color/projectGrey"
-    tools:context=".online.chat.InboxActivity">
+    tools:context=".online.notifications.InboxActivity">
 
     <TextView
         android:elevation="2dp"

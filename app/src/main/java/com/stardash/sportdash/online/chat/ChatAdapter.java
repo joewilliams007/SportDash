@@ -101,14 +101,16 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             holder.mTextView2.setText(currentItem.getText2());
             holder.mTextView0.setVisibility(View.GONE);
         }
-        
+
         holder.mTextView3.setText(currentItem.getText3());
         holder.mTextViewMetaData.setText(currentItem.getText4());
 
         if (currentItem.getText4().split(" ")[4].equals("1")) {
             holder.mTextView2.setTextColor(Color.parseColor("#E64868"));
+            holder.mImageViewReply.setVisibility(View.GONE);
         } else {
             holder.mTextView2.setTextColor(Color.parseColor("#FFFFFFFF"));
+            holder.mImageViewReply.setVisibility(View.VISIBLE);
         }
         if (currentItem.getText4().split(" ")[5].equals("1")) {
             holder.itemView.findViewById(R.id.imageViewEditMessageStatus).setVisibility(View.VISIBLE);
@@ -135,10 +137,10 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
             public void onClick(View v) {
                 if (isReply) {
                     isReply = false;
-                    replyText = holder.mTextView2.getText().toString();
                     holder.mImageViewReply.setImageResource(R.drawable.comment_removebg);
                 } else {
                     isReply = true;
+                    replyText = holder.mTextView1.getText().toString()+": "+holder.mTextView2.getText().toString();
                     holder.mImageViewReply.setImageResource(R.drawable.comment_filled);
                 }
             }
@@ -152,6 +154,15 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
 
                     if (holder.mConstraintLayout.getVisibility()==View.VISIBLE){
                         holder.mConstraintLayout.setVisibility(View.GONE);
+                        holder.mTextView3.setVisibility(View.VISIBLE);
+
+                        holder.mImageViewTick.setVisibility(View.VISIBLE);
+
+                        if (!currentItem.getText4().split(" ")[0].equals(Account.userid())) {
+                            holder.mImageViewTick.setVisibility(View.GONE);
+                        }
+
+
                     } else {
                         holder.mConstraintLayout.setVisibility(View.VISIBLE);
                         if (!currentItem.getText4().split(" ")[0].equals(Account.userid())) {
@@ -163,6 +174,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
                             holder.mImageViewEdit.setVisibility(View.GONE);
                             holder.itemView.findViewById(R.id.imageViewDelete).setVisibility(View.GONE);
                         }
+                        holder.mTextView3.setVisibility(View.GONE);
+                        holder.mImageViewTick.setVisibility(View.GONE);
                     }
 
             }
@@ -240,6 +253,11 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
                         holder.mEditText.setVisibility(View.GONE);
                         holder.itemView.findViewById(R.id.imageViewSave).setVisibility(View.GONE);
                         holder.mConstraintLayout.setVisibility(View.GONE);
+                        holder.mTextView3.setVisibility(View.VISIBLE);
+                        holder.mImageViewTick.setVisibility(View.VISIBLE);
+                        if (!currentItem.getText4().split(" ")[0].equals(Account.userid())) {
+                            holder.mImageViewTick.setVisibility(View.GONE);
+                        }
                     }
 
                 } catch (Exception e) {

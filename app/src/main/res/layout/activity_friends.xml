@@ -165,23 +165,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/textViewMessage"
                 app:srcCompat="@drawable/follow_removebg" />
 
-            <TextView
-                android:id="@+id/textViewOpenSearch"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:layout_marginTop="10dp"
-                android:background="@drawable/main_text_background_plus"
-                android:elevation="2dp"
-                android:gravity="center"
-                android:onClick="showSearch"
-                android:padding="10dp"
-                android:text="S E A R C H"
-                android:textColor="@color/white"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
             <ImageView
                 android:id="@+id/imageViewProgress"
                 android:layout_width="60dp"
@@ -357,15 +340,15 @@
             <TextView
                 android:id="@+id/textViewUsername"
                 android:layout_width="0dp"
-                android:padding="10dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:gravity="left"
+                android:gravity="center"
+                android:padding="10dp"
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewOpenSearch" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewPlan1under"
@@ -787,83 +770,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/searchLayout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="@drawable/main_text_background_plus_no_bottom"
-        android:elevation="1dp"
-        android:visibility="gone"
-        android:layout_marginTop="10dp"
-        android:onClick="doNth"
-        app:layout_constraintBottom_toBottomOf="@+id/scrollView6"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
 
-        <View
-            android:id="@+id/view6"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_margin="10dp"
-            android:background="@color/projectGrey"
-            android:elevation="-5dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textViewSearch" />
-
-        <TextView
-            android:id="@+id/textViewSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="hideSearch"
-            android:padding="10dp"
-            android:text="C A N C E L"
-            android:textColor="@color/projectGreen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
-            android:id="@+id/textViewSubmitSearch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="10dp"
-            android:elevation="2dp"
-            android:onClick="searchUsers"
-            android:padding="10dp"
-            android:text="S E A R C H"
-            android:textColor="@color/projectGreen"
-            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
-
-        <EditText
-            android:id="@+id/editTextSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/main_text_background_plus"
-            android:hint="search user"
-            android:inputType="textPersonName"
-            android:padding="10dp"
-            android:textColor="@color/white"
-            android:textColorHint="@color/white"
-            app:layout_constraintEnd_toStartOf="@+id/textViewSubmitSearch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view6" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scrollbars="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
               <TextView
                 android:id="@+id/textViewMeUsername"
@@ -914,99 +821,7 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:layout_editor_absoluteY="0dp" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayoutNavBarSearch"
-        android:layout_width="0dp"
-        android:elevation="2dp"
-        android:visibility="gone"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
 
-
-        <ImageView
-            android:id="@+id/imageViewHome"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="5dp"
-            android:padding="10dp"
-            android:onClick="openHome"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/dash_removebg" />
-
-        <ImageView
-            android:id="@+id/imageViewEnergyHome"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="5dp"
-            android:onClick="openInbox"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewProfile"
-            app:layout_constraintStart_toEndOf="@+id/imageViewHome"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/energy_removebg" />
-
-        <ImageView
-            android:id="@+id/imageViewFeed"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginLeft="10dp"
-            android:onClick="openFeed"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/feed_removebg" />
-
-        <ImageView
-            android:id="@+id/imageViewSearch"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:layout_marginBottom="5dp"
-            android:onClick="openFriendsSearch"
-            android:padding="10dp"
-            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
-            app:layout_constraintEnd_toStartOf="@+id/imageViewHome"
-            app:layout_constraintStart_toEndOf="@+id/imageViewFeed"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/search_selected" />
-
-        <TextView
-            android:id="@+id/textViewNotification1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/track_green_background"
-            android:gravity="center"
-            android:layout_marginBottom="15dp"
-            android:padding="2dp"
-            android:elevation="1dp"
-            android:visibility="invisible"
-            android:textColor="@color/projectBlack"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/imageViewEnergyHome"
-            app:srcCompat="@drawable/energy_selected" />
-
-        <ImageView
-            android:id="@+id/imageViewProfile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
-            android:onClick="openFriendsList"
-            android:padding="10dp"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/profile_removebg" />
-
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayoutNavBar"
         android:layout_width="0dp"

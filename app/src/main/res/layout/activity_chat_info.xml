@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    tools:context=".online.chat.ChatInfoActivity">
+
+
+    <ImageView
+        android:id="@+id/imageViewUser"
+        android:layout_width="55dp"
+        android:layout_height="55dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewTop"
+        app:layout_constraintEnd_toStartOf="@+id/textViewTop"
+        app:layout_constraintTop_toTopOf="@+id/textViewTop"
+        app:srcCompat="@drawable/id_removebg" />
+
+    <TextView
+        android:id="@+id/textViewTop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="100dp"
+        android:text="J O E J O E"
+        android:textColor="@color/white"
+        android:textStyle="italic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDetails"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="10dp"
+        android:layout_marginTop="100dp"
+        android:text="Chat Details"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewTop" />
+
+    <TextView
+        android:id="@+id/textViewMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="total messages"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetails" />
+
+    <TextView
+        android:id="@+id/textViewMessagesNr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="0"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewDetails" />
+
+    <TextView
+        android:id="@+id/textViewMessagesYouNr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="0"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessagesNr" />
+
+    <TextView
+        android:id="@+id/textViewMessagesHimNr"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="0"
+        android:textColor="@color/projectGreen"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessagesYouNr" />
+
+
+    <TextView
+        android:id="@+id/textViewMessagesYou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="message from you"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessages" />
+
+    <TextView
+        android:id="@+id/textViewMessagesHim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@color/projectGrey"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="message from him or her"
+        android:textColor="@color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessagesYou" />
+
+    <ImageView
+        android:id="@+id/imageView8"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProfile"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewProfile"
+        app:srcCompat="@drawable/profile_removebg" />
+
+    <TextView
+        android:id="@+id/textViewProfile"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openProfile"
+        android:padding="10dp"
+        android:text="open user profile"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewMessagesHim" />
+
+    <ImageView
+        android:id="@+id/imageViewProfile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewProfile"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProfile"
+        app:layout_constraintTop_toTopOf="@+id/textViewProfile"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageView
+        android:id="@+id/imageView11"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGeneral"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewGeneral"
+        app:srcCompat="@drawable/message_removebg" />
+
+    <TextView
+        android:id="@+id/textViewGeneral"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="openChatSettings"
+        android:padding="10dp"
+        android:text="more chat settings"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewShortCut" />
+
+    <ImageView
+        android:id="@+id/imageViewGeneral"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewGeneral"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProfile"
+        app:layout_constraintTop_toTopOf="@+id/textViewGeneral"
+        app:srcCompat="@drawable/arrow" />
+
+    <ImageView
+        android:id="@+id/imageView9"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewShortCut"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textViewShortCut"
+        app:srcCompat="@drawable/moresettings_removebg" />
+
+    <TextView
+        android:id="@+id/textViewShortCut"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:gravity="center"
+        android:onClick="addShortcut"
+        android:padding="10dp"
+        android:text="add a shortcut"
+        android:textColor="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProfile" />
+
+    <ImageView
+        android:id="@+id/imageViewShortcut"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:padding="5dp"
+        app:layout_constraintBottom_toBottomOf="@+id/textViewShortCut"
+        app:layout_constraintEnd_toEndOf="@+id/textViewProfile"
+        app:layout_constraintTop_toTopOf="@+id/textViewShortCut"
+        app:srcCompat="@drawable/arrow" />
+</androidx.constraintlayout.widget.ConstraintLayout>

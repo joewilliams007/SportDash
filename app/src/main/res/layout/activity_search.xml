@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/projectGrey"
+    tools:context=".online.SearchActivity">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/searchLayout"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/constraintLayoutNavBarSearch"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/textViewSubmitSearch"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/search_removebg"
+            android:onClick="searchUsers"
+            android:padding="10dp"
+            android:text="S E A R C H"
+            android:textColor="@color/projectGreen"
+            app:layout_constraintBottom_toBottomOf="@+id/editTextSearch"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/editTextSearch" />
+
+        <EditText
+            android:id="@+id/editTextSearch"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/track_green_background"
+            android:hint="search anything"
+            android:inputType="textPersonName"
+            android:padding="10dp"
+            android:textColor="@color/white"
+            android:textColorHint="@color/projectBlack"
+            app:layout_constraintEnd_toStartOf="@+id/textViewSubmitSearch"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/search_recycler_view"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scrollbars="vertical"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextSearch" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayoutNavBarSearch"
+        android:layout_width="0dp"
+        android:background="@color/projectGrey"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+
+        <ImageView
+            android:id="@+id/imageViewHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:padding="10dp"
+            android:onClick="openHome"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/dash_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewEnergyHome"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openInbox"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewProfile"
+            app:layout_constraintStart_toEndOf="@+id/imageViewHome"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/energy_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewFeed"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:onClick="openFeed"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/feed_removebg" />
+
+        <ImageView
+            android:id="@+id/imageViewSearch"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginBottom="5dp"
+            android:onClick="openFriendsSearch"
+            android:padding="10dp"
+            app:layout_constraintBottom_toBottomOf="@+id/textViewBottom"
+            app:layout_constraintEnd_toStartOf="@+id/imageViewHome"
+            app:layout_constraintStart_toEndOf="@+id/imageViewFeed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/search_selected" />
+
+        <TextView
+            android:id="@+id/textViewNotification1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/track_green_background"
+            android:gravity="center"
+            android:layout_marginBottom="15dp"
+            android:padding="2dp"
+            android:elevation="1dp"
+            android:visibility="invisible"
+            android:textColor="@color/projectBlack"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/imageViewEnergyHome"
+            app:srcCompat="@drawable/energy_selected" />
+
+        <ImageView
+            android:id="@+id/imageViewProfile"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:onClick="openFriendsList"
+            android:padding="10dp"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/profile_removebg" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/textViewCustomToast"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="CUSTOM TOAST"
+        android:padding="10dp"
+        android:elevation="10dp"
+        android:layout_margin="10dp"
+        android:visibility="gone"
+        android:textColor="@color/white"
+        android:background="@drawable/main_text_background_red"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

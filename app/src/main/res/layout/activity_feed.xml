@@ -116,20 +116,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/horizontalScrollView" />
 
-    <TextView
-    android:id="@+id/textViewCustomToast"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="CUSTOM TOAST"
-    android:padding="10dp"
-    android:elevation="10dp"
-    android:layout_margin="10dp"
-    android:visibility="gone"
-    android:textColor="@color/white"
-    android:background="@drawable/main_text_background_red"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toTopOf="parent" />
+
 
     <ProgressBar
         android:id="@+id/progressBar"
@@ -176,7 +163,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <TextView
-            android:id="@+id/textViewTop"
+            android:id="@+id/textViewTopU"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"

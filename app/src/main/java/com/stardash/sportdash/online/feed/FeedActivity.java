@@ -2,9 +2,8 @@ package com.stardash.sportdash.online.feed;
 
 import static com.stardash.sportdash.MainActivity.loggedIn;
 import static com.stardash.sportdash.online.ProfileActivity.invalidId;
-import static com.stardash.sportdash.online.chat.InboxActivity.amount;
-import static com.stardash.sportdash.online.chat.InboxActivity.notificationAmount;
-import static com.stardash.sportdash.online.chat.InboxActivity.notifications;
+import static com.stardash.sportdash.online.notifications.InboxActivity.notificationAmount;
+import static com.stardash.sportdash.online.notifications.InboxActivity.notifications;
 import static com.stardash.sportdash.online.friends.FriendsActivity.friendsSearchRequest;
 import static com.stardash.sportdash.settings.account.AppLockSettingsActivity.changeLock;
 import static com.stardash.sportdash.settings.app.vibrate;
@@ -21,22 +20,18 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.stardash.sportdash.MainActivity;
 import com.stardash.sportdash.R;
-import com.stardash.sportdash.me.leaderboard.LeaderboardAdapter;
-import com.stardash.sportdash.me.leaderboard.LeaderboardItem;
-import com.stardash.sportdash.me.leaderboard.leaderboard;
 import com.stardash.sportdash.network.tcp.StarsocketConnector;
-import com.stardash.sportdash.online.chat.InboxActivity;
+import com.stardash.sportdash.online.SearchActivity;
+import com.stardash.sportdash.online.notifications.InboxActivity;
 import com.stardash.sportdash.online.friends.FriendsActivity;
 import com.stardash.sportdash.online.upload.UploadActivity;
 import com.stardash.sportdash.plans.create.structure.CreateStructureNewActivity;
 import com.stardash.sportdash.settings.Account;
-import com.stardash.sportdash.settings.SettingsActivity;
 import com.stardash.sportdash.signIn.LockActivity;
 import com.stardash.sportdash.signIn.RegisterActivity;
 
@@ -60,7 +55,7 @@ public class FeedActivity extends AppCompatActivity {
             }
         }
 
-        checkNotifications();
+
         getFeed("all_time");
         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
     }
@@ -125,6 +120,7 @@ public class FeedActivity extends AppCompatActivity {
                     items_count = 0;
                     createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
                     buildRecyclerView();
+                    checkNotifications();
                     ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
                 } catch (Exception e) {
                     toast("no network");
@@ -252,9 +248,8 @@ public class FeedActivity extends AppCompatActivity {
         startActivity(i);
     }
     public void openFriendsSearch(View view) {
-        invalidId = false;
-        friendsSearchRequest = true;
-        Intent i = new Intent(this, FriendsActivity.class);
+        vibrate();
+        Intent i = new Intent(this, SearchActivity.class);
         startActivity(i);
     }
 

@@ -8,17 +8,21 @@ public class getMessage implements Runnable{
 
     @Override
     public void run() {
-        final Handler handler = new Handler(Looper.getMainLooper());
-        aClientsocket socket = new aClientsocket(2225);
-        String message = socket.receiveMessage();
+        try {
+            final Handler handler = new Handler(Looper.getMainLooper());
+            aClientsocket socket = new aClientsocket(2225);
+            String message = socket.receiveMessage();
 
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                socket.stopConnection();
-            }
-        }, 300);
-        value = message;
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    socket.stopConnection();
+                }
+            }, 300);
+            value = message;
+        } catch (Exception ignored){
+
+        }
     }
 
     public static String getAsyncMessage() {
