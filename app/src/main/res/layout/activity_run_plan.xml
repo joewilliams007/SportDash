@@ -10,43 +10,6 @@
 
 
 
-    <TextView
-        android:id="@+id/textViewTop"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:layout_marginTop="16dp"
-        android:text="T R A I N I N G S P L A N"
-        android:textColor="@color/projectGreen"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewTopLeft"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="D I S C A R D"
-        android:onClick="deletePlan"
-        android:textColor="@color/projectRed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewTopRight"
-        android:visibility="gone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="S A V E"
-        android:onClick="savePlan"
-        android:textColor="@color/projectYellow"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UsingOnClickInXml" />
-
-
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
@@ -55,7 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewTop"
+
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -63,13 +27,41 @@
             android:layout_height="match_parent">
 
             <ImageView
+                android:id="@+id/textViewTopLeft"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="deletePlan"
+                android:padding="6dp"
+                android:visibility="gone"
+                android:src="@drawable/trashbin_removebg"
+                android:text="D I S C A R D"
+                android:textColor="@color/projectRed"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewPlanName"
+                app:layout_constraintStart_toEndOf="@+id/textViewPlanName"
+                app:layout_constraintTop_toTopOf="@+id/textViewPlanName" />
+
+            <ImageView
+                android:id="@+id/textViewTopRight"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
+                android:onClick="savePlan"
+                android:padding="10dp"
+                android:src="@drawable/save_removebg"
+                android:text="S A V E"
+                android:textColor="@color/projectYellow"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewTopLeft"
+                app:layout_constraintStart_toEndOf="@+id/textViewTopLeft"
+                app:layout_constraintTop_toTopOf="@+id/textViewTopLeft"
+                tools:ignore="UsingOnClickInXml" />
+
+            <ImageView
                 android:id="@+id/imageViewCategory"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:layout_marginTop="100dp"
                 android:padding="10dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewLevelTxt"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/textViewLevelTxt"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlanName"
                 app:srcCompat="@drawable/catergory_removebg" />
 
             <TextView
@@ -84,31 +76,12 @@
 
 
             <ImageView
-                android:id="@+id/imageViewName"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                android:padding="20dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanSport"
-                app:srcCompat="@drawable/plan_removebg" />
-
-            <TextView
-                android:id="@+id/textViewName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="name"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/imageViewName"
-                app:layout_constraintStart_toEndOf="@+id/imageViewName"
-                app:layout_constraintTop_toTopOf="@+id/imageViewName" />
-
-            <ImageView
                 android:id="@+id/imageViewDifficulty"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:padding="10dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanName"
+                app:layout_constraintTop_toBottomOf="@+id/textViewPlanSport"
                 app:srcCompat="@drawable/difficulty_removebg" />
 
             <ImageView
@@ -129,7 +102,7 @@
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="@+id/imageViewDifficulty"
                 app:layout_constraintStart_toEndOf="@+id/imageViewDifficulty"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanName" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewDifficulty" />
 
             <TextView
                 android:id="@+id/textViewDescription"
@@ -162,18 +135,17 @@
 
             <TextView
                 android:id="@+id/textViewPlanIterations"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
 
+                android:background="@drawable/main_text_background"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
-                android:background="@drawable/main_text_background"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewIterations" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewIterations" />
 
             <ImageView
                 android:id="@+id/imageViewTotalDuration"
@@ -263,21 +235,20 @@
 
             <TextView
                 android:id="@+id/textViewPlanTotalDuration"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewTotalDuration" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewTotalDuration" />
 
             <TextView
                 android:id="@+id/textViewPlanId"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
@@ -287,8 +258,7 @@
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanIdText" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewPlanIdText" />
 
             <TextView
                 android:id="@+id/textViewMadeByUser"
@@ -310,7 +280,7 @@
 
             <TextView
                 android:id="@+id/textViewMadeByUserId"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
@@ -320,8 +290,7 @@
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCreatorId" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewmadeBy" />
 
             <ImageView
                 android:id="@+id/imageViewmadeBy"
@@ -334,7 +303,7 @@
 
             <TextView
                 android:id="@+id/textViewStarsAmount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
@@ -344,21 +313,11 @@
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewStars" />
-
-            <ImageView
-                android:id="@+id/imageViewStars"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                app:layout_constraintBottom_toBottomOf="@+id/textViewStarsAmount"
-                app:layout_constraintEnd_toEndOf="@+id/textViewMadeByUser"
-                app:layout_constraintTop_toTopOf="@+id/textViewStarsAmount"
-                app:srcCompat="@drawable/moresettings_removebg" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewStar" />
 
             <TextView
                 android:id="@+id/textViewViewsAmount"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
@@ -367,8 +326,7 @@
                 android:text="loading"
                 android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewViews" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewViews" />
 
             <ImageView
                 android:id="@+id/imageViewDuration"
@@ -391,45 +349,43 @@
 
             <TextView
                 android:id="@+id/textViewPlanName"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
+                android:layout_marginTop="100dp"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
+                android:textStyle="italic"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewName" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/textViewPlanSport"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewCategory" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewCategory" />
 
             <TextView
                 android:id="@+id/textViewPlanDifficulty"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDifficulty" />
+                app:layout_constraintTop_toBottomOf="@+id/imageViewCategory" />
 
             <TextView
                 android:id="@+id/textViewPlanDescription"
@@ -437,47 +393,47 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDescription" />
+                app:layout_constraintStart_toEndOf="@+id/textViewDescription"
+                app:layout_constraintTop_toBottomOf="@+id/imageViewDifficulty" />
 
             <TextView
                 android:id="@+id/textViewPlanDuration"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
                 android:background="@drawable/main_text_background"
-                android:textColor="@color/white"
                 android:gravity="center"
                 android:padding="10dp"
                 android:text="loading"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewDuration" />
+                app:layout_constraintTop_toTopOf="@+id/imageViewDuration" />
 
             <ImageView
                 android:id="@+id/imageView1"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
-                android:layout_margin="10dp"
+                android:layout_marginRight="10dp"
+                app:layout_constraintBottom_toBottomOf="@+id/textViewEnergy"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViewPlanTotalDuration"
+                app:layout_constraintTop_toTopOf="@+id/textViewEnergy"
                 app:srcCompat="@drawable/flash" />
 
             <TextView
                 android:id="@+id/textViewEnergy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
+                android:layout_margin="10dp"
                 android:layout_marginEnd="8dp"
                 android:text="loading"
                 android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="@+id/imageView1"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/imageView1"
-                app:layout_constraintTop_toTopOf="@+id/imageView1" />
+                app:layout_constraintTop_toBottomOf="@+id/textViewMadeByUser" />
 
             <ImageView
                 android:id="@+id/imageView"
@@ -583,7 +539,8 @@
                 android:text="STAR"
                 android:textColor="@color/black"
                 app:layout_constraintBottom_toTopOf="@+id/textViewRandom"
-                app:layout_constraintStart_toStartOf="parent" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
 
             <TextView

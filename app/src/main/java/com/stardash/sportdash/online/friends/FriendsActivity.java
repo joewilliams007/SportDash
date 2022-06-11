@@ -98,13 +98,6 @@ public class FriendsActivity extends AppCompatActivity {
             }
         }
 
-        if (!Account.isDataSaver()) {
-            TextView textViewDaterSaver = findViewById(R.id.textViewDownloadDataSaver);
-            TextView textViewDownload = findViewById(R.id.textViewDownload);
-            textViewDaterSaver.setVisibility(View.GONE);
-            textViewDownload.setVisibility(View.GONE);
-        }
-
         if (tappedOnSearchItem){
             theId = tappedOnSearchItemId;
             tappedOnSearchItem = false;
@@ -143,6 +136,7 @@ public class FriendsActivity extends AppCompatActivity {
             String followers = profile.split(separator, 15)[10];
             String bio = profile.split(separator, 15)[11];
             String stars = profile.split(separator, 15)[12];
+            String plans = profile.split(separator, 15)[13];
 
             TextView textViewDate = findViewById(R.id.textViewDate);
             textViewDate.setText("StarKing/Queen since " + accountCreated);
@@ -161,6 +155,7 @@ public class FriendsActivity extends AppCompatActivity {
             TextView textViewFollows = findViewById(R.id.textViewFollowingNr);
             TextView textViewFollowers = findViewById(R.id.textViewFollowersNr);
             TextView textViewStarsNr = findViewById(R.id.textViewStarsNr);
+            TextView textViewPlansNr = findViewById(R.id.textViewPlansNr);
             TextView textViewBio = findViewById(R.id.textViewBio);
             TextView textViewBioUnder = findViewById(R.id.textViewBioUnder);
 
@@ -177,7 +172,7 @@ public class FriendsActivity extends AppCompatActivity {
             textViewFollowers.setText(follows);
             textViewFollows.setText(followers);
             textViewStarsNr.setText(stars);
-
+            textViewPlansNr.setText(plans);
             int level = 100;
             try {
                 int number = Integer.parseInt(xp);
@@ -204,17 +199,11 @@ public class FriendsActivity extends AppCompatActivity {
 
             }
 
-            TextView textViewFollow = findViewById(R.id.textViewFollow);
-            TextView textViewMessage = findViewById(R.id.textViewMessage);
-            TextView textViewEdit = findViewById(R.id.textViewEdit);
             ImageView imageViewMessage = findViewById(R.id.imageViewMessage);
             ImageView imageViewEdit = findViewById(R.id.imageViewEdit);
             ImageView imageViewFollow = findViewById(R.id.imageViewFollow);
             String idZ = textViewUserID.getText().toString().replace("#", "");
             if (idZ.equals(Account.userid())) {
-                textViewFollow.setVisibility(View.GONE);
-                textViewMessage.setVisibility(View.GONE);
-                textViewEdit.setVisibility(View.VISIBLE);
                 imageViewEdit.setVisibility(View.VISIBLE);
                 imageViewMessage.setVisibility(View.GONE);
                 imageViewFollow.setVisibility(View.GONE);
@@ -236,11 +225,9 @@ public class FriendsActivity extends AppCompatActivity {
     private void checkFollow(String id) {
         try {
             TextView textViewId = findViewById(R.id.textViewMe);
-            TextView textViewFollow = findViewById(R.id.textViewFollow);
             ImageView imageViewFollow = findViewById(R.id.imageViewFollow);
             try {
 
-                textViewFollow.setText("loading");
                 imageViewFollow.setImageResource(R.drawable.follow_loading_removebg);
 
                         String isFollow = null;
@@ -250,16 +237,10 @@ public class FriendsActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                         if (isFollow.length()>10) {
-                            textViewFollow.setText("follow");
                             imageViewFollow.setImageResource(R.drawable.follow_removebg);
                         } else {
-                            textViewFollow.setText("unfollow");
                             imageViewFollow.setImageResource(R.drawable.unfollow_removebg);
                         }
-                if (!isFollowProcess) {
-                    loadPlans(id);
-                }
-
             } catch (Exception ignored){
             }
         } catch (Exception ignored){
@@ -305,183 +286,6 @@ public class FriendsActivity extends AppCompatActivity {
         }
     }
 
-    private void loadPlans(String id) {
-        if (Account.isDataSaver()) {
-                setPlanNames();
-                final ConnectivityManager connMgr = (ConnectivityManager)
-                        this.getSystemService(Context.CONNECTIVITY_SERVICE);
-                final android.net.NetworkInfo wifi = connMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-                final android.net.NetworkInfo mobile = connMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-                if (wifi.isConnectedOrConnecting ()) {
-                    if (!Account.isMobileDataSaver()) {
-                        loadPlansFinal(id);
-                        skipDataSaver = true;
-                    }
-                } else {
-                    mobile.isConnectedOrConnecting();
-                }
-        } else {
-            loadPlansFinal(id);
-        }
-    }
-
-
-
-    public void loadPlansFinal(String id) {
-            try {
-                        String received_plans = StarsocketConnector.getReplyTo("downloadPlans " + id);
-                        SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = settings.edit();
-                        try {
-                            String separator = "##########";
-                            String plan1 = received_plans.split(separator, 9)[1];
-                            String plan2 = received_plans.split(separator, 9)[2];
-                            String plan3 = received_plans.split(separator, 9)[3];
-                            String plan4 = received_plans.split(separator, 9)[4];
-                            String plan5 = received_plans.split(separator, 9)[5];
-
-                            editor.putString("1 planFriend", String.valueOf(plan1)).apply();
-                            editor.putString("2 planFriend", String.valueOf(plan2)).apply();
-                            editor.putString("3 planFriend", String.valueOf(plan3)).apply();
-                            editor.putString("4 planFriend", String.valueOf(plan4)).apply();
-                            editor.putString("5 planFriend", String.valueOf(plan5)).apply();
-
-                            setPlanNames();
-                        } catch (Exception e) {
-                            toast("error loading plans");
-                        }
-            } catch (Exception e) {
-                toast("no network");
-            }
-        checkNotifications();
-    }
-
-    private void setPlanNames() {
-        TextView textViewNamePlan1 = findViewById(R.id.textViewPlan1);
-        TextView textViewNamePlan2 = findViewById(R.id.textViewPlan2);
-        TextView textViewNamePlan3 = findViewById(R.id.textViewPlan3);
-        TextView textViewNamePlan4 = findViewById(R.id.textViewPlan4);
-        TextView textViewNamePlan5 = findViewById(R.id.textViewPlan5);
-        String empty = "E M P T Y";
-        if (Account.isDataSaver() && !skipDataSaver) {
-            empty = "Download";
-        } else {
-            Account.isDataSaver();
-        }
-        try {
-            textViewNamePlan1.setText(Account.planFriend(1).split("\n", 5)[2]);
-            if (Account.isDataSaver() && !skipDataSaver) {
-                textViewNamePlan1.setText(empty);
-            }
-        } catch (Exception e){
-            textViewNamePlan1.setText(empty);
-        }
-        try {
-            textViewNamePlan2.setText(Account.planFriend(2).split("\n",5)[2]);
-            if (Account.isDataSaver() && !skipDataSaver) {
-                textViewNamePlan2.setText(empty);
-            }
-        } catch (Exception e){
-            textViewNamePlan2.setText(empty);
-        }
-        try {
-            textViewNamePlan3.setText(Account.planFriend(3).split("\n",5)[2]);
-            if (Account.isDataSaver() && !skipDataSaver) {
-                textViewNamePlan3.setText(empty);
-            }
-        } catch (Exception e){
-            textViewNamePlan3.setText(empty);
-        }
-        try {
-            textViewNamePlan4.setText(Account.planFriend(4).split("\n",5)[2]);
-            if (Account.isDataSaver() && !skipDataSaver) {
-                textViewNamePlan4.setText(empty);
-            }
-        } catch (Exception e){
-            textViewNamePlan4.setText(empty);
-        }
-        try {
-            textViewNamePlan5.setText(Account.planFriend(5).split("\n",5)[2]);
-            if (Account.isDataSaver() && !skipDataSaver) {
-                textViewNamePlan5.setText(empty);
-            }
-        } catch (Exception e){
-            textViewNamePlan5.setText(empty);
-        }
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
-
-
-    }
-    public void plan1(View view) {
-        vibrate();
-        TextView textViewNamePlan = findViewById(R.id.textViewPlan1);
-        String text =  textViewNamePlan.getText().toString();
-        openPlan(1, text);
-    }
-    public void plan2(View view) {
-        vibrate();
-        TextView textViewNamePlan = findViewById(R.id.textViewPlan2);
-        String text =  textViewNamePlan.getText().toString();
-        openPlan(2, text);
-    }
-
-    public void plan3(View view) {
-        vibrate();
-        TextView textViewNamePlan = findViewById(R.id.textViewPlan3);
-        String text =  textViewNamePlan.getText().toString();
-        openPlan(3, text);
-    }
-    public void plan4(View view) {
-        vibrate();
-        TextView textViewNamePlan = findViewById(R.id.textViewPlan4);
-        String text =  textViewNamePlan.getText().toString();
-        openPlan(4, text);
-    }
-    public void plan5(View view) {
-        vibrate();
-        TextView textViewNamePlan = findViewById(R.id.textViewPlan5);
-        String text =  textViewNamePlan.getText().toString();
-        openPlan(5, text);
-    }
-
-    private void openPlan(int id, String text) {
-        if (text.equals("E M P T Y")) {
-            toast("empty plan");
-        } else if (text.equals("loading")) {
-            toast("empty plan");
-        } else if (text.equals("Download")) {
-            try {
-                toast("downloading");
-                TextView textViewId = findViewById(R.id.textViewMe);
-                loadPlansFinal(textViewId.getText().toString().split("#")[1]);
-                skipDataSaver = true;
-            } catch (Exception e){
-                toast("no network");
-            }
-        } else {
-            Account.setIsMine(false);
-            isMyPlan= false;
-            SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
-            SharedPreferences.Editor editor = settings.edit();
-
-            Account.setActiveIterations(0); // set iterations to none done
-            editor.putInt("selectedPlan", id).commit(); // for running plan
-
-            Intent i = new Intent(this, RunPlanActivity.class);
-            startActivity(i);
-        }
-    }
-
-    public void downloadPlansBtn(View view) {
-        skipDataSaver = true;
-        TextView textViewId = findViewById(R.id.textViewMe);
-        vibrate();
-        try {
-            loadPlansFinal(textViewId.getText().toString().split("#")[1]);
-        } catch (Exception e){
-            toast("no network");
-        }
-    }
 
     private Boolean rotating = false;
     public void rotate(View view) {
@@ -528,7 +332,6 @@ public class FriendsActivity extends AppCompatActivity {
         vibrate();
         try {
             TextView textViewId = findViewById(R.id.textViewMe);
-            TextView textViewFollow = findViewById(R.id.textViewFollow);
             TextView textViewUsername = findViewById(R.id.textViewUsername);
             try {
                 ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
@@ -538,7 +341,6 @@ public class FriendsActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        textViewFollow.setText("following");
                         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.INVISIBLE);
                     }
                 }, 100);
@@ -583,6 +385,10 @@ public class FriendsActivity extends AppCompatActivity {
         pageStatus = "Stars";
         page(2);
     }
+    public void openPlans(View view) {
+        pageStatus = "Plans";
+        page(3);
+    }
     public static Boolean isStars;
     public void page(int i){
         try {
@@ -597,6 +403,9 @@ public class FriendsActivity extends AppCompatActivity {
                 StarsocketConnector.sendMessage("starsPage " + id.replace("#", ""));
             } else if (i == 0) {
                 StarsocketConnector.sendMessage("followersPage " + id.replace("#", ""));
+            } else if (i == 3) {
+                isStars = true;
+                StarsocketConnector.sendMessage("plansPage " + id.replace("#", ""));
             }
             Intent it = new Intent(this, FollowActivity.class);
             startActivity(it);
