@@ -60,10 +60,10 @@ public class UpdateActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String received = StarsocketConnector.getMessage();
+                    String received = StarsocketConnector.getTMessage();
                     createUpdateList(received);
                 }
-            }, 500);
+            }, 1000);
 
         } catch (Exception e){
             toast("no network");

@@ -139,21 +139,13 @@ public class InboxActivity extends AppCompatActivity {
 
 
         try {
-            StarsocketConnector.sendMessage("notifications " + currentType);
-
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
                     try {
-                        String inbox = StarsocketConnector.getMessage();
+                        String inbox = StarsocketConnector.getReplyTo("notifications " + currentType);
                         createFeedList(inbox.replaceAll("undefined",""));
                     } catch (Exception e){
                         toast("no network");
                     }
                     checkNotifications();
-                }
-            }, 500);
 
         } catch (Exception e){
             toast("no network");
@@ -191,7 +183,7 @@ public class InboxActivity extends AppCompatActivity {
                 public void run() {
                     try {
                         amount = 0;
-                        String inbox = StarsocketConnector.getMessage();
+                        String inbox = StarsocketConnector.getReplyTo("notifications all");
                         Account.setNotifications(inbox);
                         String rest = inbox.replaceAll("undefined","");
                         String[] user = rest.split("\n");

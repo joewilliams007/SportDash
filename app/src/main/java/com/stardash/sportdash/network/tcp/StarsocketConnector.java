@@ -59,8 +59,9 @@ public class StarsocketConnector {
         }
     }
 
-    public static String getMessage() {
-      /*  final Handler handler = new Handler(Looper.getMainLooper());
+    public static String getTMessage() {
+
+        /*final Handler handler = new Handler(Looper.getMainLooper());
         aClientsocket socket = new aClientsocket(nodeMessageReceiveServerPort);
         String message = socket.receiveMessage();
 
@@ -69,13 +70,15 @@ public class StarsocketConnector {
             public void run() {
                     socket.stopConnection();
                 }
-            }, 300); */
+            }, 300);
+        */
 
         getMessage AsyncMessage = new getMessage();
         Thread thread = new Thread(AsyncMessage);
         thread.start();
         try {
             thread.join();
+            Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -93,14 +96,17 @@ public class StarsocketConnector {
     }
 
     public static String getReplyTo(String message) {
-        sendMessage(message);
-        try {
-            Thread.sleep(200);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
+        String answer = null;
+        while (true) {
+            sendMessage(message);
+            String answer0 = getTMessage();
+            if (answer0.split("ThiIsTheAnswer")[0].contains(message)) {
+                answer = answer0.split("ThiIsTheAnswer")[1];
+                break;
+            }
         }
-        String answer;
-        answer = getMessage();
+
         return answer;
     }
+
 }

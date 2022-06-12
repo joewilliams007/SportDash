@@ -47,12 +47,12 @@ public class FollowActivity extends AppCompatActivity {
             public void run() {
                 getData();
             }
-        }, 200);
+        }, 800);
     }
 
     private void getData() {
         try {
-            String received = StarsocketConnector.getMessage().replaceAll("\"", "");;
+            String received = StarsocketConnector.getTMessage().replaceAll("\"", "");;
             createUpdateList(received);
         } catch (Exception e){
             toast("no network");

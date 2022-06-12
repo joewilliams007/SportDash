@@ -81,9 +81,8 @@ public class FeedActivity extends AppCompatActivity {
 
     private void getFeed(String type) {
         items_count = 0;
-        ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.VISIBLE);
-        StarsocketConnector.sendMessage(type+" "+Account.userid());
 
+        try {
         TextView textViewFollowing = findViewById(R.id.textViewFollowing);
         TextView textViewFresh = findViewById(R.id.textViewFresh);
         TextView textViewAll = findViewById(R.id.textViewAll);
@@ -112,21 +111,16 @@ public class FeedActivity extends AppCompatActivity {
         }
 
 
-        final Handler handler = new Handler(Looper.getMainLooper());
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                try {
+
                     items_count = 0;
-                    createFeedList(StarsocketConnector.getMessage().replaceAll("undefined",""));
+                    createFeedList(StarsocketConnector.getReplyTo(type+" "+Account.userid()).replaceAll("undefined",""));
                     buildRecyclerView();
                     checkNotifications();
                     ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
                 } catch (Exception e) {
                     toast("no network");
                 }
-            }
-        }, 300);
+
     }
 
     private ArrayList<FeedItem> mFeedList;

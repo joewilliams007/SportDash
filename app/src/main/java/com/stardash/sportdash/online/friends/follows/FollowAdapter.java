@@ -95,16 +95,11 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                     try {
                         if (isStars) {
                             try {
-                                StarsocketConnector.sendMessage("downloadPlanById " + id);
 
-                                final Handler handler = new Handler(Looper.getMainLooper());
-                                handler.postDelayed(new Runnable() {
-                                    @Override
-                                    public void run() {
 
                                         String received = null;
 
-                                            received = StarsocketConnector.getMessage().toString();
+                                            received = StarsocketConnector.getReplyTo("downloadPlanById " + id);
 
 
                                         SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
@@ -127,8 +122,7 @@ public class FollowAdapter extends RecyclerView.Adapter<FollowAdapter.FollowView
                                             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                             MyApplication.getAppContext().startActivity(i);
                                         }
-                                    }
-                                }, 125);
+
                             } catch (Exception ignored){
 
                             }

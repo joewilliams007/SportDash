@@ -87,14 +87,11 @@ public class SearchPlanActivity extends AppCompatActivity {
 
     private void loadPlan(String id) {
         try {
-            StarsocketConnector.sendMessage("downloadPlanById " + id);
 
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
 
-                        String received = StarsocketConnector.getMessage().toString();
+
+
+                        String received = StarsocketConnector.getReplyTo("downloadPlanById " + id);
 
                         SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
                         SharedPreferences.Editor editor = settings.edit();
@@ -108,8 +105,7 @@ public class SearchPlanActivity extends AppCompatActivity {
                             editor.putString("1 planFriend", String.valueOf(plan1)).apply();
                             openPlan();
                         }
-                    }
-            }, 1000);
+
         } catch (Exception e){
             toast("no network");
         }

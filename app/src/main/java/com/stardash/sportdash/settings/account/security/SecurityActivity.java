@@ -32,12 +32,12 @@ public class SecurityActivity extends AppCompatActivity {
             @Override
             public void run() {
 
-                    createSecurityList(StarsocketConnector.getMessage().replaceAll("undefined",""));
+                    createSecurityList(StarsocketConnector.getTMessage().replaceAll("undefined",""));
                     buildRecyclerView();
                     ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
 
             }
-        }, 100);
+        }, 500);
     }
 
     private ArrayList<SecurityItem> mSecurityList;

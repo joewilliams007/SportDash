@@ -47,7 +47,7 @@ public class ProfileActivity extends AppCompatActivity {
                 public void run() {
                     getUserProfile();
                 }
-            }, 100);
+            }, 1000);
 
 
         } catch (Exception e) {
@@ -76,7 +76,7 @@ public class ProfileActivity extends AppCompatActivity {
 
     private void getUserProfile() {
         try {
-            String profile = StarsocketConnector.getMessage();
+            String profile = StarsocketConnector.getTMessage();
 
             String id = profile.split(" ", 15)[0];
             String username = profile.split(" ", 15)[1];
@@ -152,15 +152,11 @@ public class ProfileActivity extends AppCompatActivity {
     }
     public static Boolean invalidId;
     private void loadPlans(String id) {
-        StarsocketConnector.sendMessage("downloadPlans " + id);
         try {
-                final Handler handler = new Handler(Looper.getMainLooper());
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
+
                         String received_plans = null;
                         try {
-                            received_plans = StarsocketConnector.getMessage().toString();
+                            received_plans = StarsocketConnector.getReplyTo("downloadPlans " + id).toString();
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -184,8 +180,6 @@ public class ProfileActivity extends AppCompatActivity {
                         } catch (Exception e){
                             toast("error loading plans");
                         }
-                }
-            }, 1000);
         } catch (Exception e){
             toast("no network");
         }

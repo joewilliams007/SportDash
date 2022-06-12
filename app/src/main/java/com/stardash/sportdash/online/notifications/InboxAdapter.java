@@ -156,15 +156,10 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
                     if (holder.mTextView1.getText().toString().equals("STAR") || holder.mTextView1.getText().toString().equals("COMMENT")) {
                         try {
                             String plan_id = holder.mTextView3.getText().toString().split(" ")[3];
-                            StarsocketConnector.sendMessage("downloadPlanById " + plan_id);
 
-                            final Handler handler = new Handler(Looper.getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
                                     String received = null;
 
-                                        received = StarsocketConnector.getMessage();
+                                        received = StarsocketConnector.getReplyTo("downloadPlanById " + plan_id);
 
                                     SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = settings.edit();
@@ -184,8 +179,7 @@ public class InboxAdapter extends RecyclerView.Adapter<InboxAdapter.InboxViewHol
                                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         MyApplication.getAppContext().startActivity(i);
                                     }
-                                }
-                            }, 125);
+
                         } catch (Exception ignored){
 
                         }

@@ -18,7 +18,7 @@ public class getMessage implements Runnable{
                 public void run() {
                     socket.stopConnection();
                 }
-            }, 300);
+            }, 500);
             value = message;
         } catch (Exception ignored){
 

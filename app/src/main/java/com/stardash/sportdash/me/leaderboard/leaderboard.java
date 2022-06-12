@@ -55,18 +55,12 @@ public class leaderboard extends AppCompatActivity {
 
     private void getLeaderboard() {
         try {
-            StarsocketConnector.sendMessage("leaderboard");
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    try {
-                    String received = StarsocketConnector.getMessage().replaceAll("\"", "");
+            try {
+                String received = StarsocketConnector.getReplyTo("leaderboard");
 
                         try {
-                            String rest = received;
 
-                            createBoardList(rest);
+                            createBoardList(received);
                             buildRecyclerView();
 
                         } catch (Exception e){
@@ -75,8 +69,6 @@ public class leaderboard extends AppCompatActivity {
                     } catch (Exception e){
                         toast("no network");
                     }
-                }
-            }, 200);
         } catch (Exception e){
             toast("no network");
         }

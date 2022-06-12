@@ -287,13 +287,8 @@ public class RunPlanActivity extends AppCompatActivity {
     private void generatePlan() {
         vibrate();
         try {
-            StarsocketConnector.sendMessage("randomPlan");
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
                     try {
-                        thePlan = StarsocketConnector.getMessage().toString();
+                        thePlan = StarsocketConnector.getReplyTo("randomPlan").toString();
                         isRandom = true;
                         setPlan();
                         isMyPlan = false;
@@ -301,8 +296,6 @@ public class RunPlanActivity extends AppCompatActivity {
                     } catch (Exception e){
                         toast("no network");
                     }
-                }
-            }, 1000);
         } catch (Exception e){
             toast("no network");
         }
@@ -335,16 +328,9 @@ public class RunPlanActivity extends AppCompatActivity {
                 TextView textViewPlanId = findViewById(R.id.textViewPlanId);
                 TextView textViewPlanName = findViewById(R.id.textViewPlanName);
                 String desc = " %%%"+textViewPlanName.getText().toString();
-                StarsocketConnector.sendMessage("starPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#","")+desc);
-                final Handler handler = new Handler(Looper.getMainLooper());
-               // TextView textViewItem1 = findViewById(R.id.textViewItem1);
 
-                handler.postDelayed(new Runnable() {
-                    @SuppressLint("SetTextI18n")
-                    @Override
-                    public void run() {
                         try {
-                            String received = StarsocketConnector.getMessage();
+                            String received = StarsocketConnector.getReplyTo("starPlan "+Account.userid()+" "+textViewPlanId.getText().toString().replace("#","")+desc);
                             if (received.contains("star-removed")) {
                                 toast("star removed");
                             } else if (received.contains("star-added")) {
@@ -355,8 +341,7 @@ public class RunPlanActivity extends AppCompatActivity {
                         } catch (Exception e){
                             toast("no network");
                         }
-                    }
-                }, 500);
+
 
             } catch (Exception e){
                 toast("no network");
@@ -387,7 +372,7 @@ public class RunPlanActivity extends AppCompatActivity {
                 @Override
                 public void run() {
                     try {
-                        String received = StarsocketConnector.getMessage();
+                        String received = StarsocketConnector.getReplyTo("getStars "+textViewPlanId.getText().toString().replace("#",""));
 
                         ImageView imageViewVerified = findViewById(R.id.imageViewVerified);
 

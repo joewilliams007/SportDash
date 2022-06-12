@@ -75,15 +75,11 @@ public class CommentsActivity extends AppCompatActivity {
         TextView textViewPlanId = findViewById(R.id.textViewPlanId);
         textViewPlanId.setText(plan_id);
         try {
-            StarsocketConnector.sendMessage("getComments " + plan_id);
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
+
 
                     try {
 
-            String s[] = StarsocketConnector.getMessage().replaceAll(" undefined","").split("NEXTMESSAGEIS:;");
+            String s[] = StarsocketConnector.getReplyTo("getComments " + plan_id).replaceAll(" undefined","").split("NEXTMESSAGEIS:;");
             String newS = s[s.length-1];
 
                 String ans = "";
@@ -124,8 +120,6 @@ public class CommentsActivity extends AppCompatActivity {
                 }
 
 
-                }
-            }, 1000);
         } catch (Exception e){
             toast("no network");
         }

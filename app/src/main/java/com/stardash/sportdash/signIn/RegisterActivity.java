@@ -133,7 +133,7 @@ public class RegisterActivity extends AppCompatActivity {
                         ((ProgressBar) findViewById(R.id.progressBar)).setVisibility(View.GONE);
 
                     }
-                }, 3000);
+                }, 4000);
 
             } catch (Exception e){
                 toast("network error");
@@ -155,7 +155,7 @@ public class RegisterActivity extends AppCompatActivity {
         EditText editTextUsername = findViewById(R.id.editTextTextPersonNameUsername);
         String username = editTextUsername.getText().toString().replace(" ","");
 
-        String received = StarsocketConnector.getMessage();
+        String received = StarsocketConnector.getTMessage();
         String received_username = received.split(" ",2)[0];
         String received_id = received.split(" ",2)[1];
 

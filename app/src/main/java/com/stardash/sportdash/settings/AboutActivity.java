@@ -52,7 +52,7 @@ public class AboutActivity extends AppCompatActivity {
             handler.postDelayed(new Runnable() {
                 @Override
                 public void run() {
-                    String received = StarsocketConnector.getMessage();
+                    String received = StarsocketConnector.getReplyTo("aboutSportDash");
                     textViewSportDash.setText(received);
                     textViewSportDash.setVisibility(View.VISIBLE);
                 }

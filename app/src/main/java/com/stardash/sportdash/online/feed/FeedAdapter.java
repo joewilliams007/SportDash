@@ -134,16 +134,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                         img.setVisibility(View.GONE);
                         holder.mImageViewComments.setVisibility(View.GONE);
                     } else {
-                        StarsocketConnector.sendMessage("getStars " + id);
                         img.setVisibility(View.VISIBLE);
                         holder.mImageViewComments.setVisibility(View.VISIBLE);
-                        final Handler handler = new Handler(Looper.getMainLooper());
-                        handler.postDelayed(new Runnable() {
-                            @SuppressLint("SetTextI18n")
-                            @Override
-                            public void run() {
+
                                 try {
-                                    String received = StarsocketConnector.getMessage();
+                                    String received = StarsocketConnector.getReplyTo("getStars " + id);
                                     String star_status = received.split("#")[2];
                                     if (star_status.equals("1")) {
                                         holder.mImageViewStar.setImageResource(R.drawable.star_filled);
@@ -155,8 +150,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                                 }catch (Exception e) {
                                     holder.mTextView4.setText("there was an error.");
                                 }
-                            }
-                        }, 500);
+
 
 
                     }
@@ -224,14 +218,11 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                 holder.mImageViewComments.setVisibility(View.GONE);
                 try {
                         try {
-                            StarsocketConnector.sendMessage("downloadPlanById " + id);
 
-                            final Handler handler = new Handler(Looper.getMainLooper());
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
 
-                                    String received = StarsocketConnector.getMessage().toString();
+
+
+                                    String received = StarsocketConnector.getReplyTo("downloadPlanById " + id).toString();
 
                                     SharedPreferences settings = MyApplication.getAppContext().getSharedPreferences("sport", MODE_PRIVATE);
                                     SharedPreferences.Editor editor = settings.edit();
@@ -251,8 +242,7 @@ public class FeedAdapter extends RecyclerView.Adapter<FeedAdapter.FeedViewHolder
                                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                                         MyApplication.getAppContext().startActivity(i);
                                     }
-                                }
-                            }, 125);
+
 
 
                         } catch (Exception ignored){

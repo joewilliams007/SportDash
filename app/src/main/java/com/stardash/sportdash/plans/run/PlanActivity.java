@@ -181,7 +181,6 @@ public class PlanActivity extends AppCompatActivity {
         } else {
             StarsocketConnector.sendMessage("upload_plans "+Account.userid()+" "+planId+" "+planId()+" ##########"+Account.plan(planId));
         }
-            StarsocketConnector.getMessage();
             toast("success uploading plan of id "+String.valueOf(planId));
         } catch (Exception e){
             toast("no network");

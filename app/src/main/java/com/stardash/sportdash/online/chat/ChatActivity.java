@@ -197,20 +197,14 @@ public class ChatActivity extends AppCompatActivity {
     public static Boolean updateChat;
     private void getData() {
         try {
-            StarsocketConnector.sendMessage("getChat "+chatId);
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
+
                     try {
-                       String received = StarsocketConnector.getMessage().replaceAll("undefined", "");
+                       String received = StarsocketConnector.getReplyTo("getChat "+chatId).replaceAll("undefined", "");
                         createList(received);
                         isInChat = true;
                     } catch (Exception e) {
                         toast("no network");
                     }
-                }
-            }, 200);
 
         } catch (Exception e){
             toast("no network");

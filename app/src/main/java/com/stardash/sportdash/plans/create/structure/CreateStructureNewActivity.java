@@ -345,7 +345,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
             @Override
             public void run() {
                 String search_result = null;
-                    search_result = StarsocketConnector.getMessage().replaceAll("undefined","");
+                    search_result = StarsocketConnector.getTMessage().replaceAll("undefined","");
                 processSearchResult(search_result);
             }
 
@@ -361,7 +361,7 @@ public class CreateStructureNewActivity extends AppCompatActivity {
                     createListSearch(res);
                 }
             }
-        }, 250);
+        }, 800);
     }
 
     private ArrayList<ElementSearchItem> mElementSearchList;

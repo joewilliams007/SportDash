@@ -91,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
         String id = editTextId.getText().toString().replace(" ","");
         String password = editTextPassword.getText().toString().replace(" ","");
 
-        String received = StarsocketConnector.getMessage().split("\n",100)[0];
+        String received = StarsocketConnector.getTMessage().split("\n",100)[0];
 
         if(received.equals("WRONG")) {
             toast("wrong password or id");
@@ -160,8 +160,7 @@ public class LoginActivity extends AppCompatActivity {
         vibrate();
         try {
             toast("downloading plans ...");
-            StarsocketConnector.sendMessage("downloadPlans " + id);
-            String received_plans = StarsocketConnector.getMessage().toString();
+            String received_plans = StarsocketConnector.getReplyTo("downloadPlans " + id).toString();
 
             SharedPreferences settings = getSharedPreferences("sport", MODE_PRIVATE);
             SharedPreferences.Editor editor = settings.edit();

@@ -44,16 +44,11 @@ public class TermsOfServiceActivity extends AppCompatActivity {
     private void getChangelog() {
         try {
             TextView textViewSportDash = findViewById(R.id.textViewSportDash);
-            StarsocketConnector.sendMessage("terms_of_service");
-            final Handler handler = new Handler(Looper.getMainLooper());
-            handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    String received = StarsocketConnector.getMessage();
+
+                    String received = StarsocketConnector.getReplyTo("terms_of_service");
                     textViewSportDash.setText(received);
                     textViewSportDash.setVisibility(View.VISIBLE);
-                }
-            }, 500);
+
 
         } catch (Exception e){
             toast("no network");
